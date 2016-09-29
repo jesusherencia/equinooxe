@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User getUserByEmail(String email) {
-		return userRepository.findByEmail(email);
+		return userRepository.findUserByEmail(email);
 	}
 
 	public User register(String email, String username, String password) {

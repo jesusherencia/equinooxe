@@ -12,6 +12,6 @@ public class AppTestCreateUser {
 	public static void main(String[] args) {
 		log.info("My First Apache Shiro Application");
 		UserRepository userRepository = new UserJpaRepository();
-		userRepository.createUser("b@b.com", "test", "test");
+		userRepository.createUser("a@a.com", "admin", "admin");
 	}
 }
