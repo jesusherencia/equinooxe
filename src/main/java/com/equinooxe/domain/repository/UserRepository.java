@@ -8,9 +8,9 @@ import com.equinooxe.domain.shared.Repository;
 
 public interface UserRepository extends Repository<User> {
 
-	public User findByEmail(String email);
+	public User findUserByEmail(String email);
 	
-	public User findByUsername(String username);
+	public User findUserByUsername(String username);
 	
 	public User createUser(String email, String username, String password);
 	

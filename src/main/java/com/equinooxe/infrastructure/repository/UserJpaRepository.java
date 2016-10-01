@@ -37,7 +37,7 @@ public class UserJpaRepository implements UserRepository {
 		return null;
 	}
 	
-	public User findByEmail(String email) {
+	public User findUserByEmail(String email) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		User user = (User) em.createQuery("Select u From User as u Where u.email= :email")
                 .setParameter("email", email)
@@ -45,7 +45,7 @@ public class UserJpaRepository implements UserRepository {
 		return null;
 	}
 	
-	public User findByUsername(String username) {
+	public User findUserByUsername(String username) {
 		EntityManager em = entityManagerFactory.createEntityManager();
 		User user = (User) em.createQuery("Select u From User as u Where u.username= :username")
                 .setParameter("username", username)

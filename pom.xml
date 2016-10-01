@@ -5,7 +5,7 @@
 	<groupId>com.equinooxe</groupId>
 	<artifactId>equinooxe</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>test</name>
+	<name>Equinooxe</name>
 	<packaging>war</packaging>
 	
 	<properties>
@@ -41,6 +41,7 @@
     </build>
 	
 	<dependencies>
+        <!-- DATANUCLEUS -->
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-core</artifactId>
@@ -51,12 +52,27 @@
             <artifactId>datanucleus-api-jpa</artifactId>
             <version>${datanucleus.version}</version>
         </dependency>
-        <dependency>
+        <dependency><!-- JPA -->
             <groupId>org.datanucleus</groupId>
             <artifactId>javax.persistence</artifactId>
             <version>2.1.0</version>
         </dependency>
         
+        <!-- DATANUCLEUS FOR RDBMS -->
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-rdbms</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        
+        <!-- DB DRIVER -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.17</version>
+        </dependency>
+        
+        <!-- SLF4J -->
         <dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-log4j12</artifactId>
@@ -68,20 +84,8 @@
             <version>1.6.1</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- ENABLE THIS FOR MYSQL -->
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-rdbms</artifactId>
-            <version>[5.0.0-m1, 5.9)</version>
-        </dependency>
         
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.17</version>
-        </dependency>
-        
+        <!-- JUNIT -->
         <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -89,6 +93,7 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- SHIRO -->
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
 		    <artifactId>shiro-core</artifactId>
@@ -100,6 +105,7 @@
             <version>${shiro.version}</version>
         </dependency>
         
+        <!-- WEB -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -112,6 +118,26 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency><!-- Only for Tomcat as jstl is not provided -->
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+	    </dependency>
+	    
+	    <!-- Jersey -->
+	    <dependency>
+		    <groupId>org.glassfish.jersey.containers</groupId>
+		    <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
+		    <artifactId>jersey-container-servlet</artifactId>
+		    <version>2.23.2</version>
+		</dependency>
+		<!-- Required only when you are using JAX-RS Client -->
+		<!-- <dependency>
+		    <groupId>org.glassfish.jersey.core</groupId>
+		    <artifactId>jersey-client</artifactId>
+		    <version>2.23.2</version>
+		</dependency> -->
+	    
 	</dependencies>
 
 </project>
