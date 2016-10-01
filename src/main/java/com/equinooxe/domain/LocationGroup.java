@@ -35,7 +35,7 @@ public class LocationGroup implements Serializable {
     private String description;
     
     @ManyToOne
-    private Organization organization;
+    private OperativeUnit operativeUnit;
     
     @OneToMany(mappedBy="locationGroup", targetEntity = Location.class)
     private Collection<Location> locations;
@@ -60,12 +60,12 @@ public class LocationGroup implements Serializable {
         return name;
     }
 
-    public Organization getOrganization() {
-        return organization;
+    public OperativeUnit getOperativeUnit() {
+        return operativeUnit;
     }
 
-    public void setOrganization(Organization organization) {
-        this.organization = organization;
+    public void setOperativeUnit(OperativeUnit operativeUnit) {
+        this.operativeUnit = operativeUnit;
     }
 
     public void setName(String name) {

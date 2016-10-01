@@ -20,13 +20,13 @@
 		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 	<!-- Jersey -->
-	<servlet>
+	<!-- <servlet>
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
     </servlet>
     <servlet-mapping>
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping> -->
 	<!-- Generic params -->
 	<session-config>
 		<session-timeout>300</session-timeout>
