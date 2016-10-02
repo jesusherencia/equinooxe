@@ -5,8 +5,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.datanucleus.util.NucleusLogger;
-
 import com.equinooxe.domain.User;
 
 import junit.framework.TestCase;
@@ -28,7 +26,7 @@ public class AppTestJPA extends TestCase {
 			entityManager.persist( new User("b", "b@b.com", "b") );
 			tx.commit();
 		} catch (Exception e) {
-            NucleusLogger.GENERAL.error(">> Exception persisting data", e);
+            //NucleusLogger.GENERAL.error(">> Exception persisting data", e);
             System.err.println("Error persisting data : " + e.getMessage());
             return;
         } finally {
