@@ -34,7 +34,7 @@ public class OperativeUnit implements Serializable {
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "organization", targetEntity = LocationGroup.class)
+    @OneToMany(mappedBy = "operativeUnit", targetEntity = LocationGroup.class)
     private Collection<LocationGroup> groupements;
 
     public Long getId() {
