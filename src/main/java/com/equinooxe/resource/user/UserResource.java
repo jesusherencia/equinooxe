@@ -32,6 +32,7 @@ public class UserResource   {
     public Response getAll() {
         User user = new User();
         user.setUsername("Abc Edf");
+        user.setId(new Long(12));
         return Response
                 .status(Response.Status.OK)
                 .entity(user)
