@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public User getAuthentificatedUser() {
         Subject currentUser = SecurityUtils.getSubject();
         if (!currentUser.isAuthenticated()) {
-            throw new UnauthenticatedException("Aucun utilisateur n'est authentifi� ");
+            throw new UnauthenticatedException("Not currently authentificated");
         }
         return getUserByEmail(currentUser.getPrincipal().toString());
     }
