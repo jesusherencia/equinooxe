@@ -12,7 +12,6 @@ import javax.persistence.Query;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.datanucleus.util.NucleusLogger;
 
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
@@ -64,7 +63,7 @@ public class UserJpaRepository implements UserRepository {
 			result = q.getResultList();
 			tx.commit();
 		} catch (Exception e) {
-            NucleusLogger.GENERAL.error(">> Exception persisting data", e);
+            //NucleusLogger.GENERAL.error(">> Exception persisting data", e);
             System.err.println("Error persisting data : " + e.getMessage());
             return result;
         } finally {
@@ -86,7 +85,7 @@ public class UserJpaRepository implements UserRepository {
 			em.persist(t);
 			tx.commit();
 		} catch (Exception e) {
-            NucleusLogger.GENERAL.error(">> Exception persisting data", e);
+            //NucleusLogger.GENERAL.error(">> Exception persisting data", e);
             System.err.println("Error persisting data : " + e.getMessage());
             return null;
         } finally {
@@ -108,7 +107,7 @@ public class UserJpaRepository implements UserRepository {
 			em.remove(t);
 			tx.commit();
 		} catch (Exception e) {
-            NucleusLogger.GENERAL.error(">> Exception persisting data", e);
+            //NucleusLogger.GENERAL.error(">> Exception persisting data", e);
             System.err.println("Error persisting data : " + e.getMessage());
             return false;
         } finally {
@@ -137,7 +136,7 @@ public class UserJpaRepository implements UserRepository {
 	        em.persist(user);
 	        tx.commit();
 		} catch (Exception e) {
-            NucleusLogger.GENERAL.error(">> Exception persisting data", e);
+            //NucleusLogger.GENERAL.error(">> Exception persisting data", e);
             System.err.println("Error persisting data : " + e.getMessage());
             return null;
         } finally {

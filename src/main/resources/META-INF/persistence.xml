@@ -8,7 +8,7 @@
         <!-- Entities -->
         <class>com.equinooxe.domain.User</class>
         <class>com.equinooxe.domain.UserRole</class>
-        <class>com.equinooxe.domain.Organization</class>
+        <class>com.equinooxe.domain.OperativeUnit</class>
         <class>com.equinooxe.domain.AgentUser</class>
         <class>com.equinooxe.domain.CleanRequest</class>
         <class>com.equinooxe.domain.CleanTask</class>
@@ -29,8 +29,13 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="123456"/>
-            <!-- Datanucleus properties -->
-            <property name="datanucleus.schema.autoCreateAll" value="true"/>
+            <!-- Hibernate properties -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="false"/>
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.current_session_context_class" value="thread"/>
+			<!-- SQL dialect -->
+			<property name="dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
         </properties>
     </persistence-unit>
 

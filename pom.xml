@@ -16,54 +16,13 @@
         <shiro.version>1.3.0</shiro.version>
     </properties>
 	
-	<build>
-        <plugins>
-            <plugin>
-                <groupId>org.datanucleus</groupId>
-                <artifactId>datanucleus-maven-plugin</artifactId>
-                <version>5.0.0-release</version>
-                <configuration>
-                    <api>JPA</api>
-                    <persistenceUnitName>sbPersistenceUnit</persistenceUnitName>
-                    <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
-                    <verbose>false</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-	
 	<dependencies>
-        <!-- DATANUCLEUS -->
+        <!-- Hibernate -->
         <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-core</artifactId>
-            <version>${datanucleus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-api-jpa</artifactId>
-            <version>${datanucleus.version}</version>
-        </dependency>
-        <dependency><!-- JPA -->
-            <groupId>org.datanucleus</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.1.0</version>
-        </dependency>
-        
-        <!-- DATANUCLEUS FOR RDBMS -->
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-rdbms</artifactId>
-            <version>[5.0.0-m1, 5.9)</version>
-        </dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.1.Final</version>
+		</dependency>
         
         <!-- DB DRIVER -->
         <dependency>
