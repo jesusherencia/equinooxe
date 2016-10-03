@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -44,5 +45,16 @@ public class UserResource {
 	public Response getCurrentUser() {
 		return Response.status(Response.Status.OK).entity(userService.getAuthentificatedUser()).build();
 	}
+	
+	@Path("/register")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response register(BasicAuthDto dto) {
+        return Response.status(Response.Status.OK)
+        		.entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
+        		.build();
+    }
+  
 
 }
