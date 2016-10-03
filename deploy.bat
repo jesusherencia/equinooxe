@@ -10,9 +10,6 @@ cd %appServerLocation%
 
 ECHO "lunch mvn package"
 call mvn package
-ECHO "enhancer..."
-call mvn datanucleus:enhance
-
 
  
 ECHO copie to %destFolderAndName%

@@ -22,40 +22,39 @@ import com.equinooxe.service.UserService;
  */
 public class UserServiceImpl implements UserService {
 
-	UserRepository userRepository;
-	
+    UserRepository userRepository;
+
     public UserServiceImpl() {
         userRepository = new UserJpaRepository();
     }
 
-	public User getAuthentificatedUser() {
-		Subject currentUser = SecurityUtils.getSubject();
+    public User getAuthentificatedUser() {
+        Subject currentUser = SecurityUtils.getSubject();
         if (!currentUser.isAuthenticated()) {
             throw new UnauthenticatedException("Aucun utilisateur n'est authentifi� ");
         }
         return getUserByEmail(currentUser.getPrincipal().toString());
-	}
+    }
 
-	public User getUserByEmail(String email) {
-		return userRepository.findUserByEmail(email);
-	}
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
 
-	public User register(String email, String username, String password) {
-		return userRepository.createUser(email, username, password);
-	}
+    public User register(String email, String username, String password) {
+        return userRepository.createUser(email, username, password);
+    }
 
-	public List<User> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-	public List<User> findRange(int[] range) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public List<User> findRange(int[] range) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	public int count() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public int count() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 }
