@@ -5,24 +5,6 @@
 
     <!-- Persistence unit -->
     <persistence-unit name="sbPersistenceUnit">
-        <!-- Entities -->
-        <class>com.equinooxe.domain.User</class>
-        <class>com.equinooxe.domain.UserRole</class>
-        <class>com.equinooxe.domain.OperativeUnit</class>
-        <class>com.equinooxe.domain.AgentUser</class>
-        <class>com.equinooxe.domain.CleanRequest</class>
-        <class>com.equinooxe.domain.CleanTask</class>
-        <class>com.equinooxe.domain.Location</class>
-        <class>com.equinooxe.domain.LocationGroup</class>
-        <class>com.equinooxe.domain.ManagerUser</class>
-        <class>com.equinooxe.domain.Permission</class>
-        <class>com.equinooxe.domain.Role</class>
-        <class>com.equinooxe.domain.RolePermission</class>
-        <class>com.equinooxe.domain.RolesPermission</class>
-        <class>com.equinooxe.domain.Task</class>
-        <class>com.equinooxe.domain.TaskDefinition</class>
-        <exclude-unlisted-classes/>
-
         <properties>
             <!-- Datasource properties -->
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1/appnh?useServerPrepStmts=false"/>
