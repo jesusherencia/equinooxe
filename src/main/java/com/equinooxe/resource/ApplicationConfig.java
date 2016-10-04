@@ -72,8 +72,8 @@ public class ApplicationConfig extends Application {
         resources.add(com.equinooxe.controller.TestController.class);
         resources.add(com.equinooxe.resource.CORSResponseFilter.class);
         resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
-        resources.add(com.equinooxe.resource.user.UserResource.class);
-        resources.add(com.equinooxe.resource.user.AuthResource.class); 
+        resources.add(com.equinooxe.resource.user.AuthResource.class);
+        resources.add(com.equinooxe.resource.user.UserResource.class); 
     }
 
 }
