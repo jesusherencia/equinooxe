@@ -12,6 +12,7 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ public class User implements Serializable {
     @Column
     protected String salt;
 
-    @OneToMany(mappedBy = "user", targetEntity = UserRole.class)
+    @OneToMany(mappedBy = "user", targetEntity = UserRole.class,fetch = FetchType.EAGER)
     private Collection<UserRole> userRoles;
 
     public User() {
