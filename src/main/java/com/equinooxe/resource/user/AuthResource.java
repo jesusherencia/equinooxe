@@ -46,6 +46,14 @@ public class AuthResource {
         userAuth.logout();
         return Response.status(Response.Status.OK).entity("Logout success").build();
     }
+    
+    @Path("/ping")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response pingPublic() {
+        return Response.status(Response.Status.OK).entity("Public area acces is OK").build();
+    }
  
     public boolean checkUserAuth(BasicAuthDto uAuthObject) {
         throw new UnsupportedOperationException("Not supported yet.");  

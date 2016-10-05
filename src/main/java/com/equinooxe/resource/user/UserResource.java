@@ -18,43 +18,43 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 
 /**
  *
  * @author mohamed
  */
-
 @Path("/user")
+@RequiresAuthentication
 public class UserResource {
 
-	private UserService userService = new UserServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
-	@Path("/all")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAll() {
-		List<User> users =  userService.findAll(); 
-		return Response.status(Response.Status.OK).entity(users).build();
-	}
+    @Path("/all")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        List<User> users = userService.findAll();
+        return Response.status(Response.Status.OK).entity(users).build();
+    }
 
-	@Path("/current")
-	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCurrentUser() {
-		return Response.status(Response.Status.OK).entity(userService.getAuthentificatedUser()).build();
-	}
-	
-	@Path("/register")
+    @Path("/current")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCurrentUser() {
+        return Response.status(Response.Status.OK).entity(userService.getAuthentificatedUser()).build();
+    }
+
+    @Path("/register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(BasicAuthDto dto) {
         return Response.status(Response.Status.OK)
-        		.entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
-        		.build();
+                .entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
+                .build();
     }
-  
 
 }
