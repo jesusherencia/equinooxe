@@ -60,12 +60,12 @@ public class AuthentificationServiceImpl implements AuthentificationService{
 
     @Override
     public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean checkUserAuthByEmail(String userEmail) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
