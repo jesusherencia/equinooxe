@@ -8,7 +8,8 @@ SET destFolderAndName=%tomcatAppFolder%\equinooxe.war
 ECHO server folder %appServerLocation%
 cd %appServerLocation%
 
-ECHO "lunch mvn package"
+ECHO "lunch mvn clean then package"
+call mvn clean
 call mvn package
 
  

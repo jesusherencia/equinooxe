@@ -31,7 +31,7 @@ public class BasicUserAuthDto {
 
     @Override
     public String toString() {
-        return username + " | " + password+ " | "+Boolean.toString(rememberMe);
+        return username +  " | " + password+  " | "+Boolean.toString(rememberMe);
     }
 
     public String getUsername() {

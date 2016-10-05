@@ -32,9 +32,9 @@ public class AuthResource {
 
     @Path("/login")
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)  
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(BasicUserAuthDto uAuthObject) {
+    public Response login(BasicUserAuthDto uAuthObject) { 
         if (userAuth.login(uAuthObject)) {
             return Response.status(Response.Status.OK).entity("OK").build();
         }
