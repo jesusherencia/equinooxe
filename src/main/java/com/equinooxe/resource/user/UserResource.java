@@ -51,7 +51,7 @@ public class UserResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response register(BasicAuthDto dto) {
+    public Response register(BasicUserAuthDto dto) {
         return Response.status(Response.Status.OK)
                 .entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
                 .build();

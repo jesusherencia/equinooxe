@@ -3,9 +3,11 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.resource.user;
+package com.equinooxe.service.impl;
 
 
+import com.equinooxe.resource.user.BasicUserAuthDto;
+import com.equinooxe.service.AuthentificationService;
 import java.util.Arrays;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -19,11 +21,11 @@ import org.apache.shiro.subject.Subject;
  *
  * @author Mohamed
  */
-public class UserAuthImpl implements UserAuth{
+public class AuthentificationServiceImpl implements AuthentificationService{
     
     private  Subject currentUser = SecurityUtils.getSubject();
 
-    public UserAuthImpl() {
+    public AuthentificationServiceImpl() {
     }
     
     @Override
@@ -32,7 +34,7 @@ public class UserAuthImpl implements UserAuth{
     }
     
     @Override
-    public boolean login(BasicAuthDto uAuthObject) {        
+    public boolean login(BasicUserAuthDto uAuthObject) {        
         if (!currentUser.isAuthenticated()) {
             UsernamePasswordToken token = new UsernamePasswordToken(uAuthObject.getUsername(), uAuthObject.getPassword(), uAuthObject.isRememberMe());
             token.setRememberMe(uAuthObject.isRememberMe());
@@ -57,7 +59,7 @@ public class UserAuthImpl implements UserAuth{
     }
 
     @Override
-    public boolean checkUserAuth(BasicAuthDto uAuthObject) {
+    public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

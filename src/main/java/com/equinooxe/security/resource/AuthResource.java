@@ -3,9 +3,12 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.resource.user;
+package com.equinooxe.security.resource;
 
  
+import com.equinooxe.service.AuthentificationService;
+import com.equinooxe.resource.user.BasicUserAuthDto;
+import com.equinooxe.service.impl.AuthentificationServiceImpl;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,7 +25,7 @@ import javax.ws.rs.core.Response;
 public class AuthResource {
 
 
-    private UserAuth userAuth = new UserAuthImpl();
+    private AuthentificationService userAuth = new AuthentificationServiceImpl();
 
     public AuthResource() {
     }
@@ -31,7 +34,7 @@ public class AuthResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(BasicAuthDto uAuthObject) {
+    public Response login(BasicUserAuthDto uAuthObject) {
         if (userAuth.login(uAuthObject)) {
             return Response.status(Response.Status.OK).entity("OK").build();
         }
@@ -55,7 +58,7 @@ public class AuthResource {
         return Response.status(Response.Status.OK).entity("Public area acces is OK").build();
     }
  
-    public boolean checkUserAuth(BasicAuthDto uAuthObject) {
+    public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {
         throw new UnsupportedOperationException("Not supported yet.");  
     }
 

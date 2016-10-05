@@ -6,10 +6,11 @@
 package com.equinooxe.resource.user;
 
 /**
+ * A commodity to simplify serilization/deserialization as it's a simple POJO
  *
- * @author Mohamed
+ * @author mohamed.boullouz@gmail.com 
  */
-public class BasicAuthDto {
+public class BasicUserAuthDto {
 
     String username;
     String password;
@@ -18,11 +19,11 @@ public class BasicAuthDto {
     /**
      * Jackson need a default constructor to perform serialization!
      */
-    public BasicAuthDto(){
+    public BasicUserAuthDto(){
          
     }
     
-    public BasicAuthDto(String username, String password, boolean rememberMe) {
+    public BasicUserAuthDto(String username, String password, boolean rememberMe) {
         this.username = username;
         this.password = password;
         this.rememberMe = rememberMe;
