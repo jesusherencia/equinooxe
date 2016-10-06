@@ -4,12 +4,14 @@ import org.slf4j.LoggerFactory;
 
 import com.equinooxe.domain.repository.UserRepository;
 import com.equinooxe.infrastructure.repository.UserJpaRepository;
+import org.junit.Test;
 
-public class AppTestCreateUser {
+public class AppCreateUserTest {
 
-	private static final transient Logger log = LoggerFactory.getLogger(AppTestCreateUser.class);
-
-	public static void main(String[] args) {
+	private static final transient Logger log = LoggerFactory.getLogger(AppCreateUserTest.class);
+        
+        @Test
+	public void main() {
 		log.info("My First Apache Shiro Application");
 		UserRepository userRepository = new UserJpaRepository();
 		userRepository.createUser("a@a.com", "admin", "admin");
