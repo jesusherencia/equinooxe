@@ -39,9 +39,14 @@ public class UserJpaRepository implements UserRepository {
     @Override
     public User findUserByEmail(String email) {
         EntityManager em = entityManagerFactory.createEntityManager();
-        User user = (User) em.createQuery("Select u From User as u Where u.email= :email")
-                .setParameter("email", email)
-                .getSingleResult();
+        User user = null;
+        try {
+            user = (User) em.createQuery("Select u From User as u Where u.email= :email")
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception e) {
+
+        }
         return user;
     }
 
@@ -101,23 +106,12 @@ public class UserJpaRepository implements UserRepository {
 
     @Override
     public boolean remove(User t) {
-        // TODO Auto-generated method stub
-        EntityManager em = entityManagerFactory.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        try {
-            tx.begin();
-            em.remove(t);
-            tx.commit();
-        } catch (Exception e) {
-            //NucleusLogger.GENERAL.error(">> Exception persisting data", e);
-            System.err.println("Error persisting data : " + e.getMessage());
-            return false;
-        } finally {
-            if (tx.isActive()) {
-                tx.rollback();
-            }
-            em.close();
+        if (t == null) {
+            return true;
         }
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.remove(em.contains(t) ? t : em.merge(t));
+        em.flush();      
         return true;
     }
 
@@ -154,8 +148,8 @@ public class UserJpaRepository implements UserRepository {
         List<Permission> permissions;
         EntityManager em = entityManagerFactory.createEntityManager();
         permissions = em.createQuery(
-            " SELECT P FROM Permission as P, Role as R, RolePermission as RP"
-           +" WHERE RP.role.id = R.id AND RP.permission.id=P.id AND R.name= :roleName ")
+                " SELECT P FROM Permission as P, Role as R, RolePermission as RP"
+                + " WHERE RP.role.id = R.id AND RP.permission.id=P.id AND R.name= :roleName ")
                 .setParameter("roleName", roleName).getResultList();
         return permissions;
     }
