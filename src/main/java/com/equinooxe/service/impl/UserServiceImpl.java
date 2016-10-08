@@ -13,7 +13,7 @@ import org.apache.shiro.subject.Subject;
 
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.repository.UserRepository;
-import com.equinooxe.infrastructure.repository.UserJpaRepository;
+import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
 import com.equinooxe.service.UserService;
 
 /**
@@ -25,9 +25,10 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     public UserServiceImpl() {
-        userRepository = new UserJpaRepository();
+        userRepository = (UserRepository) new UserRepositoryImpl();
     }
 
+    @Override
     public User getAuthentificatedUser() {
         Subject currentUser = SecurityUtils.getSubject();
         if (!currentUser.isAuthenticated()) {
@@ -36,25 +37,29 @@ public class UserServiceImpl implements UserService {
         return getUserByEmail(currentUser.getPrincipal().toString());
     }
 
+    @Override
     public User getUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
 
+    @Override
     public User register(String email, String username, String password) {
         return userRepository.createUser(email, username, password);
     }
 
+    @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    @Override
     public List<User> findRange(int[] range) {
         // TODO Auto-generated method stub
         return null;
     }
 
-    public int count() {
-        // TODO Auto-generated method stub
+    @Override
+    public int count() {   
         return 0;
     }
 }

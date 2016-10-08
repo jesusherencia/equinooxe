@@ -24,15 +24,15 @@ import org.apache.shiro.realm.jdbc.JdbcRealm;
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.UserRole;
-import com.equinooxe.domain.repository.UserRepository;
-import com.equinooxe.infrastructure.repository.UserJpaRepository;
+import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
 
 public class MyCustomRealm extends JdbcRealm {
-	
-	UserRepository userRepository;
+    
+    /* @todo We should simplify this mush more */
+    UserRepositoryImpl userRepository;
 	
     public MyCustomRealm() {
-        userRepository = new UserJpaRepository();
+        userRepository =  new UserRepositoryImpl();
     }
      
     public User getUserByEmail(String email) {
@@ -92,11 +92,10 @@ public class MyCustomRealm extends JdbcRealm {
                     username, user.getPassword(), user.getSalt());
             return info;
         } catch(Exception e) {
-            //System.out.println("end Try getUserByUsername!");
         	e.printStackTrace();
         	return null;
         } finally {
-            //System.out.println("end Try getUserByUsername!");
+            
         }
 
     }
