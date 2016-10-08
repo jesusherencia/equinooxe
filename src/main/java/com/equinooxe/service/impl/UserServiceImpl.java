@@ -12,7 +12,6 @@ import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.subject.Subject;
 
 import com.equinooxe.domain.User;
-import com.equinooxe.domain.repository.UserRepository;
 import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
 import com.equinooxe.service.UserService;
 
@@ -22,10 +21,10 @@ import com.equinooxe.service.UserService;
  */
 public class UserServiceImpl implements UserService {
 
-    UserRepository userRepository;
+    UserRepositoryImpl userRepository;
 
     public UserServiceImpl() {
-        userRepository = (UserRepository) new UserRepositoryImpl();
+        userRepository = new UserRepositoryImpl();
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.equinooxe.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.equinooxe.domain.repository.UserRepository;
 import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
 import org.junit.After;
 import org.junit.Test;
@@ -13,7 +12,7 @@ import static org.junit.Assert.*;
 public class AppCreateUserTest {
 
     private static final transient Logger log = LoggerFactory.getLogger(AppCreateUserTest.class);
-    UserRepository userRepository = (UserRepository) new UserRepositoryImpl();
+    UserRepositoryImpl userRepository =   new UserRepositoryImpl();
     String email = "a@a.com";
 
     @Test
