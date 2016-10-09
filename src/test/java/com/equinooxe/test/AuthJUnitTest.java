@@ -28,7 +28,7 @@ public class AuthJUnitTest {
     static Client client;
 
     @Test
-    public void logInWithUsernameAsEmailAndPassword() {
+    public void logInWithUsernameAsEmailAndPasswordTest() {
         WebTarget target = client.target(BASE_URI_AUTH + "/login");
         BasicUserAuthDto u = new BasicUserAuthDto("m@m.com", "med", true);
         Entity<BasicUserAuthDto> userEntity = Entity.entity(u, MediaType.APPLICATION_JSON);

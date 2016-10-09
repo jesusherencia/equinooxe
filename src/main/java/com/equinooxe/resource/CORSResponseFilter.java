@@ -24,14 +24,11 @@ public class CORSResponseFilter implements ContainerResponseFilter {
             throws IOException {
 
         MultivaluedMap<String, Object> headers = responseContext.getHeaders();
-
         headers.add("Access-Control-Allow-Origin", "*");
-        //headers.add("Access-Control-Allow-Origin", "http://vps174148.ovh.net"); //allows CORS requests only coming from podcastpedia.org		
+        //headers.add("Access-Control-Allow-Origin", "http://vps174148.ovh.net");  	
         headers.add("Access-Control-Allow-Methods", "POST,PUT,GET,HEAD,OPTIONS");
-
         headers.add("Access-Control-Allow-Credentials", "true");
-
-        headers.add("Access-Control-Allow-Headers", "accept, accepts, authorization, content-type,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+        headers.add("Access-Control-Allow-Headers", "accept, accepts, Authorization, content-type,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     }
 
 }

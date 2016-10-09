@@ -11,14 +11,16 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AppTestShiro {
+public class AppShiroTest {
 
-    private static final transient Logger log = LoggerFactory.getLogger(AppTestShiro.class);
+    private static final transient Logger log = LoggerFactory.getLogger(AppShiroTest.class);
 
-    public static void main(String[] args) {
+    @Test
+    public  void main( ) {
         log.info("My First Apache Shiro Application");
         Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
         SecurityManager securityManager = factory.getInstance();

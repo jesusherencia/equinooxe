@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
-import com.equinooxe.domain.shared.Repository;
 
 public interface UserRepository extends Repository<User> {
 
