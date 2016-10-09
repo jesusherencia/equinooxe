@@ -59,6 +59,7 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
+        resources.add(MyCustomBasicAuthenticationFilter.class);/* @see the class doc */
         addRestResourceClasses(resources);
         return resources;
     }
@@ -70,7 +71,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.equinooxe.controller.TestController.class);
-        resources.add(com.equinooxe.resource.CORSResponseFilter.class);
+        resources.add(com.equinooxe.resource.CORSResponseFilter.class);              
         resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);
         resources.add(com.equinooxe.security.resource.AuthResource.class); 

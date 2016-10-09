@@ -27,7 +27,7 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
  *
  * @author mohamed
  */
-@Path("/user")
+@Path("/secure/user")
 @RequiresAuthentication
 public class UserResource {
 

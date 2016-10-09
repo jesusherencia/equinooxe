@@ -21,7 +21,7 @@ import com.equinooxe.domain.repository.AbstractRepository;
 
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository{
 
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     public UserRepositoryImpl() {
         super(User.class);
