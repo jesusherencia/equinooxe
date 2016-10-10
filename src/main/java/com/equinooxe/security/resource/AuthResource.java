@@ -5,10 +5,11 @@
  */
 package com.equinooxe.security.resource;
 
- 
 import com.equinooxe.service.AuthentificationService;
 import com.equinooxe.resource.user.BasicUserAuthDto;
+import com.equinooxe.service.UserService;
 import com.equinooxe.service.impl.AuthentificationServiceImpl;
+import com.equinooxe.service.impl.UserServiceImpl;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,17 +25,27 @@ import javax.ws.rs.core.Response;
 @Path("/auth")
 public class AuthResource {
 
-
     private AuthentificationService userAuth = new AuthentificationServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
     public AuthResource() {
     }
 
+    @Path("/register")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response register(BasicUserAuthDto dto) {
+        return Response.status(Response.Status.OK)
+                .entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
+                .build();
+    }
+
     @Path("/login")
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)  
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(BasicUserAuthDto uAuthObject) { 
+    public Response login(BasicUserAuthDto uAuthObject) {
         if (userAuth.login(uAuthObject)) {
             return Response.status(Response.Status.OK).entity("OK").build();
         }
@@ -49,7 +60,7 @@ public class AuthResource {
         userAuth.logout();
         return Response.status(Response.Status.OK).entity("Logout success").build();
     }
-    
+
     @Path("/ping")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,12 +68,12 @@ public class AuthResource {
     public Response pingPublic() {
         return Response.status(Response.Status.OK).entity("Public area acces is OK").build();
     }
- 
+
     public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {
-        throw new UnsupportedOperationException("Not supported yet.");  
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public boolean checkUserAuthByEmail(String userEmail) {
-        throw new UnsupportedOperationException("Not supported yet.");  
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

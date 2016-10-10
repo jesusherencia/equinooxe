@@ -25,14 +25,10 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 
     public UserRepositoryImpl() {
         super(User.class);
-        entityManager = Persistence.createEntityManagerFactory("sbPersistenceUnit").createEntityManager();
+        entityManager= getEntityManager();
+       
     }
-
-    @Override
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
+  
     @Override
     public User findUserByEmail(String email) {
         return (User) entityManager.createQuery("Select u From User as u Where u.email= :email")
@@ -58,10 +54,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         user.setSalt(salt.toString());
         user.setEmail(username);
         user.setUsername(username);
-        entityManager.getTransaction().begin(); 
-        entityManager.persist(user);        
-        entityManager.flush();
-        entityManager.getTransaction().commit();              
+        create(user);                     
         return user;
     }
 

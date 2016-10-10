@@ -9,16 +9,17 @@ package com.equinooxe.domain.repository;
  *
  * @author mboullouz
  */
-
 import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
  * Generic and common operations to all repositories
+ *
  * @author mboullouz
  * @param <T> Entity type
  */
 public abstract class AbstractRepository<T> implements Repository<T> {
+
     private Class<T> entityClass;
 
     public AbstractRepository(Class<T> entityClass) {
@@ -26,21 +27,32 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
     @Override
-    public abstract EntityManager getEntityManager();
+    public   EntityManager getEntityManager(){
+        return HibernateUtil.getEntityManager();
+    } 
 
     @Override
     public void create(T entity) {
+        getEntityManager().getTransaction().begin();
         getEntityManager().persist(entity);
+        getEntityManager().flush();
+        getEntityManager().getTransaction().commit();
     }
 
     @Override
     public void edit(T entity) {
+        getEntityManager().getTransaction().begin();
         getEntityManager().merge(entity);
+        getEntityManager().flush();
+        getEntityManager().getTransaction().commit();
     }
 
     @Override
     public void remove(T entity) {
+        getEntityManager().getTransaction().begin();
         getEntityManager().remove(getEntityManager().merge(entity));
+        getEntityManager().flush();
+        getEntityManager().getTransaction().commit();
     }
 
     @Override
@@ -71,5 +83,5 @@ public abstract class AbstractRepository<T> implements Repository<T> {
         javax.persistence.Query q = getEntityManager().createQuery(criteriaQuery);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }
