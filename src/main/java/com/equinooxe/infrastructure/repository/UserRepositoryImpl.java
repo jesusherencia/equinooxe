@@ -58,7 +58,10 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         user.setSalt(salt.toString());
         user.setEmail(username);
         user.setUsername(username);
-        entityManager.persist(user);
+        entityManager.getTransaction().begin(); 
+        entityManager.persist(user);        
+        entityManager.flush();
+        entityManager.getTransaction().commit();              
         return user;
     }
 
