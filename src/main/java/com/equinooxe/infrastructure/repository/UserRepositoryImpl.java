@@ -9,7 +9,6 @@ package com.equinooxe.infrastructure.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -18,6 +17,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.repository.AbstractRepository;
+import com.equinooxe.domain.repository.UserRepository;
 
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository{
 

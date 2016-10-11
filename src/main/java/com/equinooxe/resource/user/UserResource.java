@@ -65,5 +65,5 @@ public class UserResource {
         return Response.status(Response.Status.OK).entity(userService.getAuthentificatedUser()).build();
     }
 
-    
+
 }

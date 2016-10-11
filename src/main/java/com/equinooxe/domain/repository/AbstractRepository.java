@@ -1,3 +1,4 @@
+
 /*
  * Copyright (C) 2015 Mohamed Boullouz.
  * contact: <mohamed.boullouz@gmail.com>
@@ -85,3 +86,4 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
 }
+
