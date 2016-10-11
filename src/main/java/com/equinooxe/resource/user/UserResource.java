@@ -65,14 +65,6 @@ public class UserResource {
         return Response.status(Response.Status.OK).entity(userService.getAuthentificatedUser()).build();
     }
 
-    @Path("/register")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response register(BasicUserAuthDto dto) {
-        return Response.status(Response.Status.OK)
-                .entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
-                .build();
-    }
+   
 
 }

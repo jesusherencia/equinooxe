@@ -7,8 +7,11 @@ package com.equinooxe.security.resource;
 
  
 import com.equinooxe.service.AuthentificationService;
+import com.equinooxe.service.UserService;
 import com.equinooxe.resource.user.BasicUserAuthDto;
 import com.equinooxe.service.impl.AuthentificationServiceImpl;
+import com.equinooxe.service.impl.UserServiceImpl;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,6 +29,7 @@ public class AuthResource {
 
 
     private AuthentificationService userAuth = new AuthentificationServiceImpl();
+    private UserService userService = new UserServiceImpl();
 
     public AuthResource() {
     }
@@ -39,6 +43,16 @@ public class AuthResource {
             return Response.status(Response.Status.OK).entity("OK").build();
         }
         return Response.status(Response.Status.FORBIDDEN).entity("BadCredentials").build();
+    }
+    
+    @Path("/register")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response register(BasicUserAuthDto dto) {
+        return Response.status(Response.Status.OK)
+                .entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
+                .build();
     }
 
     @Path("/logout")
