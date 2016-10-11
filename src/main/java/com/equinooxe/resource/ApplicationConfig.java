@@ -70,7 +70,6 @@ public class ApplicationConfig extends Application {
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.equinooxe.controller.TestController.class);
         resources.add(com.equinooxe.resource.CORSResponseFilter.class);              
         resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);

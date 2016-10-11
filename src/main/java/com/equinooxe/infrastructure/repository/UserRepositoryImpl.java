@@ -9,7 +9,6 @@ package com.equinooxe.infrastructure.repository;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
@@ -18,6 +17,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.repository.AbstractRepository;
+import com.equinooxe.domain.repository.UserRepository;
 
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository{
 
@@ -25,14 +25,10 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 
     public UserRepositoryImpl() {
         super(User.class);
-        entityManager = Persistence.createEntityManagerFactory("sbPersistenceUnit").createEntityManager();
+        entityManager= getEntityManager();
+       
     }
-
-    @Override
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-
+  
     @Override
     public User findUserByEmail(String email) {
         return (User) entityManager.createQuery("Select u From User as u Where u.email= :email")
@@ -58,7 +54,7 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         user.setSalt(salt.toString());
         user.setEmail(username);
         user.setUsername(username);
-        entityManager.persist(user);
+        create(user);                     
         return user;
     }
 
