@@ -18,7 +18,7 @@ import org.apache.shiro.authz.UnauthenticatedException;
 
 /**
  *
- * @author Mohamed
+ * Customize shiro exception response
  */
 @Provider
 public class GenericExceptionMapper implements ExceptionMapper<ShiroException> {
