@@ -30,9 +30,8 @@ public class ApplicationConfig extends Application {
 
     /**
      * This is how the Jersey - Jackson serialize the object returned as
-     * Response Object @see:
-     *
-     * @return
+     * Response Object
+     * @return a Set
      */
     @Override
     public Set<Object> getSingletons() {
@@ -60,20 +59,21 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         resources.add(MyCustomBasicAuthenticationFilter.class);/* @see the class doc */
+
         addRestResourceClasses(resources);
         return resources;
     }
 
     /**
-     * Do not modify addRestResourceClasses() method. It is automatically
-     * populated with all resources defined in the project. If required, comment
+     * Populated with all resources defined in the project. If required, comment
      * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.equinooxe.resource.CORSResponseFilter.class);              
+        resources.add(com.equinooxe.resource.CORSResponseFilter.class);
         resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
+        resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);
-        resources.add(com.equinooxe.security.resource.AuthResource.class); 
+        resources.add(com.equinooxe.security.resource.AuthResource.class);
     }
 
 }
