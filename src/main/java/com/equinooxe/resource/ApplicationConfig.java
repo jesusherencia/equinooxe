@@ -59,6 +59,7 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         resources.add(MyCustomBasicAuthenticationFilter.class);/* @see the class doc */
+        resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
 
         addRestResourceClasses(resources);
         return resources;
@@ -67,11 +68,11 @@ public class ApplicationConfig extends Application {
     /**
      * Populated with all resources defined in the project. If required, comment
      * out calling this method in getClasses().
+     * @warning Netbean IDE rewrites this methods autmatically
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.equinooxe.resource.CORSResponseFilter.class);
         resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
-        resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);
         resources.add(com.equinooxe.security.resource.AuthResource.class);
     }

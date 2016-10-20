@@ -1,14 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.equinooxe</groupId>
-	<artifactId>equinooxe</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Equinooxe</name>
-	<packaging>war</packaging>
+    <groupId>com.equinooxe</groupId>
+    <artifactId>equinooxe</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Equinooxe</name>
+    <packaging>war</packaging>
 	
-	<properties>
+    <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -16,13 +16,13 @@
         <shiro.version>1.3.0</shiro.version>
     </properties>
 	
-	<dependencies>
+    <dependencies>
         <!-- Hibernate -->
         <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.2.1.Final</version>
-		</dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.1.Final</version>
+        </dependency>
         
         <!-- DB DRIVER -->
         <dependency>
@@ -33,11 +33,11 @@
         
         <!-- SLF4J -->
         <dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-log4j12</artifactId>
-		    <version>1.7.7</version>
-		</dependency>
-		<dependency> <!-- Required by Shiro -->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
+        <dependency> <!-- Required by Shiro -->
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.6.1</version>
@@ -46,19 +46,19 @@
         
         <!-- JUNIT -->
         <dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
 		
-		<!-- SHIRO -->
-		<dependency>
-		    <groupId>org.apache.shiro</groupId>
-		    <artifactId>shiro-core</artifactId>
-		    <version>${shiro.version}</version>
-		</dependency>
-		<dependency>
+        <!-- SHIRO -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
             <version>${shiro.version}</version>
@@ -78,52 +78,73 @@
             <scope>provided</scope>
         </dependency>
         <dependency><!-- Only for Tomcat as jstl is not provided -->
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-	    </dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
 	    
-	    <!-- Jersey -->
-	    <dependency>
-		    <groupId>org.glassfish.jersey.containers</groupId>
-		    <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
-		    <artifactId>jersey-container-servlet</artifactId>
-		    <version>2.23.2</version>
-		</dependency>
-		<!-- Required only when you are using JAX-RS Client -->
-		<!-- <dependency>
-		    <groupId>org.glassfish.jersey.core</groupId>
-		    <artifactId>jersey-client</artifactId>
-		    <version>2.23.2</version>
-		</dependency> -->
+        <!-- Jersey -->
+        <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>2.23.2</version>
+        </dependency>
+        <!-- Required only when you are using JAX-RS Client -->
+        <!-- <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.23.2</version>
+        </dependency> -->
 		
-		<!-- Jackson -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.5.4</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
-			<version>2.5.4</version>
-			<type>jar</type>
-		</dependency>
+        <!-- Jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>2.5.4</version>
+            <type>jar</type>
+        </dependency>
 		
-		<!-- Securing jersey with shiro -->
-		<dependency>
-			<groupId>org.secnod.shiro</groupId>
-			<artifactId>shiro-jersey</artifactId>
-			<version>0.2.0</version>
-		</dependency>
-	 <dependency>
-	  <groupId>org.glassfish.jersey.media</groupId>
-	  <artifactId>jersey-media-json-jackson</artifactId>
-	  <version>2.23.1</version>
-	  <scope>test</scope>
-	  <type>jar</type>
-	 </dependency>
-	</dependencies>
-
+        <!-- Securing jersey with shiro -->
+        <dependency>
+            <groupId>org.secnod.shiro</groupId>
+            <artifactId>shiro-jersey</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.23.1</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <version>1.0</version>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <executions>
+                    <execution><!-- Run our version calculation script -->
+                        <id>DeployToTomEE</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>${basedir}/deploy.bat</executable>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
 </project>

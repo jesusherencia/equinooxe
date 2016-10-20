@@ -5,6 +5,7 @@
  */
 package com.equinooxe.security.resource;
 
+import com.equinooxe.domain.User;
 import com.equinooxe.service.AuthentificationService;
 import com.equinooxe.service.UserService;
 import com.equinooxe.resource.user.BasicUserAuthDto;
@@ -49,7 +50,8 @@ public class AuthResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(BasicUserAuthDto uAuthObject) {
         if (userAuth.login(uAuthObject)) {
-            return Response.status(Response.Status.OK).entity("OK").build();
+            User user = userService.getAuthentificatedUser();
+            return Response.status(Response.Status.OK).entity(user).build();
         }
         return Response.status(Response.Status.FORBIDDEN).entity("BadCredentials").build();
     }   
