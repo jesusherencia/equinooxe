@@ -71,8 +71,8 @@ public class ApplicationConfig extends Application {
      * @warning Netbean IDE rewrites this methods autmatically
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.equinooxe.resource.AutorizationGenericExceptionMapper.class);
         resources.add(com.equinooxe.resource.CORSResponseFilter.class);
-        resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);
         resources.add(com.equinooxe.security.resource.AuthResource.class);
     }

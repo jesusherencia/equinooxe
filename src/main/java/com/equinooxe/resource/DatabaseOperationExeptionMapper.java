@@ -5,19 +5,19 @@
  */
 package com.equinooxe.resource;
 
+import com.equinooxe.domain.repository.DatabaseOperationGenericException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
-import org.hibernate.TransactionException;
 
 /**
  *
  * @author mboullouz
  */
-public class DatabaseOperationExeptionMapper implements ExceptionMapper<TransactionException> {
+public class DatabaseOperationExeptionMapper implements ExceptionMapper<DatabaseOperationGenericException> {
 
     @Override
-    public Response toResponse(TransactionException e) {
+    public Response toResponse(DatabaseOperationGenericException e) {
           return Response.status(Response.Status.BAD_REQUEST)
                 .entity(e.getMessage())
                 .type(MediaType.APPLICATION_JSON)

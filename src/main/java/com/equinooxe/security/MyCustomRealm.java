@@ -24,6 +24,7 @@ import org.apache.shiro.realm.jdbc.JdbcRealm;
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.UserRole;
+import com.equinooxe.domain.repository.DatabaseOperationGenericException;
 import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
 
 public class MyCustomRealm extends JdbcRealm {
@@ -38,7 +39,7 @@ public class MyCustomRealm extends JdbcRealm {
     public User getUserByEmail(String email) {
     	return userRepository.findUserByEmail(email);
     }
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws DatabaseOperationGenericException {
     	return userRepository.findUserByUsername(username);
     }
     public List<Permission> getAllByRoleName(String roleName) {

@@ -12,7 +12,7 @@ package com.equinooxe.domain.repository;
  */
 import java.util.List;
 import javax.persistence.EntityManager;
-import org.hibernate.TransactionException;
+ 
 
 /**
  * Generic and common operations to all repositories
@@ -33,16 +33,24 @@ public abstract class AbstractRepository<T> implements Repository<T> {
         return HibernateUtil.getEntityManager();
     } 
 
+    /**
+     *
+     * @param entity
+     * @throws DatabaseOperationGenericException
+     */
     @Override
-    public void create(T entity) {
+    public void create(T entity) throws DatabaseOperationGenericException {
         if( !getEntityManager().getTransaction().isActive()){
              getEntityManager().getTransaction().begin();
         }
         getEntityManager().persist(entity);
         try {
+            /**
+             * We may flush there as well
+             */
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
-            throw new TransactionException(" Commiting to the db fails "+ e.getMessage());
+            throw new DatabaseOperationGenericException(" Commiting to the db fails "+ e.getMessage());
         }
         
     }
