@@ -5,6 +5,8 @@
  */
 package com.equinooxe.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -23,6 +25,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table()
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
