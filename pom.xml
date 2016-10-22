@@ -24,6 +24,12 @@
             <version>5.2.1.Final</version>
         </dependency>
         
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+            <version>2.8.3</version>
+        </dependency>  
+        
         <!-- DB DRIVER -->
         <dependency>
             <groupId>mysql</groupId>
@@ -125,7 +131,7 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-<!--    <build>
+    <!--    <build>
         <plugins>
             <plugin>
                 <version>1.0</version>
