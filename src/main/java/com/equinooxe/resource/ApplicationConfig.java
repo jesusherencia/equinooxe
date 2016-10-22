@@ -58,7 +58,7 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
-        resources.add(MyCustomBasicAuthenticationFilter.class);/* @see the class doc */
+        resources.add(AppCustomBasicAuthenticationFilter.class);/* @see the class doc */
         resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
 
         addRestResourceClasses(resources);

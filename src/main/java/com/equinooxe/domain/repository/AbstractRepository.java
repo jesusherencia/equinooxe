@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2015 Mohamed Boullouz.
  * contact: <mohamed.boullouz@gmail.com>
- * This file is part of equinooxe Project
+ * This file is part of Equinooxe Project
  */
 package com.equinooxe.domain.repository;
 
