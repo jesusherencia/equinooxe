@@ -6,6 +6,7 @@
 
 package com.equinooxe.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -25,6 +26,7 @@ import javax.persistence.Table;
 @Table()
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="USER_TYPE")
+@JsonIgnoreProperties({"password","salt"})
 public class User implements Serializable {
 
     protected static final long serialVersionUID = 1L;
