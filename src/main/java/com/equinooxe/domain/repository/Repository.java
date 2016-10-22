@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 public interface Repository<T> {
  
     EntityManager getEntityManager();
-    public void create(T entity);
+    public void create(T entity) throws DatabaseOperationGenericException;
     public void edit(T entity);
     public void remove(T entity);
     public T find(Object id);

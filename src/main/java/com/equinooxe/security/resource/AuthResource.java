@@ -5,6 +5,8 @@
  */
 package com.equinooxe.security.resource;
 
+import com.equinooxe.domain.User;
+import com.equinooxe.domain.shared.SimpleResponseObjectWrapper;
 import com.equinooxe.service.AuthentificationService;
 import com.equinooxe.service.UserService;
 import com.equinooxe.resource.user.BasicUserAuthDto;
@@ -49,9 +51,10 @@ public class AuthResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(BasicUserAuthDto uAuthObject) {
         if (userAuth.login(uAuthObject)) {
-            return Response.status(Response.Status.OK).entity("OK").build();
+            User user = userService.getAuthentificatedUser();
+            return Response.status(Response.Status.OK).entity(user).build();
         }
-        return Response.status(Response.Status.FORBIDDEN).entity("BadCredentials").build();
+        return Response.status(Response.Status.FORBIDDEN).entity(new SimpleResponseObjectWrapper("BadCredentials",0)).build();
     }   
 
     @Path("/logout")
@@ -59,8 +62,9 @@ public class AuthResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response logout() {
-        userAuth.logout();
-        return Response.status(Response.Status.OK).entity("Logout success").build();
+        userAuth.logout();  
+        return Response.status(Response.Status.OK)
+                .entity(new SimpleResponseObjectWrapper("Logout success",1)).build();
     }
 
     @Path("/ping")

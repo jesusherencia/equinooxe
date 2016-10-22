@@ -5,6 +5,8 @@
  */
 package com.equinooxe.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -18,6 +20,7 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @DiscriminatorValue("AGENT")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class AgentUser extends User implements Serializable {
     
     @OneToMany(mappedBy = "agent", targetEntity = CleanRequest.class)

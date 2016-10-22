@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 2015 Mohamed Boullouz.
  * contact: <mohamed.boullouz@gmail.com>
- * This file is part of equinooxe Project
+ * This file is part of Equinooxe Project
  */
 package com.equinooxe.domain.repository;
 
@@ -12,6 +12,7 @@ package com.equinooxe.domain.repository;
  */
 import java.util.List;
 import javax.persistence.EntityManager;
+ 
 
 /**
  * Generic and common operations to all repositories
@@ -32,12 +33,26 @@ public abstract class AbstractRepository<T> implements Repository<T> {
         return HibernateUtil.getEntityManager();
     } 
 
+    /**
+     *
+     * @param entity
+     * @throws DatabaseOperationGenericException
+     */
     @Override
-    public void create(T entity) {
-        getEntityManager().getTransaction().begin();
+    public void create(T entity) throws DatabaseOperationGenericException {
+        if( !getEntityManager().getTransaction().isActive()){
+             getEntityManager().getTransaction().begin();
+        }
         getEntityManager().persist(entity);
-        getEntityManager().flush();
-        getEntityManager().getTransaction().commit();
+        try {
+            /**
+             * We may flush there as well
+             */
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
+            throw new DatabaseOperationGenericException(" Commiting to the db fails "+ e.getMessage());
+        }
+        
     }
 
     @Override

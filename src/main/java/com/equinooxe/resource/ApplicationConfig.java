@@ -5,8 +5,12 @@
  */
 package com.equinooxe.resource;
 
+import com.equinooxe.resource.user.UserResource;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,17 +34,27 @@ public class ApplicationConfig extends Application {
 
     /**
      * This is how the Jersey - Jackson serialize the object returned as
-     * Response Object @see:
+     * Response Object
      *
-     * @return
+     * @return a Set
      */
     @Override
     public Set<Object> getSingletons() {
         Set<Object> set = new HashSet<>();
-        log.log(Level.INFO, "Enabling custom Jackson JSON provider");
-        set.add(new JacksonJsonProvider().configure(SerializationFeature.INDENT_OUTPUT, true)
-                .configure(DeserializationFeature.WRAP_EXCEPTIONS, true)
-        );
+        /**
+         * Register Hibernate module with Jackson mapper
+         * @see http://wiki.fasterxml.com/JacksonHowToCustomSerializers
+         * @see https://github.com/FasterXML/jackson-datatype-hibernate
+         */
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new Hibernate5Module());
+        log.log(Level.INFO, "Enabling custom Jackson JSON provider and register Hibernate5Module ");
+        JacksonJsonProvider jacksonJsonProvider = new JacksonJsonProvider()
+                .configure(SerializationFeature.INDENT_OUTPUT, true)
+                .configure(DeserializationFeature.WRAP_EXCEPTIONS, true);
+        jacksonJsonProvider.setMapper(mapper);
+        set.add(jacksonJsonProvider);
+        
         set.add(new AuthorizationFilterFeature());
         set.add(new SubjectFactory());
         set.add(new AuthInjectionBinder());
@@ -59,21 +73,23 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
-        resources.add(MyCustomBasicAuthenticationFilter.class);/* @see the class doc */
+        resources.add(AppCustomBasicAuthenticationFilter.class);/* @see the class doc */
+        resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
         addRestResourceClasses(resources);
         return resources;
     }
 
     /**
-     * Do not modify addRestResourceClasses() method. It is automatically
-     * populated with all resources defined in the project. If required, comment
+     * Populated with all resources defined in the project. If required, comment
      * out calling this method in getClasses().
+     *
+     * @warning Netbean IDE rewrites this methods autmatically
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(com.equinooxe.resource.CORSResponseFilter.class);              
-        resources.add(com.equinooxe.resource.GenericExceptionMapper.class);
+        resources.add(com.equinooxe.resource.AutorizationGenericExceptionMapper.class);
+        resources.add(com.equinooxe.resource.CORSResponseFilter.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);
-        resources.add(com.equinooxe.security.resource.AuthResource.class); 
+        resources.add(com.equinooxe.security.resource.AuthResource.class);
     }
 
 }

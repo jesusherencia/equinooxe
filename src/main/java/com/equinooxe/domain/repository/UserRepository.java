@@ -9,7 +9,7 @@ public interface UserRepository extends Repository<User> {
 
 	public User findUserByEmail(String email);
 	
-	public User findUserByUsername(String username);
+	public User findUserByUsername(String username) throws DatabaseOperationGenericException;
 	
 	public User createUser(String email, String username, String password);
 	

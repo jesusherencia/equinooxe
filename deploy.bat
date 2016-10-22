@@ -10,7 +10,7 @@ cd %appServerLocation%
 
 ECHO "lunch mvn clean then package"
 call mvn clean
-call mvn package
+call mvn package -Dmaven.test.skip=true
 
  
 ECHO copie to %destFolderAndName%
