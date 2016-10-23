@@ -10,9 +10,11 @@ package com.equinooxe.domain.repository;
  *
  * @author mboullouz
  */
+import com.equinooxe.domain.utils.HibernateUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
- 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 /**
  * Generic and common operations to all repositories
@@ -29,9 +31,9 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
     @Override
-    public   EntityManager getEntityManager(){
+    public EntityManager getEntityManager() {
         return HibernateUtil.getEntityManager();
-    } 
+    }
 
     /**
      *
@@ -39,9 +41,9 @@ public abstract class AbstractRepository<T> implements Repository<T> {
      * @throws DatabaseOperationGenericException
      */
     @Override
-    public void create(T entity) throws DatabaseOperationGenericException {
-        if( !getEntityManager().getTransaction().isActive()){
-             getEntityManager().getTransaction().begin();
+    public void create(T entity) throws WebApplicationException {
+        if (!getEntityManager().getTransaction().isActive()) {
+            getEntityManager().getTransaction().begin();
         }
         getEntityManager().persist(entity);
         try {
@@ -50,9 +52,10 @@ public abstract class AbstractRepository<T> implements Repository<T> {
              */
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
-            throw new DatabaseOperationGenericException(" Commiting to the db fails "+ e.getMessage());
+            throw new WebApplicationException("  " + e.getMessage(),
+                    Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
         }
-        
+
     }
 
     @Override
@@ -89,7 +92,7 @@ public abstract class AbstractRepository<T> implements Repository<T> {
         javax.persistence.Query q = getEntityManager().createQuery(criteriaQuery);
         q.setMaxResults(range[1] - range[0] + 1);
         q.setFirstResult(range[0]);
-        return q.getResultList();
+        return (List<T>) q.getResultList();
     }
 
     public int count() {
@@ -101,4 +104,3 @@ public abstract class AbstractRepository<T> implements Repository<T> {
     }
 
 }
-

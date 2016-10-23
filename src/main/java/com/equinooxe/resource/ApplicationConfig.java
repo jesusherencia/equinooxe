@@ -4,9 +4,7 @@
  * This file is part of equinooxe Project
  */
 package com.equinooxe.resource;
-
-import com.equinooxe.resource.user.UserResource;
-import com.fasterxml.jackson.core.JsonProcessingException;
+ 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -58,6 +56,7 @@ public class ApplicationConfig extends Application {
         set.add(new AuthorizationFilterFeature());
         set.add(new SubjectFactory());
         set.add(new AuthInjectionBinder());
+       
         return set;
     }
 
@@ -74,7 +73,6 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         resources.add(AppCustomBasicAuthenticationFilter.class);/* @see the class doc */
-        resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
         addRestResourceClasses(resources);
         return resources;
     }
@@ -86,8 +84,10 @@ public class ApplicationConfig extends Application {
      * @warning Netbean IDE rewrites this methods autmatically
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.equinooxe.resource.AppCustomBasicAuthenticationFilter.class);
         resources.add(com.equinooxe.resource.AutorizationGenericExceptionMapper.class);
         resources.add(com.equinooxe.resource.CORSResponseFilter.class);
+        resources.add(com.equinooxe.resource.DatabaseOperationExeptionMapper.class);
         resources.add(com.equinooxe.resource.user.UserResource.class);
         resources.add(com.equinooxe.security.resource.AuthResource.class);
     }

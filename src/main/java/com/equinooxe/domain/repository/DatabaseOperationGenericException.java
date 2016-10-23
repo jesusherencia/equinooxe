@@ -5,12 +5,14 @@
  */
 package com.equinooxe.domain.repository;
 
+import javax.ws.rs.WebApplicationException;
+
 /**
  * Gather All DB exception so that we can map to a specific status and message
  * to send back to the api client
  * @author mboullouz
  */
-public class DatabaseOperationGenericException extends Exception{
+public class DatabaseOperationGenericException extends WebApplicationException{
     public DatabaseOperationGenericException(String message){
         super(message);
     }

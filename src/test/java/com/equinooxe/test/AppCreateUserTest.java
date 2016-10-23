@@ -18,7 +18,7 @@ public class AppCreateUserTest {
     @Test
     public void addUserViaJpaRepositoryTest() {
         log.info("My First Apache Shiro Application");
-        //userRepository.createUser(email, "admin", "admin");
+        //userRepository.createBasicUser(email, "admin", "admin");
         User u = userRepository.findUserByEmail(email);
        // assertEquals(email,u.getEmail());
         User b = null;

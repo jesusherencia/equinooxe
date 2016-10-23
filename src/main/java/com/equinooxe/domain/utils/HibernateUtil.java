@@ -1,7 +1,7 @@
 /*
 Copyright internet!
  */
-package com.equinooxe.domain.repository;
+package com.equinooxe.domain.utils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;

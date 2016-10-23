@@ -9,15 +9,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.apache.shiro.crypto.RandomNumberGenerator;
-import org.apache.shiro.crypto.SecureRandomNumberGenerator;
-import org.apache.shiro.crypto.hash.Sha256Hash;
 
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.repository.AbstractRepository;
 import com.equinooxe.domain.repository.DatabaseOperationGenericException;
 import com.equinooxe.domain.repository.UserRepository;
+import com.equinooxe.domain.utils.PasswordGeneratorUtil;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.NoResultException;
@@ -53,14 +51,12 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
     }
 
     @Override
-    public User createUser(String email, String username, String password) {
+    public User createBasicUser(String email, String username, String password) {
         User user = new User();
-        RandomNumberGenerator rng = new SecureRandomNumberGenerator();
-        Object salt = rng.nextBytes();
-        String hashedPasswordBase64 = new Sha256Hash(password, salt, 1024).toBase64();
-        user.setPassword(hashedPasswordBase64);
-        user.setSalt(salt.toString());
-        user.setEmail(username);
+        String[] hashAndSalt= PasswordGeneratorUtil.getSaltAndPasswordFor(password);
+        user.setPassword(hashAndSalt[0]);
+        user.setSalt(hashAndSalt[1]);
+        user.setEmail(email);
         user.setUsername(username);
         try {
             create(user);
@@ -69,7 +65,8 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         }
         return user;
     }
-
+    
+   
     @Override
     public List<Permission> getAllByRoleName(String roleName) {
         List<Permission> permissions;

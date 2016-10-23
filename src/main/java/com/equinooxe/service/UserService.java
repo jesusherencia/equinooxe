@@ -5,22 +5,40 @@
  */
 package com.equinooxe.service;
 
- 
 import java.util.List;
 
 import com.equinooxe.domain.User;
+import com.equinooxe.domain.viewmodels.UserRegistrationViewModel;
 
 /**
  *
  * @author ABCD-user
  */
 public interface UserService {
-    
+
     User getAuthentificatedUser();
-    
+
     User getUserByEmail(String email);
+
+    User registerBasicUser(String email, String username, String password);
+
+    /**
+     *
+     * @param email
+     * @param username
+     * @param password
+     * @param registrationType
+     * @param rolesIds
+     * @return
+     */
+    User register(String email, String username, String password, String registrationType, Long[] rolesIds);
     
-    User register(String email,String username,String password);
+    /**
+     * Call regisistration with params gathered in a pojo
+     * @param userRegistrationVM
+     * @return 
+     */
+    User register(UserRegistrationViewModel userRegistrationVM);
 
     List<User> findAll();
 
@@ -28,7 +46,4 @@ public interface UserService {
 
     int count();
 
- 
-   
-    
 }

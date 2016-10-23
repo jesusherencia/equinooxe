@@ -1,6 +1,6 @@
 /*
  */
-package com.equinooxe.domain.shared;
+package com.equinooxe.domain.viewmodels;
 
 /**
  * Webclient need a Json object

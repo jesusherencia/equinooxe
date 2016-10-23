@@ -25,7 +25,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table()
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,6 +46,11 @@ public class UserRole implements Serializable {
     @Column(name = "updateAt")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
+
+    public UserRole() {
+        this.addAt = new Date();
+        this.updateAt = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -82,7 +87,7 @@ public class UserRole implements Serializable {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
-    
+
     public void setId(Long id) {
         this.id = id;
     }

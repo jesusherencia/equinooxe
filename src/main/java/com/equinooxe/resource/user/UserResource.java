@@ -6,6 +6,7 @@
 package com.equinooxe.resource.user;
 
 import com.equinooxe.domain.User;
+import com.equinooxe.domain.viewmodels.UserRegistrationViewModel;
 import com.equinooxe.service.UserService;
 import com.equinooxe.service.impl.UserServiceImpl;
 import java.lang.reflect.Field;
@@ -32,21 +33,6 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 public class UserResource {
 
     private UserService userService = new UserServiceImpl();
-   
-    @Path("/describe")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response describe(){       
-        List<String> strFields= new ArrayList<>();
-        for (Field field : User.class.getDeclaredFields()) {
-            String str= field.getAnnotation(Column.class)+" " +field.getType()+" "+field.getName();
-            str=str.replace("java.lang.", "")
-                   .replace("@javax.persistence.", "");
-            strFields.add(str);
-        }
-        return Response.status(Response.Status.OK).entity(strFields).build();
-    }
 
     @Path("/all")
     @GET
@@ -56,6 +42,16 @@ public class UserResource {
         List<User> users = userService.findAll();
         return Response.status(Response.Status.OK).entity(users).build();
     }
+    
+    @Path("/add")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response  addUser(UserRegistrationViewModel userRegistrationVM){
+        User user = userService.register(userRegistrationVM);
+        return Response.status(Response.Status.OK).entity(user).build();
+    }
+           
 
     @Path("/current")
     @GET
@@ -65,5 +61,19 @@ public class UserResource {
         return Response.status(Response.Status.OK).entity(userService.getAuthentificatedUser()).build();
     }
 
+    @Path("/describe")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response describe() {
+        List<String> strFields = new ArrayList<>();
+        for (Field field : User.class.getDeclaredFields()) {
+            String str = field.getAnnotation(Column.class) + " " + field.getType() + " " + field.getName();
+            str = str.replace("java.lang.", "")
+                    .replace("@javax.persistence.", "");
+            strFields.add(str);
+        }
+        return Response.status(Response.Status.OK).entity(strFields).build();
+    }
 
 }

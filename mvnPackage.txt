@@ -1,0 +1,74 @@
+[INFO] Scanning for projects...
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Equinooxe 0.0.1-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ equinooxe ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:compile (default-compile) @ equinooxe ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 43 source files to C:\Users\mboullouz\Documents\equinooxe\target\classes
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[85,29] unchecked call to select(javax.persistence.criteria.Selection<? extends T>) as a member of the raw type javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[85,48] unchecked call to <X>from(java.lang.Class<X>) as a member of the raw type javax.persistence.criteria.AbstractQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[86,46] unchecked method invocation: method createQuery in interface javax.persistence.EntityManager is applied to given types
+  required: javax.persistence.criteria.CriteriaQuery<T>
+  found: javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[86,47] unchecked conversion
+  required: javax.persistence.criteria.CriteriaQuery<T>
+  found:    javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[86,75] unchecked conversion
+  required: java.util.List<T>
+  found:    java.util.List
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[91,29] unchecked call to select(javax.persistence.criteria.Selection<? extends T>) as a member of the raw type javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[91,48] unchecked call to <X>from(java.lang.Class<X>) as a member of the raw type javax.persistence.criteria.AbstractQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[92,67] unchecked method invocation: method createQuery in interface javax.persistence.EntityManager is applied to given types
+  required: javax.persistence.criteria.CriteriaQuery<T>
+  found: javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[92,68] unchecked conversion
+  required: javax.persistence.criteria.CriteriaQuery<T>
+  found:    javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[95,41] unchecked cast
+  required: java.util.List<T>
+  found:    java.util.List
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[100,67] unchecked call to <X>from(java.lang.Class<X>) as a member of the raw type javax.persistence.criteria.AbstractQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[100,67] unchecked conversion
+  required: javax.persistence.criteria.Root<T>
+  found:    javax.persistence.criteria.Root
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[101,29] unchecked call to select(javax.persistence.criteria.Selection<? extends T>) as a member of the raw type javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[102,67] unchecked method invocation: method createQuery in interface javax.persistence.EntityManager is applied to given types
+  required: javax.persistence.criteria.CriteriaQuery<T>
+  found: javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/domain/repository/AbstractRepository.java:[102,68] unchecked conversion
+  required: javax.persistence.criteria.CriteriaQuery<T>
+  found:    javax.persistence.criteria.CriteriaQuery
+[WARNING] /C:/Users/mboullouz/Documents/equinooxe/src/main/java/com/equinooxe/infrastructure/repository/UserRepositoryImpl.java:[76,66] unchecked conversion
+  required: java.util.List<com.equinooxe.domain.Permission>
+  found:    java.util.List
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ equinooxe ---
+[INFO] Not copying test resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:testCompile (default-testCompile) @ equinooxe ---
+[INFO] Not compiling test sources
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ equinooxe ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-war-plugin:2.2:war (default-war) @ equinooxe ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [equinooxe] in [C:\Users\mboullouz\Documents\equinooxe\target\equinooxe-0.0.1-SNAPSHOT]
+[INFO] Processing war project
+[INFO] Copying webapp resources [C:\Users\mboullouz\Documents\equinooxe\src\main\webapp]
+[INFO] Webapp assembled in [1924 msecs]
+[INFO] Building war: C:\Users\mboullouz\Documents\equinooxe\target\equinooxe-0.0.1-SNAPSHOT.war
+[INFO] WEB-INF\web.xml already added, skipping
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 12.141 s
+[INFO] Finished at: 2016-10-23T23:15:08+02:00
+[INFO] Final Memory: 24M/163M
+[INFO] ------------------------------------------------------------------------

@@ -7,6 +7,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Equinooxe</name>
     <packaging>war</packaging>
+    
+    
 	
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -131,9 +133,20 @@
             <type>jar</type>
         </dependency>
     </dependencies>
-    <!--    <build>
+    <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-verbose</arg>
+                        <arg>-Xlint:all,-options,-path</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!--            <plugin>
                 <version>1.0</version>
                 <artifactId>exec-maven-plugin</artifactId>
                 <groupId>org.codehaus.mojo</groupId>
@@ -149,8 +162,8 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
-    </build>-->
+    </build> 
     
 </project>

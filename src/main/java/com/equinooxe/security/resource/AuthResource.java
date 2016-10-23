@@ -6,9 +6,9 @@
 package com.equinooxe.security.resource;
 
 import com.equinooxe.domain.User;
-import com.equinooxe.domain.shared.SimpleResponseObjectWrapper;
+import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
+import com.equinooxe.domain.viewmodels.UserRegistrationViewModel;
 import com.equinooxe.service.AuthentificationService;
-import com.equinooxe.service.UserService;
 import com.equinooxe.resource.user.BasicUserAuthDto;
 import com.equinooxe.service.UserService;
 import com.equinooxe.service.impl.AuthentificationServiceImpl;
@@ -39,9 +39,16 @@ public class AuthResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response register(BasicUserAuthDto dto) {
-        return Response.status(Response.Status.OK)
-                .entity(userService.register(dto.getUsername(), dto.getUsername(), dto.getPassword()))
+    public Response register(UserRegistrationViewModel userResiftrationVM) {
+        return Response
+                .status(Response.Status.OK)
+                .entity(userService.register(
+                                userResiftrationVM.username,
+                                userResiftrationVM.email,
+                                userResiftrationVM.password,
+                                userResiftrationVM.registrationType,
+                                userResiftrationVM.roleIds)
+                )
                 .build();
     }
 
@@ -54,17 +61,17 @@ public class AuthResource {
             User user = userService.getAuthentificatedUser();
             return Response.status(Response.Status.OK).entity(user).build();
         }
-        return Response.status(Response.Status.FORBIDDEN).entity(new SimpleResponseObjectWrapper("BadCredentials",0)).build();
-    }   
+        return Response.status(Response.Status.FORBIDDEN).entity(new SimpleResponseObjectWrapper("BadCredentials", 0)).build();
+    }
 
     @Path("/logout")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response logout() {
-        userAuth.logout();  
+        userAuth.logout();
         return Response.status(Response.Status.OK)
-                .entity(new SimpleResponseObjectWrapper("Logout success",1)).build();
+                .entity(new SimpleResponseObjectWrapper("Logout success", 1)).build();
     }
 
     @Path("/ping")

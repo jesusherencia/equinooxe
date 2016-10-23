@@ -4,6 +4,7 @@ package com.equinooxe.resource;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.ext.Provider;
 import org.apache.shiro.web.util.WebUtils;
 
 /**
@@ -15,6 +16,7 @@ import org.apache.shiro.web.util.WebUtils;
  * which was failing because the Authorization header wasn't added to the preflight request
  * @author mboullouz
  */
+@Provider
 public class AppCustomBasicAuthenticationFilter extends org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter {
 
     @Override
