@@ -4,7 +4,7 @@ import com.equinooxe.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
+import com.equinooxe.module.user.UserRepositoryImpl;
 import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;

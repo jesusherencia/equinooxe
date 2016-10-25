@@ -3,7 +3,7 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.infrastructure.repository;
+package com.equinooxe.module.user;
 
 import java.util.List;
 

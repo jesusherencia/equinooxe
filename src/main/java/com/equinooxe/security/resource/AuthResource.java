@@ -7,12 +7,12 @@ package com.equinooxe.security.resource;
 
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
-import com.equinooxe.domain.viewmodels.UserRegistrationViewModel;
+import com.equinooxe.module.user.UserRegistrationViewModel;
 import com.equinooxe.service.AuthentificationService;
-import com.equinooxe.resource.user.BasicUserAuthDto;
-import com.equinooxe.service.UserService;
+import com.equinooxe.module.user.BasicUserAuthDto;
+import com.equinooxe.module.user.UserService;
 import com.equinooxe.service.impl.AuthentificationServiceImpl;
-import com.equinooxe.service.impl.UserServiceImpl;
+import com.equinooxe.module.user.UserServiceImpl;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

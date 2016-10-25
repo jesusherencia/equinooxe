@@ -2,7 +2,7 @@
  * Copyright mohamedboullouz@gmail.com 
  * This file is part of equinooxe Project
  */
-package com.equinooxe.service.impl;
+package com.equinooxe.module.user;
 
 import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.ManagerUser;
@@ -19,10 +19,9 @@ import com.equinooxe.domain.repository.AbstractRepository;
 import com.equinooxe.domain.repository.DatabaseOperationGenericException;
 import com.equinooxe.domain.utils.PasswordGeneratorUtil;
 import com.equinooxe.domain.viewmodels.RegistrationType;
-import com.equinooxe.domain.viewmodels.UserRegistrationViewModel;
+import com.equinooxe.module.user.UserRegistrationViewModel;
 import com.equinooxe.infrastructure.repository.RoleRepositoryImpl;
-import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
-import com.equinooxe.service.UserService;
+import com.equinooxe.module.user.UserService;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Level;

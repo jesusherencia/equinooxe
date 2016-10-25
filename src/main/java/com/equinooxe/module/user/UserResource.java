@@ -3,12 +3,9 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.resource.user;
+package com.equinooxe.module.user;
 
 import com.equinooxe.domain.User;
-import com.equinooxe.domain.viewmodels.UserRegistrationViewModel;
-import com.equinooxe.service.UserService;
-import com.equinooxe.service.impl.UserServiceImpl;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 

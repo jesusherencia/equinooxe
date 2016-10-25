@@ -3,7 +3,7 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.resource.user;
+package com.equinooxe.module.user;
 
 /**
  * A commodity to simplify serilization/deserialization as it's a simple POJO

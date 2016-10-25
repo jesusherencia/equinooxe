@@ -6,7 +6,7 @@
 package com.equinooxe.service.impl;
 
 
-import com.equinooxe.resource.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthDto;
 import com.equinooxe.service.AuthentificationService;
 import java.util.Arrays;
 import org.apache.shiro.SecurityUtils;

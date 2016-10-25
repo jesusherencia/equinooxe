@@ -5,7 +5,7 @@
  */
 package com.equinooxe.test;
 
-import com.equinooxe.resource.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthDto;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;

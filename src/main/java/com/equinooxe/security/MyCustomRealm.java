@@ -25,7 +25,7 @@ import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.UserRole;
 import com.equinooxe.domain.repository.DatabaseOperationGenericException;
-import com.equinooxe.infrastructure.repository.UserRepositoryImpl;
+import com.equinooxe.module.user.UserRepositoryImpl;
 
 public class MyCustomRealm extends JdbcRealm {
     

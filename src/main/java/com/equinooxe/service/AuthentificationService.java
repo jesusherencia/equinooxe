@@ -5,7 +5,7 @@
  */
 package com.equinooxe.service;
 
-import com.equinooxe.resource.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthDto;
 
 /**
  * BasicUserAuthDto: is an object used to login, it's a commodities to simplify
