@@ -3,15 +3,13 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.security.resource;
+package com.equinooxe.module.auth;
 
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import com.equinooxe.module.user.UserRegistrationViewModel;
-import com.equinooxe.service.AuthentificationService;
 import com.equinooxe.module.user.BasicUserAuthDto;
 import com.equinooxe.module.user.UserService;
-import com.equinooxe.service.impl.AuthentificationServiceImpl;
 import com.equinooxe.module.user.UserServiceImpl;
 
 import javax.ws.rs.Consumes;
@@ -30,6 +28,10 @@ import javax.ws.rs.core.Response;
 public class AuthResource {
 
     private AuthentificationService userAuth = new AuthentificationServiceImpl();
+    
+    /**
+     * This should be temporary 
+     */
     private UserService userService = new UserServiceImpl();
 
     public AuthResource() {
@@ -79,7 +81,7 @@ public class AuthResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response pingPublic() {
-        return Response.status(Response.Status.OK).entity("Public area acces is OK").build();
+        return Response.status(Response.Status.OK).entity(new SimpleResponseObjectWrapper("Public area acces is OK",1)).build();
     }
 
     public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {

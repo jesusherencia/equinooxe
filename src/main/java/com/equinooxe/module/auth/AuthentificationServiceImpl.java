@@ -3,11 +3,11 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.service.impl;
+package com.equinooxe.module.auth;
 
 
 import com.equinooxe.module.user.BasicUserAuthDto;
-import com.equinooxe.service.AuthentificationService;
+import com.equinooxe.module.auth.AuthentificationService;
 import java.util.Arrays;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;

@@ -6,15 +6,18 @@
 package com.equinooxe.domain.repository;
 
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 /**
+ * @deprecated this is ignored and not called correctly with Jersey
+ * should be fixed or deleted completly! 
  * Gather All DB exception so that we can map to a specific status and message
  * to send back to the api client
  * @author mboullouz
  */
 public class DatabaseOperationGenericException extends WebApplicationException{
-    public DatabaseOperationGenericException(String message){
-        super(message);
+    public DatabaseOperationGenericException(String message,Response rs){
+        super(message,rs);
     }
     public DatabaseOperationGenericException(String message, Throwable cause) {
         super(message, cause);

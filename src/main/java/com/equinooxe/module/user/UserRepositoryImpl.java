@@ -9,16 +9,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.repository.AbstractRepository;
 import com.equinooxe.domain.repository.DatabaseOperationGenericException;
-import com.equinooxe.domain.repository.UserRepository;
 import com.equinooxe.domain.utils.PasswordGeneratorUtil;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.NoResultException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 public class UserRepositoryImpl extends AbstractRepository<User> implements UserRepository {
 
@@ -39,21 +36,20 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 
     @Override
     public User findUserByUsername(String username) throws DatabaseOperationGenericException {
-        User user = null;
-        try {
-            user = (User) entityManager.createQuery("Select u From User as u Where u.username= :username")
-                    .setParameter("username", username)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            throw new DatabaseOperationGenericException("No single result. " + e.getMessage());
+        List<User> users;
+        users = (List<User>) entityManager.createQuery("Select u From User as u Where u.username= :username")
+                .setParameter("username", username)
+                .getResultList();
+        if (users == null || users.isEmpty()) {
+            return null;
         }
-        return user;
+        return users.get(0);
     }
 
     @Override
     public User createBasicUser(String email, String username, String password) {
         User user = new User();
-        String[] hashAndSalt= PasswordGeneratorUtil.getSaltAndPasswordFor(password);
+        String[] hashAndSalt = PasswordGeneratorUtil.getSaltAndPasswordFor(password);
         user.setPassword(hashAndSalt[0]);
         user.setSalt(hashAndSalt[1]);
         user.setEmail(email);
@@ -61,12 +57,12 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
         try {
             create(user);
         } catch (DatabaseOperationGenericException ex) {
-            Logger.getLogger(UserRepositoryImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw new WebApplicationException("Db error  " + ex.getMessage(),
+                    Response.status(Response.Status.BAD_REQUEST).entity(ex.getMessage()).build());
         }
         return user;
     }
-    
-   
+
     @Override
     public List<Permission> getAllByRoleName(String roleName) {
         List<Permission> permissions;

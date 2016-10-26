@@ -3,7 +3,7 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.service;
+package com.equinooxe.module.auth;
 
 import com.equinooxe.module.user.BasicUserAuthDto;
 

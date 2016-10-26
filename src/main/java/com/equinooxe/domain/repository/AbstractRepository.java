@@ -52,7 +52,7 @@ public abstract class AbstractRepository<T> implements Repository<T> {
              */
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
-            throw new WebApplicationException("  " + e.getMessage(),
+            throw new WebApplicationException(" Db Error! " + e.getMessage(),
                     Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
         }
 
@@ -60,18 +60,32 @@ public abstract class AbstractRepository<T> implements Repository<T> {
 
     @Override
     public void edit(T entity) {
-        getEntityManager().getTransaction().begin();
+        if (!getEntityManager().getTransaction().isActive()) {
+            getEntityManager().getTransaction().begin();
+        }
         getEntityManager().merge(entity);
-        getEntityManager().flush();
-        getEntityManager().getTransaction().commit();
+        try {
+            getEntityManager().flush();
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
+            throw new WebApplicationException(" Db Error! " + e.getMessage(),
+                    Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
+        }
     }
 
     @Override
     public void remove(T entity) {
-        getEntityManager().getTransaction().begin();
+        if (!getEntityManager().getTransaction().isActive()) {
+            getEntityManager().getTransaction().begin();
+        }
         getEntityManager().remove(getEntityManager().merge(entity));
-        getEntityManager().flush();
-        getEntityManager().getTransaction().commit();
+        try {
+            getEntityManager().flush();
+            getEntityManager().getTransaction().commit();
+        } catch (Exception e) {
+            throw new WebApplicationException(" Db Error! " + e.getMessage(),
+                    Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
+        }
     }
 
     @Override
