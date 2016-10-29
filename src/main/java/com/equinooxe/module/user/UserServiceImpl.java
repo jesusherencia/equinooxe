@@ -19,9 +19,12 @@ import com.equinooxe.domain.repository.AbstractRepository;
 import com.equinooxe.domain.repository.DatabaseOperationGenericException;
 import com.equinooxe.domain.utils.PasswordGeneratorUtil;
 import com.equinooxe.domain.viewmodels.RegistrationType;
-import com.equinooxe.infrastructure.repository.RoleRepositoryImpl;
+import com.equinooxe.module.role.RoleRepository;
+import com.equinooxe.module.role.RoleRepositoryImpl;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,15 +85,17 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public User register(String email, String username, String password, String registrationType, Long[] rolesIds) {
+    public User register(String email, String username, String password, String registrationType, Set<Integer> rolesIds) {
         Collection<UserRole> roles = new ArrayList<>();
         AbstractRepository<Role> roleRepo = new RoleRepositoryImpl();
         User user;
-        for (Long id : rolesIds) {
+        rolesIds.stream().map((id) -> {
             UserRole userRole = new UserRole();
             userRole.setRole(roleRepo.find(id));
+            return userRole;
+        }).forEach((userRole) -> {
             roles.add(userRole);
-        }
+        });
         if (registrationType.equals(RegistrationType.AGENT.toString())) {
             // Register as agent
             user = new AgentUser();
@@ -113,6 +118,14 @@ public class UserServiceImpl implements UserService {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
+    }
+
+    @Override
+    public UserRegistrationViewModel prepareRegistrationViewModel() {
+        UserRegistrationViewModel vm = new UserRegistrationViewModel();
+        RoleRepository roleRepo = new RoleRepositoryImpl();
+        vm.roles =  roleRepo.findAll();
+        return vm;
     }
     
 }

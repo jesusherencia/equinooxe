@@ -85,6 +85,8 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(com.equinooxe.module.auth.AuthResource.class);
+        resources.add(com.equinooxe.module.role.RoleResource.class);
+        resources.add(com.equinooxe.module.user.UserRegistrationResource.class);
         resources.add(com.equinooxe.module.user.UserResource.class);
         resources.add(com.equinooxe.resource.AppCustomBasicAuthenticationFilter.class);
         resources.add(com.equinooxe.resource.AutorizationGenericExceptionMapper.class);

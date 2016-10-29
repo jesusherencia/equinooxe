@@ -1,11 +1,11 @@
 /* Copyright (C) 2015  mohamedboullouz@gmail.com 
  * This file is part of Equinooxe Project
  */
-package com.equinooxe.infrastructure.repository;
+package com.equinooxe.module.role;
 
 import com.equinooxe.domain.Role;
 import com.equinooxe.domain.repository.AbstractRepository;
-import com.equinooxe.domain.repository.RoleRepository;
+import com.equinooxe.module.role.RoleRepository;
 import javax.persistence.EntityManager;
 
 /**

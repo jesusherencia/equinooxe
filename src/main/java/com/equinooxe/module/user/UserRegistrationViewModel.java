@@ -3,6 +3,12 @@
  */
 package com.equinooxe.module.user;
 
+import com.equinooxe.domain.Role;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  *
  * @author mboullouz
@@ -12,5 +18,7 @@ public class UserRegistrationViewModel {
     public String email;
     public String password;
     public String registrationType="BASIC";
-    public Long[] roleIds= new Long[10];
+    public Set<Integer> roleIds= new HashSet<>();
+    
+    public List<Role> roles = new ArrayList<>();
 }

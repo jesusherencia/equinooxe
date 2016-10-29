@@ -40,15 +40,7 @@ public class UserResource {
         return Response.status(Response.Status.OK).entity(users).build();
     }
     
-    @Path("/add")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response  addUser(UserRegistrationViewModel userRegistrationVM){
-        User user = userService.register(userRegistrationVM);
-        return Response.status(Response.Status.OK).entity(user).build();
-    }
-           
+    
 
     @Path("/current")
     @GET
