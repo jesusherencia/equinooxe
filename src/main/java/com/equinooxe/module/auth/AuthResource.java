@@ -8,7 +8,7 @@ package com.equinooxe.module.auth;
 import com.equinooxe.domain.User;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import com.equinooxe.module.user.UserRegistrationViewModel;
-import com.equinooxe.module.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthViewModel;
 import com.equinooxe.module.user.UserService;
 import com.equinooxe.module.user.UserServiceImpl;
 
@@ -58,7 +58,7 @@ public class AuthResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(BasicUserAuthDto uAuthObject) {
+    public Response login(BasicUserAuthViewModel uAuthObject) {
         if (userAuth.login(uAuthObject)) {
             User user = userService.getAuthentificatedUser();
             return Response.status(Response.Status.OK).entity(user).build();
@@ -84,7 +84,7 @@ public class AuthResource {
         return Response.status(Response.Status.OK).entity(new SimpleResponseObjectWrapper("Public area acces is OK",1)).build();
     }
 
-    public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {
+    public boolean checkUserAuth(BasicUserAuthViewModel uAuthObject) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

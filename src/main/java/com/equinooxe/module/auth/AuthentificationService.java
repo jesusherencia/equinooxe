@@ -5,11 +5,11 @@
  */
 package com.equinooxe.module.auth;
 
-import com.equinooxe.module.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthViewModel;
 
 /**
- * BasicUserAuthDto: is an object used to login, it's a commodities to simplify
- * serilization/deserialization as it's a simple POJO
+ * BasicUserAuthViewModel: is an object used to login, it's a commodities to simplify
+ serilization/deserialization as it's a simple POJO
  *
  * @author Mohamed
  */
@@ -21,7 +21,7 @@ public interface AuthentificationService {
      * @param userAuthDto
      * @return
      */
-    boolean login(BasicUserAuthDto userAuthDto);
+    boolean login(BasicUserAuthViewModel userAuthDto);
 
     /**
      * Allow logout from the API Shiro remembers the authentificated user for
@@ -35,7 +35,7 @@ public interface AuthentificationService {
      * @param userAuthDto
      * @return
      */
-    boolean checkUserAuth(BasicUserAuthDto userAuthDto);
+    boolean checkUserAuth(BasicUserAuthViewModel userAuthDto);
 
     /**
      * Check user auth by email

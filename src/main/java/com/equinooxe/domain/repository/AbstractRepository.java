@@ -11,6 +11,7 @@ package com.equinooxe.domain.repository;
  * @author mboullouz
  */
 import com.equinooxe.domain.utils.HibernateUtil;
+import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.ws.rs.WebApplicationException;
@@ -52,8 +53,10 @@ public abstract class AbstractRepository<T> implements Repository<T> {
              */
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
-            throw new WebApplicationException(" Db Error! " + e.getMessage(),
-                    Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
+            throw new WebApplicationException(
+                    " Db Error! " + e.getMessage(),
+                    Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new SimpleResponseObjectWrapper("Can't save the new record! " + e.getMessage(), 0)).build());
         }
 
     }
@@ -69,7 +72,8 @@ public abstract class AbstractRepository<T> implements Repository<T> {
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
-                    Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
+                    Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new SimpleResponseObjectWrapper("Can't edit the record! " + e.getMessage(), 0)).build());
         }
     }
 
@@ -84,7 +88,8 @@ public abstract class AbstractRepository<T> implements Repository<T> {
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
-                    Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build());
+                    Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new SimpleResponseObjectWrapper("Can't delete the record! " + e.getMessage(), 0)).build());
         }
     }
 

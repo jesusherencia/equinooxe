@@ -5,7 +5,7 @@
  */
 package com.equinooxe.test;
 
-import com.equinooxe.module.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthViewModel;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -30,8 +30,8 @@ public class AuthJUnitTest {
     @Test
     public void logInWithUsernameAsEmailAndPasswordTest() {
         WebTarget target = client.target(BASE_URI_AUTH + "/login");
-        BasicUserAuthDto u = new BasicUserAuthDto("m@m.com", "med", true);
-        Entity<BasicUserAuthDto> userEntity = Entity.entity(u, MediaType.APPLICATION_JSON);
+        BasicUserAuthViewModel u = new BasicUserAuthViewModel("m@m.com", "med", true);
+        Entity<BasicUserAuthViewModel> userEntity = Entity.entity(u, MediaType.APPLICATION_JSON);
         Response response = target.request().post(userEntity);
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
         assertEquals("OK", response.readEntity(String.class));

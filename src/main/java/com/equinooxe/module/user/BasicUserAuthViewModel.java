@@ -10,7 +10,7 @@ package com.equinooxe.module.user;
  *
  * @author mohamed.boullouz@gmail.com 
  */
-public class BasicUserAuthDto {
+public class BasicUserAuthViewModel {
 
     String username;
     String password;
@@ -19,11 +19,11 @@ public class BasicUserAuthDto {
     /**
      * Jackson need a default constructor to perform serialization!
      */
-    public BasicUserAuthDto(){
+    public BasicUserAuthViewModel(){
          
     }
     
-    public BasicUserAuthDto(String username, String password, boolean rememberMe) {
+    public BasicUserAuthViewModel(String username, String password, boolean rememberMe) {
         this.username = username;
         this.password = password;
         this.rememberMe = rememberMe;

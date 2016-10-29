@@ -6,7 +6,7 @@
 package com.equinooxe.module.auth;
 
 
-import com.equinooxe.module.user.BasicUserAuthDto;
+import com.equinooxe.module.user.BasicUserAuthViewModel;
 import com.equinooxe.module.auth.AuthentificationService;
 import java.util.Arrays;
 import org.apache.shiro.SecurityUtils;
@@ -34,7 +34,7 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     }
     
     @Override
-    public boolean login(BasicUserAuthDto uAuthObject) {        
+    public boolean login(BasicUserAuthViewModel uAuthObject) {        
         if (!currentUser.isAuthenticated()) {
             UsernamePasswordToken token = new UsernamePasswordToken(uAuthObject.getUsername(), uAuthObject.getPassword(), uAuthObject.isRememberMe());
             token.setRememberMe(uAuthObject.isRememberMe());
@@ -59,7 +59,7 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     }
 
     @Override
-    public boolean checkUserAuth(BasicUserAuthDto uAuthObject) {
+    public boolean checkUserAuth(BasicUserAuthViewModel uAuthObject) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
