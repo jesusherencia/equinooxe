@@ -50,7 +50,7 @@ public interface UserService {
      * @param rolesIds
      * @return
      */
-    User register(String email, String username, String password, String registrationType, Set<Integer> rolesIds);
+    User register(String email, String username, String password, String registrationType, Set<Long> rolesIds);
     
     /**
      * Call regisistration with params gathered in a pojo

@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public User register(String email, String username, String password, String registrationType, Set<Integer> rolesIds) {
+    public User register(String email, String username, String password, String registrationType, Set<Long> rolesIds) {
         Collection<UserRole> roles = new ArrayList<>();
         AbstractRepository<Role> roleRepo = new RoleRepositoryImpl();
         User user;

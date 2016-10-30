@@ -18,7 +18,7 @@ public class UserRegistrationViewModel {
     public String email;
     public String password;
     public String registrationType="BASIC";
-    public Set<Integer> roleIds= new HashSet<>();
+    public Set<Long> roleIds= new HashSet<>();
     
     public List<Role> roles = new ArrayList<>();
 }
