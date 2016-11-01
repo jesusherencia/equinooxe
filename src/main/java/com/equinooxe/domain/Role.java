@@ -26,7 +26,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table()
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,10 +36,10 @@ public class Role implements Serializable {
 
     @Column(name = "name", unique = true)
     private String name;
-    
-    @OneToMany(mappedBy="role", targetEntity = UserRole.class)
-     private Collection<UserRole> userRoles;
-    
+
+    @OneToMany(mappedBy = "role", targetEntity = UserRole.class)
+    private Collection<UserRole> userRoles;
+
     @OneToMany(mappedBy = "role", targetEntity = RolePermission.class)
     private Collection<RolePermission> rolePermissions;
 
@@ -47,9 +47,21 @@ public class Role implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date addAt;
 
-    @Column(name = "updateAt",nullable = true)
+    @Column(name = "updateAt", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
+
+    public Role() {
+
+        this.addAt = new Date();
+        this.updateAt = new Date();
+    }
+
+    public Role(String name) {
+        this.name = name;
+        this.addAt = new Date();
+        this.updateAt = new Date();
+    }
 
     public String getName() {
         return name;
@@ -62,7 +74,7 @@ public class Role implements Serializable {
     public void setRolePermissions(Collection<RolePermission> rolePermissions) {
         this.rolePermissions = rolePermissions;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
@@ -74,8 +86,6 @@ public class Role implements Serializable {
     public void setUserRoles(Collection<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
-
-     
 
     public Date getAddAt() {
         return addAt;
@@ -92,8 +102,7 @@ public class Role implements Serializable {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
-    
-    
+
     public Long getId() {
         return id;
     }

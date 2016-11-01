@@ -23,7 +23,6 @@ import com.equinooxe.module.role.RoleRepository;
 import com.equinooxe.module.role.RoleRepositoryImpl;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,13 +88,16 @@ public class UserServiceImpl implements UserService {
         Collection<UserRole> roles = new ArrayList<>();
         AbstractRepository<Role> roleRepo = new RoleRepositoryImpl();
         User user;
-        rolesIds.stream().map((id) -> {
-            UserRole userRole = new UserRole();
-            userRole.setRole(roleRepo.find(id));
-            return userRole;
-        }).forEach((userRole) -> {
-            roles.add(userRole);
-        });
+        if(rolesIds==null) {
+        } else {
+            rolesIds.stream().map((id) -> {
+                UserRole userRole = new UserRole();
+                userRole.setRole(roleRepo.find(id));
+                return userRole;
+            }).forEach((userRole) -> {
+                roles.add(userRole);
+            });
+        }
         if (registrationType.equals(RegistrationType.AGENT.toString())) {
             // Register as agent
             user = new AgentUser();

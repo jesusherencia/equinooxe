@@ -3,7 +3,7 @@
  */
 package com.equinooxe.module.role;
 
-import com.equinooxe.domain.Role;
+import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.repository.AbstractRepository;
 import javax.persistence.EntityManager;
 
@@ -11,14 +11,14 @@ import javax.persistence.EntityManager;
  *
  * @author mboullouz
  */
-public class RoleRepositoryImpl extends AbstractRepository<Role> implements RoleRepository{
+public class PermissionRepositoryImpl extends AbstractRepository<Permission>{
 
     private EntityManager entityManager;
 
-    public RoleRepositoryImpl() {
-        super(Role.class);
+    public PermissionRepositoryImpl() {
+        super(Permission.class);
         entityManager = getEntityManager();
 
     }
-    
+     
 }

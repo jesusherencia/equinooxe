@@ -11,5 +11,5 @@ import com.equinooxe.domain.repository.Repository;
  * @author mboullouz
  */
 public interface RoleRepository  extends Repository<Role>{
-  
+   
 }

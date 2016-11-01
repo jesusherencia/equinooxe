@@ -3,11 +3,9 @@
  */
 package com.equinooxe.module.role;
 
-import com.equinooxe.domain.Role;
-import com.equinooxe.domain.User;
-import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -18,17 +16,32 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
  *
  * @author mboullouz
  */
-@Path("/secure/role")
+@Path("/secure/rolepermission")
 @RequiresAuthentication
 public class RoleResource {
-    
-    @Path("/all")
+
+    RolePermissionService rolePermissionService = new RolePermissionServiceImpl();
+
+    @Path("/")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAll() {
-        RoleRepository roleRepository = new RoleRepositoryImpl();
-        List<Role> roles = roleRepository.findAll();
-        return Response.status(Response.Status.OK).entity(roles).build();
+    public Response get() {
+        RolePermissionViewModel vm = rolePermissionService.prepare();
+        return Response.status(Response.Status.OK)
+                .entity(vm)
+                .build();
+    }
+
+    @Path("/")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response save(RolePermissionViewModel vm) {
+        return Response
+                .status(Response.Status.OK)
+                .entity(
+                        rolePermissionService.save(vm)
+                ).build();
     }
 }

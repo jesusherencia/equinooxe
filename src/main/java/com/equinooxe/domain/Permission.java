@@ -26,7 +26,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table()
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Permission implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,8 +36,8 @@ public class Permission implements Serializable {
 
     @Column(name = "name", unique = true)
     private String name;
-    
-    @OneToMany(mappedBy="permission", targetEntity = RolePermission.class)
+
+    @OneToMany(mappedBy = "permission", targetEntity = RolePermission.class)
     private Collection<RolePermission> rolePermissions;
 
     @Column(name = "addAt")
@@ -47,6 +47,16 @@ public class Permission implements Serializable {
     @Column(name = "updateAt")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date updateAt;
+    
+    public Permission() {
+        this.addAt = new Date();
+        this.updateAt = new Date();
+    }
+    public Permission(String name) {
+        this.name = name;
+        this.addAt = new Date();
+        this.updateAt = new Date();
+    }
 
     public String getName() {
         return name;
@@ -59,7 +69,7 @@ public class Permission implements Serializable {
     public void setRolePermissions(Collection<RolePermission> rolePermissions) {
         this.rolePermissions = rolePermissions;
     }
-   
+
     public void setName(String name) {
         this.name = name;
     }
@@ -79,8 +89,7 @@ public class Permission implements Serializable {
     public void setUpdateAt(Date updateAt) {
         this.updateAt = updateAt;
     }
-    
-    
+
     public Long getId() {
         return id;
     }
