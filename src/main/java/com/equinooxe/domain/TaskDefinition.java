@@ -7,26 +7,17 @@ package com.equinooxe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  *
  * @author mohamed
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class TaskDefinition implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class TaskDefinition extends BaseEntity {
 
     @Column(unique = true)
     private String name;
@@ -34,12 +25,8 @@ public class TaskDefinition implements Serializable {
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public TaskDefinition() {
+        super();
     }
 
     public String getName() {
@@ -67,7 +54,6 @@ public class TaskDefinition implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof TaskDefinition)) {
             return false;
         }
@@ -80,7 +66,7 @@ public class TaskDefinition implements Serializable {
 
     @Override
     public String toString() {
-        return "com.appnh.nettoyage.model.TacheDefinition[ id=" + id + " ]";
+        return "TaskDefinition[ id=" + id + " ]";
     }
 
 }

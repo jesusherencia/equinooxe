@@ -7,14 +7,10 @@ package com.equinooxe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -23,25 +19,24 @@ import javax.persistence.OneToMany;
  * @author mohamed
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class LocationGroup implements Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class LocationGroup extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
     @Column(unique = true)
     private String name;
-   
+
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
-    
+
     @ManyToOne
     private OperativeUnit operativeUnit;
-    
-    @OneToMany(mappedBy="locationGroup", targetEntity = Location.class)
+
+    @OneToMany(mappedBy = "locationGroup", targetEntity = Location.class)
     private Collection<Location> locations;
+
+    public LocationGroup() {
+        super();
+    }
 
     public Collection<Location> getLocations() {
         return locations;
@@ -49,14 +44,6 @@ public class LocationGroup implements Serializable {
 
     public void setLocations(Collection<Location> locations) {
         this.locations = locations;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -92,7 +79,6 @@ public class LocationGroup implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof LocationGroup)) {
             return false;
         }
@@ -107,5 +93,5 @@ public class LocationGroup implements Serializable {
     public String toString() {
         return "com.appnh.infra.model.Groupement[ id=" + id + " ]";
     }
-    
+
 }

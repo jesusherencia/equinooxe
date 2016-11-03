@@ -1,51 +1,45 @@
 /*
- * Copyright (C) 2015 Mohamed Boullouz.
- * contact: <mohamed.boullouz@gmail.com>
+ * Copyright (C) 2015 <mohamedboullouz@gmail.com>
  * This file is part of equinooxe Project
  */
 package com.equinooxe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
+ * OperativeUnite is a kind of building/site
  *
  * @author mohamed
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class OperativeUnit implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class OperativeUnit extends BaseEntity {
 
     @Column(unique = true)
     private String name;
+
     @Column(unique = false)
-    private String adresse;
+    private String adress;
+
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
 
     @OneToMany(mappedBy = "operativeUnit", targetEntity = LocationGroup.class)
-    private Collection<LocationGroup> groupements;
+    private Collection<LocationGroup> locationGroups;
 
-    public Long getId() {
-        return id;
+    public OperativeUnit() {
+        super();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public OperativeUnit(String name) {
+        super();
+        this.name = name;
     }
 
     public String getName() {
@@ -56,12 +50,12 @@ public class OperativeUnit implements Serializable {
         this.name = name;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getAdress() {
+        return adress;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     public String getDescription() {
@@ -79,17 +73,16 @@ public class OperativeUnit implements Serializable {
         return hash;
     }
 
-    public Collection<LocationGroup> getGroupements() {
-        return groupements;
+    public Collection<LocationGroup> getLocationGroups() {
+        return locationGroups;
     }
 
-    public void setGroupements(Collection<LocationGroup> groupements) {
-        this.groupements = groupements;
+    public void setLocationGroups(Collection<LocationGroup> locationGroups) {
+        this.locationGroups = locationGroups;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof OperativeUnit)) {
             return false;
         }
@@ -102,7 +95,7 @@ public class OperativeUnit implements Serializable {
 
     @Override
     public String toString() {
-        return "com.appnh.infra.model.Etablissement[ id=" + id + " ]";
+        return "OperativeUnit[ id=" + id + " ]";
     }
 
 }

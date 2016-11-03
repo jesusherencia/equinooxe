@@ -20,9 +20,9 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @DiscriminatorValue("AGENT")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class AgentUser extends User implements Serializable {
-    
+
     @OneToMany(mappedBy = "agent", targetEntity = CleanRequest.class)
     private Collection<CleanRequest> cleanRequests;
 
@@ -33,30 +33,10 @@ public class AgentUser extends User implements Serializable {
     public void setCleanRequests(Collection<CleanRequest> cleanRequests) {
         this.cleanRequests = cleanRequests;
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AgentUser)) {
-            return false;
-        }
-        AgentUser other = (AgentUser) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {
-        return "com.appnh.models.AgentUser[ id=" + id + " ]";
+        return "AgentUser[ id=" + id + " ]";
     }
-    
+
 }

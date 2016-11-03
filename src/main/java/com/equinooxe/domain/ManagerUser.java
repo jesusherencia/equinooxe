@@ -23,26 +23,24 @@ public class ManagerUser extends User implements Serializable {
      
     @OneToMany(mappedBy = "manager", targetEntity = CleanRequest.class)
     private Collection<CleanRequest> cleanRequests;
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    
+    public ManagerUser(){
+        super();
+    }
+    
+    public ManagerUser(Collection<CleanRequest> cleanRequests){
+        super();
+        this.cleanRequests=cleanRequests;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof ManagerUser)) {
-            return false;
-        }
-        ManagerUser other = (ManagerUser) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public Collection<CleanRequest> getCleanRequests() {
+        return cleanRequests;
     }
 
+    public void setCleanRequests(Collection<CleanRequest> cleanRequests) {
+        this.cleanRequests = cleanRequests;
+    }
+ 
     @Override
     public String toString() {
         return "ManagerUser[ id=" + id + " ]";

@@ -21,13 +21,8 @@ import javax.persistence.ManyToOne;
  * @author mohamed
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class CleanTask implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class CleanTask extends BaseEntity {
 
     @Column(unique = true)
     private String name;
@@ -40,16 +35,12 @@ public class CleanTask implements Serializable {
 
     @ManyToOne
     private CleanRequest cleanRequest;
-    
+
     @ManyToOne
     private TaskDefinition taskDefinition;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public CleanTask() {
+        super();
     }
 
     public String getName() {
@@ -92,7 +83,6 @@ public class CleanTask implements Serializable {
         this.taskDefinition = taskDefinition;
     }
 
-     
     @Override
     public int hashCode() {
         int hash = 0;

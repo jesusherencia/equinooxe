@@ -8,6 +8,7 @@ package com.equinooxe.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -39,17 +40,15 @@ public class UserRole implements Serializable {
     @ManyToOne
     private Role role;
 
-    @Column(name = "addAt")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date addAt;
+    @Column(name = "addAt", columnDefinition = "DATETIME")
+    private LocalDateTime addAt;
 
-    @Column(name = "updateAt")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date updateAt;
+    @Column(name = "updateAt", columnDefinition = "DATETIME", nullable = true)
+    private LocalDateTime updateAt;
 
     public UserRole() {
-        this.addAt = new Date();
-        this.updateAt = new Date();
+        this.addAt = LocalDateTime.now();
+        this.updateAt = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -72,21 +71,23 @@ public class UserRole implements Serializable {
         this.role = role;
     }
 
-    public Date getAddAt() {
+    public LocalDateTime getAddAt() {
         return addAt;
     }
 
-    public void setAddAt(Date addAt) {
+    public void setAddAt(LocalDateTime addAt) {
         this.addAt = addAt;
     }
 
-    public Date getUpdateAt() {
+    public LocalDateTime getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(Date updateAt) {
+    public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
     }
+
+     
 
     public void setId(Long id) {
         this.id = id;

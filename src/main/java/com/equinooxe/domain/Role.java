@@ -8,8 +8,8 @@ package com.equinooxe.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +18,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 /**
  *
@@ -27,12 +26,7 @@ import javax.persistence.Temporal;
 @Entity
 @Table()
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Role implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Role extends BaseEntity {
 
     @Column(name = "name", unique = true)
     private String name;
@@ -43,24 +37,14 @@ public class Role implements Serializable {
     @OneToMany(mappedBy = "role", targetEntity = RolePermission.class)
     private Collection<RolePermission> rolePermissions;
 
-    @Column(name = "addAt")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date addAt;
-
-    @Column(name = "updateAt", nullable = true)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date updateAt;
-
     public Role() {
-
-        this.addAt = new Date();
-        this.updateAt = new Date();
+        super();
     }
 
     public Role(String name) {
+        super();
         this.name = name;
-        this.addAt = new Date();
-        this.updateAt = new Date();
+
     }
 
     public String getName() {
@@ -85,30 +69,6 @@ public class Role implements Serializable {
 
     public void setUserRoles(Collection<UserRole> userRoles) {
         this.userRoles = userRoles;
-    }
-
-    public Date getAddAt() {
-        return addAt;
-    }
-
-    public void setAddAt(Date addAt) {
-        this.addAt = addAt;
-    }
-
-    public Date getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     @Override

@@ -7,16 +7,11 @@ package com.equinooxe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -25,16 +20,11 @@ import javax.persistence.OneToMany;
  * @author mohamed
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class CleanRequest implements Serializable {
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class CleanRequest extends BaseEntity {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private LocalDate startAt;
-    private LocalDate deadlineDate;
+    private LocalDateTime startAt;
+    private LocalDateTime deadlineDate;
     private LocalDateTime doneAt;
 
     @Column(unique = false, columnDefinition = "TEXT")
@@ -55,27 +45,23 @@ public class CleanRequest implements Serializable {
     @ManyToOne
     private Location location;
 
-    public Long getId() {
-        return id;
+    public CleanRequest() {
+        super();
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getStartAt() {
+    public LocalDateTime getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(LocalDate startAt) {
+    public void setStartAt(LocalDateTime startAt) {
         this.startAt = startAt;
     }
 
-    public LocalDate getDeadlineDate() {
+    public LocalDateTime getDeadlineDate() {
         return deadlineDate;
     }
 
-    public void setDeadlineDate(LocalDate deadlineDate) {
+    public void setDeadlineDate(LocalDateTime deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
 

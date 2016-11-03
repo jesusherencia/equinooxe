@@ -23,13 +23,8 @@ import javax.persistence.OneToMany;
  * @author mohamed
  */
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-public class Location implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
+public class Location extends BaseEntity {
 
     @Column(unique = true)
     private String name;
@@ -42,17 +37,9 @@ public class Location implements Serializable {
 
     @ManyToOne
     private LocationGroup locationGroup;
-    
+
     @OneToMany(mappedBy = "location", targetEntity = CleanRequest.class)
     private Collection<CleanRequest> cleanRequests;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public LocationGroup getLocationGroup() {
         return locationGroup;
@@ -108,7 +95,7 @@ public class Location implements Serializable {
 
     @Override
     public String toString() {
-        return "com.appnh.infra.model.Espace[ id=" + id + " ]";
+        return "Location[ id=" + id + " ]";
     }
 
 }
