@@ -21,9 +21,9 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     public RolePermissionViewModel save(RolePermissionViewModel rolePermissionVM) {
         Set<Role> roles = new HashSet<>();
         Set<Permission> permissions = new HashSet<>();
-        if (rolePermissionVM.newRoleNames != null) {
-            rolePermissionVM.newRoleNames.stream().forEach(name -> {
-                Role r = new Role(name);
+        if (rolePermissionVM.newRoles != null) {
+            rolePermissionVM.newRoles.stream().forEach(roleVM -> {
+                Role r = new Role(roleVM.getName());
                
                 roles.add(r);
             });
@@ -32,9 +32,9 @@ public class RolePermissionServiceImpl implements RolePermissionService {
             roleRepository.create(role);
         });
 
-        if (rolePermissionVM.newPermissionNames != null) {
-            rolePermissionVM.newPermissionNames.stream().forEach(name -> {
-                Permission permission = new Permission(name);
+        if (rolePermissionVM.newPermissions != null) {
+            rolePermissionVM.newPermissions.stream().forEach(permissionVM -> {
+                Permission permission = new Permission(permissionVM.getName());
                 permissions.add(permission);
             });
         }

@@ -16,8 +16,8 @@ public class RolePermissionViewModel {
     /**
      * Comes from the forms
      */
-    public Set<String> newRoleNames = new HashSet<>();
-    public Set<String> newPermissionNames = new HashSet<>();
+    public Set<Role> newRoles = new HashSet<>();
+    public Set<Permission> newPermissions = new HashSet<>();
     
     /**
      * Already existing roles and permissions

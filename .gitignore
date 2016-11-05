@@ -16,3 +16,6 @@ hs_err_pid*
 
 /.classpath
 nbactions.xml
+
+# Deploy log files
+mvnPackage.txt
