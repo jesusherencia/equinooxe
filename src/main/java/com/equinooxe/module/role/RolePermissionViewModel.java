@@ -13,15 +13,51 @@ import java.util.Set;
  * @author mboullouz
  */
 public class RolePermissionViewModel {
+
     /**
      * Comes from the forms
      */
-    public Set<Role> newRoles = new HashSet<>();
-    public Set<Permission> newPermissions = new HashSet<>();
-    
+    private Set<Role> newRoles = new HashSet<>();
+
+    private Set<Permission> newPermissions = new HashSet<>();
+
     /**
      * Already existing roles and permissions
      */
-    public Set<Role> roleEntities = new HashSet<>();
-    public Set<Permission> permissionEntities = new HashSet<>();
+    private Set<Role> roleEntities = new HashSet<>();
+
+    private Set<Permission> permissionEntities = new HashSet<>();
+
+    public Set<Role> getNewRoles() {
+        return newRoles;
+    }
+
+    public void setNewRoles(Set<Role> newRoles) {
+        this.newRoles = newRoles;
+    }
+
+    public Set<Permission> getNewPermissions() {
+        return newPermissions;
+    }
+
+    public void setNewPermissions(Set<Permission> newPermissions) {
+        this.newPermissions = newPermissions;
+    }
+
+    public Set<Role> getRoleEntities() {
+        return roleEntities;
+    }
+
+    public void setRoleEntities(Set<Role> roleEntities) {
+        this.roleEntities = roleEntities;
+    }
+
+    public Set<Permission> getPermissionEntities() {
+        return permissionEntities;
+    }
+
+    public void setPermissionEntities(Set<Permission> permissionEntities) {
+        this.permissionEntities = permissionEntities;
+    }
+
 }

@@ -21,8 +21,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     public RolePermissionViewModel save(RolePermissionViewModel rolePermissionVM) {
         Set<Role> roles = new HashSet<>();
         Set<Permission> permissions = new HashSet<>();
-        if (rolePermissionVM.newRoles != null) {
-            rolePermissionVM.newRoles.stream().forEach(roleVM -> {
+        if (rolePermissionVM.getNewRoles() != null) {
+            rolePermissionVM.getNewRoles().stream().forEach(roleVM -> {
                 Role r = new Role(roleVM.getName());
                
                 roles.add(r);
@@ -32,8 +32,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
             roleRepository.create(role);
         });
 
-        if (rolePermissionVM.newPermissions != null) {
-            rolePermissionVM.newPermissions.stream().forEach(permissionVM -> {
+        if (rolePermissionVM.getNewPermissions() != null) {
+            rolePermissionVM.getNewPermissions().stream().forEach(permissionVM -> {
                 Permission permission = new Permission(permissionVM.getName());
                 permissions.add(permission);
             });
@@ -45,8 +45,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
             permissionRepository.create(permission);
         });
 
-        rolePermissionVM.roleEntities = roles;
-        rolePermissionVM.permissionEntities = permissions;
+        rolePermissionVM.setRoleEntities(roles);
+        rolePermissionVM.setPermissionEntities(permissions);
 
         return rolePermissionVM;
     }
@@ -54,8 +54,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     @Override
     public RolePermissionViewModel prepare() {
         RolePermissionViewModel vm = new RolePermissionViewModel();
-        vm.roleEntities =   new HashSet( roleRepository.findAll());
-        vm.permissionEntities =  new HashSet(  permissionRepository.findAll());
+        vm.setRoleEntities( new HashSet( roleRepository.findAll()));
+        vm.setPermissionEntities(new HashSet(  permissionRepository.findAll()));
         return vm;
     }
 
