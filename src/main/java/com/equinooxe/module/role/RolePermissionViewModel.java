@@ -5,6 +5,7 @@ package com.equinooxe.module.role;
 
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import java.util.Set;
  *
  * @author mboullouz
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RolePermissionViewModel {
 
     /**

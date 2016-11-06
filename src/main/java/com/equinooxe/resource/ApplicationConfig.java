@@ -49,6 +49,7 @@ public class ApplicationConfig extends Application {
         log.log(Level.INFO, "Enabling custom Jackson JSON provider and register Hibernate5Module ");
         JacksonJsonProvider jacksonJsonProvider = new JacksonJsonProvider()
                 .configure(SerializationFeature.INDENT_OUTPUT, true)
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .configure(DeserializationFeature.WRAP_EXCEPTIONS, true);
         jacksonJsonProvider.setMapper(mapper);
         set.add(jacksonJsonProvider);
