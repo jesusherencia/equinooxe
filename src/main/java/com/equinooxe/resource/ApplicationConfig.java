@@ -51,6 +51,7 @@ public class ApplicationConfig extends Application {
                 .configure(SerializationFeature.INDENT_OUTPUT, true)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .configure(DeserializationFeature.WRAP_EXCEPTIONS, true);
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         jacksonJsonProvider.setMapper(mapper);
         set.add(jacksonJsonProvider);
         
