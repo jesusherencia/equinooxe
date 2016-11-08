@@ -23,16 +23,22 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    protected static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected Long id;
+
+    @Column(name = "isDeleted", nullable = true)
+    protected boolean isDeleted;
+
+    @Column(name = "isArchived", nullable = true)
+    protected boolean isArchived;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @Column(name = "addAt", columnDefinition = "DATETIME")
     protected LocalDateTime addAt;
-    
+
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @Column(name = "updateAt", columnDefinition = "DATETIME", nullable = true)
@@ -41,6 +47,8 @@ public class BaseEntity implements Serializable {
     public BaseEntity() {
         this.addAt = LocalDateTime.now();
         this.updateAt = LocalDateTime.now();
+        this.isArchived = false;
+        this.isDeleted = false;
     }
 
     public Long getId() {
@@ -65,6 +73,22 @@ public class BaseEntity implements Serializable {
 
     public void setUpdateAt(LocalDateTime updateAt) {
         this.updateAt = updateAt;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public boolean isIsArchived() {
+        return isArchived;
+    }
+
+    public void setIsArchived(boolean isArchived) {
+        this.isArchived = isArchived;
     }
 
 }

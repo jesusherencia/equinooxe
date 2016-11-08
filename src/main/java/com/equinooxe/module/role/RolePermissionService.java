@@ -20,6 +20,13 @@ public interface RolePermissionService {
      * @return RolePermissionViewModel
      */
     RolePermissionViewModel prepare();
+
+    /**
+     *
+     * @param vm
+     * @return
+     */
+    Object delete(RolePermissionDeleteViewModel vm);
     
     
 }
