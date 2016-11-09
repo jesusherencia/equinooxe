@@ -5,7 +5,6 @@ package com.equinooxe.module.role;
 
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.Role;
-import com.equinooxe.domain.viewmodels.SimpleDeleteObjectViewModel;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         if (rolePermissionVM.getNewRoles() != null) {
             rolePermissionVM.getNewRoles().stream().forEach(roleVM -> {
                 Role r = new Role(roleVM.getName());
-               
                 roles.add(r);
             });
         }

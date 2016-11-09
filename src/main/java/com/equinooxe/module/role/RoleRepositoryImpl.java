@@ -11,14 +11,15 @@ import javax.persistence.EntityManager;
  *
  * @author mboullouz
  */
-public class RoleRepositoryImpl extends AbstractRepository<Role> implements RoleRepository{
+public class RoleRepositoryImpl extends AbstractRepository<Role> implements RoleRepository {
 
     private EntityManager entityManager;
 
     public RoleRepositoryImpl() {
         super(Role.class);
         entityManager = getEntityManager();
-
     }
     
+    
+
 }

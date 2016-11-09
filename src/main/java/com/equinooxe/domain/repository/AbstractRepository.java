@@ -10,6 +10,7 @@ package com.equinooxe.domain.repository;
  *
  * @author mboullouz
  */
+import com.equinooxe.domain.BaseEntity;
 import com.equinooxe.domain.utils.HibernateUtil;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import java.util.List;
@@ -23,7 +24,7 @@ import javax.ws.rs.core.Response;
  * @author mboullouz
  * @param <T> Entity type
  */
-public abstract class AbstractRepository<T> implements Repository<T> {
+public abstract class AbstractRepository<T extends BaseEntity> implements Repository<T> {
 
     private Class<T> entityClass;
 
@@ -90,6 +91,19 @@ public abstract class AbstractRepository<T> implements Repository<T> {
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
                     Response.status(Response.Status.BAD_REQUEST)
                     .entity(new SimpleResponseObjectWrapper("Can't delete the record! " + e.getMessage(), 0)).build());
+        }
+    }
+
+    @Override
+    public void remove(Long[] ids, boolean hardRemove) {
+        for (Long id : ids) {
+            T t = getEntityManager().find(entityClass, id);
+            if (hardRemove) {
+                remove(t);
+            } else {
+                t.setIsDeleted(true);
+                edit(t);
+            }
         }
     }
 

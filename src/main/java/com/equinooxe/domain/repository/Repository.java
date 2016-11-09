@@ -5,11 +5,23 @@ import javax.persistence.EntityManager;
 import javax.ws.rs.WebApplicationException;
 
 public interface Repository<T> {
- 
+
     EntityManager getEntityManager();
-    public void create(T entity) throws WebApplicationException;
-    public void edit(T entity);
-    public void remove(T entity);
-    public T find(Object id);
-    public List<T> findAll();
+
+    void create(T entity) throws WebApplicationException;
+
+    void edit(T entity);
+
+    void remove(T entity);
+
+    /**
+     * Remove list of entities using a Hard or Soft removign stragey
+     * @param ids of entities to remove
+     * @param hardRemove remove strategy
+     */
+    void remove(Long[] ids, boolean hardRemove);
+
+    T find(Object id);
+
+    List<T> findAll();
 }
