@@ -3,6 +3,9 @@
  */
 package com.equinooxe.module.role;
 
+import com.equinooxe.domain.viewmodels.DeleteOperationResult;
+import java.util.List;
+
 /**
  *
  * @author mboullouz
@@ -26,7 +29,7 @@ public interface RolePermissionService {
      * @param vm
      * @return
      */
-    Object delete(RolePermissionDeleteViewModel vm);
+    List<DeleteOperationResult> delete(RolePermissionDeleteViewModel vm);
     
     
 }

@@ -5,7 +5,10 @@ package com.equinooxe.module.role;
 
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.Role;
+import com.equinooxe.domain.viewmodels.DeleteOperationResult;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,34 +56,17 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     @Override
     public RolePermissionViewModel prepare() {
         RolePermissionViewModel vm = new RolePermissionViewModel();
-        vm.setRoleEntities( new HashSet( roleRepository.findAll()));
-        vm.setPermissionEntities(new HashSet(  permissionRepository.findAll()));
+        vm.setRoleEntities(new HashSet(roleRepository.findAll()));
+        vm.setPermissionEntities(new HashSet(permissionRepository.findAll()));
         return vm;
     }
 
     @Override
-    public Object delete(RolePermissionDeleteViewModel vm) {
-        for(Long id : vm.getRoles().ids){
-            Role role = roleRepository.find(id);
-           if(vm.getRoles().hard) {
-               roleRepository.remove(roleRepository.find(id));
-           }else {
-               role.setIsDeleted(true);
-           }
-        }
-        
-        for(Long id : vm.getPermissions().ids){
-            Permission permission= permissionRepository.find(id);
-           if(vm.getPermissions().hard) {
-               permissionRepository.remove(permissionRepository.find(id));
-           }else {
-               permission.setIsDeleted(true);
-           }
-        }
-        
-        roleRepository.getEntityManager().getTransaction().commit();
-        
-        return true;
+    public List<DeleteOperationResult> delete(RolePermissionDeleteViewModel vm) {
+        List<DeleteOperationResult> rsList = new ArrayList<>();
+        rsList.add(roleRepository.remove(vm.getRoles().ids, vm.getRoles().hard));
+        rsList.add(permissionRepository.remove(vm.getPermissions().ids, vm.getPermissions().hard));
+        return rsList;
     }
 
 }

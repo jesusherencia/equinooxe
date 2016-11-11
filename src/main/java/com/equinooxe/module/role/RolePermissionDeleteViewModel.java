@@ -3,7 +3,7 @@
  */
 package com.equinooxe.module.role;
 
-import com.equinooxe.domain.viewmodels.SimpleDeleteObjectViewModel;
+import com.equinooxe.domain.viewmodels.SimpleDeleteViewModel;
 
 /**
  *
@@ -11,22 +11,22 @@ import com.equinooxe.domain.viewmodels.SimpleDeleteObjectViewModel;
  */
 public class RolePermissionDeleteViewModel {
 
-    private SimpleDeleteObjectViewModel permissions;
-    private SimpleDeleteObjectViewModel roles;
+    private SimpleDeleteViewModel permissions;
+    private SimpleDeleteViewModel roles;
 
-    public SimpleDeleteObjectViewModel getPermissions() {
+    public SimpleDeleteViewModel getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(SimpleDeleteObjectViewModel permissions) {
+    public void setPermissions(SimpleDeleteViewModel permissions) {
         this.permissions = permissions;
     }
 
-    public SimpleDeleteObjectViewModel getRoles() {
+    public SimpleDeleteViewModel getRoles() {
         return roles;
     }
 
-    public void setRoles(SimpleDeleteObjectViewModel roles) {
+    public void setRoles(SimpleDeleteViewModel roles) {
         this.roles = roles;
     }
 

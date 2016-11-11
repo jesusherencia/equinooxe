@@ -8,7 +8,7 @@ package com.equinooxe.domain.viewmodels;
  * some data like ids, delete type ...
  * @author mboullouz
  */
-public class SimpleDeleteObjectViewModel {
+public class SimpleDeleteViewModel {
     /**
      * Delete a list of records
      */

@@ -12,6 +12,7 @@ package com.equinooxe.domain.repository;
  */
 import com.equinooxe.domain.BaseEntity;
 import com.equinooxe.domain.utils.HibernateUtil;
+import com.equinooxe.domain.viewmodels.DeleteOperationResult;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -95,16 +96,20 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
     }
 
     @Override
-    public void remove(Long[] ids, boolean hardRemove) {
+    public DeleteOperationResult remove(Long[] ids, boolean hardRemove) {
+        DeleteOperationResult rs = new DeleteOperationResult(ids.length, entityClass.getName());
         for (Long id : ids) {
             T t = getEntityManager().find(entityClass, id);
             if (hardRemove) {
                 remove(t);
+                rs.incrementeHardDeleteCounter();
             } else {
                 t.setIsDeleted(true);
                 edit(t);
+                rs.incrementeSoftDeleteCounter();
             }
         }
+        return rs;
     }
 
     @Override
