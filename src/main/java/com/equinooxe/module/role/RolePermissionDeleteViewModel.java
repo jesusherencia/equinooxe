@@ -6,7 +6,7 @@ package com.equinooxe.module.role;
 import com.equinooxe.domain.viewmodels.SimpleDeleteViewModel;
 
 /**
- *
+ * Structure the elements to delete
  * @author mboullouz
  */
 public class RolePermissionDeleteViewModel {

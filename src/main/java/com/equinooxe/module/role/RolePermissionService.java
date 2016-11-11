@@ -25,7 +25,8 @@ public interface RolePermissionService {
     RolePermissionViewModel prepare();
 
     /**
-     *
+     * Delte and collect some informations about the operation to give 
+     * a feed back to client
      * @param vm
      * @return
      */
