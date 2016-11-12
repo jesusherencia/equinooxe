@@ -100,6 +100,9 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
         DeleteOperationResult rs = new DeleteOperationResult(ids.length, entityClass.getName());
         for (Long id : ids) {
             T t = getEntityManager().find(entityClass, id);
+            if (t == null) {
+                continue;
+            }
             if (hardRemove) {
                 remove(t);
                 rs.incrementeHardDeleteCounter();

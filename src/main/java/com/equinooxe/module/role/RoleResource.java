@@ -46,8 +46,8 @@ public class RoleResource {
                 ).build();
     }
 
-    @Path("/")
-    @DELETE
+    @Path("/delete")
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response delete(RolePermissionDeleteViewModel vm) {
