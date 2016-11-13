@@ -16,6 +16,9 @@ import com.equinooxe.domain.viewmodels.DeleteOperationResult;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -122,8 +125,12 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
 
     @Override
     public List<T> findAll() {
-        javax.persistence.criteria.CriteriaQuery criteriaQuery = getEntityManager().getCriteriaBuilder().createQuery();
-        criteriaQuery.select(criteriaQuery.from(entityClass));
+        javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = getEntityManager().getCriteriaBuilder().createQuery(entityClass);
+        Metamodel m = getEntityManager().getMetamodel();
+        EntityType<T> T_ = m.entity(entityClass);
+        Root<T> entity = criteriaQuery .from(entityClass);
+        criteriaQuery.where(entity.get("isDeleted").in(false));
+        //criteriaQuery.select(criteriaQuery.from(entityClass));
         return getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
