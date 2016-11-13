@@ -7,9 +7,7 @@ import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.Role;
 import com.equinooxe.domain.viewmodels.DeleteOperationResult;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
@@ -22,9 +20,10 @@ public class RolePermissionServiceImpl implements RolePermissionService {
 
     @Override
     public RolePermissionViewModel save(RolePermissionViewModel rolePermissionVM) {
-        Set<Role> roles = new HashSet<>();
-        Set<Permission> permissions = new HashSet<>();
+        List<Role> roles = new ArrayList<>();
+        List<Permission> permissions = new ArrayList<>();
         if (rolePermissionVM.getNewRoles() != null) {
+            System.out.println("===RolesNumberToSave===" + rolePermissionVM.getNewRoles().size());
             rolePermissionVM.getNewRoles().stream().forEach(roleVM -> {
                 Role r = new Role(roleVM.getName());
                 roles.add(r);
@@ -35,6 +34,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         });
 
         if (rolePermissionVM.getNewPermissions() != null) {
+            System.out.println("***PermsNumberToSave***" + rolePermissionVM.getNewPermissions().size());
             rolePermissionVM.getNewPermissions().stream().forEach(permissionVM -> {
                 Permission permission = new Permission(permissionVM.getName());
                 permissions.add(permission);
@@ -56,8 +56,8 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     @Override
     public RolePermissionViewModel prepare() {
         RolePermissionViewModel vm = new RolePermissionViewModel();
-        vm.setRoleEntities(new HashSet(roleRepository.findAll()));
-        vm.setPermissionEntities(new HashSet(permissionRepository.findAll()));
+        vm.setRoleEntities( roleRepository.findAll() );
+        vm.setPermissionEntities( permissionRepository.findAll());
         return vm;
     }
 

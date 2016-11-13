@@ -126,11 +126,9 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
     @Override
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = getEntityManager().getCriteriaBuilder().createQuery(entityClass);
-        Metamodel m = getEntityManager().getMetamodel();
-        EntityType<T> T_ = m.entity(entityClass);
-        Root<T> entity = criteriaQuery .from(entityClass);
-        criteriaQuery.where(entity.get("isDeleted").in(false));
-        //criteriaQuery.select(criteriaQuery.from(entityClass));
+        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
+        Root<T> entity = criteriaQuery.from(entityClass);
+        criteriaQuery.where(cb.equal(entity.get("isDeleted"),false));
         return getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 

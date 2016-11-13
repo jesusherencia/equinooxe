@@ -6,7 +6,9 @@ package com.equinooxe.module.role;
 import com.equinooxe.domain.Permission;
 import com.equinooxe.domain.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,47 +21,48 @@ public class RolePermissionViewModel {
     /**
      * Comes from the forms
      */
-    private Set<Role> newRoles = new HashSet<>();
+    private List<Role> newRoles = new ArrayList<>();
 
-    private Set<Permission> newPermissions = new HashSet<>();
+    private List<Permission> newPermissions = new ArrayList<>();
 
     /**
      * Already existing roles and permissions
      */
-    private Set<Role> roleEntities = new HashSet<>();
+    private List<Role> roleEntities = new ArrayList<>();
 
-    private Set<Permission> permissionEntities = new HashSet<>();
+    private List<Permission> permissionEntities = new ArrayList<>();
 
-    public Set<Role> getNewRoles() {
+    public List<Role> getNewRoles() {
         return newRoles;
     }
 
-    public void setNewRoles(Set<Role> newRoles) {
+    public void setNewRoles(List<Role> newRoles) {
         this.newRoles = newRoles;
     }
 
-    public Set<Permission> getNewPermissions() {
+    public List<Permission> getNewPermissions() {
         return newPermissions;
     }
 
-    public void setNewPermissions(Set<Permission> newPermissions) {
+    public void setNewPermissions(List<Permission> newPermissions) {
         this.newPermissions = newPermissions;
     }
 
-    public Set<Role> getRoleEntities() {
+    public List<Role> getRoleEntities() {
         return roleEntities;
     }
 
-    public void setRoleEntities(Set<Role> roleEntities) {
+    public void setRoleEntities(List<Role> roleEntities) {
         this.roleEntities = roleEntities;
     }
 
-    public Set<Permission> getPermissionEntities() {
+    public List<Permission> getPermissionEntities() {
         return permissionEntities;
     }
 
-    public void setPermissionEntities(Set<Permission> permissionEntities) {
+    public void setPermissionEntities(List<Permission> permissionEntities) {
         this.permissionEntities = permissionEntities;
     }
-
+ 
+ 
 }
