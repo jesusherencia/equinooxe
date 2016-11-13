@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
  */
 public abstract class AbstractRepository<T extends BaseEntity> implements Repository<T> {
 
-    private Class<T> entityClass;
+    private final Class<T> entityClass;
 
     public AbstractRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -42,10 +42,11 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
     /**
      *
      * @param entity
+     * @return 
      * @throws DatabaseOperationGenericException
      */
     @Override
-    public void create(T entity) throws WebApplicationException {
+    public T create(T entity) throws WebApplicationException {
         if (!getEntityManager().getTransaction().isActive()) {
             getEntityManager().getTransaction().begin();
         }
@@ -55,6 +56,7 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
              * We may flush there as well
              */
             getEntityManager().getTransaction().commit();
+            return entity;
         } catch (Exception e) {
             Throwable t = e.getCause();
             throw new WebApplicationException(
@@ -67,7 +69,7 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
     }
 
     @Override
-    public void edit(T entity) {
+    public T edit(T entity) {
         if (!getEntityManager().getTransaction().isActive()) {
             getEntityManager().getTransaction().begin();
         }
@@ -75,6 +77,7 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
         try {
             getEntityManager().flush();
             getEntityManager().getTransaction().commit();
+            return entity;
         } catch (Exception e) {
 
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
@@ -84,7 +87,8 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
     }
 
     @Override
-    public void remove(T entity) {
+    public DeleteOperationResult remove(T entity) {
+        DeleteOperationResult rs = new DeleteOperationResult(1, entityClass.getName());
         if (!getEntityManager().getTransaction().isActive()) {
             getEntityManager().getTransaction().begin();
         }
@@ -92,11 +96,13 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
         try {
             getEntityManager().flush();
             getEntityManager().getTransaction().commit();
+            rs.hardDeleteCount++;
         } catch (Exception e) {
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
                     Response.status(Response.Status.BAD_REQUEST)
                     .entity(new SimpleResponseObjectWrapper("Can't delete the record! " + e.getMessage() + " " + e.getCause().getMessage(), 0)).build());
         }
+        return rs;
     }
 
     @Override

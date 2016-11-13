@@ -9,11 +9,11 @@ public interface Repository<T> {
 
     EntityManager getEntityManager();
 
-    void create(T entity) throws WebApplicationException;
+    T create(T entity) throws WebApplicationException;
 
-    void edit(T entity);
+    T edit(T entity);
 
-    void remove(T entity);
+    DeleteOperationResult remove(T entity);
 
     /**
      * Remove list of entities using a Hard or Soft removign stragey
