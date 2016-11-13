@@ -23,7 +23,6 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         List<Role> roles = new ArrayList<>();
         List<Permission> permissions = new ArrayList<>();
         if (rolePermissionVM.getNewRoles() != null) {
-            System.out.println("===RolesNumberToSave===" + rolePermissionVM.getNewRoles().size());
             rolePermissionVM.getNewRoles().stream().forEach(roleVM -> {
                 Role r = new Role(roleVM.getName());
                 roles.add(r);
@@ -34,7 +33,6 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         });
 
         if (rolePermissionVM.getNewPermissions() != null) {
-            System.out.println("***PermsNumberToSave***" + rolePermissionVM.getNewPermissions().size());
             rolePermissionVM.getNewPermissions().stream().forEach(permissionVM -> {
                 Permission permission = new Permission(permissionVM.getName());
                 permissions.add(permission);

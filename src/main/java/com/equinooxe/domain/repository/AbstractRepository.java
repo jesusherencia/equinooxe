@@ -17,8 +17,6 @@ import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
@@ -58,10 +56,12 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
              */
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
+            Throwable t = e.getCause();
             throw new WebApplicationException(
                     " Db Error! " + e.getMessage(),
                     Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new SimpleResponseObjectWrapper("Can't save the new record! " + e.getMessage(), 0)).build());
+                    .entity(new SimpleResponseObjectWrapper("Can't save the new record! "
+                                    + e.getMessage() + " " + t.toString(), 0)).build());
         }
 
     }
@@ -76,9 +76,10 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
             getEntityManager().flush();
             getEntityManager().getTransaction().commit();
         } catch (Exception e) {
+
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
                     Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new SimpleResponseObjectWrapper("Can't edit the record! " + e.getMessage(), 0)).build());
+                    .entity(new SimpleResponseObjectWrapper("Can't edit the record! " + e.getMessage() + " " + e.getCause().getMessage(), 0)).build());
         }
     }
 
@@ -94,7 +95,7 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
         } catch (Exception e) {
             throw new WebApplicationException(" Db Error! " + e.getMessage(),
                     Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new SimpleResponseObjectWrapper("Can't delete the record! " + e.getMessage(), 0)).build());
+                    .entity(new SimpleResponseObjectWrapper("Can't delete the record! " + e.getMessage() + " " + e.getCause().getMessage(), 0)).build());
         }
     }
 
@@ -128,7 +129,7 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
         javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = getEntityManager().getCriteriaBuilder().createQuery(entityClass);
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         Root<T> entity = criteriaQuery.from(entityClass);
-        criteriaQuery.where(cb.equal(entity.get("isDeleted"),false));
+        criteriaQuery.where(cb.equal(entity.get("isDeleted"), false));
         return getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
