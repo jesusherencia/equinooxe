@@ -14,9 +14,12 @@ import com.equinooxe.domain.BaseEntity;
 import com.equinooxe.domain.utils.HibernateUtil;
 import com.equinooxe.domain.viewmodels.DeleteOperationResult;
 import com.equinooxe.domain.viewmodels.SimpleResponseObjectWrapper;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
@@ -132,12 +135,25 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
     }
 
     @Override
-    public List<T> findAll() {
+    public List<T> findBy(Map<String, Object> criteria) {
         javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
         javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = cb.createQuery(entityClass);
         Root<T> entity = criteriaQuery.from(entityClass);
-        criteriaQuery.where(cb.equal(entity.get("isDeleted"), false));
+        List<Predicate> ps=new ArrayList<>();
+        criteria.forEach((k, v) -> {
+            Predicate p=  cb.equal(entity.get(k), v);
+            ps.add(p);
+        });
+        criteriaQuery.where(ps.toArray(new Predicate[ps.size()]));    
         return getEntityManager().createQuery(criteriaQuery).getResultList();
+    }
+
+    @Override
+    public List<T> findAll() {
+        Map<String, Object> filter = new HashMap<>();
+        filter.put("isDeleted", Boolean.FALSE);
+        filter.put("isArchived", Boolean.TRUE);
+        return this.findBy(filter);
     }
 
     public List<T> findRange(int[] range) {
@@ -155,36 +171,6 @@ public abstract class AbstractRepository<T extends BaseEntity> implements Reposi
         criteriaQuery.select(getEntityManager().getCriteriaBuilder().count(rt));
         javax.persistence.Query q = getEntityManager().createQuery(criteriaQuery);
         return ((Long) q.getSingleResult()).intValue();
-    }
-
-    @Override
-    public List<T> findAllNotMarkedDelete() {
-        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = cb.createQuery(entityClass);
-        Root<T> entity = criteriaQuery.from(entityClass);
-        criteriaQuery.where(cb.equal(entity.get("isDeleted"), false));
-        return getEntityManager().createQuery(criteriaQuery).getResultList();
-    }
-
-    @Override
-    public List<T> findAllNotMarkedArchive() {
-        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = cb.createQuery(entityClass);
-        Root<T> entity = criteriaQuery.from(entityClass);
-        criteriaQuery.where(cb.equal(entity.get("isArchived"), false));
-        return getEntityManager().createQuery(criteriaQuery).getResultList();
-    }
-
-    @Override
-    public List<T> findBy(Map<String, Object> criteria) {
-        javax.persistence.criteria.CriteriaBuilder cb = getEntityManager().getCriteriaBuilder();
-        javax.persistence.criteria.CriteriaQuery<T> criteriaQuery = cb.createQuery(entityClass);
-        Root<T> entity = criteriaQuery.from(entityClass);
-        criteria.forEach((k,v)->{
-            criteriaQuery.where(cb.equal(entity.get(k), v));
-        });
-        
-        return getEntityManager().createQuery(criteriaQuery).getResultList();
     }
 
 }

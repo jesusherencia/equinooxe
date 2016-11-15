@@ -29,9 +29,5 @@ public interface Repository<T> {
 
     List<T> findAll();
 
-    List<T> findAllNotMarkedDelete();
-
-    List<T> findAllNotMarkedArchive();
-    
-    List<T> findBy(Map<String,Object> criterias);
+    List<T> findBy(Map<String, Object> criterias);
 }
