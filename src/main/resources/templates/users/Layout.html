@@ -2,7 +2,56 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 <title>Layout page</title>
-<script src="common-script.js"></script>
+
+<script src="../../vendors/jquery/jquery.js"></script>
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../vendors/bootstrap/css/bootstrap.css"
+	th:href="@{/vendors/bootstrap/css/bootstrap.css}" />
+<script src="../../vendors/bootstrap/js/bootstrap.js"></script>
+<script src="../../vendors/vuejs/Vue.js"></script>
+<script src="../../vendors/metisMenu/metisMenu.js"></script>
+<script src="../../node_modules/systemjs/dist/system.js"></script>
+<!-- <script src="../../config.js"></script> -->
+<!-- <script src="../../web-app/index.js"></script> -->
+<script type="text/javascript">
+	/*  System.import('../../web-app/index.js'); */
+	// set our baseURL reference path
+	/*  SystemJS.config({
+	 baseURL: '../../web-app/'
+	 }); */
+	/*  SystemJS.config({
+	 paths: {
+	 'app/*': '../../web-app/*'
+	 },
+	 packages: {
+	 app: {
+	 format: 'register',
+	 defaultExtension: 'js'
+	 }
+	 }
+	 });
+
+	 // loads /js/main.js
+	 System.import('app/index').then(null, console.error.bind(console)); */
+	System.config({
+		baseURL : '../../web-app/',
+		defaultJSExtensions : true,
+		packages : {
+			'.' : {
+				defaultExtension : 'js'
+			}
+		},
+		meta : {
+			'*' : {
+				format : 'register'
+			}
+		},
+	});
+	System.import('index.js'); // just for test reasons
+</script>
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../../css/main.css" th:href="@{/css/main.css}" />
 </head>
 <body>
 	<ul>
