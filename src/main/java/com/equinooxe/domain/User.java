@@ -18,8 +18,8 @@ import java.util.Locale;
 import java.util.Set;
 import java.time.ZonedDateTime;
 
-/**
- * A user. 
+/** 
+ * A user.    
  */
 @Entity
 @Table(name = "jhi_user")
@@ -28,7 +28,7 @@ import java.time.ZonedDateTime;
 public class User extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
