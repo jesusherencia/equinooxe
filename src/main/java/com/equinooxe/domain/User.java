@@ -19,9 +19,9 @@ import java.util.Set;
 import java.time.ZonedDateTime;
 
 /** 
- * A user.    
+ * A user.     
  */
-@Entity
+@Entity   
 @Table(name = "jhi_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "user")

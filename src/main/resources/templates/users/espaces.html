@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="/layouts/layout">
+	layout:decorator="/layouts/layout">
 <head>
-  
+
 </head>
 <body>
-  <section  layout:fragment="content">
-    <p>This is a paragraph from content page 1</p>
-  </section>
-  <footer>
-    <p layout:fragment="custom-footer">This is some footer content from content page 1</p>
-  </footer>
+	<section layout:fragment="content">
+		Some content from the child one !
+
+		<h1>
+			Hi user one: <span th:text="${user.login}">...</span>
+		</h1>
+	</section>
+	<footer>
+		<p layout:fragment="custom-footer"> 
+		  footer content from child!
+		</p>
+	</footer>
 </body>
 </html>

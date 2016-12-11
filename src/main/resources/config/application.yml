@@ -71,7 +71,7 @@ jhipster:
     swagger:
         title: equinooxe API
         description: equinooxe API documentation
-        version: 0.0.1
+        version: 0.1
         termsOfServiceUrl:
         contactName:
         contactUrl:

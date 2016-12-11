@@ -7,13 +7,34 @@
 
 !function($) {
     "use strict";
-
+    console.log('jquerAPP starts!')
     var Sidemenu = function() {
         this.$body = $("body"),
         this.$openLeftBtn = $(".open-left"),
         this.$menuItem = $("#sidebar-menu a")
     };
+    window.openMenu= function(){
+      console.log('switch open/close nav oupps :) ');
+      $("#wrapper").toggleClass("enlarged");
+      $("#wrapper").addClass("forced");
+
+      if($("#wrapper").hasClass("enlarged") && $("body").hasClass("fixed-left")) {
+        $("body").removeClass("fixed-left").addClass("fixed-left-void");
+      } else if(!$("#wrapper").hasClass("enlarged") && $("body").hasClass("fixed-left-void")) {
+        $("body").removeClass("fixed-left-void").addClass("fixed-left");
+      }
+
+      if($("#wrapper").hasClass("enlarged")) {
+        $(".left ul").removeAttr("style");
+      } else {
+        $(".subdrop").siblings("ul:first").show();
+      }
+
+      toggle_slimscroll(".slimscrollleft");
+      $("body").trigger("resize");
+    }
     Sidemenu.prototype.openLeftBar = function() {
+      console.log('switch open/close nav');
       $("#wrapper").toggleClass("enlarged");
       $("#wrapper").addClass("forced");
 
@@ -60,12 +81,16 @@
     //init sidemenu
     Sidemenu.prototype.init = function() {
       var $this  = this;
-
+      console.log('init open left btn:', this.$openLeftBtn);
+      
       var ua = navigator.userAgent,
         event = (ua.match(/iP/i)) ? "touchstart" : "click";
-
+     $("#openLeftMenu").on('click',function(e){
+        console.log('clicked :: ::::::::' );
+     });
       //bind on click
       this.$openLeftBtn.on(event, function(e) {
+        
         e.stopPropagation();
         $this.openLeftBar();
       });

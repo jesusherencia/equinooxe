@@ -22,6 +22,9 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
@@ -52,6 +55,8 @@ public class SpaceResource {
 	@Inject
 	private UserSearchRepository userSearchRepository;
 
+	
+
 	/**
 	 * POST /users : Creates a new user.
 	 * <p>
@@ -75,7 +80,7 @@ public class SpaceResource {
 	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<?> createUser() throws URISyntaxException {
 		log.debug("REST request to save Space : {}", "");
-
+		 
 		// Lowercase the user login before comparing with database
 		return ResponseEntity.created(new URI("/api/spaces/"))
 				.headers(HeaderUtil.createAlert("A user is created with identifier ", ""))
@@ -86,9 +91,8 @@ public class SpaceResource {
 	@Secured(AuthoritiesConstants.USER)
 	public ResponseEntity<?> postSpace(@RequestBody SpaceDTO space) {
 		log.debug("REST request space body : {}", space.name);
-		
-		return ResponseEntity.ok()
-				.headers(HeaderUtil.createAlert("A user is created with identifier ", ""))
+
+		return ResponseEntity.ok().headers(HeaderUtil.createAlert("A user is created with identifier ", ""))
 				.body(space);
 	}
 }

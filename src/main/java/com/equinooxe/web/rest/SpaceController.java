@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Controller;
 
@@ -26,12 +28,16 @@ import org.springframework.stereotype.Controller;
 public class SpaceController {
 	@Inject
     private UserRepository userRepository;
+	@PersistenceContext 
+	private EntityManager em;
 	@RequestMapping(value = "/web/spaces")
 	public ModelAndView index(@RequestParam(value = "id") Optional<String> id) { 
 		ModelAndView mav = new ModelAndView("/users/espaces");
 		List<User> managedUserVMs= userRepository.findAll();
 		mav.addObject("users",managedUserVMs); 
 		mav.addObject("id",id.orElse("Id not present!"));  
+		User u = em.find(User.class, new Long(1));
+		mav.addObject("user",u);  
 		return mav;
 	}
 }
