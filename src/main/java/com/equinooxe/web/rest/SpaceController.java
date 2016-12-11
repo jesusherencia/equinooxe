@@ -11,7 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserRepository;
-import java.util.List; 
+import com.equinooxe.repository.UserSpecRepository;
+import com.equinooxe.repository.UserSpecs;
+
+import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -22,22 +25,24 @@ import org.springframework.stereotype.Controller;
 
 /**
  *
- * @author mboullouz 
+ * @author mboullouz
  */
 @Controller
 public class SpaceController {
 	@Inject
-    private UserRepository userRepository;
-	@PersistenceContext 
-	private EntityManager em;
+	private UserRepository userRepository;
+	
+	@Inject
+	private UserSpecRepository userSpecRepository;
+
 	@RequestMapping(value = "/web/spaces")
-	public ModelAndView index(@RequestParam(value = "id") Optional<String> id) { 
+	public ModelAndView index(@RequestParam(value = "id") Optional<String> id) {
 		ModelAndView mav = new ModelAndView("/users/espaces");
-		List<User> managedUserVMs= userRepository.findAll();
-		mav.addObject("users",managedUserVMs); 
-		mav.addObject("id",id.orElse("Id not present!"));  
-		User u = em.find(User.class, new Long(1));
-		mav.addObject("user",u);  
+		List<User> managedUserVMs = userRepository.findAll();
+		mav.addObject("users", managedUserVMs);
+		mav.addObject("id", id.orElse("Id not present!"));
+		User u = (User) userSpecRepository.findOne(UserSpecs.firstRecord());
+		mav.addObject("user", u);
 		return mav;
 	}
 }
