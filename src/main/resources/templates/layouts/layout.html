@@ -75,12 +75,6 @@
 
             <!-- Top Bar Start -->
             <div class="topbar">
-
-                <!-- LOGO -->
-                <div class="topbar-left">
-                    <a href="index.html" class="logo"><span>Admin<span>to</span></span><i class="zmdi zmdi-layers"></i></a>
-                </div>
-
                 <!-- Button mobile view to collapse sidebar menu -->
                 <div class="navbar navbar-default" role="navigation">
                     <div class="container">
@@ -137,12 +131,8 @@
 
                     <!-- User -->
                     <div class="user-box">
-                        <div class="user-img">
-                            <img src="../../assets/images/users/avatar-1.jpg" alt="user-img" 
-                            title="Mat Helme" class="img-circle img-thumbnail img-responsive"/>
-                            <div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>
-                        </div>
                         <h5><a href="#">Mat Helme</a> </h5>
+                        <p th:text="${session.user.login}" th:unless="${session == null}">[...]</p>
                         <ul class="list-inline">
                             <li>
                                 <a href="#" >

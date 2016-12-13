@@ -12,8 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.equinooxe.domain.QUser;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserRepository;
-import com.equinooxe.repository.UserSpecRepository;
-import com.equinooxe.repository.UserSpecs;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
@@ -21,9 +19,8 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 
-import org.elasticsearch.search.fetch.QueryFetchSearchResult;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -34,25 +31,23 @@ import org.springframework.stereotype.Controller;
 public class SpaceController {
 	@Inject
 	private UserRepository userRepository;
-	
+
 	@Inject
-	private UserSpecRepository userSpecRepository;
-	
-	 @Inject
-	 EntityManager entityManager;
+	EntityManager entityManager;
 
 	@RequestMapping(value = "/web/spaces")
 	public ModelAndView index(@RequestParam(value = "id") Optional<String> id) {
-		ModelAndView mav = new ModelAndView("/users/espaces");
+		ModelAndView modelView = new ModelAndView("/users/espaces");
 		List<User> managedUserVMs = userRepository.findAll();
-		mav.addObject("users", managedUserVMs);
-		mav.addObject("id", id.orElse("Id not present!"));
-		QUser user = QUser.user; 
-		JPAQueryFactory queryFactory= new JPAQueryFactory(entityManager); 
-		User u = queryFactory.selectFrom(user).where(user.id.eq(new Long(1))).fetchOne();
-		//User u = (User) userSpecRepository.findOne(UserSpecs.firstRecord());
-		
-		mav.addObject("user", u);
-		return mav;
+		modelView.addObject("users", managedUserVMs);
+		modelView.addObject("id", id.orElse("Id not present!"));
+		QUser qUser = QUser.user;
+		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
+		User u = queryFactory.selectFrom(qUser).where(qUser.id.eq(new Long(1))).fetchOne();
+		// User u = (User) userSpecRepository.findOne(UserSpecs.firstRecord());
+		 
+
+		modelView.addObject("user", u);
+		return modelView;
 	}
 }
