@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.equinooxe.domain.QUser;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserRepository;
+import com.equinooxe.security.AuthoritiesConstants;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -36,6 +38,7 @@ public class SpaceController {
 	EntityManager entityManager;
 
 	@RequestMapping(value = "/web/spaces")
+	@Secured(AuthoritiesConstants.USER)
 	public ModelAndView index(@RequestParam(value = "id") Optional<String> id) {
 		ModelAndView modelView = new ModelAndView("/users/espaces");
 		List<User> managedUserVMs = userRepository.findAll();
