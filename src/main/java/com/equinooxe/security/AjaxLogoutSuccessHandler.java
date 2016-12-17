@@ -24,5 +24,6 @@ public class AjaxLogoutSuccessHandler extends AbstractAuthenticationTargetUrlReq
     	
     	request.getSession().setAttribute("user", null);/* remove user from session */
         response.setStatus(HttpServletResponse.SC_OK);
+        response.sendRedirect("/");
     }
 }
