@@ -2,12 +2,11 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-
-    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <title>Layout page</title>
     
@@ -125,7 +124,8 @@
                     <div class="user-box">
                         <ul class="list-inline">
                             <li>
-                             <a th:text="${session.user.login}">[..]</a>
+                             <a th:text="${session.user.login}" 
+                                th:unless="${session.user == null}"  >[..]</a>
                             </li>
                             <li>
                                 <a href="#" >
@@ -247,7 +247,7 @@
                 </div> <!-- content -->
 
                 <footer class="footer">
-                    2017 © Equinooxe.
+                    2016-2017 © Equinooxe.
                 </footer>
 
             </div>
@@ -261,7 +261,7 @@
 
             <!-- Right Sidebar -->
             <div th:replace="/layouts/fragments/rightSideBar" class="side-bar right-bar">
-                
+              
             </div>
             <!-- /Right-bar -->
 

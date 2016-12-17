@@ -29,7 +29,7 @@ spring:
     jpa:
         open-in-view: false
         hibernate:
-            ddl-auto: none
+            ddl-auto: update
             naming:
                 strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
     messages:

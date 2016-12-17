@@ -664,7 +664,7 @@ File: Components
 }
 .panel-default > .panel-heading {
   border-bottom: none;
-  color: #797979;
+  color: black;
 }
 .panel-title {
   font-weight: 600;
@@ -891,7 +891,7 @@ File: Components
   padding: 15px;
 }
 .portlet-default .portlet-title {
-  color: #797979 !important;
+  color: black !important;
 }
 .portlet .portlet-heading.bg-custom a,
 .portlet .portlet-heading.bg-purple a,
@@ -1131,7 +1131,7 @@ File: Components
   border-bottom: 2px solid #ebeff2;
 }
 tbody {
-  color: #797979;
+  color: black;
 }
 th {
   color: #666666;

@@ -28,7 +28,7 @@ body {
   margin: 0;
   padding-bottom: 60px;
   overflow-x: hidden;
-  color: #797979;
+  color: black;
 }
 html {
   position: relative;
@@ -41,7 +41,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #505458;
+  color: black;
   font-family: 'Karla', sans-serif;
   margin: 10px 0;
 }

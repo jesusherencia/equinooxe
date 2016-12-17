@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="/layouts/layout">
-<head>
-
-</head>
+ 
 <body>
 	<section layout:fragment="content">
 		<h5>Nouvel utilisateur</h5>
+			<ul th:if="${not #lists.isEmpty(erreurs)}">
+				<li th:each="erreur : ${erreurs}" >
+				 <span th:text="${erreur.key}"></span> : <span th:text="${erreur.value}"></span>
+				</li>
+     	 	</ul>
 		
 		<form action="#" th:action="@{/user/new}" th:object="${userForm}" method="post">
             <table class="table">
                 <tr>
                     <td>Nom:</td>
-                    <td><input type="text" th:field="*{name}" /></td>
-                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Erreur de nom</td>
+                    <td><input type="text" th:field="*{lastName}" /></td>
+                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur de nom</td>
+                </tr>
+                <tr>
+                    <td>Prénom:</td>
+                    <td><input type="text" th:field="*{firstName}" /></td>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur de prénom</td>
                 </tr>
                 <tr>
                     <td>Email:</td>
                     <td><input type="email" th:field="*{email}" /></td>
                     <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Erreur d'email</td>
+                </tr>
+                
+                <tr>
+                    <td>Login:</td>
+                    <td><input type="text" th:field="*{login}" /></td>
+                    <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Erreur login</td>
+                </tr>
+                
+                <tr>
+                    <td>Mot de passe:</td>
+                    <td><input type="password" th:field="*{password}" /></td>
+                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Erreur mot de passe</td>
                 </tr>
                 <tr>
                     <td><button type="submit">Enregistrer</button></td>

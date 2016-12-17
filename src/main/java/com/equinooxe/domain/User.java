@@ -23,6 +23,8 @@ import java.time.ZonedDateTime;
  */
 @Entity   
 @Table(name = "jhi_user")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "USER_TYPE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "user")
 public class User extends AbstractAuditingEntity implements Serializable {
@@ -31,52 +33,52 @@ public class User extends AbstractAuditingEntity implements Serializable {
      
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	protected Long id;
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
     @Column(length = 50, unique = true, nullable = false)
-    private String login;
+    protected String login;
 
     @JsonIgnore
     @NotNull
     @Size(min = 60, max = 60)
     @Column(name = "password_hash",length = 60)
-    private String password;
+    protected String password;
 
     @Size(max = 50)
     @Column(name = "first_name", length = 50)
-    private String firstName;
+    protected String firstName;
 
     @Size(max = 50)
     @Column(name = "last_name", length = 50)
-    private String lastName;
+    protected String lastName;
 
     @Email
     @Size(max = 100)
     @Column(length = 100, unique = true)
-    private String email;
+    protected String email;
 
     @NotNull
     @Column(nullable = false)
-    private boolean activated = false;
+    protected boolean activated = false;
 
     @Size(min = 2, max = 5)
     @Column(name = "lang_key", length = 5)
-    private String langKey;
+    protected String langKey;
 
     @Size(max = 20)
     @Column(name = "activation_key", length = 20)
     @JsonIgnore
-    private String activationKey;
+    protected String activationKey;
 
     @Size(max = 20)
     @Column(name = "reset_key", length = 20)
-    private String resetKey;
+    protected String resetKey;
 
     @Column(name = "reset_date", nullable = true)
-    private ZonedDateTime resetDate = null;
+    protected ZonedDateTime resetDate = null;
 
     @JsonIgnore
     @ManyToMany
@@ -85,12 +87,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
         inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Authority> authorities = new HashSet<>();
+    protected Set<Authority> authorities = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<PersistentToken> persistentTokens = new HashSet<>();
+    protected Set<PersistentToken> persistentTokens = new HashSet<>();
 
     public Long getId() {
         return id;

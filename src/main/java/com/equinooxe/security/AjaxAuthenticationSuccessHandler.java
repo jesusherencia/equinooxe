@@ -50,7 +50,7 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		request.getSession().setAttribute("user", u);
 		log.debug("\n=======================\n "
 				+ "=================  " + "User with login: " + u.getLogin()
-			    + "is registred in the session!" + "\n======================="
+			    + "  is registred in the session!" + "\n======================="
 		         + "\n ==========================");
 	}
 }

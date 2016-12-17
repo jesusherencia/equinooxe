@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layouts/layout">
+ 
+<body>
+	<section layout:fragment="content">
+	   
+		<h5>Utilisateur: 
+			<span th:text="user.lastName"></span>
+			<span th:text="user.firstName"></span>
+		</h5>
+		<table class="table">
+                <tr>
+                    <td>Nom:</td>
+                    <td><span   th:text="*{lastName}"></span> </td>
+                </tr>
+                <tr>
+                    <td>Prénom:</td>
+                    <td><span  th:text="*{firstName}" /></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><span  th:text="*{email}" /></td>
+                </tr>
+                <tr>
+                    <td>Login:</td>
+                    <td><input th:text="*{login}" /></td>
+                </tr>
+                <tr>
+                    <td>Actions:</td>
+                    <td>
+                     	<a href="@{/user/new}"> Editer </a>
+                    </td>
+                </tr>
+        </table>
+	</section>
+ 
+</body>
+</html>

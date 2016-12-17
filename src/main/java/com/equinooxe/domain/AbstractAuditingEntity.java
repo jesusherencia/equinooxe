@@ -45,8 +45,30 @@ public abstract class AbstractAuditingEntity implements Serializable {
     @Column(name = "last_modified_date")
     @JsonIgnore
     private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
+    
+    @Column(name = "isDeleted", nullable = true)
+    protected boolean isDeleted=false;
 
-    public String getCreatedBy() {
+    @Column(name = "isArchived", nullable = true)
+    protected boolean isArchived=false;
+
+    public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	public boolean isArchived() {
+		return isArchived;
+	}
+
+	public void setArchived(boolean isArchived) {
+		this.isArchived = isArchived;
+	}
+
+	public String getCreatedBy() {
         return createdBy;
     }
 
