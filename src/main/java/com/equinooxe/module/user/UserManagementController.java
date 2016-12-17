@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,9 @@ public class UserManagementController {
 	
 	@Inject
 	EntityManager entityManager;
+	
+	@Autowired
+	AddUserValidator addUserValidator;
 
 	@GetMapping("/user/new")
 	public String showForm(UserForm userForm) {
@@ -46,15 +50,11 @@ public class UserManagementController {
 
 	@PostMapping("/user/new")
 	public String checkPersonInfo(@Valid UserForm userForm, BindingResult bindingResult,Model uiModel, RedirectAttributes redirectAttributes) {
-		
+		addUserValidator.validate(userForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			 return  "/user/form";
 		}
-		Map<String, String> errors= userFormErrors(userForm);
-		if(errors.size()>0){
-			 uiModel.addAttribute("erreurs",errors);
-			 return  "/user/form";
-		}
+		 
 
 		User user = userService.createUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
 				userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
