@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layouts/layout">
+<head>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<h5>Nouvel utilisateur</h5>
+		
+		<form action="#" th:action="@{/user/new}" th:object="${userForm}" method="post">
+            <table class="table">
+                <tr>
+                    <td>Nom:</td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Erreur de nom</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="email" th:field="*{email}" /></td>
+                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Erreur d'email</td>
+                </tr>
+                <tr>
+                    <td><button type="submit">Enregistrer</button></td>
+                </tr>
+            </table>
+        </form>
+	</section>
+	<footer>
+		<p layout:fragment="custom-footer"> 
+		  footer content from child!
+		</p>
+	</footer>
+</body>
+</html>

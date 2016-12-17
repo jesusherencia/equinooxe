@@ -37,7 +37,7 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		/** add the user to session */
 		response.setStatus(HttpServletResponse.SC_OK);
 		addUserToSession(request);
-		response.sendRedirect("/web/spaces");
+		response.sendRedirect("/home");
 	}
 
 	public void addUserToSession(HttpServletRequest request) {
