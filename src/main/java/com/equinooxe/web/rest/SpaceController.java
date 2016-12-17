@@ -5,6 +5,14 @@
  */
 package com.equinooxe.web.rest;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,16 +22,6 @@ import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
 
 /**
  *

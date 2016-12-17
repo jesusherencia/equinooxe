@@ -110,13 +110,6 @@
                                 </div>
                                 <!-- End Notification bar -->
                             </li>
-                            <li class="hidden-xs">
-                                <form role="search" class="app-search">
-                                    <input type="text" placeholder="Search..."
-                                           class="form-control" />
-                                    <a href=""><i class="fa fa-search"></i></a>
-                                </form>
-                            </li>
                         </ul>
 
                     </div><!-- end container -->
@@ -128,12 +121,12 @@
             <!-- ========== Left Sidebar Start ========== -->
             <div class="left side-menu">
                 <div class="sidebar-inner slimscrollleft">
-
                     <!-- User -->
                     <div class="user-box">
-                        <h5><a href="#">Mat Helme</a> </h5>
-                        <p th:text="${session.user.login}" th:unless="${session == null}">[...]</p>
                         <ul class="list-inline">
+                            <li>
+                             <a th:text="${session.user.login}">[..]</a>
+                            </li>
                             <li>
                                 <a href="#" >
                                     <i class="zmdi zmdi-settings"></i>
@@ -152,8 +145,6 @@
                     <!--- Sidemenu -->
                     <div id="sidebar-menu">
                         <ul>
-                        	<li class="text-muted menu-title">Navigation</li>
-
                             <li>
                                 <a href="index.html" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
                             </li>
@@ -235,7 +226,7 @@
 
             </div>
             <!-- Left Sidebar End -->
-
+ 
 
 
             <!-- ============================================================== -->

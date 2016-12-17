@@ -1,7 +1,7 @@
 body {
-    background: #eee;
+    background: white;
 }
-
-.bg-green {
-	background: #eee;
+.navbar {
+    min-height: 43px;
 }
+ 
