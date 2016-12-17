@@ -6,30 +6,30 @@
 	<section layout:fragment="content">
 	   
 		<h5>Utilisateur: 
-			<span th:text="user.lastName"></span>
-			<span th:text="user.firstName"></span>
+			<span th:text="${#strings.capitalize(user.lastName)}"></span>
+			<span th:text="${#strings.capitalize(user.firstName)}"></span>
 		</h5>
 		<table class="table">
                 <tr>
                     <td>Nom:</td>
-                    <td><span   th:text="*{lastName}"></span> </td>
+                    <td><span   th:text="${#strings.capitalize(user.lastName)}"></span> </td>
                 </tr>
                 <tr>
                     <td>Prénom:</td>
-                    <td><span  th:text="*{firstName}" /></td>
+                    <td><span  th:text="${#strings.capitalize(user.firstName)}" /></td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><span  th:text="*{email}" /></td>
+                    <td><span  th:text="${user.email}" /></td>
                 </tr>
                 <tr>
                     <td>Login:</td>
-                    <td><input th:text="*{login}" /></td>
+                    <td><span th:text="${user.login}" ></span> </td>
                 </tr>
                 <tr>
                     <td>Actions:</td>
                     <td>
-                     	<a href="@{/user/new}"> Editer </a>
+                     <a th:href="${(#mvc.url('UMC#show').arg(0,user.id)).build()}">Editer </a>
                     </td>
                 </tr>
         </table>
