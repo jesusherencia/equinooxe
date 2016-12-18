@@ -2,6 +2,7 @@ package com.equinooxe.module.user;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.equinooxe.domain.QManagerUtilisateur;
 import com.equinooxe.domain.QUser;
 import com.equinooxe.domain.User;
+import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 import com.equinooxe.service.UserService;
@@ -36,50 +38,52 @@ public class UserManagementController {
 
 	@Inject
 	private UserService userService;
-	
+
 	@Inject
 	EntityManager entityManager;
-	
+
 	@Autowired
 	AddUserValidator addUserValidator;
 
+	@Autowired
+	UserQueryRepository userQueryRepo;
+
 	@GetMapping("/user/new")
-	public String showForm(UserForm userForm) {
+	public String showForm(@RequestParam(value = "id", required = false) Long id, UserForm userForm, Model uiModel) {
+		if (id != null && id > 0) {
+			User u = userQueryRepo.getOneById(id);
+			userForm = new UserForm(u);
+			uiModel.addAttribute("userForm",userForm);
+		}
 		return "/user/form";
 	}
 
-	@PostMapping("/user/new")
-	public String checkPersonInfo(@Valid UserForm userForm, BindingResult bindingResult,Model uiModel, RedirectAttributes redirectAttributes) {
+	@PostMapping("/user/save")
+	public String save(@Valid UserForm userForm, BindingResult bindingResult, Model uiModel,
+			RedirectAttributes redirectAttributes) {
 		addUserValidator.validate(userForm, bindingResult);
 		if (bindingResult.hasErrors()) {
-			 return  "/user/form";
+			return "/user/form";
 		}
-		 
+		User user;
+		if (userForm.getId() != null) {
+			user = userService.updateUser(userForm.getFirstName(), userForm.getLastName(),
+					userForm.getEmail().toLowerCase(), "fr").get();
+		} else {
+			user = userService.createUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
+					userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
+		}
 
-		User user = userService.createUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
-				userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
 		redirectAttributes.addAttribute("id", user.getId());
 		return "redirect:/user/show";
 	}
-	
+
 	@GetMapping("/user/show")
-	public String show(@RequestParam(value="id", required=true) Long id, Model uiModel, RedirectAttributes redirectAttributes) {
-		QUser qUser = QUser.user;
-		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
-		User u = queryFactory.selectFrom(qUser).where(qUser.id.eq(id)).fetchOne();
-		uiModel.addAttribute("user",u);
+	public String show(@RequestParam(value = "id", required = true) Long id, Model uiModel,
+			RedirectAttributes redirectAttributes) {
+		User u = userQueryRepo.getOneById(id);
+		uiModel.addAttribute("user", u);
 		return "/user/show";
 	}
 
-	private Map<String, String> userFormErrors(UserForm userForm) {
-		Map<String, String> errors = new HashMap<>();
-		if (userRepository.findOneByLogin(userForm.getLogin().toLowerCase()).isPresent()) {
-			errors.put("login", "Login déjà utilisé");
-		}
-		if (userRepository.findOneByEmail(userForm.getEmail()).isPresent()) {
-			errors.put("email", "Email déjà utilisé");
-		}
-
-		return errors;
-	}
 }

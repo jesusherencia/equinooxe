@@ -12,10 +12,16 @@ button, .btn-gray {
     border: 1px solid #d6d1d1;
 }
 .btn-blue {
-	color: #007de0;
-    font-weight: 400;
+    color: #007de0;
+    font-weight: 600;
     background: #e3f2fd;
-    border: 1px solid #2196F3;
+    border: 1px solid #cce4f7;
+}
+
+.titre {
+	font-weight: 600;
+    color: #0084e5;
+    margin: 1%;
 }
 
  

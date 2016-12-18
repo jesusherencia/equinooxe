@@ -5,7 +5,11 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.equinooxe.domain.User;
+
 public class UserForm {
+	
+	private Long id;
 
 	@NotNull
 	@Size(min = 2, max = 30)
@@ -22,10 +26,28 @@ public class UserForm {
 	@Email
 	private String email;
 	
-	@NotNull
-	@Size(min = 2, max = 30)
 	private String password;
 	
+	public UserForm(){
+		
+	}
+	
+	public UserForm(User u){
+		this.email=u.getEmail();
+		this.firstName= u.getFirstName();
+		this.lastName= u.getLastName();
+		this.login= u.getLogin();
+		this.id=u.getId();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getEmail() {
 		return email;
 	}
