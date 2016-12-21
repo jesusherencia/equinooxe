@@ -86,7 +86,7 @@
                                 </button>
                             </li>
                             <li>
-                                <h4 class="page-title">Blank Page</h4>
+                                <h4 class="page-title">Equinooxe</h4>
                             </li>
                         </ul>
 
@@ -125,7 +125,12 @@
                         <ul class="list-inline">
                             <li>
                              <a th:text="${session.user.login}" 
-                                th:unless="${session.user == null}"  >[..]</a>
+                                th:unless="${session.user == null}"  >[..]
+                             </a>
+                             <a th:if="${session.user==null}" 
+                                th:href="${(#mvc.url('AC#reconnect')).build()}" >
+                               <small> Synchronisation session</small>
+                             </a>
                             </li>
                             <li>
                                 <a href="#" >
