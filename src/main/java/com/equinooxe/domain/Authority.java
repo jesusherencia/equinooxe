@@ -2,6 +2,8 @@ package com.equinooxe.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

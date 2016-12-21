@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layouts/layout">
+
+<body>
+	<section layout:fragment="content">
+		<div class="titre">
+			<i class="ti-list-ol"></i> <span> Liste des utilisateurs</span>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Email</th>
+					<th>Modification</th>
+					<th>Roles</th>
+					<th>Actif</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td th:text="${user.firstName+' '+ user.lastName}">Nom complet</td>
+					<td th:text="${user.email}">Nom complet</td>
+					<td th:text="${#calendars.format(user.lastModifiedDate,'dd MMMM yyyy')}" >01 Janvier 2016</td>
+					<td>
+						<span th:each="auth : ${user.authorities}" >
+						   <span th:text="${auth.name}">
+						     
+						   </span>
+						</span>
+                    </td>
+					<td th:text="${user.activated}" >Non</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+</body>
+</html>

@@ -23,6 +23,12 @@ public class AuthController {
 	@Inject
 	EntityManager entityManager;
 	
+	/**
+	 * Reconnect the user: sync the session with the spring security session 
+	 * initialized by ajax login
+	 * @param request
+	 * @return
+	 */
 	@GetMapping("/reconnect")
 	public String reconnect(HttpServletRequest request){
 		SecurityContext securityContext = SecurityContextHolder.getContext();

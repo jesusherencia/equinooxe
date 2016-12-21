@@ -1,9 +1,13 @@
 package com.equinooxe.module.user;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.equinooxe.config.ThymeleafConfiguration;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
@@ -23,9 +28,12 @@ import com.equinooxe.service.UserService;
 @Controller
 @Secured(AuthoritiesConstants.USER)
 public class UserManagementController {
-
+	private final Logger log = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 	@Inject
 	private UserService userService;
+
+	@Inject
+	private UserRepository userRepository;
 
 	@Inject
 	EntityManager entityManager;
@@ -44,13 +52,13 @@ public class UserManagementController {
 	@GetMapping("/user/edit")
 	public String editForm(@RequestParam(value = "id", required = true) Long id, UserForm userForm, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("flashMessage","editer .utilisateur.existant"); 
+		redirectAttributes.addFlashAttribute("flashMessage", "editer .utilisateur.existant");
 		User u = userQueryRepo.getOneById(id);
 		userForm = new UserForm(u);
 		uiModel.addAttribute("userForm", userForm);
 		return "/user/form";
 	}
- 
+
 	@PostMapping("/user/save")
 	public String save(@Valid UserForm userForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
@@ -68,7 +76,7 @@ public class UserManagementController {
 		}
 
 		redirectAttributes.addAttribute("id", user.getId());
-		redirectAttributes.addFlashAttribute("flashMessage","operation.effectuee.avec.succes");
+		redirectAttributes.addFlashAttribute("flashMessage", "operation.effectuee.avec.succes");
 		return "redirect:/user/show";
 	}
 
@@ -78,6 +86,22 @@ public class UserManagementController {
 		User u = userQueryRepo.getOneById(id);
 		uiModel.addAttribute("user", u);
 		return "/user/show";
+	}
+
+	@GetMapping("/user/list")
+	public String list(@RequestParam(value = "filter", required = false) String filter, Model uiModel,
+			RedirectAttributes redirectAttributes) {
+		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
+		
+		users.stream().forEach(u -> {
+			u.getAuthorities().size();
+			log.info("===========\n==== =========SIZE: "+u.getAuthorities().size()+"=======\n======");
+			u.getAuthorities().stream().forEach(au -> {
+				log.info("===========\n============="+au.getName()+"=======\n======");
+			});
+		});
+		uiModel.addAttribute("users", users);
+		return "/user/list";
 	}
 
 }

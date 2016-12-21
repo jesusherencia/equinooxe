@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head lang="en">
-        <meta charset="UTF-8"/>
-        <title>ReactJS + Spring Data REST</title>
-        <link rel="stylesheet" href="/main.css" />
-    </head>
-    <body>
-
-        <h1>Find me in templates/home.html</h1>
-        
-        <b> Spring ThymeLeaf! some changes </b>
-
-    </body>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="/layouts/layout">
+ 
+<body>
+	<section layout:fragment="content">
+	    <h4>Ceci est le dashboard principal! </h4>
+	</section>
+ 
+</body>
 </html>

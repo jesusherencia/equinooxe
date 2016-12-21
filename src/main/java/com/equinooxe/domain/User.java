@@ -5,6 +5,8 @@ import com.equinooxe.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.Email;
 
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -18,10 +20,10 @@ import java.util.Locale;
 import java.util.Set;
 import java.time.ZonedDateTime;
 
-/** 
- * A user.     
+/**
+ * A user.
  */
-@Entity   
+@Entity
 @Table(name = "jhi_user")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "USER_TYPE")
@@ -29,213 +31,207 @@ import java.time.ZonedDateTime;
 @Document(indexName = "user")
 public class User extends AbstractAuditingEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
 
-    @NotNull
-    @Pattern(regexp = Constants.LOGIN_REGEX)
-    @Size(min = 1, max = 50)
-    @Column(length = 50, unique = true, nullable = false)
-    protected String login;
+	@NotNull
+	@Pattern(regexp = Constants.LOGIN_REGEX)
+	@Size(min = 1, max = 50)
+	@Column(length = 50, unique = true, nullable = false)
+	protected String login;
 
-    @JsonIgnore
-    @NotNull
-    @Size(min = 60, max = 60)
-    @Column(name = "password_hash",length = 60)
-    protected String password;
+	@JsonIgnore
+	@NotNull
+	@Size(min = 60, max = 60)
+	@Column(name = "password_hash", length = 60)
+	protected String password;
 
-    @Size(max = 50)
-    @Column(name = "first_name", length = 50)
-    protected String firstName;
+	@Size(max = 50)
+	@Column(name = "first_name", length = 50)
+	protected String firstName;
 
-    @Size(max = 50)
-    @Column(name = "last_name", length = 50)
-    protected String lastName;
+	@Size(max = 50)
+	@Column(name = "last_name", length = 50)
+	protected String lastName;
 
-    @Email
-    @Size(max = 100)
-    @Column(length = 100, unique = true)
-    protected String email;
+	@Email
+	@Size(max = 100)
+	@Column(length = 100, unique = true)
+	protected String email;
 
-    @NotNull
-    @Column(nullable = false)
-    protected boolean activated = false;
+	@NotNull
+	@Column(nullable = false)
+	protected boolean activated = false;
 
-    @Size(min = 2, max = 5)
-    @Column(name = "lang_key", length = 5)
-    protected String langKey;
+	@Size(min = 2, max = 5)
+	@Column(name = "lang_key", length = 5)
+	protected String langKey;
 
-    @Size(max = 20)
-    @Column(name = "activation_key", length = 20)
-    @JsonIgnore
-    protected String activationKey;
+	@Size(max = 20)
+	@Column(name = "activation_key", length = 20)
+	@JsonIgnore
+	protected String activationKey;
 
-    @Size(max = 20)
-    @Column(name = "reset_key", length = 20)
-    protected String resetKey;
+	@Size(max = 20)
+	@Column(name = "reset_key", length = 20)
+	protected String resetKey;
 
-    @Column(name = "reset_date", nullable = true)
-    protected ZonedDateTime resetDate = null;
+	@Column(name = "reset_date", nullable = true)
+	protected ZonedDateTime resetDate = null;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-        name = "jhi_user_authority",
-        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected Set<Authority> authorities = new HashSet<>();
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name = "jhi_user_authority", joinColumns = {
+			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "authority_name", referencedColumnName = "name") })
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	@Fetch(FetchMode.JOIN)
+	protected Set<Authority> authorities = new HashSet<>();
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected Set<PersistentToken> persistentTokens = new HashSet<>();
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	protected Set<PersistentToken> persistentTokens = new HashSet<>();
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    public String getFullName(){
-    	return this.firstName+" "+this.lastName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getLogin() {
-        return login;
-    }
+	public String getFullName() {
+		return this.firstName + " " + this.lastName;
+	}
 
-    //Lowercase the login before saving it in database
-    public void setLogin(String login) {
-        this.login = login.toLowerCase(Locale.ENGLISH);
-    }
+	public String getLogin() {
+		return login;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	// Lowercase the login before saving it in database
+	public void setLogin(String login) {
+		this.login = login.toLowerCase(Locale.ENGLISH);
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public boolean getActivated() {
-        return activated;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
+	public boolean getActivated() {
+		return activated;
+	}
 
-    public String getActivationKey() {
-        return activationKey;
-    }
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
 
-    public void setActivationKey(String activationKey) {
-        this.activationKey = activationKey;
-    }
+	public String getActivationKey() {
+		return activationKey;
+	}
 
-    public String getResetKey() {
-        return resetKey;
-    }
+	public void setActivationKey(String activationKey) {
+		this.activationKey = activationKey;
+	}
 
-    public void setResetKey(String resetKey) {
-        this.resetKey = resetKey;
-    }
+	public String getResetKey() {
+		return resetKey;
+	}
 
-    public ZonedDateTime getResetDate() {
-       return resetDate;
-    }
+	public void setResetKey(String resetKey) {
+		this.resetKey = resetKey;
+	}
 
-    public void setResetDate(ZonedDateTime resetDate) {
-       this.resetDate = resetDate;
-    }
+	public ZonedDateTime getResetDate() {
+		return resetDate;
+	}
 
-    public String getLangKey() {
-        return langKey;
-    }
+	public void setResetDate(ZonedDateTime resetDate) {
+		this.resetDate = resetDate;
+	}
 
-    public void setLangKey(String langKey) {
-        this.langKey = langKey;
-    }
+	public String getLangKey() {
+		return langKey;
+	}
 
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
+	public void setLangKey(String langKey) {
+		this.langKey = langKey;
+	}
 
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
+	public Set<Authority> getAuthorities() {
+		return authorities;
+	}
 
-    public Set<PersistentToken> getPersistentTokens() {
-        return persistentTokens;
-    }
+	public void setAuthorities(Set<Authority> authorities) {
+		this.authorities = authorities;
+	}
 
-    public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
-        this.persistentTokens = persistentTokens;
-    }
+	public Set<PersistentToken> getPersistentTokens() {
+		return persistentTokens;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
+		this.persistentTokens = persistentTokens;
+	}
 
-        User user = (User) o;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-        if (!login.equals(user.login)) {
-            return false;
-        }
+		User user = (User) o;
 
-        return true;
-    }
+		if (!login.equals(user.login)) {
+			return false;
+		}
 
-    @Override
-    public int hashCode() {
-        return login.hashCode();
-    }
+		return true;
+	}
 
-    @Override
-    public String toString() {
-        return "User{" +
-            "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", email='" + email + '\'' +
-            ", activated='" + activated + '\'' +
-            ", langKey='" + langKey + '\'' +
-            ", activationKey='" + activationKey + '\'' +
-            "}";
-    }
+	@Override
+	public int hashCode() {
+		return login.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "User{" + "login='" + login + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName
+				+ '\'' + ", email='" + email + '\'' + ", activated='" + activated + '\'' + ", langKey='" + langKey
+				+ '\'' + ", activationKey='" + activationKey + '\'' + "}";
+	}
 }
