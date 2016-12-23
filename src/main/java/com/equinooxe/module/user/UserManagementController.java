@@ -92,14 +92,6 @@ public class UserManagementController {
 	public String list(@RequestParam(value = "filter", required = false) String filter, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
-		
-		users.stream().forEach(u -> {
-			u.getAuthorities().size();
-			log.info("===========\n==== =========SIZE: "+u.getAuthorities().size()+"=======\n======");
-			u.getAuthorities().stream().forEach(au -> {
-				log.info("===========\n============="+au.getName()+"=======\n======");
-			});
-		});
 		uiModel.addAttribute("users", users);
 		return "/user/list";
 	}
