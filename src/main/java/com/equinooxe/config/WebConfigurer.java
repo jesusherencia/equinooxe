@@ -59,6 +59,8 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 		 InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 	        viewResolver.setPrefix("templates");
 	        viewResolver.setSuffix(".ftl");
+	        viewResolver.setCache(false);
+	        viewResolver.setContentType("text/html; charset=utf-8");
 	        log.info("\n================\n"+ "Configure FreeMaker" +"\n===============\n");
 
 		log.info("Web application fully configured");

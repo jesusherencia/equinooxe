@@ -1,22 +1,25 @@
+<#import "/spring.ftl" as spring />
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="/layouts/layout">
  
 <body>
 	<section layout:fragment="content">
-		<div class="titre"> <i class="fa fa-plus"></i> 
-		   <span th:if="${userForm.id==null}" >Nouvel utilisateur</span>
-		   <span th:if="${userForm.id>0}" > Edition de l'utilisateur:
-		      <span th:text="${#strings.capitalize(userForm.lastName)}"></span>
-			  <span th:text="${#strings.capitalize(userForm.firstName)}"></span>
-		   </span>
+		<div class="titre"> <i class="fa fa-plus"></i>
+		   <#if !userForm.id??>
+			   Nouvel utilisateur
+			<#else>
+			   Edition de l'utilisateur
+			   ${userForm.lastName}
+			   ${userForm.firstName}
+		   </#if> 
 		</div>
-		<!-- 	<ul th:if="${not #lists.isEmpty(erreurs)}">
+		<#-- 	<ul th:if="${not #lists.isEmpty(erreurs)}">
 				<li th:each="erreur : ${erreurs}" >
 				 <span th:text="${erreur.key}"></span> : <span th:text="${erreur.value}"></span>
 				</li>
-     	 	</ul> -->
-		
+     	 	</ul>  
+		 
 		<form action="#" th:action="@{/user/save}" th:object="${userForm}" method="post">
             <table class="table">
                 <tr>
@@ -25,9 +28,9 @@
                     <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur de nom</td>
                 </tr>
                 <tr>
-                    <td>Prénom:</td>
+                    <td>Prï¿½nom:</td>
                     <td><input type="text" th:field="*{firstName}" /></td>
-                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur de prénom</td>
+                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur de prï¿½nom</td>
                 </tr>
                 <tr>
                     <td>Email:</td>
@@ -51,6 +54,7 @@
                 </tr>
             </table>
         </form>
+        -->
 	</section>
 	<footer>
 		<p layout:fragment="custom-footer"> 
