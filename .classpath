@@ -965,6 +965,26 @@
       <attribute value="jar:file:/C:/Users/mboullouz/.m2/repository/org/codehaus/groovy/groovy/2.4.7/groovy-2.4.7-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/thymeleaf/extras/thymeleaf-extras-conditionalcomments/2.1.2.RELEASE/thymeleaf-extras-conditionalcomments-2.1.2.RELEASE.jar" sourcepath="M2_REPO/org/thymeleaf/extras/thymeleaf-extras-conditionalcomments/2.1.2.RELEASE/thymeleaf-extras-conditionalcomments-2.1.2.RELEASE-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/mboullouz/.m2/repository/org/thymeleaf/extras/thymeleaf-extras-conditionalcomments/2.1.2.RELEASE/thymeleaf-extras-conditionalcomments-2.1.2.RELEASE-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/attoparser/attoparser/2.0.0.RELEASE/attoparser-2.0.0.RELEASE.jar" sourcepath="M2_REPO/org/attoparser/attoparser/2.0.0.RELEASE/attoparser-2.0.0.RELEASE-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/mboullouz/.m2/repository/org/attoparser/attoparser/2.0.0.RELEASE/attoparser-2.0.0.RELEASE-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.22/nekohtml-1.9.22.jar" sourcepath="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.22/nekohtml-1.9.22-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/mboullouz/.m2/repository/net/sourceforge/nekohtml/nekohtml/1.9.22/nekohtml-1.9.22-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar" sourcepath="M2_REPO/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/mboullouz/.m2/repository/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/net/logstash/logback/logstash-logback-encoder/4.7/logstash-logback-encoder-4.7.jar" sourcepath="M2_REPO/net/logstash/logback/logstash-logback-encoder/4.7/logstash-logback-encoder-4.7-sources.jar">
     <attributes>
       <attribute value="jar:file:/C:/Users/mboullouz/.m2/repository/net/logstash/logback/logstash-logback-encoder/4.7/logstash-logback-encoder-4.7-javadoc.jar!/" name="javadoc_location"/>

@@ -46,9 +46,6 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 	@Autowired(required = false)
 	private MetricRegistry metricRegistry;
 
-	@Autowired
-	private SpringTemplateEngine templateEngine;
-
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		if (env.getActiveProfiles().length != 0) {
@@ -60,24 +57,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 		if (env.acceptsProfiles(Constants.SPRING_PROFILE_PRODUCTION)) {
 			initCachingHttpHeadersFilter(servletContext, disps);
 		}
-
-		boolean found = false;
-		IDialect dial = null;
-		for (IDialect t : templateEngine.getDialects()) {
-			if (t instanceof LayoutDialect) {
-				found = true;
-				dial = t;
-			}
-		}
-		if (!found) {
-			log.info("\n========= Thymleaf dialect add conf (*__*) ===============\n");
-			templateEngine.addDialect(new LayoutDialect());
-		} else {
-			if (dial != null) {
-				log.info("\n========= Dialect found :)" + dial.getPrefix() + " ===============\n");
-
-			}
-		}
+ 
 
 		log.info("Web application fully configured");
 	}
