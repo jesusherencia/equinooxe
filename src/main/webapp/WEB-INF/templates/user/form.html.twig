@@ -5,10 +5,10 @@
 <body>
 	<section layout:fragment="content">
 		<div class="titre"> <i class="fa fa-plus"></i> 
-		   <span th:if="${userForm.id==null}" >Nouvel utilisateur</span>
-		   <span th:if="${userForm.id>0}" > Edition de l'utilisateur:
-		      <span th:text="${#strings.capitalize(userForm.lastName)}"></span>
-			  <span th:text="${#strings.capitalize(userForm.firstName)}"></span>
+		   <span th:if="userForm.id==null}" >Nouvel utilisateur</span>
+		   <span th:if="userForm.id>0}" > Edition de l'utilisateur:
+		      <span th:text="strings.capitalize(userForm.lastName)}"></span>
+			  <span th:text="strings.capitalize(userForm.firstName)}"></span>
 		   </span>
 		</div>
 		<!-- 	<ul th:if="${not #lists.isEmpty(erreurs)}">
@@ -22,29 +22,29 @@
                 <tr>
                     <td>Nom:</td>
                     <td><input type="text" th:field="*{lastName}" /></td>
-                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur de nom</td>
+                    <td th:if="fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur de nom</td>
                 </tr>
                 <tr>
                     <td>Prénom:</td>
                     <td><input type="text" th:field="*{firstName}" /></td>
-                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur de prénom</td>
+                    <td th:if="fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur de prénom</td>
                 </tr>
                 <tr>
                     <td>Email:</td>
                     <td><input type="email" th:field="*{email}" /></td>
-                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Erreur d'email</td>
+                    <td th:if="fields.hasErrors('email')}" th:errors="*{email}">Erreur d'email</td>
                 </tr>
                 
                 <tr>
                     <td>Login:</td>
                     <td><input type="text" th:field="*{login}" /></td>
-                    <td th:if="${#fields.hasErrors('login')}" th:errors="*{login}">Erreur login</td>
+                    <td th:if="fields.hasErrors('login')}" th:errors="*{login}">Erreur login</td>
                 </tr>
                 
                 <tr>
                     <td>Mot de passe:</td>
                     <td><input type="password" th:field="*{password}" /></td>
-                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Erreur mot de passe</td>
+                    <td th:if="fields.hasErrors('password')" th:errors="*{password}">Erreur mot de passe</td>
                 </tr>
                 <tr>
                     <td><button class="btn-blue" type="submit">Enregistrer <i class="fa fa-save"></i> </button></td>

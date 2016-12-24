@@ -5,9 +5,8 @@
        </li>
       <li>
        <a href="/user/list"
-          th:href="${(#mvc.url('UMC#list')).build()}"
-          th:classappend="${#httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}"
-          class="waves-effect">
+          th:href="{{mvc.url('UMC#list').build()}}"
+          class="waves-effect {{httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}}">
            <i class="ti-user"></i> 
            <span> Utilisateurs </span> 
         </a>

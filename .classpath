@@ -4,7 +4,7 @@
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
 	<classpathentry including="**/*.java" kind="src" path="target/generated-sources/java"/>
-	<classpathentry excluding="**/*.java|**/application*.yml|**/application*.properties" kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" path="src/main/webapp/WEB-INF/templates"/>
 	<classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/mboullouz/.m2/repository/javax/inject/javax.inject/1/javax.inject-1-javadoc.jar!/"/>

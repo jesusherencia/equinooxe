@@ -46,7 +46,7 @@ public class PebbleTemplateConfiguration  extends WebMvcConfigurerAdapter {
                 .loader(this.templateLoader())
                 .extension(springExtension())
                 .build();
-    } 
+    }  
 
     @Bean
     public ViewResolver viewResolver() {

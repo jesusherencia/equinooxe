@@ -1,11 +1,36 @@
 {% extends "layout" %}
 
-{% block title %} Home {% endblock %}
+{% block title %}
+Home
+{% endblock %}
 
 {% block content %}
-   <h1 style="color: blue;">
-     
-      Home page content.
-   
-   </h1>
+<h1 style="color: blue;">
+
+	Home page content.
+	<h5>
+		ctype:
+		{{ response.contentType }}
+	</h5>
+
+	<h5>
+		ctype:
+		{{ response.contentType }}
+	</h5>
+	<h5>
+		path:
+		{{ request.contextPath }}
+	</h5>
+	<h5>
+		session interv:
+		{{ session.maxInactiveInterval }}
+	</h5>
+	<h5>
+		Link: <a href="{{ href('/user/new') }}">User new</a>
+	</h5>
+	<h5>
+	<!--  {{ beans.corsFilter }}  -->	
+	</h5>
+
+</h1>
 {% endblock %}

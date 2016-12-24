@@ -127,7 +127,7 @@
                                 th:unless="${session.user == null}"  >[..]
                              </a>
                              <a th:if="${session.user==null}" 
-                                th:href="${(#mvc.url('AC#reconnect')).build()}" >
+                                 href="${(#mvc.url('AC#reconnect')).build()}" >
                                <small> Synchronisation session</small>
                              </a>
                             </li>
@@ -147,9 +147,9 @@
                     <!-- End User -->
 
                     <!--- Sidemenu -->
-                    <div th:replace="/layouts/fragments/leftSideBar">
-                        <p> Erreur initialisation menu de gauche </p>
-                    </div>
+                    
+                     {% include "partials/leftSideBar" %}
+                     
                     <!-- Sidebar -->
                     <div class="clearfix"></div>
 
@@ -190,9 +190,7 @@
 
 
             <!-- Right Sidebar -->
-            <div th:replace="/layouts/fragments/rightSideBar" class="side-bar right-bar">
-              
-            </div>
+            {% include "partials/rightSideBar" %}
             <!-- /Right-bar -->
 
         </div>
