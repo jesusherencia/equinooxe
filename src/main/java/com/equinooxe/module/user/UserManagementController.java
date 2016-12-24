@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.equinooxe.config.ThymeleafConfiguration;
+ 
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
@@ -28,7 +27,6 @@ import com.equinooxe.service.UserService;
 @Controller
 @Secured(AuthoritiesConstants.USER)
 public class UserManagementController {
-	private final Logger log = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 	@Inject
 	private UserService userService;
 

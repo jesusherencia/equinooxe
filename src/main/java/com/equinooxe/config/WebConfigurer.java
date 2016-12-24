@@ -5,8 +5,6 @@ import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.equinooxe.web.filter.CachingHttpHeadersFilter;
 
-import nz.net.ultraq.thymeleaf.LayoutDialect;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -46,8 +42,7 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 	@Autowired(required = false)
 	private MetricRegistry metricRegistry;
 
-	@Autowired
-	private SpringTemplateEngine templateEngine;
+	 
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
@@ -60,24 +55,11 @@ public class WebConfigurer implements ServletContextInitializer, EmbeddedServlet
 		if (env.acceptsProfiles(Constants.SPRING_PROFILE_PRODUCTION)) {
 			initCachingHttpHeadersFilter(servletContext, disps);
 		}
-
-		boolean found = false;
-		IDialect dial = null;
-		for (IDialect t : templateEngine.getDialects()) {
-			if (t instanceof LayoutDialect) {
-				found = true;
-				dial = t;
-			}
-		}
-		if (!found) {
-			log.info("\n========= Thymleaf dialect add conf (*__*) ===============\n");
-			templateEngine.addDialect(new LayoutDialect());
-		} else {
-			if (dial != null) {
-				log.info("\n========= Dialect found :)" + dial.getPrefix() + " ===============\n");
-
-			}
-		}
+		
+		 InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+	        viewResolver.setPrefix("templates");
+	        viewResolver.setSuffix(".ftl");
+	        log.info("\n================\n"+ "Configure FreeMaker" +"\n===============\n");
 
 		log.info("Web application fully configured");
 	}

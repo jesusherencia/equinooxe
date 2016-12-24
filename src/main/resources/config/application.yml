@@ -37,8 +37,7 @@ spring:
     mvc:
         favicon:
             enabled: false
-    thymeleaf:
-        mode: LEGACYHTML5
+    
         
 
 security:
