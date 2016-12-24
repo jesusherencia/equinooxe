@@ -5,7 +5,7 @@ import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
 import com.equinooxe.web.filter.CachingHttpHeadersFilter;
 
-import nz.net.ultraq.thymeleaf.LayoutDialect;
+//import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +19,9 @@ import org.springframework.core.env.Environment;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.spring4.SpringTemplateEngine;
+//import org.thymeleaf.TemplateEngine;
+//import org.thymeleaf.dialect.IDialect;
+//import org.thymeleaf.spring4.SpringTemplateEngine;
 
 import java.io.File;
 import java.nio.file.Paths;
