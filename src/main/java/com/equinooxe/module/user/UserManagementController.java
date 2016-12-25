@@ -1,5 +1,6 @@
 package com.equinooxe.module.user;
 
+ 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,7 +67,7 @@ public class UserManagementController {
 		userForm = new UserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
 		uiModel.addAttribute("userForm", userForm); 
 		return "/user/form";
-	}
+	} 
 
 	@PostMapping("/user/save")
 	public String save(@Valid UserForm userForm, BindingResult bindingResult, Model uiModel,
