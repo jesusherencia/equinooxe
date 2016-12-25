@@ -1,39 +1,43 @@
-<!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="/layouts/layout">
- 
-<body>
-	<section layout:fragment="content">
-	   
-		<h5>Utilisateur: 
-			<span th:text="${#strings.capitalize(user.lastName)}"></span>
-			<span th:text="${#strings.capitalize(user.firstName)}"></span>
-		</h5>
+{% extends "../layout" %}
+
+{% block title %}
+  Détails utilisateur
+{% endblock %}
+
+{% block content %}
+        <div class="titre"> <i class="fa fa-plus"></i> 
+		     Détails de l'utilisateur:
+		     {{ user.lastName | upper }} 
+		     {{ user.firstName | capitalize }}  
+		</div>	   
+		 
 		<table class="table">
                 <tr>
                     <td>Nom:</td>
-                    <td><span   th:text="${#strings.capitalize(user.lastName)}"></span> </td>
+                    <td> {{ user.lastName | upper }}  </td>
                 </tr>
                 <tr>
-                    <td>Pr�nom:</td>
-                    <td><span  th:text="${#strings.capitalize(user.firstName)}" /></td>
+                    <td>Prénom:</td>
+                    <td>{{ user.firstName | capitalize  }} </td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><span  th:text="${user.email}" /></td>
+                    <td>{{ user.email   }} </td>
                 </tr>
                 <tr>
                     <td>Login:</td>
-                    <td><span th:text="${user.login}" ></span> </td>
+                    <td>{{ user.login }}  </td>
                 </tr>
                 <tr>
                     <td>Actions:</td>
                     <td>
-                     <a th:href="${(#mvc.url('UMC#show').arg(0,user.id)).build()}">Editer </a>
+                   	 <ul>
+                   	 	<li> <a href="{{ href('/user/edit')}}/?id={{ user.id }}" >Editer </a></li>
+                   	 </ul>
                     </td>
                 </tr>
         </table>
-	</section>
+{% endblock %}
  
 </body>
 </html>

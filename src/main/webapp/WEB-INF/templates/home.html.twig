@@ -12,11 +12,6 @@ Home
 		ctype:
 		{{ response.contentType }}
 	</h5>
-
-	<h5>
-		ctype:
-		{{ response.contentType }}
-	</h5>
 	<h5>
 		path:
 		{{ request.contextPath }}
@@ -29,7 +24,7 @@ Home
 		Link: <a href="{{ href('/user/new') }}">User new</a>
 	</h5>
 	<h5>
-	<!--  {{ beans.corsFilter }}  -->	
+	     <b>uri?  {{ request.getRequestURI()  }} </b>
 	</h5>
 
 </h1>

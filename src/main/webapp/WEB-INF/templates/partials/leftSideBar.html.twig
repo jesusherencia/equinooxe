@@ -1,59 +1,42 @@
-<div  id="sidebar-menu">
-   <ul>
-      <li><a href="index.html" class="waves-effect"><i
-         class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
-       </li>
-      <li>
-       <a href="/user/list"
-          th:href="{{mvc.url('UMC#list').build()}}"
-          class="waves-effect {{httpServletRequest.getRequestURI().startsWith('/user') ? 'active':''}}">
-           <i class="ti-user"></i> 
-           <span> Utilisateurs </span> 
-        </a>
-      </li>
-      <li class="has_sub">
-         <a href="javascript:void(0);"
-            class="waves-effect"><i class="zmdi zmdi-invert-colors"></i> 
-            <span>  User Interface </span> <span class="menu-arrow"></span>
-         </a>
-      </li>
-      <li class="has_sub">
-         <a href="javascript:void(0);"
-            class="waves-effect"><i class="zmdi zmdi-collection-text"></i>
-            <span class="label label-warning pull-right">7</span>
-            <span> Forms </span> 
-         </a>
-      </li>
-      <li class="has_sub"><a href="javascript:void(0);"
-          class="waves-effect"><i class="zmdi zmdi-view-list"></i> 
-          <span> Tables </span> <span class="menu-arrow"></span></a>
-      </li>
-      <li class="has_sub"><a href="javascript:void(0);"
-          class="waves-effect"><i class="zmdi zmdi-chart"></i>
-          <span> Charts </span> <span class="menu-arrow"></span></a>
-      </li>
-      <li>
-        <a href="calendar.html" class="waves-effect">
-	        <i class="zmdi zmdi-calendar"></i>
-	        <span> Calendar </span>
-        </a>
-      </li>
-      <li>
-        <a href="inbox.html" class="waves-effect"><i
-           class="zmdi zmdi-email"></i><span
-           class="label label-purple pull-right">New</span><span> Mail </span>
-        </a>
-      </li>
-      <li class="has_sub">
-         <a href="" class="waves-effect">
-         	<i class="zmdi zmdi-collection-item"></i>
-         	<span> Pages </span> <span class="menu-arrow"></span>
-         </a>
-         <ul class="list-unstyled">
-            <li><a href="page-starter.html">Starter Page</a></li>
-            <li><a href="page-login.html">Login</a></li>
-         </ul>
-      </li>
-   </ul>
-   <div class="clearfix"></div>
+<div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <!-- User -->
+                    <div class="user-box">
+                        <ul class="list-inline">
+                            <li>
+                             
+                            {% if request.session.attribute('user') is null %}
+                              <a  
+                                 href="{{ href('/reconnect') }}" title=" Synchronisation session" >
+                                 <i class=" ti-exchange-vertical"></i> Reconnect
+                              </a>
+                             {% else %}
+                              <a> 
+                                {{ request.session.attribute('user').login   }}
+                              </a>
+                             {% endif %}
+                            </li>
+                            <li>
+                                <a href="#" >
+                                    <i class="zmdi zmdi-settings"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ href('/api/logout') }}" class="text-custom" title="Se déconnecter">
+                                    <i class="zmdi zmdi-power"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End User -->
+
+                    <!--- Sidemenu -->
+                    
+                     {% include "partials/menuLeftSideBar" %}
+                     
+                    <!-- Sidebar -->
+                    <div class="clearfix"></div>
+
+                </div>
 </div>

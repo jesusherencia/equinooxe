@@ -8,4 +8,9 @@ public class DashboardController {
 	public String home() {
 		return "/home";
 	}
+	
+	@GetMapping("/")
+	public String ngIndex() {
+		return "/ngapp/index";
+	}
 }

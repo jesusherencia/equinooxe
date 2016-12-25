@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.equinooxe.domain.QUser;
 import com.equinooxe.domain.User;
@@ -29,15 +30,20 @@ public class AuthController {
 	 * @param request
 	 * @return
 	 */
-	@GetMapping("/reconnect")
+	@GetMapping("/reconnect") 
 	public String reconnect(HttpServletRequest request){
 		SecurityContext securityContext = SecurityContextHolder.getContext();
 		Authentication authentication = securityContext.getAuthentication();
 		UserDetails principal = (UserDetails) authentication.getPrincipal();
+		if(principal==null || principal.getUsername()==null){
+			return "redirect:/";
+		}
 		QUser qUser = QUser.user;
 		JPAQueryFactory queryFactory = new JPAQueryFactory(entityManager);
 		User u = queryFactory.selectFrom(qUser).where(qUser.login.eq(principal.getUsername())).fetchOne();
 		request.getSession().setAttribute("user", u);
 		return "redirect:/home";
 	}
+	 
+	
 }

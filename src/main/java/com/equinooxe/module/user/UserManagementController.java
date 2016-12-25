@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.config.ThymeleafConfiguration;
@@ -31,9 +32,9 @@ public class UserManagementController {
 	private final Logger log = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 	@Inject
 	private UserService userService;
-
+	
 	@Inject
-	private UserRepository userRepository;
+	private UserRepository userRepo;
 
 	@Inject
 	EntityManager entityManager;
@@ -67,9 +68,19 @@ public class UserManagementController {
 			return "/user/form";
 		}
 		User user;
+		log.info("\n============= U.ID: "+userForm.getId());
 		if (userForm.getId() != null) {
-			user = userService.updateUser(userForm.getFirstName(), userForm.getLastName(),
-					userForm.getEmail().toLowerCase(), "fr").get();
+			 user = userQueryRepo.getOneById(userForm.getId()); 
+			 user.setFirstName(userForm.getFirstName());
+			 user.setEmail(userForm.getEmail());
+			 user.setLastName(userForm.getLastName());
+			 user.setLogin(userForm.getLogin());
+			 if(userForm.getPassword()!=null && userForm.getPassword().length()>=4){
+				 user.setPassword(userForm.getPassword());
+			 }
+			 userRepo.saveAndFlush(user);
+			 log.info("\n============= User {} updated ",user);
+			
 		} else {
 			user = userService.createUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
 					userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
@@ -77,7 +88,7 @@ public class UserManagementController {
 
 		redirectAttributes.addAttribute("id", user.getId());
 		redirectAttributes.addFlashAttribute("flashMessage", "operation.effectuee.avec.succes");
-		return "redirect:/user/show";
+		return "redirect:/user/show/?id="+user.getId();
 	}
 
 	@GetMapping("/user/show")
@@ -89,11 +100,12 @@ public class UserManagementController {
 	}
 
 	@GetMapping("/user/list")
-	public String list(@RequestParam(value = "filter", required = false) String filter, Model uiModel,
+	public ModelAndView list(@RequestParam(value = "filter", required = false) String filter, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
 		uiModel.addAttribute("users", users);
-		return "/user/list";
+		ModelAndView mv= new ModelAndView("/user/list").addObject("users", users);
+		 return mv;
 	}
 
 }

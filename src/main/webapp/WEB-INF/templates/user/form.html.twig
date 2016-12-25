@@ -1,61 +1,77 @@
-<!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="/layouts/layout">
- 
-<body>
-	<section layout:fragment="content">
+{% extends "../layout" %}
+
+{% block title %}
+  Gestion utilisateur
+{% endblock %}
+
+{% block content %}
 		<div class="titre"> <i class="fa fa-plus"></i> 
-		   <span th:if="userForm.id==null}" >Nouvel utilisateur</span>
-		   <span th:if="userForm.id>0}" > Edition de l'utilisateur:
-		      <span th:text="strings.capitalize(userForm.lastName)}"></span>
-			  <span th:text="strings.capitalize(userForm.firstName)}"></span>
-		   </span>
+		   {% if userForm.id is null or userForm.id<0 %}
+		     Nouvel utilisateur 
+		   {% else %} 
+		     Edition de l'utilisateur:
+		     {{ userForm.lastName | upper }} 
+		     {{ userForm.firstName | capitalize }}  
+		  {% endif %}
 		</div>
-		<!-- 	<ul th:if="${not #lists.isEmpty(erreurs)}">
-				<li th:each="erreur : ${erreurs}" >
-				 <span th:text="${erreur.key}"></span> : <span th:text="${erreur.value}"></span>
-				</li>
-     	 	</ul> -->
 		
-		<form action="#" th:action="@{/user/save}" th:object="${userForm}" method="post">
+		<form  action="{{ href('/user/save') }}" method="post" name="userForm" >
             <table class="table">
                 <tr>
                     <td>Nom:</td>
-                    <td><input type="text" th:field="*{lastName}" /></td>
-                    <td th:if="fields.hasErrors('lastName')}" th:errors="*{lastName}">Erreur de nom</td>
+                    <td><input type="text" name="lastName" value="{{userForm.lastName  }}" /></td>
+                    <td>
+                      {% for err in getFieldErrors('userForm', 'lastName') %}
+                        <p>{{ err }}</p>
+                   	  {% endfor %}
+                    </td>
                 </tr>
                 <tr>
-                    <td>Prénom:</td>
-                    <td><input type="text" th:field="*{firstName}" /></td>
-                    <td th:if="fields.hasErrors('firstName')}" th:errors="*{firstName}">Erreur de prénom</td>
+                    <td>PrÃ©nom:</td>
+                    <td><input type="text" name="firstName" value="{{userForm.firstName}}" /></td>
+                    <td>
+                    {% for err in getFieldErrors('userForm', 'firstName') %}
+                        <p>{{ err }}</p>
+                    {% endfor %}
+                    </td>
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td><input type="email" th:field="*{email}" /></td>
-                    <td th:if="fields.hasErrors('email')}" th:errors="*{email}">Erreur d'email</td>
+                    <td><input type="email" name="email" value="{{userForm.email}}"  /></td>
+                    <td>
+                        {% for err in getFieldErrors('userForm', 'email') %}
+                            <p>{{ err }}</p>
+                        {% endfor %}
+                    </td>
                 </tr>
                 
                 <tr>
                     <td>Login:</td>
-                    <td><input type="text" th:field="*{login}" /></td>
-                    <td th:if="fields.hasErrors('login')}" th:errors="*{login}">Erreur login</td>
+                    <td><input type="text" name="login" value="{{userForm.login}}" /></td>
+                    <td>
+                        {% for err in getFieldErrors('userForm', 'login') %}
+                            <p>{{ err }}</p>
+                        {% endfor %}
+                    </td>
                 </tr>
                 
                 <tr>
                     <td>Mot de passe:</td>
-                    <td><input type="password" th:field="*{password}" /></td>
-                    <td th:if="fields.hasErrors('password')" th:errors="*{password}">Erreur mot de passe</td>
+                    <td><input type="password" name="password"   /></td>
+                    <td>
+                        {% for err in getFieldErrors('userForm', 'password') %}
+                            <p>{{ err }}</p>
+                         {% endfor %}
+                     </td>
+                </tr>
+                <tr>
+                <td>
+                <input type="hidden" name="id" value="{{ userForm.id }}" />
+                </td>
                 </tr>
                 <tr>
                     <td><button class="btn-blue" type="submit">Enregistrer <i class="fa fa-save"></i> </button></td>
                 </tr>
             </table>
         </form>
-	</section>
-	<footer>
-		<p layout:fragment="custom-footer"> 
-		  footer content from child!
-		</p>
-	</footer>
-</body>
-</html>
+{% endblock %}
