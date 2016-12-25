@@ -18,7 +18,7 @@
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/layouts/error/error.html'
+                        templateUrl: '/resources/app/layouts/error/error.html'
                     }
                 }
             })
@@ -30,7 +30,7 @@
                 },
                 views: {
                     'content@': {
-                        templateUrl: 'app/layouts/error/accessdenied.html'
+                        templateUrl: '/resources/app/layouts/error/accessdenied.html'
                     }
                 }
             });

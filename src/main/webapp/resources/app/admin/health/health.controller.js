@@ -40,7 +40,7 @@
 
         function showHealth (health) {
             $uibModal.open({
-                templateUrl: 'app/admin/health/health.modal.html',
+                templateUrl: '/resources/app/admin/health/health.modal.html',
                 controller: 'HealthModalController',
                 controllerAs: 'vm',
                 size: 'lg',

@@ -17,7 +17,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/account/sessions/sessions.html',
+                    templateUrl: '/resources/app/account/sessions/sessions.html',
                     controller: 'SessionsController',
                     controllerAs: 'vm'
                 }

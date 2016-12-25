@@ -17,7 +17,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/account/password/password.html',
+                    templateUrl: '/resources/app/account/password/password.html',
                     controller: 'PasswordController',
                     controllerAs: 'vm'
                 }

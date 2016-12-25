@@ -17,7 +17,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/admin/configuration/configuration.html',
+                    templateUrl: '/resources/app/admin/configuration/configuration.html',
                     controller: 'JhiConfigurationController',
                     controllerAs: 'vm'
                 }

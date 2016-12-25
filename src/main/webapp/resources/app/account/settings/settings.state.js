@@ -17,7 +17,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/account/settings/settings.html',
+                    templateUrl: '/resources/app/account/settings/settings.html',
                     controller: 'SettingsController',
                     controllerAs: 'vm'
                 }

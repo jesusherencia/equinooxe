@@ -1,3 +1,4 @@
+console.log('app.state file');
 (function() {
     'use strict';
 
@@ -12,7 +13,7 @@
             abstract: true,
             views: {
                 'navbar@': {
-                    templateUrl: 'app/layouts/navbar/navbar.html',
+                    templateUrl: '/resources/app/layouts/navbar/navbar.html',
                     controller: 'NavbarController',
                     controllerAs: 'vm'
                 }

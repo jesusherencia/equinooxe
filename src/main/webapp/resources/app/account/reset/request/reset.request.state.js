@@ -16,7 +16,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/account/reset/request/reset.request.html',
+                    templateUrl: '/resources/app/account/reset/request/reset.request.html',
                     controller: 'RequestResetController',
                     controllerAs: 'vm'
                 }
