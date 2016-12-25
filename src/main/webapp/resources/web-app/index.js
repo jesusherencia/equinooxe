@@ -12,7 +12,7 @@ System.register(['./menu'], function(exports_1, context_1) {
             $('body').addClass('bg-green');
             Hello = (function () {
                 function Hello() {
-                    console.log("TS system app is up _/\_ ");
+                    console.log("TS system fro web-app is up _/\\_ ");
                     var m = new menu_1.Menu();
                 }
                 return Hello;

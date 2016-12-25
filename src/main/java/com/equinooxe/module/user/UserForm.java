@@ -1,10 +1,16 @@
 package com.equinooxe.module.user;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.equinooxe.domain.Authority;
 import com.equinooxe.domain.User;
 
 public class UserForm {
@@ -28,18 +34,56 @@ public class UserForm {
 	
 	private String password;
 	
+	private String[]  autorities = new String[99];
+	
+	private Set<Authority>  avelaibleAutorities = new HashSet<>();
+	
+	
+	
 	public UserForm(){
-		
+		autorities = new String[99];
+		avelaibleAutorities = new HashSet<>();
 	}
 	
-	public UserForm(User u){
+	public UserForm(Set<Authority>  avelaibleAutorities){
+		autorities = new String[99];
+		avelaibleAutorities = new HashSet<>();
+	}
+	
+	public UserForm(User u,Set<Authority>  avelaibleAutorities){
 		this.email=u.getEmail();
 		this.firstName= u.getFirstName();
 		this.lastName= u.getLastName();
 		this.login= u.getLogin();
 		this.id=u.getId();
+		int i=0;
+		for(Authority autho :  u.getAuthorities()) {
+			this.autorities[i]=autho.getName();
+			 i++;
+		}  
+		this.avelaibleAutorities= avelaibleAutorities;
 	}
 	
+	public String[]  getAutorities() {
+		return autorities;
+	}
+	
+
+	public void setAutorities(String[]  autorities) {
+		this.autorities = autorities;
+	}
+
+	
+	
+	
+	public Set<Authority> getAvelaibleAutorities() {
+		return avelaibleAutorities;
+	}
+
+	public void setAvelaibleAutorities(Set<Authority> avelaibleAutorities) {
+		this.avelaibleAutorities = avelaibleAutorities;
+	}
+
 	public Long getId() {
 		return id;
 	}

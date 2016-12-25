@@ -64,6 +64,28 @@
                          {% endfor %}
                      </td>
                 </tr>
+                
+                <tr>
+                    <td>Mot de passe:</td>
+                    <td>
+                      {% for authority in userForm.avelaibleAutorities %}
+                        <input type="checkbox" 
+                               name="autorities" 
+                               {% if userForm.autorities contains authority.name %}
+                                 checked="checked"                                    
+                               {% endif %}
+                               value="{{ authority.name }}"> {{ authority.name }}<br>
+                      {% endfor %}
+                    </td>
+                    <td>
+                        {% for err in getFieldErrors('userForm', 'password') %}
+                            <p>{{ err }}</p>
+                         {% endfor %}
+                     </td>
+                </tr>
+                
+
+                
                 <tr>
                 <td>
                 <input type="hidden" name="id" value="{{ userForm.id }}" />

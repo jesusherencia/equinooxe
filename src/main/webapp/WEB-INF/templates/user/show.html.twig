@@ -28,6 +28,14 @@
                     <td>Login:</td>
                     <td>{{ user.login }}  </td>
                 </tr>
+                 <tr>
+                    <td>Roles:</td>
+                    <td> {% for auth in user.authorities %}
+						     {{ auth.name }} 
+						 {% endfor %} 
+					</td>
+                </tr>
+               
                 <tr>
                     <td>Actions:</td>
                     <td>

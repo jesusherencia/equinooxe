@@ -1,6 +1,8 @@
 package com.equinooxe.module.user;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -20,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.config.ThymeleafConfiguration;
+import com.equinooxe.domain.Authority;
 import com.equinooxe.domain.User;
+import com.equinooxe.repository.AuthorityRepository;
 import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
@@ -32,6 +36,9 @@ public class UserManagementController {
 	private final Logger log = LoggerFactory.getLogger(ThymeleafConfiguration.class);
 	@Inject
 	private UserService userService;
+	
+	@Inject
+	AuthorityRepository authorityRepo;
 	
 	@Inject
 	private UserRepository userRepo;
@@ -47,6 +54,7 @@ public class UserManagementController {
 
 	@GetMapping("/user/new")
 	public String showForm(UserForm userForm, Model uiModel) {
+		userForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
 		return "/user/form";
 	}
 
@@ -55,8 +63,8 @@ public class UserManagementController {
 			RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("flashMessage", "editer .utilisateur.existant");
 		User u = userQueryRepo.getOneById(id);
-		userForm = new UserForm(u);
-		uiModel.addAttribute("userForm", userForm);
+		userForm = new UserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
+		uiModel.addAttribute("userForm", userForm); 
 		return "/user/form";
 	}
 
@@ -78,6 +86,14 @@ public class UserManagementController {
 			 if(userForm.getPassword()!=null && userForm.getPassword().length()>=4){
 				 user.setPassword(userForm.getPassword());
 			 }
+			 Set<Authority> selectedAut= new HashSet<>();
+			 for(String authName : userForm.getAutorities()){ 
+				 log.info("\n============== auth name selected: {}", authName);
+				 if(authName!=null && authName.length()>1){
+					 selectedAut.add(authorityRepo.findOne(authName));
+				 }
+			 }
+			 user.setAuthorities(selectedAut);
 			 userRepo.saveAndFlush(user);
 			 log.info("\n============= User {} updated ",user);
 			
