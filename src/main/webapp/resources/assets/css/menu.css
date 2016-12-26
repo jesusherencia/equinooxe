@@ -312,19 +312,15 @@
 }
 
 #sidebar-menu ul ul li.active a {
-    color: #71b6f9;
+    color: #0084e6;
+    background: #fbfbfa;
 }
 
 #sidebar-menu ul ul a {
-    color: #63747c;
-    -webkit-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-    border-left: 3px solid transparent;
+    color: #000000;
+    font-size: 13px;
     display: block;
-    padding: 10px 20px 10px 65px;
+    padding: 0px 4px 8px 61px;
 }
 
 #sidebar-menu ul ul a:hover {
@@ -389,8 +385,9 @@
     margin-right: 0px;
 }
 
-#sidebar-menu>ul>li>a.active {
-    background: #E3F2FD;
+ a.active{
+    /*background: #E3F2FD;*/
+    background: #fff7ee;
     border-left: 3px solid #027bf1;
     color: #007de0 !important;
     font-weight: 600;

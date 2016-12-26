@@ -3,17 +3,26 @@
       <li><a href="{{ href('/home') }}" class="waves-effect {{request.getRequestURI().startsWith('/home') ? 'active':''}}"><i
          class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
        </li>
-      <li>
-       <a href="{{ href('/user/list') }}"
+      <li class="has_sub">
+       <a href="javascript:void(0);"
           class="waves-effect {{request.getRequestURI().startsWith('/user') ? 'active':''}}">
            <i class="ti-user"></i> 
            <span> Utilisateurs </span> 
+           <span class="menu-arrow"></span>
         </a>
+        <ul class="list-unstyled">
+                 <li class="{{request.getRequestURI().startsWith('/user/list') ? 'active':''}}" >
+                     <a href="{{ href('/user/list') }}"> Liste</a>
+                 </li>
+                 <li class="{{request.getRequestURI().startsWith('/user/new') ? 'active':''}}">
+                     <a href="{{ href('/user/new') }}">  Nouveau</a>
+                 </li>
+        </ul>
       </li>
       <li class="has_sub">
          <a href="javascript:void(0);"
             class="waves-effect"><i class="zmdi zmdi-invert-colors"></i> 
-            <span>  User Interface </span> <span class="menu-arrow"></span>
+            <span>  Espaces </span> <span class="menu-arrow"></span>
          </a>
       </li>
       <li class="has_sub">
@@ -28,14 +37,15 @@
              <a href="javascript:void(0);" class="waves-effect">
                <i class="zmdi zmdi-view-list"></i>
                 <span> Tables </span> 
-                <span class=" menu-arrow ti-angle-right pull-right"></span>
-                <span class=" menu-arrow ti-angle-down pull-right" style="display: none;"></span>
+                <span class="menu-arrow"></span>
+               <!--  <span class=" eq-menu-arrow ti-angle-right pull-right"></span>
+                <span class=" eq-menu-arrow ti-angle-down pull-right" style="display: none;"></span> -->
              </a>
              <ul class="list-unstyled">
-             <li><a href="tables-basic.html">Basic Tables</a></li>
-             <li><a href="tables-datatable.html">Data Table</a></li>
-             <li><a href="tables-responsive.html">Responsive Table</a></li>
-             <li><a href="tables-editable.html">Editable Table</a></li>
+                 <li><a href="tables-basic.html">  Basic Tables</a></li>
+                 <li><a href="tables-datatable.html">  Data Table</a></li>
+                 <li><a href="tables-responsive.html"> Responsive Table</a></li>
+                 <li><a href="tables-editable.html"> Editable Table</a></li>
              </ul>
       </li>
       <li>
@@ -45,7 +55,7 @@
         </a>
       </li>
       <li class="has_sub">
-         <a href="" class="waves-effect">
+         <a href="javascript:void(0);" class="waves-effect">
          	<i class="zmdi zmdi-collection-item"></i>
          	<span> Pages </span> <span class="menu-arrow"></span>
          </a>

@@ -1,16 +1,19 @@
 body {
     background: white;
 }
+
 .navbar {
     min-height: 43px;
 }
 
-button, .btn-gray {
-	color: #2c3133;
+button,
+.btn-gray {
+    color: #2c3133;
     font-weight: 400;
     background: #ECEFF1;
     border: 1px solid #d6d1d1;
 }
+
 .btn-blue {
     color: #007de0;
     font-weight: 600;
@@ -19,12 +22,12 @@ button, .btn-gray {
 }
 
 .titre {
-	font-weight: 600;
+    font-weight: 600;
     color: #0084e5;
     margin: 1%;
 }
-.menu-arrow {
-    font-size: 10px;
-}
 
- 
+.eq-menu-arrow {
+    font-size: 10px;
+    margin: 3px;
+}
