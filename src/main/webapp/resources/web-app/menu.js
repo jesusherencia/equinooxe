@@ -9,7 +9,12 @@ System.register([], function(exports_1, context_1) {
                 function LeftMenu() {
                     console.log('Menu load *()* ');
                     this.bindSubMenu();
+                    this.bindInitSubMenu();
                 }
+                LeftMenu.prototype.bindInitSubMenu = function () {
+                    console.log("Open on init");
+                    this.openSubMenu($(LeftMenu.OPEN_SUB_SELECTOR));
+                };
                 /**
                  * Bind sub menu so it listen to click events
                  * @memberOf LeftMenu
@@ -34,6 +39,7 @@ System.register([], function(exports_1, context_1) {
                     targetElement.find("ul.list-unstyled").show();
                 };
                 LeftMenu.SUB_MENU_MAIN_SELECTOR = ".has_sub";
+                LeftMenu.OPEN_SUB_SELECTOR = ".open_sub_menu";
                 return LeftMenu;
             }());
             exports_1("LeftMenu", LeftMenu);

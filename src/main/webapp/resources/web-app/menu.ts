@@ -1,9 +1,16 @@
 
 export class LeftMenu {
     static SUB_MENU_MAIN_SELECTOR =".has_sub";
+    static OPEN_SUB_SELECTOR=".open_sub_menu";
     constructor() {
         console.log('Menu load *()* ');
         this.bindSubMenu();
+        this.bindInitSubMenu();
+    }
+
+    public bindInitSubMenu():void {
+        console.log("Open on init");
+       this.openSubMenu( $(LeftMenu.OPEN_SUB_SELECTOR) );
     }
    
     /**

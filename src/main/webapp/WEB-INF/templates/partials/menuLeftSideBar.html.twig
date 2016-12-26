@@ -3,7 +3,7 @@
       <li><a href="{{ href('/home') }}" class="waves-effect {{request.getRequestURI().startsWith('/home') ? 'active':''}}"><i
          class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
        </li>
-      <li class="has_sub">
+      <li class="has_sub {{request.getRequestURI().startsWith('/user') ? 'open_sub_menu':''}}">
        <a href="javascript:void(0);"
           class="waves-effect {{request.getRequestURI().startsWith('/user') ? 'active':''}}">
            <i class="ti-user"></i> 
