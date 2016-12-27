@@ -1,0 +1,22 @@
+
+{% macro leftMenuEntry(entry) %}
+    <li class=" {{ entry.subs|length >0 ? 'has_sub': '' }}  {{entry.active ? 'open_sub_menu':''}}">
+       <a {% if entry.subs|length >0  %}
+            href="javascript:void(0);"
+          {% else %}
+            href="{{ href(entry.url) }}"
+          {% endif %}
+          class="waves-effect {{entry.active ? 'active':''}}">
+           <i class="{{ entry.icon }}"></i> 
+           <span> {{ entry.label }} </span> 
+           <span class="menu-arrow"></span>
+        </a>
+        <ul class="list-unstyled">
+                 {% for subEntry in entry.subs %}
+                 <li class="{{subEntry.active ? 'active':''}}" >
+                     <a href="{{ href('/user/list') }}"> {{ subEntry.label }}</a>
+                 </li>
+                 {% endfor %} 
+        </ul>
+   </li>
+{% endmacro %}

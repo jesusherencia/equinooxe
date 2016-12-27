@@ -1,10 +1,11 @@
+
 <div class="left side-menu">
                 <div class="sidebar-inner slimscrollleft">
                     <!-- User -->
                     <div class="user-box">
                         <ul class="list-inline">
                             <li>
-                             
+                             <h1>{{ menuModel.k1.a  }}</h1>
                             {% if request.session.attribute('user') is null %}
                               <a  
                                  href="{{ href('/reconnect') }}" title=" Synchronisation session" >

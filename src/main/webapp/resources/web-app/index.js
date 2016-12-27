@@ -2,23 +2,28 @@ System.register(['./menu'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var menu_1;
-    var EqApp, h;
+    var EqApp, eqApp;
     return {
         setters:[
             function (menu_1_1) {
                 menu_1 = menu_1_1;
             }],
         execute: function() {
-            $('body').addClass('bg-green');
+            /**
+             * a js equivalent of  public static void main(String[] args)!
+             *
+             * @export
+             * @class EqApp
+             */
             EqApp = (function () {
                 function EqApp() {
-                    console.log("TS system fro web-app is up _/\\_ ");
-                    var m = new menu_1.LeftMenu();
+                    var menu = new menu_1.LeftMenu();
                 }
                 return EqApp;
             }());
             exports_1("EqApp", EqApp);
-            h = new EqApp();
+            /** Run the app! */
+            eqApp = new EqApp();
         }
     }
 });

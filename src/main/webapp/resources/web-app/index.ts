@@ -1,11 +1,15 @@
-$('body').addClass('bg-green');
-
 import { LeftMenu } from './menu'
+/**
+ * a js equivalent of  public static void main(String[] args)! 
+ * 
+ * @export
+ * @class EqApp
+ */
 export class EqApp {
     constructor() {
-        console.log("TS system fro web-app is up _/\\_ ");
-        let m = new LeftMenu();
+        let menu = new LeftMenu();
     }
 }
 
-let h = new EqApp();
+/** Run the app! */
+let eqApp = new EqApp();

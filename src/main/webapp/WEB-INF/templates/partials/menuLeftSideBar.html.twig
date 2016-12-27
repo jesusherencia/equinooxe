@@ -1,30 +1,42 @@
+{% import "partials/leftSideBarModel" %}
+{% set menuModel =
+{
+    "dashboard": {
+        "url": "/home",
+        "active": request.getRequestURI().startsWith('/home'),
+        "icon": "zmdi zmdi-view-dashboard",
+        "label": "Dashboard",
+        "subs": []
+    },
+    "users": {
+        "url": "/user",
+        "active": request.getRequestURI().startsWith('/user'),
+        "icon": "ti-user",
+        "label": "Utilisateurs",
+        "subs": [{
+                "url": "/user/list",
+                "label": "Liste",
+                "active": request.getRequestURI().startsWith('/user/list')
+                }, {
+                "url": "/user/new",
+                "label": "Ajouter",
+                "active": request.getRequestURI().startsWith('/user/new')
+        }]
+    },
+	"spaces": {
+        "url": "/spaces",
+        "active": request.getRequestURI().startsWith('/spaces'),
+        "icon": " ti-layers",
+        "label": "Espaces",
+        "subs": []
+    }
+}
+%}
 <div  id="sidebar-menu">
    <ul>
-      <li><a href="{{ href('/home') }}" class="waves-effect {{request.getRequestURI().startsWith('/home') ? 'active':''}}"><i
-         class="zmdi zmdi-view-dashboard"></i> <span> Dashboard </span> </a>
-       </li>
-      <li class="has_sub {{request.getRequestURI().startsWith('/user') ? 'open_sub_menu':''}}">
-       <a href="javascript:void(0);"
-          class="waves-effect {{request.getRequestURI().startsWith('/user') ? 'active':''}}">
-           <i class="ti-user"></i> 
-           <span> Utilisateurs </span> 
-           <span class="menu-arrow"></span>
-        </a>
-        <ul class="list-unstyled">
-                 <li class="{{request.getRequestURI().startsWith('/user/list') ? 'active':''}}" >
-                     <a href="{{ href('/user/list') }}"> Liste</a>
-                 </li>
-                 <li class="{{request.getRequestURI().startsWith('/user/new') ? 'active':''}}">
-                     <a href="{{ href('/user/new') }}">  Nouveau</a>
-                 </li>
-        </ul>
-      </li>
-      <li class="has_sub">
-         <a href="javascript:void(0);"
-            class="waves-effect"><i class="zmdi zmdi-invert-colors"></i> 
-            <span>  Espaces </span> <span class="menu-arrow"></span>
-         </a>
-      </li>
+      {{ leftMenuEntry(menuModel.dashboard) }}
+      {{ leftMenuEntry(menuModel.users) }}
+      {{ leftMenuEntry(menuModel.spaces) }} 
       <li class="has_sub">
          <a href="javascript:void(0);"
             class="waves-effect"><i class="zmdi zmdi-collection-text"></i>
