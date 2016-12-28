@@ -32,11 +32,7 @@ import java.time.ZonedDateTime;
 public class User extends AbstractAuditingEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected Long id;
-
+ 
 	@NotNull
 	@Pattern(regexp = Constants.LOGIN_REGEX)
 	@Size(min = 1, max = 50)
@@ -95,14 +91,6 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	protected Set<PersistentToken> persistentTokens = new HashSet<>();
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getFullName() {
 		return this.firstName + " " + this.lastName;

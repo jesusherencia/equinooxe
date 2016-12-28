@@ -13,6 +13,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.ZonedDateTime;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -24,34 +27,46 @@ import javax.persistence.MappedSuperclass;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractAuditingEntity implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, length = 50, updatable = false)
     @JsonIgnore
-    private String createdBy;
+    protected String createdBy;
 
     @CreatedDate
     @Column(name = "created_date", nullable = false)
     @JsonIgnore
-    private ZonedDateTime createdDate = ZonedDateTime.now();
+    protected ZonedDateTime createdDate = ZonedDateTime.now();
 
     @LastModifiedBy
     @Column(name = "last_modified_by", length = 50)
     @JsonIgnore
-    private String lastModifiedBy;
+    protected String lastModifiedBy;
 
     @LastModifiedDate
     @Column(name = "last_modified_date")
     @JsonIgnore
-    private ZonedDateTime lastModifiedDate = ZonedDateTime.now();
+    protected ZonedDateTime lastModifiedDate = ZonedDateTime.now();
     
     @Column(name = "isDeleted", nullable = true)
     protected boolean isDeleted=false;
 
     @Column(name = "isArchived", nullable = true)
     protected boolean isArchived=false;
+    
+    public Long getId() {
+		return id;
+	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+    
     public boolean isDeleted() {
 		return isDeleted;
 	}

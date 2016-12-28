@@ -2,7 +2,6 @@ package com.equinooxe.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Proxy;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +19,7 @@ import java.io.Serializable;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Authority implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 
     @NotNull
     @Size(min = 0, max = 50)
