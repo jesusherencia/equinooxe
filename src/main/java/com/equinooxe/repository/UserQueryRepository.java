@@ -20,7 +20,7 @@ public class UserQueryRepository {
 	QUser qUser;
 	JPAQueryFactory queryFactory;
  
-	
+	 
 	public JPAQueryFactory getQueryFactory(){
 		qUser = QUser.user;
 		queryFactory = new JPAQueryFactory(entityManager);

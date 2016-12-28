@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports = {
-    app: 'src/main/webapp/',
+    app: 'src/main/webapp/resources/',
     dist: 'target/www/',
     swaggerDist: 'target/www/swagger-ui/',
     test: 'src/test/javascript/',
-    bower: 'src/main/webapp/bower_components/',
+    bower: 'src/main/webapp/resources/bower_components/',
     tmp: 'target/tmp',
     revManifest: 'target/tmp/rev-manifest.json',
     port: 9000,

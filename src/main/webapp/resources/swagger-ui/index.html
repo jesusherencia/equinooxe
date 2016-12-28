@@ -35,7 +35,8 @@
             var springfox = {
                 "baseUrl": function() {
                     var urlMatches = /(.*)\/swagger-ui\/index.html.*/.exec(window.location.href);
-                    return urlMatches[1];
+                   // return urlMatches[1];
+                   return "http://localhost:8080";
                 },
                 "securityConfig": function(cb) {
                     $.getJSON(this.baseUrl() + "/swagger-resources/configuration/security", function(data) {
