@@ -3,12 +3,16 @@
 ######################
 /target/www/**
 
+
 ######################
 # Node
 ######################
 node/
 node_tmp/
 node_modules/
+bower_components/
+typings/
+npm-debug.log
 
 ######################
 # SASS
