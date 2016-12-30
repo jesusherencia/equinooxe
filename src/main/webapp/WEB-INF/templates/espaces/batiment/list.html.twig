@@ -1,4 +1,4 @@
-{% extends "layout" %}
+{% extends "../../layout" %}
 
 {% block title %}
   Liste des utilisateurs
@@ -14,8 +14,11 @@
 	                                     ></i>
 	                             </a>
 	                            <ul class="dropdown-menu" role="menu">
-	                                 <li><a href="#"
-	                                      >Détails</a></li>
+	                                 <li>
+	                                 	<a href="{{ href('/espaces/batiment/new') }}">
+	                                 		Ajouter batiment
+	                                 	</a>
+	                                 </li>
 	                                 <li><a href="#">
 	                                       Editer</a>
 	                                 </li>
@@ -48,8 +51,8 @@
                                   <i class="zmdi zmdi-more-vert"></i>
                              </a>
                             <ul class="dropdown-menu" role="menu">
-                                 <li> <a href="{{ href('/batiment/show')}}/?id={{ userEntry.id }}" >D�tails</a></li>
-                                 <li> <a href="{{ href('/batiment/edit')}}/?id={{ userEntry.id }}" >Editer </a></li>
+                                 <li> <a href="{{ href('/espaces/batiment/show')}}/{{ entity.id }}" >Détails</a></li>
+                                 <li> <a href="{{ href('/batiment/edit')}}/{{ entity.id }}" >Editer </a></li>
                             </ul>
                        </div>
 					</td>

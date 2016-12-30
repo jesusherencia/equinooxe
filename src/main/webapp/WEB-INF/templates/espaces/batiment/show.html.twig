@@ -1,0 +1,40 @@
+{% extends "../../layout" %}
+
+{% block title %}
+  Détails utilisateur
+{% endblock %}
+
+{% block content %}
+        <div class="titre"> <i class="fa fa-plus"></i> 
+		     Détails du batiment:
+		     {{ batiment.nom | capitalize }}  
+		</div>	   
+		<table class="table">
+                <tr>
+                    <td>Nom:</td>
+                    <td>{{ batiment.nom | capitalize  }} </td>
+                </tr>
+                <tr>
+                    <td>Adresse:</td>
+                    <td>{{ batiment.adresse   }} </td>
+                </tr>
+                 <tr>
+                    <td>Etages:</td>
+                    <td> {% for etage in batiment.etages %}
+						     {{ etages.nom }} 
+						 {% endfor %} 
+					</td>
+                </tr>
+                <tr>
+                    <td>Actions:</td>
+                    <td>
+                   	 <ul>
+                   	 	<li> <a href="{{ href('/espaces/batiment/edit')}}/?id={{ batiment.id }}" >Editer </a></li>
+                   	 </ul>
+                    </td>
+                </tr>
+        </table>
+{% endblock %}
+ 
+</body>
+</html>

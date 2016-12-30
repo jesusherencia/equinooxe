@@ -9,16 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.equinooxe.domain.Espace;
-import com.equinooxe.domain.QLocation;
+import com.equinooxe.domain.QEspace;
 
 /**
  * @author mboullouz
  *
  */
 @Component
-public class EspaceQueryRepository extends AbstractQueryRespository<QLocation,Espace> {
+public class EspaceQueryRepository extends AbstractQueryRespository<QEspace,Espace> {
 	@Autowired
 	public EspaceQueryRepository(EntityManager entityManager) {
-		super(entityManager,QLocation.location);
+		super(entityManager,QEspace.espace);
 	}
 }
