@@ -2,7 +2,6 @@ package com.equinooxe.repository;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,28 +9,27 @@ import org.springframework.stereotype.Component;
 
 import com.equinooxe.domain.QUser;
 import com.equinooxe.domain.User;
-import com.querydsl.jpa.impl.JPAQueryFactory;
 
+/**
+ * 
+ * @author mboullouz
+ *
+ */
 @Component
-public class UserQueryRepository {
-	 
-	QUser qUser;
-	JPAQueryFactory queryFactory;
-	
+public class UserQueryRepository extends AbstractQueryRespository<QUser,User> {
+
 	@Autowired
-	public UserQueryRepository(EntityManager entityManager){
-		qUser = QUser.user;
-		queryFactory = new JPAQueryFactory(entityManager);
+	public UserQueryRepository(EntityManager entityManager) {
+		super(entityManager,QUser.user);
 	}
-	 
-     
 
 	public User getOneById(Long id) {
-		User u = queryFactory.selectFrom(qUser).where(qUser.id.eq(id)).fetchOne();
+		User u = queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
 		return u;
 	}
 	
-	public List<User> getAll(){
-		return   queryFactory.selectFrom(qUser).innerJoin(qUser.authorities).fetch();
+	@Override
+	public List<User> getAll() {
+		return queryFactory.selectFrom(qEntity).innerJoin(qEntity.authorities).fetch();
 	}
 }
