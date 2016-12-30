@@ -1,4 +1,4 @@
-{% import "partials/leftSideBarModel" %}
+{% import "partials/leftSideBarMacro" %}
 {% set menuModel =
 {
     "dashboard": {
@@ -17,7 +17,8 @@
                 "url": "/user/list",
                 "label": "Liste",
                 "active": request.getRequestURI().startsWith('/user/list')
-                }, {
+                },
+                {
                 "url": "/user/new",
                 "label": "Ajouter",
                 "active": request.getRequestURI().startsWith('/user/new')
@@ -37,45 +38,6 @@
       {{ leftMenuEntry(menuModel.dashboard) }}
       {{ leftMenuEntry(menuModel.users) }}
       {{ leftMenuEntry(menuModel.spaces) }} 
-      <li class="has_sub">
-         <a href="javascript:void(0);"
-            class="waves-effect"><i class="zmdi zmdi-collection-text"></i>
-            <span class="label label-warning pull-right">7</span>
-            <span> Forms </span> 
-         </a>
-      </li>
-      
-      <li class="has_sub">
-             <a href="javascript:void(0);" class="waves-effect">
-               <i class="zmdi zmdi-view-list"></i>
-                <span> Tables </span> 
-                <span class="menu-arrow"></span>
-               <!--  <span class=" eq-menu-arrow ti-angle-right pull-right"></span>
-                <span class=" eq-menu-arrow ti-angle-down pull-right" style="display: none;"></span> -->
-             </a>
-             <ul class="list-unstyled">
-                 <li><a href="tables-basic.html">  Basic Tables</a></li>
-                 <li><a href="tables-datatable.html">  Data Table</a></li>
-                 <li><a href="tables-responsive.html"> Responsive Table</a></li>
-                 <li><a href="tables-editable.html"> Editable Table</a></li>
-             </ul>
-      </li>
-      <li>
-        <a href="inbox.html" class="waves-effect"><i
-           class="zmdi zmdi-email"></i><span
-           class="label label-purple pull-right">New</span><span> Mail </span>
-        </a>
-      </li>
-      <li class="has_sub">
-         <a href="javascript:void(0);" class="waves-effect">
-         	<i class="zmdi zmdi-collection-item"></i>
-         	<span> Pages </span> <span class="menu-arrow"></span>
-         </a>
-         <ul class="list-unstyled">
-            <li><a href="page-starter.html">Starter Page</a></li>
-            <li><a href="page-login.html">Login</a></li>
-         </ul>
-      </li>
    </ul>
    <div class="clearfix"></div>
 </div>

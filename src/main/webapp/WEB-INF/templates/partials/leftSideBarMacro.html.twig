@@ -14,7 +14,7 @@
         <ul class="list-unstyled">
                  {% for subEntry in entry.subs %}
                  <li class="{{subEntry.active ? 'active':''}}" >
-                     <a href="{{ href('/user/list') }}"> {{ subEntry.label }}</a>
+                     <a href="{{ href(subEntry.url) }}"> {{ subEntry.label }}</a>
                  </li>
                  {% endfor %} 
         </ul>
