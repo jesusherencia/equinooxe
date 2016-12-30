@@ -38,7 +38,7 @@ public class AgentUser extends User implements Serializable {
 
     @Override
     public String toString() {
-        return "AgentUser[ id=" + id + " ]";
+        return "{ id=" + id + " }";
     }
 
 }

@@ -21,10 +21,10 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class Location extends AbstractAuditingEntity implements Serializable {
+public class Espace extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
     @Column(unique = true)
-    private String name;
+    private String nom;
 
     @Column(unique = true)
     private String number;
@@ -33,25 +33,25 @@ public class Location extends AbstractAuditingEntity implements Serializable {
     private String description;
 
     @ManyToOne
-    private LocationGroup locationGroup;
+    private Etage etage;
 
-    @OneToMany(mappedBy = "location", targetEntity = CleanRequest.class)
+    @OneToMany(mappedBy = "espace", targetEntity = CleanRequest.class)
     private Collection<CleanRequest> cleanRequests;
 
-    public LocationGroup getLocationGroup() {
-        return locationGroup;
+    public Etage getEtage() {
+        return etage;
     }
 
-    public void setLocationGroup(LocationGroup locationGroup) {
-        this.locationGroup = locationGroup;
+    public void setEtage(Etage etage) {
+        this.etage = etage;
     }
 
-    public String getName() {
-        return name;
+    public String getNom() {
+        return nom;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNom(String name) {
+        this.nom = name;
     }
 
     public String getNumber() {
@@ -79,10 +79,10 @@ public class Location extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Location)) {
+        if (!(object instanceof Espace)) {
             return false;
         }
-        Location other = (Location) object;
+        Espace other = (Espace) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -91,7 +91,10 @@ public class Location extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Location[ id=" + id + " ]";
+        return "{ "
+        		+ "id:" + id  +
+        		  "nom:"+ nom+
+        		" }";
     }
 
 }

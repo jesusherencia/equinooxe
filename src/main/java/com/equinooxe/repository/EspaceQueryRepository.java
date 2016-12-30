@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.equinooxe.domain.Location;
+import com.equinooxe.domain.Espace;
 import com.equinooxe.domain.QLocation;
 
 /**
@@ -16,9 +16,9 @@ import com.equinooxe.domain.QLocation;
  *
  */
 @Component
-public class LocationQueryRepository extends AbstractQueryRespository<QLocation,Location> {
+public class EspaceQueryRepository extends AbstractQueryRespository<QLocation,Espace> {
 	@Autowired
-	public LocationQueryRepository(EntityManager entityManager) {
+	public EspaceQueryRepository(EntityManager entityManager) {
 		super(entityManager,QLocation.location);
 	}
 }

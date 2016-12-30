@@ -117,7 +117,7 @@ public class UserManagementController {
 	}
 
 	@GetMapping("/user/list")
-	public ModelAndView list(@RequestParam(value = "filter", required = false) String filter, Model uiModel,
+	public ModelAndView list(Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
 		uiModel.addAttribute("users", users);

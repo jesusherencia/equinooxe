@@ -45,7 +45,7 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
     private Collection<CleanTask> cleanTasks;
 
     @ManyToOne
-    private Location location;
+    private Espace espace;
 
     public CleanRequest() {
         super();
@@ -115,12 +115,12 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
         this.cleanTasks = cleanTasks;
     }
 
-    public Location getLocation() {
-        return location;
+    public Espace getLocation() {
+        return espace;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(Espace espace) {
+        this.espace = espace;
     }
 
     @Override

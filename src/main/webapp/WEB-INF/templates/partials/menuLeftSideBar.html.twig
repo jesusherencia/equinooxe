@@ -24,12 +24,16 @@
                 "active": request.getRequestURI().startsWith('/user/new')
         }]
     },
-	"spaces": {
-        "url": "/spaces",
-        "active": request.getRequestURI().startsWith('/spaces'),
+	"espaces": {
+        "url": "/espaces",
+        "active": request.getRequestURI().startsWith('/espaces'),
         "icon": " ti-layers",
         "label": "Espaces",
-        "subs": []
+        "subs": [{
+                "url": "/espaces/batiment/list",
+                "label": "Batiments",
+                "active": request.getRequestURI().startsWith('/espaces/batiment')
+                }]
     }
 }
 %}
@@ -37,7 +41,7 @@
    <ul>
       {{ leftMenuEntry(menuModel.dashboard) }}
       {{ leftMenuEntry(menuModel.users) }}
-      {{ leftMenuEntry(menuModel.spaces) }} 
+      {{ leftMenuEntry(menuModel.espaces) }} 
    </ul>
    <div class="clearfix"></div>
 </div>

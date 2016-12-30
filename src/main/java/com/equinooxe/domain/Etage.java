@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2015 <mohamedboullouz@gmail.com>
+ * Copyright (C) 2015 Mohamed Boullouz.
+ * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
 package com.equinooxe.domain;
@@ -12,52 +13,55 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
- * OperativeUnite is a kind of building/site
  *
  * @author mohamed
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class OperativeUnit extends AbstractAuditingEntity implements Serializable {
+public class Etage extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
     @Column(unique = true)
-    private String name;
-
-    @Column(unique = false)
-    private String adress;
+    private String nom;
 
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "operativeUnit", targetEntity = LocationGroup.class)
-    private Collection<LocationGroup> locationGroups;
+    @ManyToOne
+    private Batiment batiment;
 
-    public OperativeUnit() {
+    @OneToMany(mappedBy = "etage", targetEntity = Espace.class)
+    private Collection<Espace> espaces;
+
+    public Etage() {
         super();
     }
 
-    public OperativeUnit(String name) {
-        super();
-        this.name = name;
+    public Collection<Espace> getEspaces() {
+        return espaces;
     }
 
-    public String getName() {
-        return name;
+    public void setEspaces(Collection<Espace> espaces) {
+        this.espaces = espaces;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getNom() {
+        return nom;
     }
 
-    public String getAdress() {
-        return adress;
+    public Batiment getBatiment() {
+        return batiment;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setBatiment(Batiment batiment) {
+        this.batiment = batiment;
+    }
+
+    public void setNom(String name) {
+        this.nom = name;
     }
 
     public String getDescription() {
@@ -75,20 +79,12 @@ public class OperativeUnit extends AbstractAuditingEntity implements Serializabl
         return hash;
     }
 
-    public Collection<LocationGroup> getLocationGroups() {
-        return locationGroups;
-    }
-
-    public void setLocationGroups(Collection<LocationGroup> locationGroups) {
-        this.locationGroups = locationGroups;
-    }
-
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof OperativeUnit)) {
+        if (!(object instanceof Etage)) {
             return false;
         }
-        OperativeUnit other = (OperativeUnit) object;
+        Etage other = (Etage) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -97,7 +93,7 @@ public class OperativeUnit extends AbstractAuditingEntity implements Serializabl
 
     @Override
     public String toString() {
-        return "OperativeUnit[ id=" + id + " ]";
+        return "com.appnh.infra.model.Groupement[ id=" + id + " ]";
     }
 
 }

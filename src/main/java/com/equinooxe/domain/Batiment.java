@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2015 Mohamed Boullouz.
- * contact: <mohamed.boullouz@gmail.com>
+ * Copyright (C) 2015 <mohamedboullouz@gmail.com>
  * This file is part of equinooxe Project
  */
 package com.equinooxe.domain;
@@ -9,26 +8,44 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
+ * OperativeUnite is a kind of building/site
  *
  * @author mohamed
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class TaskDefinition extends AbstractAuditingEntity implements Serializable {
+public class Batiment extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
     @Column(unique = true)
     private String name;
 
+    @Column(unique = false)
+    private String adresse;
+
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
 
-    public TaskDefinition() {
+    @OneToMany(mappedBy = "batiment", targetEntity = Etage.class)
+    @Fetch(FetchMode.JOIN)
+    private Collection<Etage> etages;
+
+    public Batiment() {
         super();
+    }
+
+    public Batiment(String name) {
+        super();
+        this.name = name;
     }
 
     public String getName() {
@@ -37,6 +54,14 @@ public class TaskDefinition extends AbstractAuditingEntity implements Serializab
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adress) {
+        this.adresse = adress;
     }
 
     public String getDescription() {
@@ -54,12 +79,20 @@ public class TaskDefinition extends AbstractAuditingEntity implements Serializab
         return hash;
     }
 
+    public Collection<Etage> getEtages() {
+        return etages;
+    }
+
+    public void setEtages(Collection<Etage> etages) {
+        this.etages = etages;
+    }
+
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof TaskDefinition)) {
+        if (!(object instanceof Batiment)) {
             return false;
         }
-        TaskDefinition other = (TaskDefinition) object;
+        Batiment other = (Batiment) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -68,7 +101,7 @@ public class TaskDefinition extends AbstractAuditingEntity implements Serializab
 
     @Override
     public String toString() {
-        return "TaskDefinition[ id=" + id + " ]";
+        return "{ id:" + id + " }";
     }
 
 }

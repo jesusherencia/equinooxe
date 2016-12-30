@@ -40,7 +40,7 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
     private CleanRequest cleanRequest;
 
     @ManyToOne
-    private TaskDefinition taskDefinition;
+    private TacheDefinition tacheDefinition;
 
     public CleanTask() {
         super();
@@ -78,12 +78,12 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
         this.cleanRequest = cleanRequest;
     }
 
-    public TaskDefinition getTaskDefinition() {
-        return taskDefinition;
+    public TacheDefinition getTacheDefinition() {
+        return tacheDefinition;
     }
 
-    public void setTaskDefinition(TaskDefinition taskDefinition) {
-        this.taskDefinition = taskDefinition;
+    public void setTacheDefinition(TacheDefinition tacheDefinition) {
+        this.tacheDefinition = tacheDefinition;
     }
 
     @Override
@@ -95,7 +95,6 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CleanTask)) {
             return false;
         }
@@ -108,7 +107,7 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.appnh.nettoyage.model.Tache[ id=" + id + " ]";
+        return "{ id=" + id + " }";
     }
 
 }

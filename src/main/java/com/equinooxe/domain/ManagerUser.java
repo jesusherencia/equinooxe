@@ -21,7 +21,7 @@ public class ManagerUser extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Max(12)
-	@Column(name = "age",length=20)
+	@Column(name = "phoneInterne",length=20)
 	private String phoneInterne;
 	
 	
