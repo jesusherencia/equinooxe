@@ -1,7 +1,7 @@
 {
   "version": "0.0.0",
   "name": "equinooxe",
-  "appPath": "src/main/webapp/",
+  "appPath": "src/main/webapp/resources/",
   "testPath": "src/test/javascript/spec",
   "dependencies": {
     "angular": "1.5.8",

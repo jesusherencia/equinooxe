@@ -26,7 +26,7 @@ public class AddBatimentValidator implements Validator {
 		BatimentFormModel batimentFormModel = (BatimentFormModel) target;
 	    batimentRepository.findOneByNom( batimentFormModel.getNom()).ifPresent(b->{
 	    	//String errorCode, Object[] errorArgs, String defaultMessage
-	    	errors.reject("valeur.existe.pour.champs",new String[]{batimentFormModel.getNom(),"Nom"},"valeur.existe.pour.champs");
+	    	errors.reject("valeur.existe.pour.champs",new String[]{batimentFormModel.getNom(),"Nom"},"nom");
 	    });
 		 
 	}

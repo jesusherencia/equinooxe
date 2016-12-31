@@ -11,6 +11,7 @@ export class LeftMenu {
     constructor() {
         this.bindSubMenu();
         this.initSubMenu();
+        
     }
 
     /**

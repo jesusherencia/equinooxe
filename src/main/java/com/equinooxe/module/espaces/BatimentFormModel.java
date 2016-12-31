@@ -3,6 +3,9 @@
   */
 package com.equinooxe.module.espaces;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.equinooxe.domain.Batiment;
 
 /**
@@ -11,8 +14,11 @@ import com.equinooxe.domain.Batiment;
  */
 public class BatimentFormModel {
     private Long id;
+    @NotNull
+	@Size(min = 2, max = 60)
     private String nom;
     private String adresse;
+    private String description;
     /**
 	 * 
 	 */
@@ -22,12 +28,25 @@ public class BatimentFormModel {
 		 id= batiment.getId();
 		 nom= batiment.getNom();
 		 adresse= batiment.getAdresse();
+		 description= batiment.getDescription();
 	}
 	/**
 	 * @return the id
 	 */
 	public Long getId() {
 		return id;
+	}
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	/**
 	 * @param id the id to set

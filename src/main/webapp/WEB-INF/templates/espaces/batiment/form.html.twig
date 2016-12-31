@@ -14,9 +14,9 @@ Gestion des batiments
 	{{ batimentFormModel.nom | capitalize }}
 	{% endif %}
 </div>
-{% for err in getAllErrors('batimentFormModel') %}
+	 {% for err in getAllErrors('batimentFormModel') %}
     <b style="color: red;">{{ err }}</b><br>
-{% endfor %}
+{% endfor %}  
 <form action="{{ href('/espaces/batiment/save') }}" method="post" name="batimentFormModel">
 	<table class="table">
 		<tr>
@@ -26,6 +26,15 @@ Gestion des batiments
 			<td>{% for err in getFieldErrors('batimentFormModel', 'nom') %}
 				{{ err }}<br> 
 				{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><input type="text" name="description"
+				value="{{batimentFormModel.description}}" /></td>
+			<td> {% for err in getFieldErrors('batimentFormModel', 'description') %}
+				  {{ err }}<br>
+				 {% endfor %}
 			</td>
 		</tr>
 		<tr>
