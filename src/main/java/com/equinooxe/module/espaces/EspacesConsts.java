@@ -13,7 +13,7 @@ public class EspacesConsts {
 	public static final String BASE_URL = "/espaces";
 
 	/** Batiments */
-	public static final String VIEW_BATIMENT_BASE = VIEW_BASE_URL + "/batiment";
+	public static final String VIEW_BATIMENT_BASE = VIEW_BASE_URL + "batiment";
 	public static final String URL_BATIMENT_BASE = BASE_URL + "/batiment";
 	// views
 	public static final String VIEW_BATIMENT_LIST = VIEW_BATIMENT_BASE + "/list";

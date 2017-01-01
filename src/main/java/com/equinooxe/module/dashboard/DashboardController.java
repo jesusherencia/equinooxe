@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
 	@GetMapping("/home")
 	public String home() {
-		return "/home";
+		return "home";
 	}
 	
 	@GetMapping("/")
 	public String ngIndex() { 
-		return "/ngapp/index";
+		return "ngapp/index";
 	}
 }

@@ -48,7 +48,7 @@ public class EtageController {
 	 */
 	@GetMapping("/espaces/batiment/{batimentId}/etage/new")
 	public ModelAndView showForm(@PathVariable Long batimentId, EtageFormModel etageFormModel) {
-		return new ModelAndView("/espaces/etage/form").addObject("etageFormModel",
+		return new ModelAndView("espaces/etage/form").addObject("etageFormModel",
 				new EtageFormModel(batimentRepository.findOne(batimentId)));
 	}
 
@@ -57,7 +57,7 @@ public class EtageController {
 		EqLogger.set(EtageController.class);
 		if (bindingResult.hasErrors()) {
 			EqLogger.info("Etage not valide");
-			return "/espaces/etage/form";
+			return "espaces/etage/form";
 		}
 		Batiment batiment = batimentRepository.findOne(etageFormModel.getBatimentId());/* batiment will be null on submit */
 		Etage etage = new Etage(etageFormModel.getNom(), etageFormModel.getDescription(), batiment);
@@ -77,7 +77,7 @@ public class EtageController {
 		else {
 			etages= etageRepository.findAll();
 		}
-		return new ModelAndView("/espaces/etage/list").addObject("etages", etages);
+		return new ModelAndView("espaces/etage/list").addObject("etages", etages);
 	}
 
 }
