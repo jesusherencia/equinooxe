@@ -3,7 +3,6 @@
   */
 package com.equinooxe.module.espaces;
 
-import java.util.HashSet;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -57,18 +56,30 @@ public class BatimentController {
 		if (bindingResult.hasErrors()) {
 			return EspacesConsts.VIEW_BATIMENT_NEW;
 		}
-		Batiment batiment = new Batiment();
-		batiment.setAdresse(batimentFormModel.getAdresse());
-		batiment.setNom(batimentFormModel.getNom());
-		batiment=batimentRepository.saveAndFlush(batiment);
+		Batiment batiment = null;
+		if (batimentFormModel.getId() > 0) { /* Edit */
+			batiment = batimentRepository.findOne(batimentFormModel.getId());
+			batiment.update(batimentFormModel.getNom(), batimentFormModel.getAdresse(),
+					batimentFormModel.getDescription());
+		} else { /* new record */
+			batiment = new Batiment(batimentFormModel.getNom(), batimentFormModel.getAdresse(),
+					batimentFormModel.getDescription());
+		}
+		batiment = batimentRepository.saveAndFlush(batiment);
 
 		return "redirect:" + EspacesConsts.URL_BATIMENT_SHOW + batiment.getId();
 	}
 
 	@GetMapping(EspacesConsts.URL_BATIMENT_SHOW_ID)
 	public ModelAndView showForm(@PathVariable Long id) {
-		return new ModelAndView(EspacesConsts.VIEW_BATIMENT_SHOW)
-				   .addObject("batiment", batimentRepository.findOne(id));
+		return new ModelAndView(EspacesConsts.VIEW_BATIMENT_SHOW).addObject("batiment", batimentRepository.findOne(id));
 
+	}
+
+	@GetMapping(EspacesConsts.URL_BATIMENT_EDIT_ID)
+	public ModelAndView edit(@PathVariable Long id, BatimentFormModel batimentFormModel) {
+		Batiment batiment = batimentRepository.findOne(id);
+		batimentFormModel = new BatimentFormModel(batiment);
+		return new ModelAndView(EspacesConsts.VIEW_BATIMENT_NEW).addObject("batimentFormModel", batimentFormModel);
 	}
 }

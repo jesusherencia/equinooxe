@@ -56,7 +56,7 @@ public class UserManagementController {
 	@GetMapping("/user/new")
 	public String showForm(UserForm userForm, Model uiModel) {
 		userForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
-		return "/user/form";
+		return "user/form";
 	}
 
 	@GetMapping("/user/edit")
@@ -66,7 +66,7 @@ public class UserManagementController {
 		User u = userQueryRepo.getOneById(id);
 		userForm = new UserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
 		uiModel.addAttribute("userForm", userForm); 
-		return "/user/form";
+		return "user/form";
 	} 
 
 	@PostMapping("/user/save")
@@ -74,7 +74,7 @@ public class UserManagementController {
 			RedirectAttributes redirectAttributes) {
 		addUserValidator.validate(userForm, bindingResult);
 		if (bindingResult.hasErrors()) {
-			return "/user/form";
+			return "user/form";
 		}
 		User user;
 		log.info("\n============= U.ID: "+userForm.getId());
@@ -89,7 +89,6 @@ public class UserManagementController {
 			 }
 			 Set<Authority> selectedAut= new HashSet<>();
 			 for(String authName : userForm.getAutorities()){ 
-				 log.info("\n============== auth name selected: {}", authName);
 				 if(authName!=null && authName.length()>1){
 					 selectedAut.add(authorityRepo.findOne(authName));
 				 }
@@ -113,7 +112,7 @@ public class UserManagementController {
 			RedirectAttributes redirectAttributes) {
 		User u = userQueryRepo.getOneById(id);
 		uiModel.addAttribute("user", u);
-		return "/user/show";
+		return "user/show";
 	}
 
 	@GetMapping("/user/list")
@@ -121,7 +120,7 @@ public class UserManagementController {
 			RedirectAttributes redirectAttributes) {
 		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
 		uiModel.addAttribute("users", users);
-		ModelAndView mv= new ModelAndView("/user/list").addObject("users", users);
+		ModelAndView mv= new ModelAndView("user/list").addObject("users", users);
 		 return mv;
 	}
 

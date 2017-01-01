@@ -9,27 +9,36 @@
 		     Détails du batiment:
 		     {{ batiment.nom | capitalize }}  
 		</div>	   
-		<table class="table">
+		<table class="table table-kv ">
                 <tr>
                     <td>Nom:</td>
                     <td>{{ batiment.nom | capitalize  }} </td>
                 </tr>
                 <tr>
-                    <td>Adresse:</td>
-                    <td>{{ batiment.adresse   }} </td>
+                    <td>Description:</td>
+                    <td>{{ batiment.description  }} </td>
                 </tr>
-                 <tr>
+                <tr>
                     <td>Etages:</td>
-                    <td> {% for etage in batiment.etages %}
-						     {{ etages.nom }} 
-						 {% endfor %} 
+                    <td> 
+                     <ul class="no-style">
+                         {% for etage in batiment.etages %}
+    						   <li title="{{ etage.description }}"> {{ etage.nom }} </li>  
+    					 {% endfor %} 
+					 </ul>
 					</td>
                 </tr>
                 <tr>
+                    <td>Adresse:</td>
+                    <td>{{ batiment.adresse   }} </td>
+                </tr>
+                
+                <tr>
                     <td>Actions:</td>
                     <td>
-                   	 <ul>
-                   	 	<li> <a href="{{ href('/espaces/batiment/edit')}}/?id={{ batiment.id }}" >Editer </a></li>
+                   	 <ul class="no-style">
+                   	   	<li> <a href="{{ href('/espaces/batiment')}}/{{ batiment.id }}/etage/new" >Ajouter étage </a></li>
+                   	 	<li> <a href="{{ href('/espaces/batiment/edit')}}/{{ batiment.id }}" >Editer </a></li>
                    	 </ul>
                     </td>
                 </tr>
