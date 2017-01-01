@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.equinooxe.domain.Batiment;
 import com.equinooxe.repository.BatimentRepository;
 
 /**
@@ -24,11 +23,14 @@ public class AddBatimentValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		BatimentFormModel batimentFormModel = (BatimentFormModel) target;
-	    batimentRepository.findOneByNom( batimentFormModel.getNom()).ifPresent(b->{
-	    	//String errorCode, Object[] errorArgs, String defaultMessage
-	    	errors.reject("valeur.existe.pour.champs",new String[]{batimentFormModel.getNom(),"Nom"},"nom");
-	    });
-		 
+		if (batimentFormModel.getId() > 0) { /* edit case */
+			
+		} else {
+			batimentRepository.findOneByNom(batimentFormModel.getNom()).ifPresent(b -> {
+				errors.reject("valeur.existe.pour.champs", new String[] { batimentFormModel.getNom(), "Nom" }, "nom");
+			});
+		}
+
 	}
 
 	/*

@@ -26,4 +26,5 @@ public class EspacesConsts {
 	public static final String URL_BATIMENT_SAVE = URL_BATIMENT_BASE + "/save";
 	public static final String URL_BATIMENT_SHOW_ID = URL_BATIMENT_BASE + "/show/{id}";
 	public static final String URL_BATIMENT_SHOW = URL_BATIMENT_BASE + "/show/";
+	public static final String URL_BATIMENT_EDIT_ID = URL_BATIMENT_BASE + "/edit/{id}";
 }

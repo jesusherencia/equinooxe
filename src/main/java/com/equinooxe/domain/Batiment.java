@@ -45,7 +45,11 @@ public class Batiment extends AbstractAuditingEntity implements Serializable {
 
     public Batiment(String nom,String adresse, String desc) {
         super();
-        this.nom = nom;
+        this.update(nom, adresse, desc);
+    }
+    
+    public void update(String nom,String adresse, String desc) {
+    	this.nom = nom;
         this.adresse=adresse;
         this.description=desc;
     }

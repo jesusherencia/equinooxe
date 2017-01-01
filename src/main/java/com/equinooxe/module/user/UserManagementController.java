@@ -89,7 +89,6 @@ public class UserManagementController {
 			 }
 			 Set<Authority> selectedAut= new HashSet<>();
 			 for(String authName : userForm.getAutorities()){ 
-				 log.info("\n============== auth name selected: {}", authName);
 				 if(authName!=null && authName.length()>1){
 					 selectedAut.add(authorityRepo.findOne(authName));
 				 }

@@ -10,7 +10,7 @@ Gestion des batiments
 	{% if batimentFormModel.id is null or batimentFormModel.id<0 %}
 	Nouveau batiment
 	{% else %}
-	Edition de l'utilisateur:
+	Edition du batiment:
 	{{ batimentFormModel.nom | capitalize }}
 	{% endif %}
 </div>
@@ -30,8 +30,8 @@ Gestion des batiments
 		</tr>
 		<tr>
 			<td>Description:</td>
-			<td><input type="text" name="description"
-				value="{{batimentFormModel.description}}" /></td>
+			<td><textarea name="description"> {{batimentFormModel.description}} </textarea>
+			</td>
 			<td> {% for err in getFieldErrors('batimentFormModel', 'description') %}
 				  {{ err }}<br>
 				 {% endfor %}
@@ -46,10 +46,7 @@ Gestion des batiments
 				 {% endfor %}
 			</td>
 		</tr>
-		<tr>
-			<td><input type="hidden" name="id" value="{{ batimentFormModel.id }}" />
-			</td>
-		</tr>
+		 <input type="hidden" name="id" value="{{ batimentFormModel.id }}" />
 		<tr>
 			<td><button class="btn-blue" type="submit">
 					Enregistrer <i class="fa fa-save"></i>

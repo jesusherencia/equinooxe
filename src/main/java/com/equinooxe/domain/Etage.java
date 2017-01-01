@@ -24,76 +24,89 @@ import javax.persistence.OneToMany;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class Etage extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
-    @Column(unique = true)
-    private String nom;
+	@Column(unique = true)
+	private String nom;
 
-    @Column(unique = false, columnDefinition = "TEXT")
-    private String description;
+	@Column(unique = false, columnDefinition = "TEXT")
+	private String description;
 
-    @ManyToOne
-    private Batiment batiment;
+	@ManyToOne
+	private Batiment batiment;
 
-    @OneToMany(mappedBy = "etage", targetEntity = Espace.class)
-    private Collection<Espace> espaces;
+	@OneToMany(mappedBy = "etage", targetEntity = Espace.class)
+	private Collection<Espace> espaces;
 
-    public Etage() {
-        super();
-    }
+	public Etage() {
+		super();
+	}
 
-    public Collection<Espace> getEspaces() {
-        return espaces;
-    }
+	public Etage(String nom, String desc, Batiment batiment) {
+		this.update(nom, desc, batiment);
+	}
 
-    public void setEspaces(Collection<Espace> espaces) {
-        this.espaces = espaces;
-    }
+	public void update(String nom, String desc, Batiment batiment) {
+		this.nom = nom;
+		this.description = desc;
+		this.batiment = batiment;
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public Collection<Espace> getEspaces() {
+		return espaces;
+	}
 
-    public Batiment getBatiment() {
-        return batiment;
-    }
+	public void setEspaces(Collection<Espace> espaces) {
+		this.espaces = espaces;
+	}
 
-    public void setBatiment(Batiment batiment) {
-        this.batiment = batiment;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public void setNom(String name) {
-        this.nom = name;
-    }
+	public Batiment getBatiment() {
+		return batiment;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setBatiment(Batiment batiment) {
+		this.batiment = batiment;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setNom(String name) {
+		this.nom = name;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof Etage)) {
-            return false;
-        }
-        Etage other = (Etage) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    @Override
-    public String toString() {
-        return "com.appnh.infra.model.Groupement[ id=" + id + " ]";
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof Etage)) {
+			return false;
+		}
+		Etage other = (Etage) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "{ id:" + id + ", nom:" + nom 
+				+ ",description:" + description 
+				+ ", batiment:" + batiment.toString()
+				+ " }";
+	}
 
 }

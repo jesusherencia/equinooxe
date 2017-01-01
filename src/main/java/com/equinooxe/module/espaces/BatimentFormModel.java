@@ -13,7 +13,7 @@ import com.equinooxe.domain.Batiment;
  *
  */
 public class BatimentFormModel {
-    private Long id;
+    private Long id= new Long(-1);
     @NotNull
 	@Size(min = 2, max = 60)
     private String nom;
