@@ -22,7 +22,7 @@ spring:
         url: jdbc:mysql://localhost:3306/equinooxe?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
         username: root
-        password: ff
+        password: 
         hikari:
             data-source-properties:
                 cachePrepStmts: true

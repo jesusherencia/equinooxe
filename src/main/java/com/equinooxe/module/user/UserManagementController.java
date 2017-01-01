@@ -120,7 +120,7 @@ public class UserManagementController {
 			RedirectAttributes redirectAttributes) {
 		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
 		uiModel.addAttribute("users", users);
-		ModelAndView mv= new ModelAndView("/user/list").addObject("users", users);
+		ModelAndView mv= new ModelAndView("user/list").addObject("users", users);
 		 return mv;
 	}
 
