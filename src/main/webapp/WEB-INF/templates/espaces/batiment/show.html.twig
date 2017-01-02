@@ -25,9 +25,9 @@
                          {% for etage in batiment.etages %}
     						   <li title="{{ etage.description }}"> 
     						     {{ etage.nom }}
-    						     <form method="post" action="{{ removeEtage.postTo }}" name="removeEtage">
+    						     <form method="post" action="{{ removeFormModel.postTo }}" name="removeFormModel">
         						      <input type="hidden" name="id" value="{{ etage.id }}"/>
-        						      <input type="hidden" name="redirectTo" value="{{ removeEtage.redirectTo }}"/>
+        						      <input type="hidden" name="redirectTo" value="{{ removeFormModel.redirectTo }}"/>
         						     <button>Supprimer</button>
         						 </form>
     						    </li>  
