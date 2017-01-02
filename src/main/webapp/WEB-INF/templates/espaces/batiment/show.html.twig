@@ -23,7 +23,14 @@
                     <td> 
                      <ul class="no-style">
                          {% for etage in batiment.etages %}
-    						   <li title="{{ etage.description }}"> {{ etage.nom }} </li>  
+    						   <li title="{{ etage.description }}"> 
+    						     {{ etage.nom }}
+    						     <form method="post" action="{{ removeEtage.postTo }}" name="removeEtage">
+        						      <input type="hidden" name="id" value="{{ etage.id }}"/>
+        						      <input type="hidden" name="redirectTo" value="{{ removeEtage.redirectTo }}"/>
+        						     <button>Supprimer</button>
+        						 </form>
+    						    </li>  
     					 {% endfor %} 
 					 </ul>
 					</td>

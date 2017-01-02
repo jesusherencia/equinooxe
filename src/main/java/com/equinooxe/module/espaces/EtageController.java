@@ -81,13 +81,13 @@ public class EtageController {
 	}
 	
 	@PostMapping("/espaces/etage/remove")
-	public String remove(RemoveFormModel removeFormModel) {
-		if(removeFormModel.id>0){
-			Etage e= etageRepository.findOne(removeFormModel.id);
+	public String remove(RemoveFormModel removeEtage) {
+		if(removeEtage.id>0){
+			Etage e= etageRepository.findOne(removeEtage.id);
 			etageRepository.delete(e);
 		}
 		 
-		return "redirect:" + removeFormModel.redirectTo;
+		return "redirect:" + removeEtage.redirectTo;
 	}
 
 }
