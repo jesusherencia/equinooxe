@@ -42,23 +42,27 @@ public class AsyncSpringLiquibase extends SpringLiquibase {
 
     @Override
     public void afterPropertiesSet() throws LiquibaseException {
-        if (!env.acceptsProfiles(Constants.SPRING_PROFILE_NO_LIQUIBASE)) {
-            if (env.acceptsProfiles(Constants.SPRING_PROFILE_DEVELOPMENT, Constants.SPRING_PROFILE_HEROKU)) {
-                taskExecutor.execute(() -> {
-                    try {
-                        logger.warn("Starting Liquibase asynchronously, your database might not be ready at startup!");
-                        initDb();
-                    } catch (LiquibaseException e) {
-                        logger.error("Liquibase could not start correctly, your database is NOT ready: {}", e.getMessage(), e);
-                    }
-                });
-            } else {
-                logger.debug("Starting Liquibase synchronously");
-                initDb();
-            }
-        } else {
-            logger.debug("Liquibase is disabled");
-        }
+    	/**
+    	 * Commented as we dont figure out a simple way (without touching maven) to prevent Liquibase from
+    	 * overriding the db on init using Prod mode (case deploy using embeded tomcat )
+    	 */
+//        if (!env.acceptsProfiles(Constants.SPRING_PROFILE_NO_LIQUIBASE)) {
+//            if (env.acceptsProfiles(Constants.SPRING_PROFILE_DEVELOPMENT, Constants.SPRING_PROFILE_HEROKU)) {
+//                taskExecutor.execute(() -> {
+//                    try {
+//                        logger.warn("Starting Liquibase asynchronously, your database might not be ready at startup!");
+//                        initDb();
+//                    } catch (LiquibaseException e) {
+//                        logger.error("Liquibase could not start correctly, your database is NOT ready: {}", e.getMessage(), e);
+//                    }
+//                });
+//            } else {
+//                logger.debug("Starting Liquibase synchronously");
+//                initDb();
+//            }
+//        } else {
+//            logger.debug("Liquibase is disabled");
+//        }
     }
 
     protected void initDb() throws LiquibaseException {
