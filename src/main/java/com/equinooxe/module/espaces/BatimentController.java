@@ -72,7 +72,12 @@ public class BatimentController {
 
 	@GetMapping(EspacesConsts.URL_BATIMENT_SHOW_ID)
 	public ModelAndView showForm(@PathVariable Long id) {
-		return new ModelAndView(EspacesConsts.VIEW_BATIMENT_SHOW).addObject("batiment", batimentRepository.findOne(id));
+		RemoveFormModel removeFormModel = new RemoveFormModel(
+				new Long(-1), "/espaces/etage/remove",
+				EspacesConsts.URL_BATIMENT_SHOW + id);
+		return new ModelAndView(EspacesConsts.VIEW_BATIMENT_SHOW)
+				.addObject( "batiment", batimentRepository.findOne(id) )
+				.addObject("removeEtage",removeFormModel);
 
 	}
 

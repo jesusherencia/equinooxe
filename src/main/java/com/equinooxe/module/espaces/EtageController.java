@@ -79,5 +79,15 @@ public class EtageController {
 		}
 		return new ModelAndView("espaces/etage/list").addObject("etages", etages);
 	}
+	
+	@PostMapping("/espaces/etage/remove")
+	public String remove(RemoveFormModel removeFormModel) {
+		if(removeFormModel.id>0){
+			Etage e= etageRepository.findOne(removeFormModel.id);
+			etageRepository.delete(e);
+		}
+		 
+		return "redirect:" + removeFormModel.redirectTo;
+	}
 
 }
