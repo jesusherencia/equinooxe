@@ -1,4 +1,5 @@
-import { LeftMenu } from './menu'
+import { LeftMenu } from './menu';
+ 
 /**
  * a js equivalent of  public static void main(String[] args)! 
  * 

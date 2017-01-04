@@ -65,7 +65,7 @@ public class EtageController {
 		etage = etageRepository.saveAndFlush(etage);
 		uiModel.addAttribute("batiment", etageFormModel.getBatiment());
 		return "redirect:" + EspacesConsts.URL_BATIMENT_SHOW + batiment.getId();
-	}
+	} 
 	
 	@GetMapping("/espaces/etage/list")
 	public ModelAndView list(@RequestParam(value = "batimentId",defaultValue="-1", required = false)Long batimentId) {

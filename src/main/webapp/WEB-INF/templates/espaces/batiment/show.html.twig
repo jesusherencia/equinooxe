@@ -1,5 +1,7 @@
 {% extends "../../layout" %}
-
+{% block appImport %}
+  <script src="/resources/web-app/espaces/espaces.config.js"></script>  
+{% endblock %}
 {% block title %}
   Détails utilisateur
 {% endblock %}
@@ -17,18 +19,19 @@
                 <tr>
                     <td>Description:</td>
                     <td>{{ batiment.description  }} </td>
-                </tr>
+                </tr> 
                 <tr>
                     <td>Etages:</td>
                     <td> 
-                     <ul class="no-style">
+                     <ul  id="e1" class="no-style">
                          {% for etage in batiment.etages %}
-    						   <li title="{{ etage.description }}"> 
+    						    <li  title="{{ etage.description }}"> 
     						     {{ etage.nom }}
-    						     <form method="post" action="{{ removeFormModel.postTo }}" name="removeFormModel">
-        						      <input type="hidden" name="id" value="{{ etage.id }}"/>
+    						     <form  method="post" action="{{ removeFormModel.postTo }}" name="removeFormModel">
+        						      <input type="hidden" name="id" v-model={{etage.id}} value="{{ etage.id }}"/>
         						      <input type="hidden" name="redirectTo" value="{{ removeFormModel.redirectTo }}"/>
-        						     <button>Supprimer</button>
+        						     <button >Supprimer</button>
+        						     <b v-on:click="sayHi">Click</b>
         						 </form>
     						    </li>  
     					 {% endfor %} 
@@ -50,7 +53,6 @@
                     </td>
                 </tr>
         </table>
+      
 {% endblock %}
- 
-</body>
-</html>
+

@@ -26,9 +26,10 @@
         <![endif]-->
 
         <script src="/resources/assets/js/modernizr.min.js"></script>
-     
 	    <script src="/resources/node_modules/systemjs/dist/system.js"></script>
-	    <script type="text/javascript">
+	    
+	    {% block appImport %}
+	     <script type="text/javascript">
 			System.config({
 				baseURL : '/resources/web-app/',
 				defaultJSExtensions : true,
@@ -44,11 +45,17 @@
 				},
 			});
 			System.import('index.js');
-		</script>
-	    <link rel="stylesheet" type="text/css" media="all" href="/resources/css/main.css" th:href="@{/css/main.css}" />
+		 </script>
+		{% endblock %}
+	    <link rel="stylesheet" type="text/css" media="all" href="/resources/css/main.css"/>
         <script>
             var resizefunc = []; 
         </script>
+        
+        <!-- ~~~ ~~ ~~ ~~ ~~ ~~ DEP APP ~~~ ~~ ~~ ~~ ~~ ~~  -->
+        <script src="/resources/node_modules/vue/dist/vue.js"></script>
+        <script src="/resources/node_modules/axios/dist/axios.js"></script>
+        
         <!-- jQuery  -->
         <script src="/resources/assets/js/jquery.min.js"></script>
         <script src="/resources/assets/js/bootstrap.min.js"></script>

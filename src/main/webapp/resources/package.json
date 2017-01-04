@@ -9,12 +9,15 @@
   },
   "license": "ISC",
   "dependencies": {
-    "systemjs": "^0.19.22"
+    "@types/axios": "^0.9.34",
+    "axios": "^0.15.3",
+    "systemjs": "^0.19.22",
+    "vue": "^2.1.8"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
     "lite-server": "^2.1.0",
     "typescript": "^1.7.5",
-    "typings":"^0.6.8"
+    "typings": "^0.6.8"
   }
 }
