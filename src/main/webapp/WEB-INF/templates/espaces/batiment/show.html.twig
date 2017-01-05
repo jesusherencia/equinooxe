@@ -18,21 +18,24 @@
    <tr>
       <td>Etages:</td>
       <td>
-         <ul id="e1" class="no-style">
-            <div>
-               <b v-on:click="sayHi">Click {{batiment.nom}} </b><br>
-               <li v-for="etage in batiment.etages" title="etage.description">
-                  {{ etage.nom }} 
-                  <my-component></my-component>
-                  <form  method="post" name="removeFormModel">
-                     <input type="hidden" name="id" value=" etage.id  "/>
-                     <input type="hidden" name="redirectTo" value=""/>
-                     <button class="btn-gray">Supprimer</button>
-                     <b v-on:click="sayHi">Click</b>
-                  </form>
-               </li>
-            </div>
-         </ul>
+         <div id="e1">
+          
+                <!-- 
+                <ul  class="no-style">
+                <div>
+                   <li v-for="etage in batiment.etages" title="etage.description">
+                      <span v-bind:text-content.prop="etage.nom "></span> {{ etage.nom }} 
+                      <form  method="post" name="removeFormModel">
+                         <input type="hidden" name="id" value="etage.id"/>
+                         <input type="hidden" name="redirectTo" value=""/>
+                         <button v-on:click="deleteEtage($event,etage.id)" class="btn-gray">Supprimer</button>
+                      </form>
+                   </li>
+                   </ul>
+                </div> -->
+             
+       </div>
+        
       </td>
    </tr>
    <tr>

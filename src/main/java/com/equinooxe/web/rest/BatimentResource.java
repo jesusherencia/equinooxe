@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping("/api/batiment")
 @Secured(AuthoritiesConstants.USER)
 public class BatimentResource {
-	 private final Logger log = LoggerFactory.getLogger(BatimentResource.class);
+	private final Logger log = LoggerFactory.getLogger(BatimentResource.class);
 	@Inject
 	BatimentRepository batimentRepository;
 	 
@@ -47,14 +48,6 @@ public class BatimentResource {
 	public ResponseEntity<Batiment> getOne(@PathVariable  Long id) {
 		log.info("\n==== ID : "+id+" vvvvv ");
 		Batiment batiment = batimentRepository.findOne(id);
-//		log.info("\n========= bat is: "+ batiment.toString());
-//		String jsonInString=batiment.toString();
-//		ObjectMapper mapper = new ObjectMapper();
-//		try {
-//		  jsonInString = mapper.writeValueAsString(batiment);
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();  
-//		}
 		return new ResponseEntity<>(batiment, HttpStatus.OK);
 	}
 	
@@ -74,4 +67,13 @@ public class BatimentResource {
         return  ResponseEntity.ok().body(batimentRepository.saveAndFlush(batiment));
     }
 	
+    @DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> delete(@PathVariable  Long id) {
+		log.info("\n==== to delete : "+id+" vvvvv ");
+		
+		Batiment entity = batimentRepository.findOne(id);
+		log.info("\n ============= DELETE\n ===",entity.toString());
+		batimentRepository.delete(entity);
+		return new ResponseEntity<>("Deleted successfully",HttpStatus.OK);
+	}
 }
