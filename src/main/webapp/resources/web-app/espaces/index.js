@@ -8,13 +8,28 @@ System.register([], function(exports_1, context_1) {
             Index = (function () {
                 function Index() {
                     console.log('Espaces Index');
+                    Vue.component('my-component', {
+                        template: '<div>A custom component!</div>'
+                    });
                     var cmp = {
                         el: "#e1",
-                        template: "\n             <div>\n             <b v-on:click=\"sayHi\">Click {{batiment.nom}} </b><br>\n             <li v-for=\"etage in batiment.etages\" title=\" etage.description  \"> \n    \t\t\t\t\t\t     {{ etage.nom }}\n    \t\t\t\t\t\t     <form  method=\"post\"  name=\"removeFormModel\">\n        \t\t\t\t\t\t      <input type=\"hidden\" name=\"id\" value=\" etage.id  \"/>\n        \t\t\t\t\t\t      <input type=\"hidden\" name=\"redirectTo\" value=\"\"/>\n        \t\t\t\t\t\t     <button >Supprimer</button>\n        \t\t\t\t\t\t     <b v-on:click=\"sayHi\">Click</b>\n        \t\t\t\t\t\t </form>\n    \t\t\t\t\t\t    </li> \n            </div> ",
+                        // template: `
+                        //  <div>
+                        //  <b v-on:click="sayHi">Click {{batiment.nom}} </b><br>
+                        //  <li v-for="etage in batiment.etages" title=" etage.description  "> 
+                        // 				     {{ etage.nom }} <my-component></my-component>
+                        // 				     <form  method="post"  name="removeFormModel">
+                        // 					      <input type="hidden" name="id" value=" etage.id  "/>
+                        // 					      <input type="hidden" name="redirectTo" value=""/>
+                        // 					     <button >Supprimer</button>
+                        // 					     <b v-on:click="sayHi">Click</b>
+                        // 					 </form>
+                        // 				    </li> 
+                        // </div> `,
                         methods: {
                             sayHi: function () {
-                                alert('hi' + this.data + " <-");
-                                console.log(this.data);
+                                alert('hi' + this.batiment.nom + " <-");
+                                console.log(this.batiment.id);
                             }
                         },
                         data: function () {
@@ -30,15 +45,6 @@ System.register([], function(exports_1, context_1) {
                         }
                     };
                     var v1 = new Vue(cmp);
-                    axios({
-                        method: 'get',
-                        url: '/api/batiment/1'
-                    }).then(function (res) {
-                        console.log('Some res!', res);
-                        // v1.$set(v1,"batiment", {nom:"ABCD EFG"});
-                        //v1.batiment = res.data;
-                        // v1.$data.batiment = res;
-                    });
                 }
                 return Index;
             }());
