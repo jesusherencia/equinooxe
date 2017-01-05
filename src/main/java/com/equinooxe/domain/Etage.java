@@ -16,6 +16,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 /**
  *
  * @author mohamed
@@ -34,6 +37,7 @@ public class Etage extends AbstractAuditingEntity implements Serializable {
 	private Batiment batiment;
 
 	@OneToMany(mappedBy = "etage", targetEntity = Espace.class)
+	@Fetch(FetchMode.JOIN)
 	private Collection<Espace> espaces;
 
 	public Etage() {

@@ -9,7 +9,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	
     <title>{% block title %} {% endblock %}</title>
-    <!-- App CSS -->
+        <!-- ~~~ ~~ ~~ ~~ ~~ ~~ DEP APP ~~~ ~~ ~~ ~~ ~~ ~~  -->
+         <script src="/resources/node_modules/vue/dist/vue.js"></script>
+         <!-- <script src="/resources/node_modules/vue/dist/vue.common.js"></script> -->   
+            
+            <script src="/resources/node_modules/axios/dist/axios.js"></script>
+        <!-- App CSS -->
         <link href="/resources/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="/resources/assets/css/core.css" rel="stylesheet" type="text/css" />
         <link href="/resources/assets/css/components.css" rel="stylesheet" type="text/css" />
@@ -52,9 +57,7 @@
             var resizefunc = []; 
         </script>
         
-        <!-- ~~~ ~~ ~~ ~~ ~~ ~~ DEP APP ~~~ ~~ ~~ ~~ ~~ ~~  -->
-        <script src="/resources/node_modules/vue/dist/vue.js"></script>
-        <script src="/resources/node_modules/axios/dist/axios.js"></script>
+        
         
         <!-- jQuery  -->
         <script src="/resources/assets/js/jquery.min.js"></script>
