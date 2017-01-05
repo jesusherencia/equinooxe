@@ -1,5 +1,6 @@
 
 export class Index {
+    public static mainView: vuejs.Vue;
     constructor() {
         console.log('Espaces Index');
 
@@ -22,22 +23,7 @@ export class Index {
             </ul> 
             `,
             methods: {
-                deleteEtage: function (evt: Event, etageId: number) {
-                    evt.preventDefault();
-                    this.batiment.etages.forEach(etage => {
-                        if (etage.id == etageId) {
-                            console.log("Start deleting", etage.id);
-                            axios.delete("/api/etage/delete/" + etage.id).then(
-                                function (res) {
-                                    alert(res.data);
-                                    this.batiment.etages = this.batiment.etages.filter(function (obj) {
-                                        return  etage.id  === etageId;
-                                    });
-                                }
-                            )
-                        }
-                    })
-                }
+                deleteEtage: EtageDeleteTask,
             },
             data: function () {
                 let _data = this;
@@ -46,12 +32,33 @@ export class Index {
                 };
             }
         };
-        let v1: vuejs.Vue = new Vue(cmp);
+        Index.mainView = new Vue(cmp);
 
 
     }
 }
 
+export class EtageDeleteTask {
+    constructor(evt: Event, etageId: number, data: any = null) {
+        data = Index.mainView.batiment;
+        console.log(data);
+         console.log("main",Index.mainView);
 
+        evt.preventDefault();
+        data.etages.forEach(etage => {
+            if (etage.id == etageId) {
+                console.log("Start deleting", etage.id);
+                axios.delete("/api/etage/delete/" + etage.id).then(
+                    function (res) {
+                        alert(res.data);
+                        data.etages = data.etages.filter(function (obj) {
+                            return etage.id === etageId;
+                        });
+                    }
+                )
+            }
+        })
+    }
+}
 
 let app = new Index();
