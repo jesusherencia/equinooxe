@@ -1,9 +1,8 @@
-export interface IVm extends vuejs.Vue {
-    batiment: any;
-}
+ 
 export class Index {
     constructor() {
         console.log('Espaces Index');
+        console.log($("#goptions").data("goptions"));
         Vue.component('my-component', {
         template: '<div>A custom component!</div>'
         })
@@ -33,13 +32,14 @@ export class Index {
             data: function () {
                 let _data=this;
                 return {
-                    batiment: 
-                        axios({
-                            method: 'get',
-                            url: '/api/batiment/1'
-                        }).then(res => {
-                            _data.batiment= res.data;
-                        })
+                    // batiment: $("#goptions").data("goptions"),
+                    batiment: JSON.parse($("#Model").text())
+                        // axios({
+                        //     method: 'get',
+                        //     url: '/api/batiment/'+$("#batimentId").data("idbatiment")
+                        // }).then(res => {
+                        //     _data.batiment= res.data;
+                        // })
                     
                 };
             }

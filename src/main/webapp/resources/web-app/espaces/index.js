@@ -8,6 +8,7 @@ System.register([], function(exports_1, context_1) {
             Index = (function () {
                 function Index() {
                     console.log('Espaces Index');
+                    console.log($("#goptions").data("goptions"));
                     Vue.component('my-component', {
                         template: '<div>A custom component!</div>'
                     });
@@ -35,12 +36,8 @@ System.register([], function(exports_1, context_1) {
                         data: function () {
                             var _data = this;
                             return {
-                                batiment: axios({
-                                    method: 'get',
-                                    url: '/api/batiment/1'
-                                }).then(function (res) {
-                                    _data.batiment = res.data;
-                                })
+                                // batiment: $("#goptions").data("goptions"),
+                                batiment: JSON.parse($("#Model").text())
                             };
                         }
                     };

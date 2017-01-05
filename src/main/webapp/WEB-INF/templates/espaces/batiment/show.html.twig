@@ -1,59 +1,58 @@
 {% extends "../../layout" %}
-
 {% block title %}
-  Détails utilisateur
+    Détails batiment
 {% endblock %}
-
 {% block content %}
-        <div class="titre"> <i class="fa fa-plus"></i> 
-		     Détails du batiment:
-		     {{ batiment.nom | capitalize }}  
-		</div>	   
-		<table  class="table table-kv ">
-                <tr>
-                    <td>Nom:</td>
-                    <td>{{ batiment.nom | capitalize  }} </td>
-                </tr>
-                <tr>
-                    <td>Description:</td>
-                    <td>{{ batiment.description  }} </td>
-                </tr>  
-                <tr>
-                    <td>Etages:</td>
-                    <td> 
-                         <ul id="e1"  class="no-style">
-                           <div>
-                             <b v-on:click="sayHi">Click {{batiment.nom}} </b><br>
-                             <li v-for="etage in batiment.etages" title=" etage.description  "> 
-                    						     {{ etage.nom }} <my-component></my-component>
-                    						     <form  method="post"  name="removeFormModel">
-                        						      <input type="hidden" name="id" value=" etage.id  "/>
-                        						      <input type="hidden" name="redirectTo" value=""/>
-                        						     <button >Supprimer</button>
-                        						     <b v-on:click="sayHi">Click</b>
-                        						 </form>
-                    						    </li> 
-                            </div>
-    					 </ul> 
-					</td>
-                </tr>
-                <tr>
-                    <td>Adresse:</td>
-                    <td>{{ batiment.adresse   }} </td>
-                </tr>
-                
-                <tr>
-                    <td>Actions:</td>
-                    <td>
-                   	 <ul class="no-style">
-                   	   	<li> <a href="{{ href('/espaces/batiment')}}/{{ batiment.id }}/etage/new" >Ajouter étage </a></li>
-                   	 	<li> <a href="{{ href('/espaces/batiment/edit')}}/{{ batiment.id }}" >Editer </a></li>
-                   	 </ul>
-                    </td>
-                </tr>
-        </table>
+<div class="titre"> <i class="fa fa-plus"></i> 
+   Détails du batiment: {{ batiment.nom | capitalize }}  
+</div>
+<table  class="table table-kv " >
+   <tr>
+      <td>Nom:</td>
+      <td>{{ batiment.nom | capitalize  }} </td>
+   </tr>
+   <tr>
+      <td>Description:</td>
+      <td>{{ batiment.description  }} </td>
+   </tr>
+   <tr>
+      <td>Etages:</td>
+      <td>
+         <ul id="e1" class="no-style">
+            <div>
+               <b v-on:click="sayHi">Click {{batiment.nom}} </b><br>
+               <li v-for="etage in batiment.etages" title="etage.description">
+                  {{ etage.nom }} 
+                  <my-component></my-component>
+                  <form  method="post" name="removeFormModel">
+                     <input type="hidden" name="id" value=" etage.id  "/>
+                     <input type="hidden" name="redirectTo" value=""/>
+                     <button class="btn-gray">Supprimer</button>
+                     <b v-on:click="sayHi">Click</b>
+                  </form>
+               </li>
+            </div>
+         </ul>
+      </td>
+   </tr>
+   <tr>
+      <td>Adresse:</td>
+      <td>{{ batiment.adresse   }} </td>
+   </tr>
+   <tr>
+      <td>Actions:</td>
+      <td>
+         <ul class="no-style">
+            <li> <a href="{{ href('/espaces/batiment')}}/{{ batiment.id }}/etage/new" >Ajouter étage </a></li>
+            <li> <a href="{{ href('/espaces/batiment/edit')}}/{{ batiment.id }}" >Editer </a></li>
+         </ul>
+      </td>
+   </tr>
+</table>
+<script id="Model" type="application/json">
+   {{ batiment|raw }} 
+</script>
 <script src="/resources/web-app/espaces/espaces.config.js"></script>        
 {% endblock %}
 {% block appImport %}
-
 {% endblock %}

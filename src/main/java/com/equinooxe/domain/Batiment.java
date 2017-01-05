@@ -6,6 +6,8 @@ package com.equinooxe.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -107,7 +109,14 @@ public class Batiment extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "{ id:" + id + " }";
+    	ObjectMapper mapper = new ObjectMapper();
+    	String jsonInString= "{ id:" + id + " }";
+    	try {
+			 jsonInString = mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+        return jsonInString;
     }
 
 }
