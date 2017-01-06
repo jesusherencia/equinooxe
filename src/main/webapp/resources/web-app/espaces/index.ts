@@ -39,20 +39,20 @@ export class Index {
 }
 
 export class EtageDeleteTask {
-    constructor(evt: Event, etageId: number, data: any = null) {
-        data = Index.mainView.batiment;
+    constructor(evt: Event, etageId: number) {
+        let data = Index.mainView.batiment;
         console.log(data);
-         console.log("main",Index.mainView);
+        console.log("main", Index.mainView);
 
         evt.preventDefault();
         data.etages.forEach(etage => {
             if (etage.id == etageId) {
                 console.log("Start deleting", etage.id);
                 axios.delete("/api/etage/delete/" + etage.id).then(
-                    function (res) {
+                    res => {
                         alert(res.data);
-                        data.etages = data.etages.filter(function (obj) {
-                            return etage.id === etageId;
+                        data.etages = data.etages.filter(e=> {
+                            return e.id !== etageId;
                         });
                     }
                 )

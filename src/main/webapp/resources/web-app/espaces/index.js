@@ -30,9 +30,8 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("Index", Index);
             EtageDeleteTask = (function () {
-                function EtageDeleteTask(evt, etageId, data) {
-                    if (data === void 0) { data = null; }
-                    data = Index.mainView.batiment;
+                function EtageDeleteTask(evt, etageId) {
+                    var data = Index.mainView.batiment;
                     console.log(data);
                     console.log("main", Index.mainView);
                     evt.preventDefault();
@@ -41,8 +40,8 @@ System.register([], function(exports_1, context_1) {
                             console.log("Start deleting", etage.id);
                             axios.delete("/api/etage/delete/" + etage.id).then(function (res) {
                                 alert(res.data);
-                                data.etages = data.etages.filter(function (obj) {
-                                    return etage.id === etageId;
+                                data.etages = data.etages.filter(function (e) {
+                                    return e.id !== etageId;
                                 });
                             });
                         }

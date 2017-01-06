@@ -12,7 +12,8 @@
     "@types/axios": "^0.9.34",
     "axios": "^0.15.3",
     "systemjs": "^0.19.22",
-    "vue": "^2.1.8"
+    "vue": "^2.1.8",
+    "lodash": "4.17.4"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
