@@ -26,24 +26,29 @@ export class Index {
                 deleteEtage: EtageDeleteTask,
             },
             data: function () {
-                let _data = this;
-                return {
-                    batiment: JSON.parse($("#Model").text())
-                };
+                return new DataModelHolder(this);
             }
         };
         Index.mainView = new Vue(cmp);
-
-
     }
+}
+ 
+
+export class DataModelHolder {
+    public batiment: BatimentEntity = JSON.parse($("#Model").text());
+    constructor(parent:any) {
+        console.log('data ctor',"parent: ",parent);
+    }
+}
+
+export class BatimentEntity {
+    public nom: string;
+    public etages: Array<any> = [];
 }
 
 export class EtageDeleteTask {
     constructor(evt: Event, etageId: number) {
-        let data = Index.mainView.batiment;
-        console.log(data);
-        console.log("main", Index.mainView);
-
+        let data = <BatimentEntity>Index.mainView['batiment'];
         evt.preventDefault();
         data.etages.forEach(etage => {
             if (etage.id == etageId) {
@@ -51,7 +56,7 @@ export class EtageDeleteTask {
                 axios.delete("/api/etage/delete/" + etage.id).then(
                     res => {
                         alert(res.data);
-                        data.etages = data.etages.filter(e=> {
+                        data.etages = data.etages.filter(e => {
                             return e.id !== etageId;
                         });
                     }

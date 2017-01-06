@@ -1,7 +1,7 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var Index, EtageDeleteTask, app;
+    var Index, DataModelHolder, BatimentEntity, EtageDeleteTask, app;
     return {
         setters:[],
         execute: function() {
@@ -18,10 +18,7 @@ System.register([], function(exports_1, context_1) {
                             deleteEtage: EtageDeleteTask,
                         },
                         data: function () {
-                            var _data = this;
-                            return {
-                                batiment: JSON.parse($("#Model").text())
-                            };
+                            return new DataModelHolder(this);
                         }
                     };
                     Index.mainView = new Vue(cmp);
@@ -29,11 +26,24 @@ System.register([], function(exports_1, context_1) {
                 return Index;
             }());
             exports_1("Index", Index);
+            DataModelHolder = (function () {
+                function DataModelHolder(parent) {
+                    this.batiment = JSON.parse($("#Model").text());
+                    console.log('data ctor', "parent: ", parent);
+                }
+                return DataModelHolder;
+            }());
+            exports_1("DataModelHolder", DataModelHolder);
+            BatimentEntity = (function () {
+                function BatimentEntity() {
+                    this.etages = [];
+                }
+                return BatimentEntity;
+            }());
+            exports_1("BatimentEntity", BatimentEntity);
             EtageDeleteTask = (function () {
                 function EtageDeleteTask(evt, etageId) {
-                    var data = Index.mainView.batiment;
-                    console.log(data);
-                    console.log("main", Index.mainView);
+                    var data = Index.mainView['batiment'];
                     evt.preventDefault();
                     data.etages.forEach(function (etage) {
                         if (etage.id == etageId) {
