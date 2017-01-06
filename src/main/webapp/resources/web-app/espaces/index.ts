@@ -1,48 +1,61 @@
 
+interface IViewModel extends vuejs.ComponentOption {
+    methods: { deleteEtage: Function }
+}
+
+class ViewModelImpl implements IViewModel {
+    public data(): DataModelHolder {
+        return new DataModelHolder(this);
+    }
+    public methods = {
+        deleteEtage: EtageDeleteTask,
+    }
+    public el = "#e1";
+    public template = `<ul class="no-style">
+                        <li v-for="etage in batiment.etages" title="etage.description">
+                            {{ etage.nom }} 
+                            <form  method="post" name="removeFormModel">
+                                <input type="hidden" name="id" value="etage.id"/>
+                                <input type="hidden" name="redirectTo" value=""/>
+                                <button v-on:click="deleteEtage($event,etage.id)" class="btn-gray">Supprimer</button>
+                            </form>
+                        </li>
+                        </ul> 
+                      `;
+}
+
+/**
+ * Main
+ * 
+ * @export
+ * @class Index
+ */
 export class Index {
     public static mainView: vuejs.Vue;
     constructor() {
         console.log('Espaces Index');
-
-        Vue.component('my-component', {
-            template: '<div>A custom component!</div>'
-        })
-
-        let cmp: vuejs.ComponentOption = {
-            el: "#e1",
-            template:
-            `<ul class="no-style">
-               <li v-for="etage in batiment.etages" title="etage.description">
-                  {{ etage.nom }} 
-                  <form  method="post" name="removeFormModel">
-                     <input type="hidden" name="id" value="etage.id"/>
-                     <input type="hidden" name="redirectTo" value=""/>
-                     <button v-on:click="deleteEtage($event,etage.id)" class="btn-gray">Supprimer</button>
-                  </form>
-               </li>
-            </ul> 
-            `,
-            methods: {
-                deleteEtage: EtageDeleteTask,
-            },
-            data: function () {
-                return new DataModelHolder(this);
-            }
-        };
+        let cmp: IViewModel = new ViewModelImpl();
         Index.mainView = new Vue(cmp);
     }
 }
- 
 
+
+/**
+ * 
+ * 
+ * @export
+ * @class DataModelHolder
+ */
 export class DataModelHolder {
     public batiment: BatimentEntity = JSON.parse($("#Model").text());
-    constructor(parent:any) {
-        console.log('data ctor',"parent: ",parent);
+    constructor(parent: IViewModel) {
+        console.log('data ctor', "parent: ", parent);
     }
 }
 
 export class BatimentEntity {
     public nom: string;
+    public id: number;
     public etages: Array<any> = [];
 }
 
