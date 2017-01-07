@@ -18,6 +18,7 @@ export class ListEtagesComponent {
 interface IComponentOptions extends vuejs.ComponentOption {
     methods: { deleteEtage: Function };
     data():DataModelHolder;
+    
 }
 
 class ComponentOptionsImpl implements IComponentOptions {
@@ -27,17 +28,26 @@ class ComponentOptionsImpl implements IComponentOptions {
     public methods = {
         deleteEtage: EtageDeleteService,
     }
-    public el = "#e1";
+    public el = "#ListEtagesComponent";
     public template = `<ul class="no-style">
-                        <li v-for="etage in batiment.etages" title="etage.description">
-                            {{ etage.nom }} 
-                            <form  method="post" name="removeFormModel">
-                                <input type="hidden" name="id" value="etage.id"/>
-                                <input type="hidden" name="redirectTo" value=""/>
-                                <button v-on:click="deleteEtage($event,etage.id)" class="btn-gray">Supprimer</button>
-                            </form>
-                        </li>
-                        </ul> 
+                            <li v-for="etage in batiment.etages" title="etage.description">
+                                {{ etage.nom }} 
+                                <div class="dropdown pull-right">
+                                    <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+                                        <i class="zmdi zmdi-more-vert"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <form  method="post" name="removeFormModel">
+                                                <input type="hidden" name="id" value="etage.id"/>
+                                                <input type="hidden" name="redirectTo" value=""/>
+                                                <button v-on:click="deleteEtage($event,etage.id)" class="as-link">Supprimer</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                      </ul> 
                       `;
 }
 
@@ -48,7 +58,7 @@ class ComponentOptionsImpl implements IComponentOptions {
  * @class DataModelHolder
  */
 class DataModelHolder {
-    public batiment: BatimentEntity = JSON.parse($("#Model").text());
+    public batiment: BatimentEntity = JSON.parse($("#ListEtages").text());
     constructor(parent: IComponentOptions) {
         console.log('data ctor', "parent: ", parent);
     }

@@ -25,8 +25,8 @@ System.register([], function(exports_1, context_1) {
                     this.methods = {
                         deleteEtage: EtageDeleteService,
                     };
-                    this.el = "#e1";
-                    this.template = "<ul class=\"no-style\">\n                        <li v-for=\"etage in batiment.etages\" title=\"etage.description\">\n                            {{ etage.nom }} \n                            <form  method=\"post\" name=\"removeFormModel\">\n                                <input type=\"hidden\" name=\"id\" value=\"etage.id\"/>\n                                <input type=\"hidden\" name=\"redirectTo\" value=\"\"/>\n                                <button v-on:click=\"deleteEtage($event,etage.id)\" class=\"btn-gray\">Supprimer</button>\n                            </form>\n                        </li>\n                        </ul> \n                      ";
+                    this.el = "#ListEtagesComponent";
+                    this.template = "<ul class=\"no-style\">\n                            <li v-for=\"etage in batiment.etages\" title=\"etage.description\">\n                                {{ etage.nom }} \n                                <div class=\"dropdown pull-right\">\n                                    <a href=\"#\" class=\"dropdown-toggle card-drop\" title=\"Options\" data-toggle=\"dropdown\" aria-expanded=\"false\">\n                                        <i class=\"zmdi zmdi-more-vert\"></i>\n                                    </a>\n                                    <ul class=\"dropdown-menu\" role=\"menu\">\n                                        <li>\n                                            <form  method=\"post\" name=\"removeFormModel\">\n                                                <input type=\"hidden\" name=\"id\" value=\"etage.id\"/>\n                                                <input type=\"hidden\" name=\"redirectTo\" value=\"\"/>\n                                                <button v-on:click=\"deleteEtage($event,etage.id)\" class=\"as-link\">Supprimer</button>\n                                            </form>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li>\n                      </ul> \n                      ";
                 }
                 ComponentOptionsImpl.prototype.data = function () {
                     return new DataModelHolder(this);
@@ -41,7 +41,7 @@ System.register([], function(exports_1, context_1) {
              */
             DataModelHolder = (function () {
                 function DataModelHolder(parent) {
-                    this.batiment = JSON.parse($("#Model").text());
+                    this.batiment = JSON.parse($("#ListEtages").text());
                     console.log('data ctor', "parent: ", parent);
                 }
                 return DataModelHolder;

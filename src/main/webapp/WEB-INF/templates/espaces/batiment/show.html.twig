@@ -18,24 +18,7 @@
    <tr>
       <td>Etages:</td>
       <td>
-         <div id="e1">
-          
-                <!-- 
-                <ul  class="no-style">
-                <div>
-                   <li v-for="etage in batiment.etages" title="etage.description">
-                      <span v-bind:text-content.prop="etage.nom "></span> {{ etage.nom }} 
-                      <form  method="post" name="removeFormModel">
-                         <input type="hidden" name="id" value="etage.id"/>
-                         <input type="hidden" name="redirectTo" value=""/>
-                         <button v-on:click="deleteEtage($event,etage.id)" class="btn-gray">Supprimer</button>
-                      </form>
-                   </li>
-                   </ul>
-                </div> -->
-             
-       </div>
-        
+         <div id="ListEtagesComponent"></div>
       </td>
    </tr>
    <tr>
@@ -52,7 +35,7 @@
       </td>
    </tr>
 </table>
-<script id="Model" type="application/json">
+<script id="ListEtages" type="application/json">
    {{ batiment|raw }} 
 </script>
 <script src="/resources/web-app/espaces/espaces.config.js"></script>        

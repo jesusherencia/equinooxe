@@ -33,7 +33,7 @@ public class EtageResource {
 	EtageRepository etageRepository; 
 	 
 	
-	@GetMapping("/all")
+	@GetMapping("/all") 
 	@Timed
 	public ResponseEntity<List<Etage>> getEtages() { 
 	    List<Etage> Etages = etageRepository.findAll();

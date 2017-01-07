@@ -1,51 +1,67 @@
 body {
-	background: white;
+    background: white;
 }
 
 .navbar {
-	min-height: 43px;
+    min-height: 43px;
 }
 
-button, .btn-gray {
-	color: #2c3133;
-	font-weight: 400;
-	background: #ECEFF1;
-	border: 1px solid #d6d1d1;
+button,
+.btn-gray {
+    color: #2c3133;
+    font-weight: 400;
+    background: #ECEFF1;
+    border: 1px solid #d6d1d1;
 }
 
 .btn-blue {
-	color: #007de0;
-	font-weight: 600;
-	background: #e3f2fd;
-	border: 1px solid #cce4f7;
+    color: #007de0;
+    font-weight: 600;
+    background: #e3f2fd;
+    border: 1px solid #cce4f7;
 }
 
 .titre {
-	font-weight: 600;
-	color: #0084e5;
-	margin: 1%;
+    font-weight: 600;
+    color: #0084e5;
+    margin: 1%;
 }
 
 .eq-menu-arrow {
-	font-size: 10px;
-	margin: 3px;
+    font-size: 10px;
+    margin: 3px;
 }
 
+
 /* style */
-.unstyled, .no-style {
-	list-style: none;
+
+.unstyled,
+.no-style {
+    list-style: none;
 }
+
 
 /* 
  For tables that contains form inputs
  AND tables that display data as key,value
  */
+
 .table-kv tr td:first-child {
-	background: #fdfdfd;
-	width: 20%;
+    background: #fdfdfd;
+    width: 20%;
 }
 
 .table-kv td>ul {
-	list-style: none;
-	margin-left: -5%;
+    list-style: none;
+    margin-left: -5%;
+}
+
+.as-link {
+    /** treat a button as an <a> */
+    background: #ffffff;
+    border: 1px solid #ffffff;
+	width: 100%;
+}
+.as-link:hover {
+    color: #007de0;
 }

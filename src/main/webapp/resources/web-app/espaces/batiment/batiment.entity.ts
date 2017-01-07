@@ -1,3 +1,9 @@
+/**
+ * 
+ * 
+ * @export
+ * @class BatimentEntity
+ */
 export class BatimentEntity {
     public nom: string;
     public id: number;

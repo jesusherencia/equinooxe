@@ -104,13 +104,6 @@ public class Etage extends AbstractAuditingEntity implements Serializable {
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "{ id:" + id + ", nom:" + nom 
-				+ ",description:" + description 
-				+ ", batiment:" + batiment.toString()
-				+ " }";
-	}
+ 
 
 }

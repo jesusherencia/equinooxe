@@ -107,16 +107,5 @@ public class Batiment extends AbstractAuditingEntity implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-    	ObjectMapper mapper = new ObjectMapper();
-    	String jsonInString= "{ id:" + id + " }";
-    	try {
-			 jsonInString = mapper.writeValueAsString(this);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-        return jsonInString;
-    }
 
 }

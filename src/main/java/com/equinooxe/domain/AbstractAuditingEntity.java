@@ -1,22 +1,27 @@
 package com.equinooxe.domain;
 
 import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.envers.Audited;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.ZonedDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.envers.Audited;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.equinooxe.domain.util.LocalDateTimeSerializer;
+import com.equinooxe.domain.util.ZonedDateTimeSerializer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Base abstract class for entities which will hold definitions for created, last modified by and created,
@@ -35,22 +40,20 @@ public abstract class AbstractAuditingEntity implements Serializable {
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, length = 50, updatable = false)
-    @JsonIgnore
     protected String createdBy;
 
     @CreatedDate
     @Column(name = "created_date", nullable = false)
-    @JsonIgnore
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     protected ZonedDateTime createdDate = ZonedDateTime.now();
 
     @LastModifiedBy
     @Column(name = "last_modified_by", length = 50)
-    @JsonIgnore
     protected String lastModifiedBy;
 
     @LastModifiedDate
     @Column(name = "last_modified_date")
-    @JsonIgnore
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
     protected ZonedDateTime lastModifiedDate = ZonedDateTime.now();
     
     @Column(name = "isDeleted", nullable = true)
@@ -113,5 +116,16 @@ public abstract class AbstractAuditingEntity implements Serializable {
 
     public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+    @Override
+    public String toString() {
+    	ObjectMapper mapper = new ObjectMapper();
+    	String jsonInString= "{ id:" + id + " }";
+    	try {
+			 jsonInString = mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+        return jsonInString;
     }
 }
