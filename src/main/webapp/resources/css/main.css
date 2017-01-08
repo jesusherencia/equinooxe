@@ -60,8 +60,14 @@ button,
     /** treat a button as an <a> */
     background: #ffffff;
     border: 1px solid #ffffff;
-	width: 100%;
+    width: 100%;
 }
+
 .as-link:hover {
     color: #007de0;
 }
+
+.smaller {
+    font-size: smaller;
+}
+ 

@@ -29,25 +29,35 @@ class ComponentOptionsImpl implements IComponentOptions {
         deleteEtage: EtageDeleteService,
     }
     public el = "#ListEtagesComponent";
-    public template = `<ul class="no-style">
-                            <li v-for="(etage,index) in batiment.etages" title="etage.description" style="border-bottom: 1px solid #BBDEFB;">
-                                #{{index+1}} &nbsp;  {{ etage.nom }} <fr-datetime :frdate="etage.createdDate" ></fr-datetime>
-                                <div class="dropdown pull-right">
-                                    <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
-                                        <i class="zmdi zmdi-more-vert"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <form  method="post" name="removeFormModel">
-                                                <input type="hidden" name="id" value="etage.id"/>
-                                                <input type="hidden" name="redirectTo" value=""/>
-                                                <button v-on:click="deleteEtage($event,etage.id)" class="as-link">Supprimer</button>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                      </ul> 
+    public template = `<table class="table smaller">
+                            <caption class="smaller">Etages du:{{batiment.nom }}</caption>
+                            <tr>
+                              <th># </th>
+                              <th>Nom </th>
+                              <th>Ajout </th>
+                            </th>
+                            <tr v-for="(etage,index) in batiment.etages" class="as-tr" title="etage.description">
+                                    <td>  {{ etage.id}}       </td>
+                                    <td>  {{ etage.nom }}   </td>
+                                    <td>  <fr-datetime :frdate="etage.createdDate" ></fr-datetime> </td>
+                                    <td>
+                                    <div class="dropdown pull-right">
+                                        <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="zmdi zmdi-more-vert"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <form  method="post" name="removeFormModel">
+                                                    <input type="hidden" name="id" value="etage.id"/>
+                                                    <input type="hidden" name="redirectTo" value=""/>
+                                                    <button v-on:click="deleteEtage($event,etage.id)" class="as-link">Supprimer</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                  </td>
+                            </tr>
+                      </table> 
                       `;
 }
 
