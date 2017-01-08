@@ -30,8 +30,8 @@ class ComponentOptionsImpl implements IComponentOptions {
     }
     public el = "#ListEtagesComponent";
     public template = `<ul class="no-style">
-                            <li v-for="etage in batiment.etages" title="etage.description">
-                                {{ etage.nom }} 
+                            <li v-for="(etage,index) in batiment.etages" title="etage.description" style="border-bottom: 1px solid #BBDEFB;">
+                                #{{index+1}} &nbsp;  {{ etage.nom }} <fr-datetime :frdate="etage.createdDate" ></fr-datetime>
                                 <div class="dropdown pull-right">
                                     <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
                                         <i class="zmdi zmdi-more-vert"></i>

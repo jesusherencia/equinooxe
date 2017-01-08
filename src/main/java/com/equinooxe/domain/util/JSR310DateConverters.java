@@ -13,7 +13,7 @@ public final class JSR310DateConverters {
 
         public static final LocalDateToDateConverter INSTANCE = new LocalDateToDateConverter();
 
-        private LocalDateToDateConverter() {}
+        private LocalDateToDateConverter() {} 
 
         @Override
         public Date convert(LocalDate source) {
