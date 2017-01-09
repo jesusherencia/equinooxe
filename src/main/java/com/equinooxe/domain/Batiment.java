@@ -63,14 +63,14 @@ public class Batiment extends AbstractAuditingEntity implements Serializable {
     }
 
     public String getAdresse() {
-        return adresse;
+        return adresse; 
     }
 
     public void setAdresse(String adress) {
         this.adresse = adress;
-    }
+    }  
 
-    public String getDescription() {
+    public String getDescription() { 
         return description;
     }
 
