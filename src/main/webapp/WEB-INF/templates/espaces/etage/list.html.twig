@@ -40,9 +40,10 @@
 				<tr>
 					<td> {{ entity.nom }}</td>
 					<td> 
-					  {{ etage.batiment.nom }} <br>
+					 <a href="{{ href('/espaces/batiment/show')}}/{{ entity.batiment.id }}">     
+					     {{ entity.batiment.nom }} </a>
                     </td>
-                    <td>{{ entity.description }}</td>
+                    <td> {{ entity.description }}  </td>
 					<td>
 					   <div class="dropdown pull-right">
                              <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">

@@ -91,7 +91,7 @@ public class Batiment extends AbstractAuditingEntity implements Serializable {
 
     public void setEtages(Collection<Etage> etages) {
         this.etages = etages;
-    }
+    } 
 
     @Override
     public boolean equals(Object object) {

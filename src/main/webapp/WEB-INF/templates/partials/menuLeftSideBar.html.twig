@@ -33,10 +33,16 @@
                 "url": "/espaces/batiment/list",
                 "label": "Batiments",
                 "active": request.getRequestURI().startsWith('/espaces/batiment')
-                }]
+                },
+                {
+                "url": "/espaces/etage/list",
+                "label": "Etages",
+                "active": request.getRequestURI().startsWith('/espaces/etage')
+                }
+               ]
     }
 }
-%}
+%} 
 <div  id="sidebar-menu">
    <ul>
       {{ leftMenuEntry(menuModel.dashboard) }}
