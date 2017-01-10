@@ -1,5 +1,9 @@
 body {
-    background: white;
+    background: white; 
+    min-height: 613px;
+}
+.content-page .content  {
+    margin-bottom: 10%; /* kinda bug fix */
 }
 
 .navbar {
