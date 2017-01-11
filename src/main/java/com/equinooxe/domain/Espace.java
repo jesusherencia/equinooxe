@@ -89,12 +89,4 @@ public class Espace extends AbstractAuditingEntity implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "{ "
-        		+ "id:" + id  +
-        		  "nom:"+ nom+
-        		" }";
-    }
-
 }

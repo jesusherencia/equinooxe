@@ -26,7 +26,7 @@ System.register([], function(exports_1, context_1) {
             }());
             DataModelHolder = (function () {
                 function DataModelHolder(parent) {
-                    this.batiment = JSON.parse($("#ListEtages").text());
+                    this.batiment = JSON.parse($("#BatimentEntity").text());
                 }
                 return DataModelHolder;
             }());

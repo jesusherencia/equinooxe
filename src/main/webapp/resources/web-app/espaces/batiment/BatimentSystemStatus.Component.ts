@@ -1,4 +1,4 @@
-import { BatimentEntity } from './batiment.entity';
+import { BatimentEntity } from './Batiment.Entity';
 export class BatimentSystemStatusComponent {
     public static mainView: vuejs.Vue;
     constructor() {
@@ -44,6 +44,6 @@ class ComponentOptionsImpl implements IComponentOptions {
 }
 
 class DataModelHolder {
-    public batiment: BatimentEntity = JSON.parse($("#ListEtages").text());
+    public batiment: BatimentEntity = JSON.parse($("#BatimentEntity").text());
     constructor(parent: IComponentOptions) { }
 }

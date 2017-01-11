@@ -1,7 +1,7 @@
 {% extends "../../layout" %}
 
 {% block title %}
-  Liste des utilisateurs
+  Liste des étages
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,7 @@
 		
 		<table class="table table-kv">
 			<thead>
-				<tr>
+				<tr> 
 					<th>Nom</th>
 					<th>Batiment</th>
 					<th>Description</th>
@@ -35,7 +35,11 @@
 			<tbody>
 			    {% for entity in etages %}
 				<tr>
-					<td> {{ entity.nom }}</td>
+					<td> 
+						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
+					   	    {{ entity.nom }}
+						</a>
+					</td>
 					<td> 
 					 <a href="{{ href('/espaces/batiment/show')}}/{{ entity.batiment.id }}">     
 					     {{ entity.batiment.nom }} </a>

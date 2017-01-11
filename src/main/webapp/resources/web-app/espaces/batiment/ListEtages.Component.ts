@@ -68,7 +68,7 @@ class ComponentOptionsImpl implements IComponentOptions {
  * @class DataModelHolder
  */
 class DataModelHolder {
-    public batiment: BatimentEntity = JSON.parse($("#ListEtages").text());
+    public batiment: BatimentEntity = JSON.parse($("#BatimentEntity").text());
     constructor(parent: IComponentOptions) {
         console.log('data ctor', "parent: ", parent);
     }

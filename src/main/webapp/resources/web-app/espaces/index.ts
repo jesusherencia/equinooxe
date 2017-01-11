@@ -1,9 +1,9 @@
  
-import { ListEtagesComponent } from './batiment/list.etages.cmp';
+import {ListEtagesComponent } from './batiment/ListEtages.Component';
 import { BatimentSystemStatusComponent } from './batiment/BatimentSystemStatus.Component';
 import { DatesComponent } from './../common-component/dates.component';
 import { LeftMenu } from './../menu';
-
+ 
 /**
  * Resister components 
  */

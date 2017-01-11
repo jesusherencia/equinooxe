@@ -51,6 +51,12 @@ public class EtageController {
 		return new ModelAndView("espaces/etage/form").addObject("etageFormModel",
 				new EtageFormModel(batimentRepository.findOne(batimentId)));
 	}
+	
+	@GetMapping("/espaces/etage/show/{id}")
+	public ModelAndView show(@PathVariable Long id) {
+		return new ModelAndView("espaces/etage/show")
+				  .addObject("etage",etageRepository.findOne(id));
+	}
 
 	@PostMapping("/espaces/etage/save")
 	public String save(@Valid EtageFormModel etageFormModel, BindingResult bindingResult, Model uiModel) {

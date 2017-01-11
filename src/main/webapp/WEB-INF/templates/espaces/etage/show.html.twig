@@ -1,10 +1,10 @@
 {% extends "../../layout" %}
 {% block title %}
-    Détails batiment
+    Détails etage
 {% endblock %}
 {% block content %}
 <div class="titre"> 
-  <i class="fa fa-plus"></i>   Détails du batiment: {{ batiment.nom | capitalize }}  
+  <i class="fa fa-plus"></i>   Détails du etage: {{ etage.nom | capitalize }}  
   <div class="dropdown pull-right">
 	                             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
 	                                  <i style="font-size: 18px" 
@@ -13,9 +13,7 @@
 	                             </a>
 	                            <ul class="dropdown-menu" role="menu">
 	                                 <li>
-	                                 	<a href="{{ href('/espaces/batiment')}}/{{ batiment.id }}/etage/new" >Ajouter étage </a>
-	                                 </li>
-	                                 <li><a href="{{ href('/espaces/batiment/edit')}}/{{ batiment.id }}" >Editer </a>
+	                                    <a href="{{ href('/espaces/etage/edit')}}/{{ etage.id }}" >Editer </a>
 	                                 </li>
 	                            </ul>
   </div>
@@ -23,28 +21,28 @@
 <table  class="table table-kv " >
    <tr>
       <td>Nom:</td>
-      <td>{{ batiment.nom | capitalize  }} </td>
+      <td>{{ etage.nom | capitalize  }} </td>
    </tr>
    <tr>
       <td>Description:</td>
-      <td>{{ batiment.description  }} </td>
+      <td>{{ etage.description  }} </td>
    </tr>
    <tr>
-      <td>Etages:</td>
+      <td>Espaces:</td>
       <td>
          <div id="ListEtagesComponent"></div>
       </td>
    </tr>
    <tr>
       <td>Adresse:</td>
-      <td>{{ batiment.adresse   }} </td>
+      <td>{{ etage.adresse   }} </td>
    </tr>
 </table>
 <hr>
-<div id="BatimentSystemStatus"></div>
+<div id="EtageSystemStatus"></div>
 
-<script id="BatimentEntity" type="application/json">
-   {{ batiment|raw }} 
+<script id="ListEtages" type="application/json">
+   {{ etage|raw }} 
 </script>
 <script src="/resources/web-app/espaces/espaces.config.js"></script>        
 {% endblock %}

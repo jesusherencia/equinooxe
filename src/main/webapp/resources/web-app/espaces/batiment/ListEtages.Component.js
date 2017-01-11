@@ -41,7 +41,7 @@ System.register([], function(exports_1, context_1) {
              */
             DataModelHolder = (function () {
                 function DataModelHolder(parent) {
-                    this.batiment = JSON.parse($("#ListEtages").text());
+                    this.batiment = JSON.parse($("#BatimentEntity").text());
                     console.log('data ctor', "parent: ", parent);
                 }
                 return DataModelHolder;
@@ -72,4 +72,4 @@ System.register([], function(exports_1, context_1) {
         }
     }
 });
-//# sourceMappingURL=list.etages.cmp.js.map
+//# sourceMappingURL=ListEtages.Component.js.map
