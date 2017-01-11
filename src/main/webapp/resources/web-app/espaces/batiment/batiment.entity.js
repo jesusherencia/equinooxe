@@ -21,4 +21,4 @@ System.register([], function(exports_1, context_1) {
         }
     }
 });
-//# sourceMappingURL=batiment.entity.js.map
+//# sourceMappingURL=Batiment.Entity.js.map

@@ -46,7 +46,10 @@
 <script id="BatimentEntity" type="application/json">
    {{ batiment|raw }} 
 </script>
-<script src="/resources/web-app/espaces/espaces.config.js"></script>        
+<script>
+  System.import('espaces/batiment/index.js');
+  console.log('espaces.config louded!');   
+</script>         
 {% endblock %}
 {% block appImport %}
 {% endblock %}

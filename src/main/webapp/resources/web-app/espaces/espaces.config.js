@@ -15,5 +15,4 @@ System.config({
         }
     },
 });
-System.import('index.js');
-console.log('espaces.config louded!');
+

@@ -7,23 +7,23 @@ System.register(['./../BaseSystemStatus.Component'], function(exports_1, context
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var BaseSystemStatus_Component_1;
-    var BatimentSystemStatusComponent;
+    var EtageSystemStatusComponent;
     return {
         setters:[
             function (BaseSystemStatus_Component_1_1) {
                 BaseSystemStatus_Component_1 = BaseSystemStatus_Component_1_1;
             }],
         execute: function() {
-            BatimentSystemStatusComponent = (function (_super) {
-                __extends(BatimentSystemStatusComponent, _super);
-                function BatimentSystemStatusComponent() {
-                    _super.call(this, "#BatimentSystemStatus", "#BatimentEntity");
-                    console.log('...>> BatimentSystemStatusComponent <<...');
+            EtageSystemStatusComponent = (function (_super) {
+                __extends(EtageSystemStatusComponent, _super);
+                function EtageSystemStatusComponent() {
+                    _super.call(this, "#EtageSystemStatus", "#EtageEntity");
+                    console.log('...>> EtageSystemStatusComponent <<...');
                 }
-                return BatimentSystemStatusComponent;
+                return EtageSystemStatusComponent;
             }(BaseSystemStatus_Component_1.BaseSystemStatusComponent));
-            exports_1("BatimentSystemStatusComponent", BatimentSystemStatusComponent);
+            exports_1("EtageSystemStatusComponent", EtageSystemStatusComponent);
         }
     }
 });
-//# sourceMappingURL=BatimentSystemStatus.Component.js.map
+//# sourceMappingURL=EtageSystemStatus.Component.js.map

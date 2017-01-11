@@ -31,7 +31,6 @@
         <![endif]-->
     <script src="/resources/assets/js/modernizr.min.js"></script>
     <script src="/resources/node_modules/systemjs/dist/system.js"></script>
-    {% block appImport %}
     <script type="text/javascript">
         System.config({
             baseURL: '/resources/web-app/',
@@ -48,8 +47,9 @@
             },
         });
         System.import('index.js');
-
+        System.import('common-component/global.components.loader.js');
     </script>
+    {% block appImport %}
     {% endblock %}
     <link rel="stylesheet" type="text/css" media="all" href="/resources/css/main.css" />
     <script>

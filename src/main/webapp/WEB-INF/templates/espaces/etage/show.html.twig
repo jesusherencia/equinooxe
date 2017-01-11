@@ -30,7 +30,7 @@
    <tr>
       <td>Espaces:</td>
       <td>
-         <div id="ListEtagesComponent"></div>
+         <div id="ListEspacesComponent"></div>
       </td>
    </tr>
    <tr>
@@ -41,10 +41,15 @@
 <hr>
 <div id="EtageSystemStatus"></div>
 
-<script id="ListEtages" type="application/json">
+<script id="EtageEntity" type="application/json">
    {{ etage|raw }} 
 </script>
-<script src="/resources/web-app/espaces/espaces.config.js"></script>        
+<script src="/resources/web-app/espaces/espaces.config.js"></script>     
+<script>
+System.import('index.js');
+console.log('espaces.config louded!');   
+</script>     
+
 {% endblock %}
 {% block appImport %}
 {% endblock %}
