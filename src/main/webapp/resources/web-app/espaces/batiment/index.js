@@ -17,6 +17,4 @@ System.register(['./ListEtages.Component', './BatimentSystemStatus.Component'], 
         }
     }
 });
-// let etageSystemStatus = new EtageSystemStatusComponent();
-// let leftMenu = new LeftMenu(); 
 //# sourceMappingURL=index.js.map
