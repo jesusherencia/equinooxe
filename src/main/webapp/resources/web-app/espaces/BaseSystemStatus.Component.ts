@@ -43,9 +43,9 @@ class ComponentOptionsImpl implements IComponentOptions {
               <fr-datetime :frdate="entityData.lastModifiedDate"></fr-datetime> 
               <since :frdate="entityData.lastModifiedDate"></since>
             </td>
-            <td>  {{ entityData.createdBy }} </td>
-            <td>  {{ entityData.archived  }} </td>
-            <td>  {{ entityData.deleted   }} </td>
+            <td>  {{ entityData.createdBy|capitalize }} </td>
+            <td v-bind:class="{ archived: entityData.archived }">  {{ entityData.archived? 'Oui': 'Non' }} </td>
+            <td v-bind:class="{ deleted : entityData.deleted }">   {{ entityData.deleted?  'Oui': 'Non' }} </td>
             </td>
         <tr>
       </table>
@@ -56,7 +56,6 @@ class ComponentOptionsImpl implements IComponentOptions {
 class DataModelHolder {
     public entityData: any
     constructor(parent: IComponentOptions) {
-         console.log("DataModelHolder Parent D:",parent);
         this.entityData = JSON.parse($(BaseSystemStatusComponent.dataSelector).text());
     }
 }

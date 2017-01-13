@@ -74,4 +74,6 @@ button,
 .smaller {
     font-size: smaller;
 }
- 
+.archived, .deleted {
+    color:#F44336;
+}
