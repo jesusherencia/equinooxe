@@ -33,16 +33,20 @@ Gestion des étages
 			<td>Description:</td>
 			<td><textarea name="description"> {{etageFormModel.description}} </textarea>
 			</td>
-			<td> {% for err in getFieldErrors('etageFormModel', 'description') %}
+			<td> 
+			     {% for err in getFieldErrors('etageFormModel', 'description') %}
 				  {{ err }}<br>
 				 {% endfor %}
 			</td>
 		</tr>
 		 <input type="hidden" name="batimentId" value="{{ etageFormModel.batiment.id }}" />
+		 <input type="hidden" name="id"         value="{{ etageFormModel.id }}" />
 		<tr>
-			<td><button class="btn-blue" type="submit">
+			<td>
+			    <button class="btn-blue" type="submit">
 					Enregistrer <i class="fa fa-save"></i>
-				</button></td>
+				</button>
+			</td>
 		</tr>
 	</table>
 </form>

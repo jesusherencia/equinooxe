@@ -1,53 +1,41 @@
-{% extends "../../layout" %}
-{% block title %}
-    Détails etage
-{% endblock %}
-{% block content %}
-<div class="titre"> 
-  <i class="fa fa-plus"></i>   Détails du etage: {{ etage.nom | capitalize }}  
-  <div class="dropdown pull-right">
-	                             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
-	                                  <i style="font-size: 18px" 
-	                                     class="ti-settings"
-	                                     ></i>
-	                             </a>
-	                            <ul class="dropdown-menu" role="menu">
-	                                 <li>
-	                                    <a href="{{ href('/espaces/etage/edit')}}/{{ etage.id }}" >Editer </a>
-	                                 </li>
-	                            </ul>
-  </div>
+{% extends "../../layout" %} {% block title %} Détails etage {% endblock %} {% block content %}
+<div class="titre">
+    <i class="fa fa-plus"></i> Détails du etage: {{ etage.nom | capitalize }}
+    <div class="dropdown pull-right">
+        <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+            <i style="font-size: 18px" class="ti-settings"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="{{ href('/espaces/etage/edit')}}/{{ etage.id }}">Editer </a>
+            </li>
+        </ul>
+    </div>
 </div>
-<table  class="table table-kv " >
-   <tr>
-      <td>Nom:</td>
-      <td>{{ etage.nom | capitalize  }} </td>
-   </tr>
-   <tr>
-      <td>Description:</td>
-      <td>{{ etage.description  }} </td>
-   </tr>
-   <tr>
-      <td>Espaces:</td>
-      <td>
-         <div id="ListEspacesComponent"></div>
-      </td>
-   </tr>
-   <tr>
-      <td>Adresse:</td>
-      <td>{{ etage.adresse   }} </td>
-   </tr>
+<table class="table table-kv ">
+    <tr>
+        <td>Nom:</td>
+        <td>{{ etage.nom | capitalize }} </td>
+    </tr>
+    <tr>
+        <td>Description:</td>
+        <td>{{ etage.description }} </td>
+    </tr>
+    <tr>
+        <td>Espaces:</td>
+        <td>
+            <div id="ListEspacesComponent"></div>
+        </td>
+    </tr>
 </table>
 <hr>
 <div id="EtageSystemStatus"></div>
-
 <script id="EtageEntity" type="application/json">
-   {{ etage|raw }} 
+    {{ etage | raw }}
+
 </script>
 <script>
-  System.import('espaces/etage/index.js');
-</script>     
+    System.import('espaces/etage/index.js');
 
-{% endblock %}
-{% block appImport %}
-{% endblock %}
+</script>
+{% endblock %} {% block appImport %} {% endblock %}

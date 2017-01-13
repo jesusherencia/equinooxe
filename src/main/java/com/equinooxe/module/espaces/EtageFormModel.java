@@ -8,6 +8,8 @@ import javax.validation.constraints.Size;
 
 import com.equinooxe.domain.Batiment;
 import com.equinooxe.domain.Etage;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author mboullouz
@@ -32,8 +34,9 @@ public class EtageFormModel {
 		this.batiment = etage.getBatiment();
 		this.batimentId = this.batiment.getId();
 	}
-	public EtageFormModel(Batiment batiment){
-		this.batiment =batiment;
+
+	public EtageFormModel(Batiment batiment) {
+		this.batiment = batiment;
 		this.batimentId = this.batiment.getId();
 	}
 
@@ -110,6 +113,18 @@ public class EtageFormModel {
 	 */
 	public void setBatiment(Batiment batiment) {
 		this.batiment = batiment;
+	}
+
+	@Override
+	public String toString() {
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonInString = "{ id:" + id + " }";
+		try {
+			jsonInString = mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return jsonInString;
 	}
 
 }
