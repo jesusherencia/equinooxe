@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.equinooxe.domain.util.J8PebbleExtension;
 import com.mitchellbosecke.pebble.PebbleEngine;
 import com.mitchellbosecke.pebble.loader.Loader;
 import com.mitchellbosecke.pebble.loader.ServletLoader;
@@ -44,7 +45,7 @@ public class PebbleTemplateConfiguration  extends WebMvcConfigurerAdapter {
     public PebbleEngine pebbleEngine() {
          return new PebbleEngine.Builder()
                 .loader(this.templateLoader())
-                .extension(springExtension())
+                .extension(springExtension(), new J8PebbleExtension())
                 .build();
     }  
 

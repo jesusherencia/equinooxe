@@ -29,6 +29,7 @@
 					<th>Nom</th>
 					<th>Batiment</th>
 					<th>Description</th>
+					<th>Mise à jour</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -45,6 +46,7 @@
 					     {{ entity.batiment.nom }} </a>
                     </td>
                     <td> {{ entity.description }}  </td>
+                    <td> zd: {{ entity.lastModifiedDate|zonedDate }}  </td>
 					<td>
 					   <div class="dropdown pull-right">
                              <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
