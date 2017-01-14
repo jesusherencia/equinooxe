@@ -1,12 +1,12 @@
-{% extends "layout" %}
+{% extends "../../layout" %}
 
 {% block title %}
-  Liste des utilisateurs
+  Liste des espaces
 {% endblock %}
 
 {% block content %}
 		<div class="titre">
-			<i class="ti-list-ol"></i> <span> Liste des utilisateurs</span>
+			<i class="ti-list-ol"></i> <span> Liste des espaces</span>
 			<div class="dropdown pull-right">
 	                             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
 	                                  <i style="font-size: 18px" 
@@ -14,46 +14,45 @@
 	                                     ></i>
 	                             </a>
 	                            <ul class="dropdown-menu" role="menu">
-	                                 <li><a href="#"
-	                                      >Détails</a></li>
-	                                 <li><a href="#">
-	                                       Editer</a>
+	                                 <li>
+	                                 	<a href="{{ href('/espaces/batiment/new') }}">
+	                                 		Ajouter espace 
+	                                 	</a>
 	                                 </li>
 	                            </ul>
 	        </div>
 		</div>
 		
-		<table class="table">
+		<table class="table table-kv">
 			<thead>
-				<tr>
-					<th>Nom</th>
-					<th>Email</th>
-					<!-- <th>Modification</th> -->
-					<th>Roles</th>
-					<th>Actif</th>
+				<tr>  
+					<th>Nom/N°</th>
+					<th>Etage</th>
+					<th>Description</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-			    {% for userEntry in users %}
+			    {% for entity in espaces %}
 				<tr>
-					<td> {{ user.firstName }} {{ userEntry.lastName }}</td>
-					<td>{{ userEntry.email }}</td>
-				    {# <td>{{ userEntry.lastModifiedDate|date('dd MMMM yyyy') }}</td>  #}
-					<td>
-					     {% for auth in userEntry.authorities %}
-						     {{ auth.name }} 
-						 {% endfor %}
+					<td> 
+						<a href="{{ href('/espaces/espace/show')}}/{{ entity.id }}">  
+					   	    {{ entity.nom }}
+						</a>
+					</td>
+					<td> 
+					 <a href="{{ href('/espaces/espace/show')}}/{{ entity.etage.id }}">     
+					     {{ entity.etage.nom }} / {{ entity.etage.numero }}  </a>
                     </td>
-					<td>{{ userEntry.activated }}</td>
+                    <td> {{ entity.description }}  </td>
 					<td>
 					   <div class="dropdown pull-right">
                              <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
                                   <i class="zmdi zmdi-more-vert"></i>
                              </a>
                             <ul class="dropdown-menu" role="menu">
-                                 <li> <a href="{{ href('/user/show')}}/?id={{ userEntry.id }}" >Détails</a></li>
-                                 <li> <a href="{{ href('/user/edit')}}/?id={{ userEntry.id }}" >Editer </a></li>
+                                 <li> <a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}" >Détails</a></li>
+                                 <li> <a href="{{ href('/espaces/etage/edit')}}/{{ entity.id }}" >Editer </a></li>
                             </ul>
                        </div>
 					</td>

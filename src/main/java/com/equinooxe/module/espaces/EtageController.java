@@ -100,6 +100,7 @@ public class EtageController {
 			etages = etageRepository.findAll();
 		}
 		return new ModelAndView("espaces/etage/list").addObject("etages", etages);
+	
 	}
 
 	@PostMapping("/espaces/etage/remove")

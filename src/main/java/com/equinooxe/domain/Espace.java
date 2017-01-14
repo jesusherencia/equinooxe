@@ -27,7 +27,7 @@ public class Espace extends AbstractAuditingEntity implements Serializable {
     private String nom;
 
     @Column(unique = true)
-    private String number;
+    private String numero;
 
     @Column(unique = false, columnDefinition = "TEXT")
     private String description;
@@ -54,12 +54,12 @@ public class Espace extends AbstractAuditingEntity implements Serializable {
         this.nom = name;
     }
 
-    public String getNumber() {
-        return number;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setNumero(String number) {
+        this.numero = number;
     }
 
     public String getDescription() {

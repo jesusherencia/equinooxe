@@ -39,6 +39,9 @@ public class UserManagementController {
 	private UserService userService;
 	
 	@Inject
+	private UserRepository userRepository;
+	
+	@Inject
 	AuthorityRepository authorityRepo;
 	
 	@Inject
@@ -118,8 +121,7 @@ public class UserManagementController {
 	@GetMapping("/user/list")
 	public ModelAndView list(Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		List<User> users = userQueryRepo.getAll() /*userRepository.findAll();*/ ;
-		uiModel.addAttribute("users", users);
+		List<User> users =userRepository.findAll()  /*userRepository.findAll(); userQueryRepo.getAll()*/ ;
 		ModelAndView mv= new ModelAndView("user/list").addObject("users", users);
 		 return mv;
 	}
