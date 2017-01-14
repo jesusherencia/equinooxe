@@ -9,10 +9,17 @@ import java.util.Map;
 
 import com.mitchellbosecke.pebble.extension.Filter;
 
-public class J8DateFilter implements Filter {
+/**
+ * Simple toString ZonedDateTime for Pebble
+ * Warning: this drop timezone part as the app only need simple,
+ * format displaying,  Locale is ignored!
+ * @author mboullouz
+ *
+ */
+public class ZonedDateTimePebbleFilter implements Filter {
 	private final List<String> argumentNames = new ArrayList<>();
 
-	public J8DateFilter() {
+	public ZonedDateTimePebbleFilter() {
 		argumentNames.add("format");
 		argumentNames.add("existingFormat");
 	}

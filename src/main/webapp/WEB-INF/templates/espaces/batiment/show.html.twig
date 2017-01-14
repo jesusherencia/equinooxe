@@ -41,7 +41,8 @@
    </tr>
 </table>
 <hr>
-<div id="BatimentSystemStatus"></div>
+{% include "../../partials/systemInfo" with {"infoForEntity": batiment} %}
+<!-- <div id="BatimentSystemStatus"></div> -->
 
 <script id="BatimentEntity" type="application/json">
    {{ batiment|raw }} 

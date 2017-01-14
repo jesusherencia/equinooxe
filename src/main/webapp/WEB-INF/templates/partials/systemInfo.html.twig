@@ -1,0 +1,21 @@
+<!-- Expects and entity with name: infoForEntity  -->
+<div>
+      <caption style="color:#F44336;">Système</caption>
+      <table class="table">
+        <tr>
+            <th> Dernière mise à jour </th>
+            <th> Par </th>
+            <th> Archive </th>
+            <th> Suppression </th>
+        </tr>
+        <tr>
+            <td>
+              <span> {{infoForEntity.lastModifiedDate|zonedDate  }} </sspan> 
+              <small> ({{infoForEntity.lastModifiedDate|zonedDate|since  }}) </small>
+            </td>
+            <td>  {{ infoForEntity.createdBy|capitalize }} </td>
+            <td class="{{ infoForEntity.archived? 'archived': ''}}" >  {{ infoForEntity.archived? 'Oui': 'Non' }} </td>
+            <td class="{{ infoForEntity.deleted?  'deleted' : '' }}">   {{ infoForEntity.deleted?  'Oui': 'Non' }} </td>
+        <tr>
+      </table>
+</div>
