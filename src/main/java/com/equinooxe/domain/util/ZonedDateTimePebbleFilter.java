@@ -35,7 +35,7 @@ public class ZonedDateTimePebbleFilter implements Filter {
             return "Unknown_date";
         }
 		LocalDateTime in =((ZonedDateTime) input).toLocalDateTime();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 		return in.format(formatter);
 	}
 

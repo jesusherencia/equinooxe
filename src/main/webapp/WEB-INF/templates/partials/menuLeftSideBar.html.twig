@@ -29,7 +29,8 @@
         "active": request.getRequestURI().startsWith('/espaces'),
         "icon": " ti-layers",
         "label": "Espaces",
-        "subs": [{
+        "subs": [
+                {
                 "url": "/espaces/batiment/list",
                 "label": "Batiments",
                 "active": request.getRequestURI().startsWith('/espaces/batiment')
@@ -38,6 +39,11 @@
                 "url": "/espaces/etage/list",
                 "label": "Etages",
                 "active": request.getRequestURI().startsWith('/espaces/etage')
+                },
+                {
+                "url": "/espaces/espace/list",
+                "label": "Espaces",
+                "active": request.getRequestURI().startsWith('/espaces/espace')
                 }
                ]
     }

@@ -7,4 +7,4 @@ import { LeftMenu } from './../../menu';
  
 
 let listEtagesComponent = new ListEtagesComponent();
-let batimentSystemStatus = new BatimentSystemStatusComponent();
+// let batimentSystemStatus = new BatimentSystemStatusComponent();

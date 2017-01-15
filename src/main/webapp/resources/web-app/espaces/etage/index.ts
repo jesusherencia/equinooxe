@@ -2,4 +2,4 @@
 import { EtageSystemStatusComponent } from './EtageSystemStatus.Component';
 
 
-let etageSatusComp = new EtageSystemStatusComponent();
+// let etageSatusComp = new EtageSystemStatusComponent();

@@ -13,7 +13,7 @@ System.register([], function(exports_1, context_1) {
              */
             ListEtagesComponent = (function () {
                 function ListEtagesComponent() {
-                    console.log('Espaces Index');
+                    console.log('ListEtagesComponent');
                     var cmpOptions = new ComponentOptionsImpl();
                     ListEtagesComponent.mainView = new Vue(cmpOptions);
                 }
@@ -42,7 +42,7 @@ System.register([], function(exports_1, context_1) {
             DataModelHolder = (function () {
                 function DataModelHolder(parent) {
                     this.batiment = JSON.parse($("#BatimentEntity").text());
-                    console.log('data ctor', "parent: ", parent);
+                    // console.log('data ctor', "parent: ", parent);
                 }
                 return DataModelHolder;
             }());

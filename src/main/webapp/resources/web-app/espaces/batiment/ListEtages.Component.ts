@@ -9,7 +9,7 @@ import { BatimentEntity } from './batiment.entity';
 export class ListEtagesComponent {
     public static mainView: vuejs.Vue;
     constructor() {
-        console.log('Espaces Index');
+        console.log('ListEtagesComponent');
         let cmpOptions: IComponentOptions = new ComponentOptionsImpl();
         ListEtagesComponent.mainView = new Vue(cmpOptions);
     }
@@ -70,7 +70,7 @@ class ComponentOptionsImpl implements IComponentOptions {
 class DataModelHolder {
     public batiment: BatimentEntity = JSON.parse($("#BatimentEntity").text());
     constructor(parent: IComponentOptions) {
-        console.log('data ctor', "parent: ", parent);
+        // console.log('data ctor', "parent: ", parent);
     }
 }
 

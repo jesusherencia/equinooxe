@@ -38,7 +38,7 @@ public class SinceDatePebbleFilter implements Filter {
 		}
 		String desiredFormat = (String) args.get("format");
 		String inString = (String) input;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 		LocalDateTime in = LocalDateTime.parse(inString, formatter);
 
 		return getDiff(in, desiredFormat);
@@ -76,7 +76,7 @@ public class SinceDatePebbleFilter implements Filter {
 		if (days > 0)
 			out += days + "jour"+(days>1?"s ":" ");
 		if (hours > 0)
-			out += hours + " heure"+(hours>1?"s ":" ");
+			out += hours + "heure"+(hours>1?"s ":" ");
 		return out;
 	}
 }

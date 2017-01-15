@@ -27,7 +27,7 @@ public class LocalDateTimePebbleFilter implements Filter {
             return "Unknown_date";
         }
 		LocalDateTime in =(LocalDateTime) input;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 		return in.format(formatter);
 	}
 }

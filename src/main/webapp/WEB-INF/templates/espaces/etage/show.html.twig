@@ -29,7 +29,8 @@
     </tr>
 </table>
 <hr>
-<div id="EtageSystemStatus"></div>
+{% include "../../partials/systemInfo" with {"infoForEntity": etage} %}
+<!-- <div id="EtageSystemStatus"></div> -->
 <script id="EtageEntity" type="application/json">
     {{ etage | raw }}
 
