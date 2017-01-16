@@ -1,0 +1,53 @@
+{% extends "../../layout" %}
+
+{% block title %}
+Gestion des étages
+{% endblock %}
+
+{% block content %}
+<div class="titre">
+	<i class="fa fa-plus"></i>
+	{% if etageFormModel.id<0 %}
+	 Nouvel espace 
+	{% else %}
+	Edition de l'espace:
+	{{ etageFormModel.nom | capitalize }}
+	{% endif %}
+	dans l'étage {{ espaceFormModel.etage.nom | capitalize }}
+</div>
+	 {% for err in getAllErrors('espaceFormModel') %}
+    <b style="color: red;">{{ err }}</b><br>
+{% endfor %}  
+<form action="{{ href('/espaces/espace/save') }}" method="post" name="espaceFormModel">
+	<table class="table">
+		<tr>
+			<td>Nom:</td>
+			<td><input type="text" name="nom"
+				value="{{espaceFormModel.nom  }}" /></td>
+			<td>{% for err in getFieldErrors('espaceFormModel', 'nom') %}
+				{{ err }}<br> 
+				{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><textarea name="description"> {{espaceFormModel.description}} </textarea>
+			</td>
+			<td> 
+			     {% for err in getFieldErrors('espaceFormModel', 'description') %}
+				  {{ err }}<br>
+				 {% endfor %}
+			</td>
+		</tr>
+		 <input type="hidden" name="batimentId" value="{{ espaceFormModel.etage.id }}" />
+		 <input type="hidden" name="id"         value="{{ espaceFormModel.id }}" />
+		<tr>
+			<td>
+			    <button class="btn-blue" type="submit">
+					Enregistrer <i class="fa fa-save"></i>
+				</button>
+			</td>
+		</tr>
+	</table>
+</form>
+{% endblock %}
