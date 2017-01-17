@@ -1,4 +1,4 @@
-import { BatimentEntity } from './batiment.entity';
+import { BatimentEntity } from './../model/batiment.entity';
 
 /**
  * Main

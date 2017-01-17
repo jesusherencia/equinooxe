@@ -1,0 +1,1 @@
+//   /espaces/etage/{etageId}/espace/new

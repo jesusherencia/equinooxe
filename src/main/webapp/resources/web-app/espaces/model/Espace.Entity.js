@@ -1,7 +1,7 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var BatimentEntity;
+    var EspaceEntity;
     return {
         setters:[],
         execute: function() {
@@ -11,14 +11,13 @@ System.register([], function(exports_1, context_1) {
              * @export
              * @class BatimentEntity
              */
-            BatimentEntity = (function () {
-                function BatimentEntity() {
-                    this.etages = [];
+            EspaceEntity = (function () {
+                function EspaceEntity() {
                 }
-                return BatimentEntity;
+                return EspaceEntity;
             }());
-            exports_1("BatimentEntity", BatimentEntity);
+            exports_1("EspaceEntity", EspaceEntity);
         }
     }
 });
-//# sourceMappingURL=Batiment.Entity.js.map
+//# sourceMappingURL=Espace.Entity.js.map
