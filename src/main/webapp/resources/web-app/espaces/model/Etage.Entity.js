@@ -1,7 +1,7 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var BatimentEntity;
+    var EtageEntity;
     return {
         setters:[],
         execute: function() {
@@ -11,13 +11,13 @@ System.register([], function(exports_1, context_1) {
              * @export
              * @class BatimentEntity
              */
-            BatimentEntity = (function () {
-                function BatimentEntity() {
+            EtageEntity = (function () {
+                function EtageEntity() {
                     this.espaces = [];
                 }
-                return BatimentEntity;
+                return EtageEntity;
             }());
-            exports_1("BatimentEntity", BatimentEntity);
+            exports_1("EtageEntity", EtageEntity);
         }
     }
 });

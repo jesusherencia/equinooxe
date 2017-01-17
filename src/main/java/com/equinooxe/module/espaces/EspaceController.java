@@ -35,8 +35,8 @@ public class EspaceController {
 	}
 	
 	@GetMapping("/espaces/etage/{etageId}/espace/new")
-	public ModelAndView showForm(@PathVariable Long etageId, EtageFormModel etageFormModel) {
+	public ModelAndView showForm(@PathVariable Long etageId, EspaceFormModel etageFormModel) {
 		return new ModelAndView("espaces/espace/form").addObject("espaceFormModel",
-				new EtageFormModel(etageRepository.findOne(etageId)));
+				new EspaceFormModel(etageRepository.findOne(etageId)));
 	}
 }

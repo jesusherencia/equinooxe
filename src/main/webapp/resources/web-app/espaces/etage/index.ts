@@ -1,5 +1,5 @@
 
 import { EtageSystemStatusComponent } from './EtageSystemStatus.Component';
+import { ListEspacesComponent } from './ListEspaces.Component';
 
-
-// let etageSatusComp = new EtageSystemStatusComponent();
+ let listEspacesComponent = new ListEspacesComponent();
