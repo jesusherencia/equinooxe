@@ -22,8 +22,7 @@ Gestion des étages
 	<table class="table">
 		<tr>
 			<td>Nom:</td>
-			<td><input type="text" name="nom"
-				value="{{espaceFormModel.nom  }}" /></td>
+			<td><input type="text" name="nom" value="{{espaceFormModel.nom  }}" /></td>
 			<td>{% for err in getFieldErrors('espaceFormModel', 'nom') %}
 				{{ err }}<br> 
 				{% endfor %}
