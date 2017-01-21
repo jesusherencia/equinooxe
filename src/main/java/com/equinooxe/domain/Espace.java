@@ -38,7 +38,18 @@ public class Espace extends AbstractAuditingEntity implements Serializable {
     @OneToMany(mappedBy = "espace", targetEntity = CleanRequest.class)
     private Collection<CleanRequest> cleanRequests;
 
-    public Etage getEtage() {
+	public Espace(String nom, String description, Etage etage) {
+		super();
+		this.nom = nom;
+		this.description = description;
+		this.etage = etage;
+	}
+	
+	public Espace(){
+		super();
+	}
+
+	public Etage getEtage() {
         return etage;
     }
 
