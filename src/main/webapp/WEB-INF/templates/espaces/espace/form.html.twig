@@ -7,13 +7,13 @@ Gestion des étages
 {% block content %}
 <div class="titre">
 	<i class="fa fa-plus"></i>
-	{% if etageFormModel.id<0 %}
+	{% if espaceFormModel.id<0 %}
 	 Nouvel espace 
 	{% else %}
 	Edition de l'espace:
-	{{ etageFormModel.nom | capitalize }}
+	{{ espaceFormModel.nom | capitalize }}
 	{% endif %}
-	dans l'étage {{ espaceFormModel.etage.nom | capitalize }}
+	dans l'étage: {{ espaceFormModel.etage.nom | capitalize }}
 </div>
 	 {% for err in getAllErrors('espaceFormModel') %}
     <b style="color: red;">{{ err }}</b><br>
@@ -29,7 +29,7 @@ Gestion des étages
 			</td>
 		</tr>
 		<tr>
-			<td>Nom:</td>
+			<td>Numero:</td>
 			<td><input type="text" name="nom" value="{{espaceFormModel.numero  }}" /></td>
 			<td>{% for err in getFieldErrors('espaceFormModel', 'numero') %}
 				{{ err }}<br> 

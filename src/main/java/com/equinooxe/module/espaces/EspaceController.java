@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.equinooxe.domain.Batiment;
 import com.equinooxe.domain.Espace;
 import com.equinooxe.domain.Etage;
 import com.equinooxe.repository.EspaceRepository;
@@ -58,13 +57,14 @@ public class EspaceController {
 		if (espaceFormModel.getId() > 0) {
 			espace = espaceRepository.findOne(espaceFormModel.getId());
 			espace.setNom(espaceFormModel.getNom());
+			espace.setNumero(espaceFormModel.getNumero());
 			espace.setDescription(espaceFormModel.getDescription());
 			espaceRepository.saveAndFlush(espace);
 			return "redirect:/espaces/espace/show/" + espace.getId();
 		} else {
 			etage = etageRepository.findOne(espaceFormModel
 					.getEtageId());/* batiment will be null on submit */
-			espace = new Espace(espaceFormModel.getNom(), espaceFormModel.getDescription(), etage);
+			espace = new Espace(espaceFormModel.getNom(),espaceFormModel.getNumero(), espaceFormModel.getDescription(), etage);
 			EqLogger.info(espace.toString());
 			espace = espaceRepository.saveAndFlush(espace);
 		}
