@@ -57,6 +57,10 @@ public class UserService {
 			log.debug("Activated user: {}", user);
 			return user;
 		});
+	} 
+	
+	public  User saveAndFlush(User u){
+		return userRepository.saveAndFlush(u);
 	}
 
 	public Optional<User> completePasswordReset(String newPassword, String key) {

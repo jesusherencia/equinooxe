@@ -4,10 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EqLogger {
-	private static Logger log;
+	private static Logger log =LoggerFactory.getLogger(EqLogger.class);
 	public static final String MESSAGE_PREFIX = "\n ===========\n";
 	public static final String MESSAGE_SUFFIX = "\n ========== ";
-	private static EqLogger eqLog;
+	private static EqLogger eqLog ;
 
 	public EqLogger(Logger pLog) {
 		log = pLog;

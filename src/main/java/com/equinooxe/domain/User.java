@@ -1,7 +1,7 @@
 package com.equinooxe.domain;
 
 import com.equinooxe.config.Constants;
-
+import com.equinooxe.domain.listeners.UserEntityListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -29,6 +29,7 @@ import java.time.ZonedDateTime;
 @DiscriminatorColumn(name = "USER_TYPE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "user")
+@EntityListeners(UserEntityListener.class)
 public class User extends AbstractAuditingEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

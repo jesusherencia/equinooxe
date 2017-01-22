@@ -7,8 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import org.elasticsearch.search.aggregations.support.format.ValueFormat.DateTime;
+import javax.persistence.ManyToOne;
 
 import com.equinooxe.domain.util.LocalDateTimeDeserializer;
 import com.equinooxe.domain.util.LocalDateTimeSerializer;
@@ -16,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.querydsl.core.types.dsl.DateTemplate;
+
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
@@ -34,10 +33,17 @@ public class Notification {
 	private String message;
 	
 	@Column(name = "title")
-	private String title;
+	private String title="";
 	
-	@Column(name = "type" )
-	private String type;
+	@Column(name = "type", nullable=true )
+	private String type=INFO_TYPE;
+	
+	@Column(name = "url", nullable=true)
+	private String url="#";
+	
+	@ManyToOne(targetEntity=User.class)
+	private User user;
+	
 	
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -48,18 +54,22 @@ public class Notification {
 		this.addAt = LocalDateTime.now();
 	}
 	
-	public Notification(String message, String title) {
+	public Notification(User user,String message, String title, String url) {
 		super();
+		this.user=user;
 		this.message = message;
 		this.title = title;
+		this.url=url;
 		this.type = INFO_TYPE;
 		this.addAt = LocalDateTime.now();
 	}
 
-	public Notification(String message, String title, String type) {
+	public Notification(User user,String message, String title, String url, String type) {
 		super();
+		this.user=user;
 		this.message = message;
 		this.title = title;
+		this.url=url;
 		this.type = type;
 		this.addAt = LocalDateTime.now();
 	}
@@ -74,6 +84,24 @@ public class Notification {
 
 	public String getMessage() {
 		return message;
+	}
+	
+	
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setMessage(String message) {
@@ -103,5 +131,12 @@ public class Notification {
 	public void setAddAt(LocalDateTime addAt) {
 		this.addAt = addAt;
 	}
+
+	@Override
+	public String toString() {
+		return "Notification [id=" + id + ", message=" + message + ", title=" + title + ", type=" + type + ", url="
+				+ url + ", user=" + user.toString() + ", addAt=" + addAt + "]";
+	}
+	
 	
 }

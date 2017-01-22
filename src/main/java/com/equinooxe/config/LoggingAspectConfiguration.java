@@ -1,6 +1,7 @@
 package com.equinooxe.config;
 
 import com.equinooxe.aop.logging.LoggingAspect;
+
 import org.springframework.context.annotation.*;
 
 @Configuration
@@ -12,4 +13,5 @@ public class LoggingAspectConfiguration {
     public LoggingAspect loggingAspect() {
         return new LoggingAspect();
     }
+    
 }
