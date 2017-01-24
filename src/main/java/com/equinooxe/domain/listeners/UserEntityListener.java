@@ -3,16 +3,6 @@
  */
 package com.equinooxe.domain.listeners;
 
-import com.equinooxe.domain.Notification;
-import com.equinooxe.domain.User;
-import com.equinooxe.repository.NotificationRepository;
-import com.equinooxe.repository.UserRepository;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
@@ -21,9 +11,11 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 
+import com.equinooxe.domain.User;
+
 
 /**
- *
+ * TODO remove and use AOP instead!
  * @author mboullouz
  */
 public class UserEntityListener {

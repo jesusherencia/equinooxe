@@ -5,12 +5,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.equinooxe.domain.Notification;
 import com.equinooxe.domain.QNotification;
 import com.equinooxe.service.util.EqLogger;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
+@Component
 public class NotificationQueryRepository {
 	protected QNotification qNotification= QNotification.notification;
 	protected JPAQueryFactory queryFactory;

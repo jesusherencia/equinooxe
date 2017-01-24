@@ -8,18 +8,15 @@
 		<div class="titre">
 			<i class="ti-list-ol"></i> <span> Liste des utilisateurs</span>
 			<div class="dropdown pull-right">
-	                             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
-	                                  <i style="font-size: 18px" 
-	                                     class="ti-settings"
-	                                     ></i>
-	                             </a>
-	                            <ul class="dropdown-menu" role="menu">
-	                                 <li><a href="#"
-	                                      >Détails</a></li>
-	                                 <li><a href="#">
-	                                       Editer</a>
-	                                 </li>
-	                            </ul>
+	             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+	                 <i style="font-size: 18px" 
+	                    class="ti-settings"></i>
+	            </a>
+	            <ul class="dropdown-menu" role="menu">
+	               <li>
+	                  <a href="/user/new">Nouvel utilisateur</a>
+	               </li>
+	            </ul>
 	        </div>
 		</div>
 		
@@ -28,7 +25,6 @@
 				<tr>
 					<th>Nom</th>
 					<th>Email</th>
-					<!-- <th>Modification</th> -->
 					<th>Roles</th>
 					<th>Actif</th>
 					<th></th>
@@ -39,7 +35,6 @@
 				<tr>
 					<td> {{ user.firstName }} {{ userEntry.lastName }}</td>
 					<td>{{ userEntry.email }}</td>
-				    {# <td>{{ userEntry.lastModifiedDate|date('dd MMMM yyyy') }}</td>  #}
 					<td>
 					     {% for auth in userEntry.authorities %}
 						     {{ auth.name }} 
