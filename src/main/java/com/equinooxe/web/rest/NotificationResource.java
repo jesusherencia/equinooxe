@@ -16,6 +16,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.equinooxe.domain.Notification;
 import com.equinooxe.repository.NotificationQueryRepository;
 import com.equinooxe.security.AuthoritiesConstants;
+import com.equinooxe.security.SecurityUtils;
 @RestController
 @RequestMapping("/api/notification")
 @Secured(AuthoritiesConstants.USER)
@@ -29,7 +30,8 @@ public class NotificationResource {
 		@GetMapping("/all") 
 		@Timed
 		public ResponseEntity<List<Notification>> getEtages() { 
-		    List<Notification> notifs = notificationQueryRepository.getAll();
+			String userLogin= SecurityUtils.getCurrentUserLogin();
+		    List<Notification> notifs = notificationQueryRepository.getByLogin(userLogin);
 		    return ResponseEntity.ok().body(notifs);
 		}
 }

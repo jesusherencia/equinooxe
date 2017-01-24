@@ -30,6 +30,9 @@ public class NotificationQueryRepository {
 		return  queryFactory.selectFrom(qNotification).fetch();
 	}
 	public List<Notification>  getByUserId(Long userId) {
-		return queryFactory.select(qNotification).where(qNotification.user.id.eq(userId)).fetch();
+		return queryFactory.selectFrom(qNotification).where(qNotification.user.id.eq(userId)).fetch();
+	}
+	public List<Notification>  getByLogin(String login) {
+		return queryFactory.selectFrom(qNotification).where(qNotification.user.login.eq(login)).fetch();
 	}
 }
