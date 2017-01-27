@@ -17,7 +17,6 @@ import javax.persistence.PersistenceContext;
 import java.util.SortedSet;
 import java.util.stream.Stream;
 
-@SuppressWarnings("unused")
 @Configuration
 @EnableCaching
 @AutoConfigureAfter(value = { MetricsConfiguration.class, DatabaseConfiguration.class })

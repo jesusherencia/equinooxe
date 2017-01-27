@@ -33,8 +33,8 @@
 			<tbody>
 			    {% for userEntry in users %}
 				<tr>
-					<td> {{ user.firstName }} {{ userEntry.lastName }}</td>
-					<td>{{ userEntry.email }}</td>
+					<td> {{ userEntry.firstName }} {{ userEntry.lastName }}</td>
+					<td> {{ userEntry.email }}</td>
 					<td>
 					     {% for auth in userEntry.authorities %}
 						     {{ auth.name }} 

@@ -1,4 +1,5 @@
 {% import "partials/leftSideBarMacro" %}
+
 {% set menuModel =
 {
     "dashboard": {
@@ -7,6 +8,18 @@
         "icon": "zmdi zmdi-view-dashboard",
         "label": "Dashboard",
         "subs": []
+    },
+    "cleaning": {
+        "url": "/cleaning",
+        "active": request.getRequestURI().startsWith('/clean'),
+        "icon": "ti-layout-media-right-alt",
+        "label": "Cleaning",
+        "subs": [{
+                "url": "/cleaning/request/list",
+                "label": "Demandes",
+                "active": request.getRequestURI().startsWith('/request/list')
+                }
+              ]
     },
     "users": {
         "url": "/user",
@@ -52,6 +65,7 @@
 <div  id="sidebar-menu">
    <ul>
       {{ leftMenuEntry(menuModel.dashboard) }}
+      {{ leftMenuEntry(menuModel.cleaning) }}
       {{ leftMenuEntry(menuModel.users) }}
       {{ leftMenuEntry(menuModel.espaces) }} 
    </ul>

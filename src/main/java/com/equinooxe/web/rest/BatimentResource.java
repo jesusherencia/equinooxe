@@ -20,13 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.equinooxe.domain.Batiment;
-import com.equinooxe.domain.Espace;
 import com.equinooxe.repository.BatimentRepository;
 import com.equinooxe.security.AuthoritiesConstants;
-import com.equinooxe.service.util.EqLogger;
 import com.equinooxe.web.rest.util.HeaderUtil;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/api/batiment")

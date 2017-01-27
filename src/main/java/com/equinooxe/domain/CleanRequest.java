@@ -14,6 +14,8 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -32,8 +34,8 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
     @Column(unique = false, columnDefinition = "TEXT")
     private String instructions;
 
-    @Column()
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private CleanStatus status;
 
     @ManyToOne
     private AgentUser agent;
@@ -51,7 +53,23 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
         super();
     }
 
-    public LocalDateTime getStartAt() {
+    public CleanStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CleanStatus status) {
+		this.status = status;
+	}
+
+	public Espace getEspace() {
+		return espace;
+	}
+
+	public void setEspace(Espace espace) {
+		this.espace = espace;
+	}
+
+	public LocalDateTime getStartAt() {
         return startAt;
     }
 
@@ -83,13 +101,7 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
         this.instructions = instructions;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    
 
     public AgentUser getAgent() {
         return agent;
