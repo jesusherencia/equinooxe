@@ -24,10 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.config.ThymeleafConfiguration;
 import com.equinooxe.domain.Authority;
-import com.equinooxe.domain.Notification;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.AuthorityRepository;
-import com.equinooxe.repository.NotificationRepository;
 import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
@@ -57,9 +55,6 @@ public class UserManagementController {
 
 	@Autowired
 	UserQueryRepository userQueryRepo;
-	
-	@Inject
-	private NotificationRepository notificationRepository;
 
 	@GetMapping("/user/new")
 	public String showForm(UserForm userForm, Model uiModel) {

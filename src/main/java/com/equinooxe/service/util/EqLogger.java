@@ -3,27 +3,35 @@ package com.equinooxe.service.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.equinooxe.domain.util.EqUtils;
+
 public class EqLogger {
-	private static Logger log =LoggerFactory.getLogger(EqLogger.class);
+	private Logger log;
 	public static final String MESSAGE_PREFIX = "\n ===========\n";
 	public static final String MESSAGE_SUFFIX = "\n ========== ";
-	private static EqLogger eqLog ;
-
-	public EqLogger(Logger pLog) {
-		log = pLog;
+ 
+	
+	public EqLogger(){
+		 log =LoggerFactory.getLogger(EqLogger.class);
+	}
+	
+	public EqLogger(Class<?> clazz){
+		 log =LoggerFactory.getLogger(clazz);
 	}
 
-	public static EqLogger set(Class<?> clazz) {
+	public  EqLogger set(Class<?> clazz) {
 		log = LoggerFactory.getLogger(clazz);
-		return eqLog = new EqLogger(log);
+		return this;
 	}
 
-	public static EqLogger info(String message) {
-		if (eqLog == null) {
-			log = LoggerFactory.getLogger(EqLogger.class);
-			eqLog = new EqLogger(log);
-		}
+	public  EqLogger info(String message) {
 		log.info(MESSAGE_PREFIX + message + MESSAGE_SUFFIX);
-		return eqLog;
+		return this;
 	}
+	
+	public  EqLogger json(String message, Object obj) {
+		log.info(MESSAGE_PREFIX + message+ ":: \n "+EqUtils.json(obj) + MESSAGE_SUFFIX);
+		return this;
+	}
+	
 }

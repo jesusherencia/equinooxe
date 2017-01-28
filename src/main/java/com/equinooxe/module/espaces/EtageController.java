@@ -24,7 +24,6 @@ import com.equinooxe.domain.Etage;
 import com.equinooxe.repository.BatimentRepository;
 import com.equinooxe.repository.EtageRepository;
 import com.equinooxe.security.AuthoritiesConstants;
-import com.equinooxe.service.util.EqLogger;
 
 /**
  * @author mboullouz
@@ -67,10 +66,7 @@ public class EtageController {
 	public String save(@Valid EtageFormModel etageFormModel, BindingResult bindingResult, Model uiModel) {
 		Batiment batiment = null;
 		Etage etage = null;
-		EqLogger.set(EtageController.class);
-		EqLogger.info(etageFormModel.toString());
 		if (bindingResult.hasErrors()) {
-			EqLogger.info("Etage not valide");
 			return "espaces/etage/form";
 		}
 		if (etageFormModel.getId() > 0) {
@@ -82,7 +78,6 @@ public class EtageController {
 		} else {
 			batiment = batimentRepository.findOne(etageFormModel.getBatimentId());/* batiment will be null on submit */
 			etage = new Etage(etageFormModel.getNom(), etageFormModel.getDescription(), batiment);
-			EqLogger.info(etage.toString());
 			etage = etageRepository.saveAndFlush(etage);
 		}
 		uiModel.addAttribute("batiment", etageFormModel.getBatiment());
@@ -105,10 +100,8 @@ public class EtageController {
 
 	@PostMapping("/espaces/etage/remove")
 	public String remove(@Valid RemoveFormModel removeFormModel, BindingResult bindingResult, Model uiModel) {
-		EqLogger.info(" Remove data: " + removeFormModel.toString());
 		if (removeFormModel.getId() > 0) {
 			Etage e = etageRepository.findOne(removeFormModel.getId());
-			EqLogger.info("Remove Entity: " + e.toString());
 			etageRepository.delete(e);
 		}
 

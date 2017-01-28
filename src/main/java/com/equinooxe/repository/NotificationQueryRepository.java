@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import com.equinooxe.domain.Notification;
 import com.equinooxe.domain.QNotification;
-import com.equinooxe.service.util.EqLogger;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Component
@@ -20,8 +19,6 @@ public class NotificationQueryRepository {
  
 	@Autowired
 	public NotificationQueryRepository(EntityManager entityManager) {
-		EqLogger.set(AbstractQueryRespository.class);
-		EqLogger.info(" AbstractQueryRespository ctor called! ");
 		this.entityManager=  entityManager;
 		queryFactory = new JPAQueryFactory(entityManager);
 	}

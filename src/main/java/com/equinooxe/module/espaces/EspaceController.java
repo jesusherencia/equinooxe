@@ -21,7 +21,6 @@ import com.equinooxe.domain.Etage;
 import com.equinooxe.repository.EspaceRepository;
 import com.equinooxe.repository.EtageRepository;
 import com.equinooxe.security.AuthoritiesConstants;
-import com.equinooxe.service.util.EqLogger;
 
 @Controller
 @Secured(AuthoritiesConstants.USER)
@@ -48,10 +47,7 @@ public class EspaceController {
 	public String save(EspaceFormModel espaceFormModel, BindingResult bindingResult, Model uiModel) {
 		Etage etage = null;
 		Espace espace = null;
-		EqLogger.set(EtageController.class);
-		EqLogger.info(espaceFormModel.toString());
 		if (bindingResult.hasErrors()) {
-			EqLogger.info("Etage not valide");
 			return "espaces/etage/form";
 		}
 		if (espaceFormModel.getId() > 0) {
@@ -65,7 +61,6 @@ public class EspaceController {
 			etage = etageRepository.findOne(espaceFormModel
 					.getEtageId());/* batiment will be null on submit */
 			espace = new Espace(espaceFormModel.getNom(),espaceFormModel.getNumero(), espaceFormModel.getDescription(), etage);
-			EqLogger.info(espace.toString());
 			espace = espaceRepository.saveAndFlush(espace);
 		}
 		uiModel.addAttribute("etage", espaceFormModel.getEtage());

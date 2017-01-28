@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import com.equinooxe.domain.AbstractAuditingEntity;
-import com.equinooxe.service.util.EqLogger;
 import com.querydsl.core.types.dsl.EntityPathBase;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -22,7 +21,6 @@ public abstract class AbstractQueryRespository<QE extends EntityPathBase<E>,E ex
 	protected EntityManager entityManager;
  
 	public AbstractQueryRespository(EntityManager em, QE qEntity){
-		EqLogger.set(AbstractQueryRespository.class);
 		this.qEntity = qEntity;
 		this.entityManager= em;
 		queryFactory = new JPAQueryFactory(entityManager);
