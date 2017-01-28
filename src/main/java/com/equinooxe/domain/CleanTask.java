@@ -21,10 +21,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 public class CleanTask extends AbstractAuditingEntity implements Serializable {
-
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column(unique = true)
@@ -103,11 +99,6 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "{ id=" + id + " }";
     }
 
 }

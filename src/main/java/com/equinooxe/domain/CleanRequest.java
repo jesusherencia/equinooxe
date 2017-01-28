@@ -5,19 +5,17 @@
  */
 package com.equinooxe.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
  *
@@ -34,8 +32,8 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
     @Column(unique = false, columnDefinition = "TEXT")
     private String instructions;
 
-    @Enumerated(EnumType.STRING)
-    private CleanStatus status;
+    @Column
+    private String status = CleanStatus.EN_ATTENTE;
 
     @ManyToOne
     private AgentUser agent;
@@ -53,11 +51,11 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
         super();
     }
 
-    public CleanStatus getStatus() {
+    public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(CleanStatus status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -144,7 +142,6 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CleanRequest)) {
             return false;
         }
@@ -155,9 +152,11 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.appnh.nettoyage.model.DemandeNettoyage[ id=" + id + " ]";
+    public static class CleanStatus {
+    	public static final String   EN_ATTENTE ="EN_ATTENTE";
+    	public static final String   EN_COURS="EN_COURS";
+    	public static final String   REPORTEE="REPORTEE";
+    	public static final String   FAIT="FAIT";
     }
 
 }
