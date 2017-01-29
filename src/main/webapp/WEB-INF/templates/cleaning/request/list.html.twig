@@ -25,10 +25,11 @@
 		
 		<table class="table table-kv">
 			<thead>
-				<tr>  
-					<th>Nom</th>
-					<th>Batiment</th>
-					<th>Description</th>
+				<tr> 
+				    <th>Espace</th> 
+					<th>Espace</th>
+					<th>Status</th>
+					<th>Nbr taches</th>
 					<th>Mise à jour</th>
 					<th></th>
 				</tr>
@@ -36,16 +37,21 @@
 			<tbody>
 			    {% for entity in cleanRequests %}
 				<tr>
+				    <td> 
+						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
+					   	    {{ entity.agent.lastName }}
+						</a>
+					</td>
 					<td> 
 						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
-					   	    {{ entity.nom }}
+					   	    {{ entity.espace.nom }}
 						</a>
 					</td>
 					<td> 
 					 <a href="{{ href('/espaces/batiment/show')}}/{{ entity.batiment.id }}">     
-					     {{ entity.batiment.nom }} </a>
+					     {{ entity.status }} </a>
                     </td>
-                    <td> {{ entity.description }}  </td>
+                    <td> {{ entity.cleanTasks|length }}  </td>
                     <td> {{ entity.lastModifiedDate|zonedDate }}  </td>
 					<td>
 					   <div class="dropdown pull-right">
@@ -62,4 +68,5 @@
 				{% endfor %}
 			</tbody>
 		</table>
+	 
 {% endblock %}

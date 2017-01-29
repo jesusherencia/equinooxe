@@ -20,6 +20,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.equinooxe.domain.util.ZonedDateTimeSerializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -119,7 +120,8 @@ public abstract class AbstractAuditingEntity implements Serializable {
     @Override
     public String toString() {
     	ObjectMapper mapper = new ObjectMapper();
-    	String jsonInString= "{ id:" + id + " }";
+    	mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    	String jsonInString= this.getClass().getSimpleName()+":{ id:" + id + " }";
     	try {
 			 jsonInString = mapper.writeValueAsString(this);
 		} catch (JsonProcessingException e) {

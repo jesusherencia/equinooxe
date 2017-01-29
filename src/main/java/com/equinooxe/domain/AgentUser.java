@@ -36,9 +36,4 @@ public class AgentUser extends User implements Serializable {
         this.cleanRequests = cleanRequests;
     }
 
-    @Override
-    public String toString() {
-        return "{ id=" + id + " }";
-    }
-
 }
