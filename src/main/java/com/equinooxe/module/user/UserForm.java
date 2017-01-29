@@ -8,7 +8,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.Authority;
+import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 
 public class UserForm {
@@ -36,6 +38,8 @@ public class UserForm {
 	
 	private Set<Authority>  avelaibleAutorities = new HashSet<>();
 	
+	private boolean isManager =false;
+	
 	
 	
 	public UserForm(){
@@ -49,17 +53,31 @@ public class UserForm {
 	}
 	
 	public UserForm(User u,Set<Authority>  avelaibleAutorities){
-		this.email=u.getEmail();
-		this.firstName= u.getFirstName();
-		this.lastName= u.getLastName();
-		this.login= u.getLogin();
-		this.id=u.getId();
+		initUserCommonPart(u,avelaibleAutorities);
 		int i=0;
 		for(Authority autho :  u.getAuthorities()) {
 			this.autorities[i]=autho.getName();
 			 i++;
 		}  
 		this.avelaibleAutorities= avelaibleAutorities;
+	}
+	
+	public UserForm(ManagerUser  mu, Set<Authority>  avelaibleAutorities){
+		this.initUserCommonPart(mu, avelaibleAutorities);
+		this.isManager=true;
+	}
+	
+	public UserForm(AgentUser  au, Set<Authority>  avelaibleAutorities){
+		this.initUserCommonPart(au, avelaibleAutorities);
+		this.isManager=false;
+	}
+	
+	private void initUserCommonPart(User u,Set<Authority>  avelaibleAutorities){
+		this.email=u.getEmail();
+		this.firstName= u.getFirstName();
+		this.lastName= u.getLastName();
+		this.login= u.getLogin();
+		this.id=u.getId();
 	}
 	
 	public String[]  getAutorities() {
@@ -129,7 +147,14 @@ public class UserForm {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+	public boolean isManager() {
+		return isManager;
+	}
+
+	public void setManager(boolean isManager) {
+		this.isManager = isManager;
+	}
 	
 
 }

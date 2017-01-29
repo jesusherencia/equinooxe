@@ -1,15 +1,14 @@
 package com.equinooxe.service;
 
-import com.equinooxe.domain.Authority;
-import com.equinooxe.domain.User;
-import com.equinooxe.repository.AuthorityRepository;
-import com.equinooxe.repository.PersistentTokenRepository;
-import com.equinooxe.repository.UserRepository;
-import com.equinooxe.repository.search.UserSearchRepository;
-import com.equinooxe.security.AuthoritiesConstants;
-import com.equinooxe.security.SecurityUtils;
-import com.equinooxe.service.util.RandomUtil;
-import com.equinooxe.web.rest.vm.ManagedUserVM;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,10 +16,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import javax.inject.Inject;
-import java.util.*;
+import com.equinooxe.domain.Authority;
+import com.equinooxe.domain.ManagerUser;
+import com.equinooxe.domain.User;
+import com.equinooxe.repository.AuthorityRepository;
+import com.equinooxe.repository.ManagerUserRepository;
+import com.equinooxe.repository.PersistentTokenRepository;
+import com.equinooxe.repository.UserRepository;
+import com.equinooxe.repository.search.UserSearchRepository;
+import com.equinooxe.security.AuthoritiesConstants;
+import com.equinooxe.security.SecurityUtils;
+import com.equinooxe.service.util.RandomUtil;
+import com.equinooxe.web.rest.vm.ManagedUserVM;
 
 /**
  * Service class for managing users.
@@ -36,6 +43,9 @@ public class UserService {
 
 	@Inject
 	private UserRepository userRepository;
+	
+	@Inject
+	private ManagerUserRepository userManagerRepository;
 
 	@Inject
 	private UserSearchRepository userSearchRepository;
@@ -86,6 +96,33 @@ public class UserService {
 			return user;
 		});
 	}
+	
+	public ManagerUser createManagerUser(String login, String password, String firstName, String lastName, String email,
+			String langKey) {
+
+		ManagerUser newUser = new ManagerUser();
+		Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+		Set<Authority> authorities = new HashSet<>();
+		String encryptedPassword = passwordEncoder.encode(password);
+		newUser.setLogin(login);
+		// new user gets initially a generated password
+		newUser.setPassword(encryptedPassword);
+		newUser.setFirstName(firstName);
+		newUser.setLastName(lastName);
+		newUser.setEmail(email);
+		newUser.setLangKey(langKey);
+		// new user is not active
+		newUser.setActivated(false);
+		// new user gets registration key
+		newUser.setActivationKey(RandomUtil.generateActivationKey());
+		authorities.add(authority);
+		newUser.setAuthorities(authorities);
+		userManagerRepository.save(newUser);
+		userSearchRepository.save(newUser);
+		log.debug("Created Information for User: {}", newUser);
+		return newUser;
+	}
+
 
 	public User createUser(String login, String password, String firstName, String lastName, String email,
 			String langKey) {

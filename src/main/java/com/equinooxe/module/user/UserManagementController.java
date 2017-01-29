@@ -23,8 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.domain.Authority;
+import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.AuthorityRepository;
+import com.equinooxe.repository.ManagerUserQueryRepository;
 import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
@@ -39,6 +41,9 @@ public class UserManagementController {
 	
 	@Inject
 	private UserRepository userRepository;
+	
+	@Inject
+	private ManagerUserQueryRepository managerUserQueryRepository;
 	
 	@Inject
 	AuthorityRepository authorityRepo;
@@ -64,7 +69,7 @@ public class UserManagementController {
 	@GetMapping("/user/edit")
 	public String editForm(@RequestParam(value = "id", required = true) Long id, UserForm userForm, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("flashMessage", "editer .utilisateur.existant");
+		redirectAttributes.addFlashAttribute("flashMessage", "editer.utilisateur.existant");
 		User u = userQueryRepo.getOneById(id);
 		userForm = new UserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
 		uiModel.addAttribute("userForm", userForm); 
@@ -78,10 +83,10 @@ public class UserManagementController {
 		if (bindingResult.hasErrors()) {
 			return "user/form";
 		}
-		User user;
+		Object userObj=null;
 		log.info("\n============= U.ID: "+userForm.getId());
 		if (userForm.getId() != null) {
-			 user = userQueryRepo.getOneById(userForm.getId()); 
+			 User user  = userQueryRepo.getOneById(userForm.getId()); 
 			 user.setFirstName(userForm.getFirstName());
 			 user.setEmail(userForm.getEmail());
 			 user.setLastName(userForm.getLastName());
@@ -98,16 +103,15 @@ public class UserManagementController {
 			 user.setAuthorities(selectedAut);
 			 userRepo.saveAndFlush(user);
 			 log.info("\n============= User {} updated ",user);
-			
+			 userObj= user;
 		} else {
-			user = userService.createUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
+		 ManagerUser user = userService.createManagerUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
 					userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
+		 userObj= user;
 		}
-		
-		 
-		redirectAttributes.addAttribute("id", user.getId());
+		redirectAttributes.addAttribute("id",((User) userObj).getId());
 		redirectAttributes.addFlashAttribute("flashMessage", "operation.effectuee.avec.succes");
-		return "redirect:/user/show/?id="+user.getId();
+		return "redirect:/user/show/?id="+((User) userObj).getId();
 	}
 
 	@GetMapping("/user/show")
