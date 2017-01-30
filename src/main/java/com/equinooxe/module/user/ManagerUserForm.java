@@ -13,85 +13,79 @@ import com.equinooxe.domain.Authority;
 import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 
-public class UserForm {
-	
+public class ManagerUserForm {
+
 	private Long id;
 
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String login;
-	
+
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String firstName;
-	
+
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String lastName;
 
 	@Email
 	private String email;
-	
+
 	private String password;
-	
-	private String[]  autorities = new String[99];
-	
-	private Set<Authority>  avelaibleAutorities = new HashSet<>();
-	
-	private boolean isManager =false;
-	
-	
-	
-	public UserForm(){
+
+	private String[] autorities = new String[99];
+
+	private Set<Authority> avelaibleAutorities = new HashSet<>();
+
+	private boolean isManager = true;
+
+	public ManagerUserForm() {
 		autorities = new String[99];
 		avelaibleAutorities = new HashSet<>();
 	}
-	
-	public UserForm(Set<Authority>  avelaibleAutorities){
+
+	public ManagerUserForm(Set<Authority> avelaibleAutorities) {
 		autorities = new String[99];
 		avelaibleAutorities = new HashSet<>();
 	}
-	
-	public UserForm(User u,Set<Authority>  avelaibleAutorities){
-		initUserCommonPart(u,avelaibleAutorities);
-		int i=0;
-		for(Authority autho :  u.getAuthorities()) {
-			this.autorities[i]=autho.getName();
-			 i++;
-		}  
-		this.avelaibleAutorities= avelaibleAutorities;
+
+	public ManagerUserForm(User u, Set<Authority> avelaibleAutorities) {
+		initUserCommonPart(u, avelaibleAutorities);
+		int i = 0;
+		for (Authority autho : u.getAuthorities()) {
+			this.autorities[i] = autho.getName();
+			i++;
+		}
+		this.avelaibleAutorities = avelaibleAutorities;
 	}
-	
-	public UserForm(ManagerUser  mu, Set<Authority>  avelaibleAutorities){
+
+	public ManagerUserForm(ManagerUser mu, Set<Authority> avelaibleAutorities) {
 		this.initUserCommonPart(mu, avelaibleAutorities);
-		this.isManager=true;
+		this.isManager = true;
 	}
-	
-	public UserForm(AgentUser  au, Set<Authority>  avelaibleAutorities){
+
+	public ManagerUserForm(AgentUser au, Set<Authority> avelaibleAutorities) {
 		this.initUserCommonPart(au, avelaibleAutorities);
-		this.isManager=false;
+		this.isManager = false;
 	}
-	
-	private void initUserCommonPart(User u,Set<Authority>  avelaibleAutorities){
-		this.email=u.getEmail();
-		this.firstName= u.getFirstName();
-		this.lastName= u.getLastName();
-		this.login= u.getLogin();
-		this.id=u.getId();
+
+	private void initUserCommonPart(User u, Set<Authority> avelaibleAutorities) {
+		this.email = u.getEmail();
+		this.firstName = u.getFirstName();
+		this.lastName = u.getLastName();
+		this.login = u.getLogin();
+		this.id = u.getId();
 	}
-	
-	public String[]  getAutorities() {
+
+	public String[] getAutorities() {
 		return autorities;
 	}
-	
 
-	public void setAutorities(String[]  autorities) {
+	public void setAutorities(String[] autorities) {
 		this.autorities = autorities;
 	}
 
-	
-	
-	
 	public Set<Authority> getAvelaibleAutorities() {
 		return avelaibleAutorities;
 	}
@@ -155,6 +149,5 @@ public class UserForm {
 	public void setManager(boolean isManager) {
 		this.isManager = isManager;
 	}
-	
 
 }

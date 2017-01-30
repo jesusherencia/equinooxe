@@ -61,41 +61,44 @@ public class UserManagementController {
 	UserQueryRepository userQueryRepo;
 
 	@GetMapping("/user/new")
-	public String showForm(UserForm userForm, Model uiModel) {
-		userForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
-		return "user/form";
+	public ModelAndView showForm( Model uiModel) {
+		ModelAndView vm = new ModelAndView("user/form");
+		ManagerUserForm managerUserForm = new ManagerUserForm();
+		managerUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
+		vm.addObject("managerUserForm",managerUserForm);
+		return vm;
 	}
 
 	@GetMapping("/user/edit")
-	public String editForm(@RequestParam(value = "id", required = true) Long id, UserForm userForm, Model uiModel,
+	public String editForm(@RequestParam(value = "id", required = true) Long id, ManagerUserForm managerUserForm, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("flashMessage", "editer.utilisateur.existant");
 		User u = userQueryRepo.getOneById(id);
-		userForm = new UserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
-		uiModel.addAttribute("userForm", userForm); 
+		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
+		uiModel.addAttribute("userForm", managerUserForm); 
 		return "user/form";
 	} 
 
 	@PostMapping("/user/save")
-	public String save(@Valid UserForm userForm, BindingResult bindingResult, Model uiModel,
+	public String save(@Valid ManagerUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		addUserValidator.validate(userForm, bindingResult);
+		addUserValidator.validate(managerUserForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "user/form";
 		}
 		Object userObj=null;
-		log.info("\n============= U.ID: "+userForm.getId());
-		if (userForm.getId() != null) {
-			 User user  = userQueryRepo.getOneById(userForm.getId()); 
-			 user.setFirstName(userForm.getFirstName());
-			 user.setEmail(userForm.getEmail());
-			 user.setLastName(userForm.getLastName());
-			 user.setLogin(userForm.getLogin());
-			 if(userForm.getPassword()!=null && userForm.getPassword().length()>=4){
-				 user.setPassword(userForm.getPassword());
+		log.info("\n============= U.ID: "+managerUserForm.getId());
+		if (managerUserForm.getId() != null) {
+			 User user  = userQueryRepo.getOneById(managerUserForm.getId()); 
+			 user.setFirstName(managerUserForm.getFirstName());
+			 user.setEmail(managerUserForm.getEmail());
+			 user.setLastName(managerUserForm.getLastName());
+			 user.setLogin(managerUserForm.getLogin());
+			 if(managerUserForm.getPassword()!=null && managerUserForm.getPassword().length()>=4){
+				 user.setPassword(managerUserForm.getPassword());
 			 }
 			 Set<Authority> selectedAut= new HashSet<>();
-			 for(String authName : userForm.getAutorities()){ 
+			 for(String authName : managerUserForm.getAutorities()){ 
 				 if(authName!=null && authName.length()>1){
 					 selectedAut.add(authorityRepo.findOne(authName));
 				 }
@@ -105,8 +108,8 @@ public class UserManagementController {
 			 log.info("\n============= User {} updated ",user);
 			 userObj= user;
 		} else {
-		 ManagerUser user = userService.createManagerUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
-					userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
+		 ManagerUser user = userService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(), managerUserForm.getFirstName(),
+					managerUserForm.getLastName(), managerUserForm.getEmail().toLowerCase(), "fr");
 		 userObj= user;
 		}
 		redirectAttributes.addAttribute("id",((User) userObj).getId());

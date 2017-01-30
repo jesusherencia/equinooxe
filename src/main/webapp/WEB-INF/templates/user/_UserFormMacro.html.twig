@@ -1,6 +1,6 @@
-{% macro input(userForm) %}
- <form  action="{{ href('/user/save') }}" method="post" name="userForm" >
-            <table class="table">
+{% macro userFormMacro(userForm,saveUrl='/user/save', formName="userForm") %}
+ <form  action="{{ href(saveUrl) }}" method="post" name="{{ formName }}" >
+        <table class="table">
                 <tr>
                     <td>Nom:</td>
                     <td><input type="text" name="lastName" value="{{userForm.lastName  }}" /></td>
@@ -28,7 +28,6 @@
                         {% endfor %}
                     </td>
                 </tr>
-                
                 <tr>
                     <td>Login:</td>
                     <td><input type="text" name="login" value="{{userForm.login}}" /></td>
@@ -38,7 +37,6 @@
                         {% endfor %}
                     </td>
                 </tr>
-                
                 <tr>
                     <td>Mot de passe:</td>
                     <td><input type="password" name="password"   /></td>
@@ -48,7 +46,6 @@
                          {% endfor %}
                      </td>
                 </tr>
-                
                 <tr>
                     <td>Mot de passe:</td>
                     <td>
@@ -68,9 +65,9 @@
                      </td>
                 </tr>
                 <tr>
-                <td>
-                <input type="hidden" name="id" value="{{ userForm.id }}" />
-                </td>
+                    <td>
+                  	  <input type="hidden" name="id" value="{{ userForm.id }}" />
+                    </td>
                 </tr>
                 <tr>
                     <td><button class="btn-blue" type="submit">Enregistrer <i class="fa fa-save"></i> </button></td>

@@ -1,99 +1,39 @@
 {% extends "../layout" %}
-
+{% import "./_UserFormMacro" %}
 {% block title %}
   Gestion utilisateur
 {% endblock %}
 
 {% block content %}
-		<div class="titre"> <i class="fa fa-plus"></i> 
-		   {% if userForm.id is null or userForm.id<0 %}
-		     Nouvel utilisateur 
-		   {% else %} 
-		     Edition de l'utilisateur:
-		     {{ userForm.lastName | upper }} 
-		     {{ userForm.firstName | capitalize }}  
-		  {% endif %}
-		</div>
+        {% set U = beans.utils %}
+      <h1>Ajout utilisateurs: {{ U.contains("a","b") }} </h1>
+	  <div class="row">
+                <div class="col-lg-6">
+                   <ul class="nav nav-tabs">
+                       <li role="presentation" class="active">
+                            <a href="#managers" role="tab" data-toggle="tab" aria-expanded="true">Managers</a>
+                       </li>
+                       <li role="presentation" class="">
+                           <a href="#agents" role="tab" data-toggle="tab" 
+                           aria-expanded=" ">Agents</a>
+                       </li>
+                   </ul>
+                   <div class="tab-content">
+                     <div role="tabpanel" class="tab-pane fade active in" id="managers">
+                         <h4>Nouveau manager</h4> 
+                         {{ userFormMacro(managerUserForm,saveUrl='/user/manager/save', formName="managerUserForm") }}
+                     </div>
+                   {# request.getRequestURI().startsWith('/home')
+                     {% if  beans.utils.contains(request.getRequestURI(),'tabAgent')  %}
+                                              true
+                                           {% else %} false {% endif %}
+                    <div role="tabpanel" class="tab-pane fade" id="agents"> 
+                         <h4>Nouvel agent</h4> 
+                         {{ userFormMacro(userForm,saveUrl='/user/agent/save'  , formName="userForm") }}
+                     </div>
+                    </div>
+                    #}  
+            </div><!-- end col -->
+      </div>
 		
-		<form  action="{{ href('/user/save') }}" method="post" name="userForm" >
-            <table class="table">
-                <tr>
-                    <td>Nom:</td>
-                    <td><input type="text" name="lastName" value="{{userForm.lastName  }}" /></td>
-                    <td>
-                      {% for err in getFieldErrors('userForm', 'lastName') %}
-                        <p>{{ err }}</p>
-                   	  {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Prénom:</td>
-                    <td><input type="text" name="firstName" value="{{userForm.firstName}}" /></td>
-                    <td>
-                    {% for err in getFieldErrors('userForm', 'firstName') %}
-                        <p>{{ err }}</p>
-                    {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type="email" name="email" value="{{userForm.email}}"  /></td>
-                    <td>
-                        {% for err in getFieldErrors('userForm', 'email') %}
-                            <p>{{ err }}</p>
-                        {% endfor %}
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>Login:</td>
-                    <td><input type="text" name="login" value="{{userForm.login}}" /></td>
-                    <td>
-                        {% for err in getFieldErrors('userForm', 'login') %}
-                            <p>{{ err }}</p>
-                        {% endfor %}
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td>Mot de passe:</td>
-                    <td><input type="password" name="password"   /></td>
-                    <td>
-                        {% for err in getFieldErrors('userForm', 'password') %}
-                            <p>{{ err }}</p>
-                         {% endfor %}
-                     </td>
-                </tr>
-                
-                <tr>
-                    <td>Mot de passe:</td>
-                    <td>
-                      {% for authority in userForm.avelaibleAutorities %}
-                        <input type="checkbox" 
-                               name="autorities" 
-                               {% if userForm.autorities contains authority.name %}
-                                 checked="checked"                                    
-                               {% endif %}
-                               value="{{ authority.name }}"> {{ authority.name }}<br>
-                      {% endfor %}
-                    </td>
-                    <td>
-                        {% for err in getFieldErrors('userForm', 'password') %}
-                            <p>{{ err }}</p>
-                         {% endfor %}
-                     </td>
-                </tr>
-                
-
-                
-                <tr>
-                <td>
-                <input type="hidden" name="id" value="{{ userForm.id }}" />
-                </td>
-                </tr>
-                <tr>
-                    <td><button class="btn-blue" type="submit">Enregistrer <i class="fa fa-save"></i> </button></td>
-                </tr>
-            </table>
-        </form>
 {% endblock %}

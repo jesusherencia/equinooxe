@@ -18,7 +18,7 @@ public class AddUserValidator implements Validator {
 	 
 	@Override
 	public boolean supports(Class<?> clazz) {
-		return UserForm.class.isAssignableFrom(clazz);
+		return ManagerUserForm.class.isAssignableFrom(clazz);
 	}
 
 	@Override
@@ -26,16 +26,16 @@ public class AddUserValidator implements Validator {
 	 * TODO take care of the case when of edit
 	 */
 	public void validate(Object target, Errors errors) {
-		UserForm userForm = (UserForm) target;
-		if(userForm.getId()==null && (userForm.getPassword()==null||userForm.getPassword().length()<4)){
+		ManagerUserForm managerUserForm = (ManagerUserForm) target;
+		if(managerUserForm.getId()==null && (managerUserForm.getPassword()==null||managerUserForm.getPassword().length()<4)){
 			errors.rejectValue("password", "password.obligatoire");
 		}
-		Optional<User> optUser=userRepository.findOneByLogin(userForm.getLogin().toLowerCase());
-		if (optUser.isPresent() && optUser.get().getId()!=userForm.getId() ) {
+		Optional<User> optUser=userRepository.findOneByLogin(managerUserForm.getLogin().toLowerCase());
+		if (optUser.isPresent() && optUser.get().getId()!=managerUserForm.getId() ) {
 			errors.rejectValue("login", "login.deja.utilise");
 		}
-		optUser=userRepository.findOneByEmail(userForm.getEmail());
-		if (optUser.isPresent() && optUser.get().getId()!=userForm.getId()) {
+		optUser=userRepository.findOneByEmail(managerUserForm.getEmail());
+		if (optUser.isPresent() && optUser.get().getId()!=managerUserForm.getId()) {
 			errors.rejectValue("email", "email.deja.utilise");
 		}
 	}

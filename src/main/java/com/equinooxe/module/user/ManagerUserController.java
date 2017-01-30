@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,41 +58,40 @@ public class ManagerUserController {
 	ManagerUserQueryRepository managerUserQueryRepo;
 
 	@GetMapping("/user/manager/new")
-	public String showForm(UserForm userForm, Model uiModel) {
-		userForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
+	public String showForm(ManagerUserForm managerUserForm, Model uiModel) {
+		managerUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
 		return "user/form";
 	}
 
 	@GetMapping("/user/manager/edit")
-	public String editForm(@RequestParam(value = "id", required = true) Long id, UserForm userForm, Model uiModel,
+	public String editForm(@RequestParam(value = "id", required = true) Long id, ManagerUserForm managerUserForm, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		redirectAttributes.addFlashAttribute("flashMessage", "editer.utilisateur.existant");
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
-		userForm = new UserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
-		uiModel.addAttribute("userForm", userForm); 
+		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
+		uiModel.addAttribute("userForm", managerUserForm); 
 		return "user/form";
 	} 
 
 	@PostMapping("/user/manager/save")
-	public String save(@Valid UserForm userForm, BindingResult bindingResult, Model uiModel,
+	public String save(@Valid ManagerUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		addUserValidator.validate(userForm, bindingResult);
+		addUserValidator.validate(managerUserForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "user/form";
 		}
 		ManagerUser user;
-		log.info("\n============= U.ID: "+userForm.getId());
-		if (userForm.getId() != null) {
-			 user  = managerUserQueryRepo.getOneById(userForm.getId()); 
-			 user.setFirstName(userForm.getFirstName());
-			 user.setEmail(userForm.getEmail());
-			 user.setLastName(userForm.getLastName());
-			 user.setLogin(userForm.getLogin());
-			 if(userForm.getPassword()!=null && userForm.getPassword().length()>=4){
-				 user.setPassword(userForm.getPassword());
+		if (managerUserForm.getId() != null) {
+			 user  = managerUserQueryRepo.getOneById(managerUserForm.getId()); 
+			 user.setFirstName(managerUserForm.getFirstName());
+			 user.setEmail(managerUserForm.getEmail());
+			 user.setLastName(managerUserForm.getLastName());
+			 user.setLogin(managerUserForm.getLogin());
+			 if(managerUserForm.getPassword()!=null && managerUserForm.getPassword().length()>=4){
+				 user.setPassword(managerUserForm.getPassword());
 			 }
 			 Set<Authority> selectedAut= new HashSet<>();
-			 for(String authName : userForm.getAutorities()){ 
+			 for(String authName : managerUserForm.getAutorities()){ 
 				 if(authName!=null && authName.length()>1){
 					 selectedAut.add(authorityRepo.findOne(authName));
 				 }
@@ -100,11 +100,10 @@ public class ManagerUserController {
 			 userRepo.saveAndFlush(user);
 			 log.info("\n============= User {} updated ",user);
 		} else {
-		 user = userService.createManagerUser(userForm.getLogin(), userForm.getPassword(), userForm.getFirstName(),
-					userForm.getLastName(), userForm.getEmail().toLowerCase(), "fr");
+		 user = userService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(), managerUserForm.getFirstName(),
+					managerUserForm.getLastName(), managerUserForm.getEmail().toLowerCase(), "fr");
 		}
 		redirectAttributes.addAttribute("id",user.getId());
-		redirectAttributes.addFlashAttribute("flashMessage", "operation.effectuee.avec.succes");
 		return "redirect:/user/show/?id="+user.getId();
 	}
 

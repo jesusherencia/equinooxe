@@ -2,6 +2,7 @@ package com.equinooxe.config;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -56,6 +57,11 @@ public class PebbleTemplateConfiguration  extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".html.twig");
         viewResolver.setPebbleEngine(pebbleEngine());
         return viewResolver;
+    }
+    
+    @Bean
+    public StringUtils utils(){
+    	return new StringUtils();
     }
 
 }
