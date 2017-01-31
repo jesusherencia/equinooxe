@@ -3,19 +3,22 @@
 {% block title %}
   Gestion utilisateur
 {% endblock %}
-
+  
 {% block content %}
-        {% set U = beans.utils %}
-      <h1>Ajout utilisateurs: {{ U.contains("a","b") }} </h1>
+      {%  set isTabAgent= StringUtils(request.getRequestURI(),"tabAgent","contains")  %}
+      {%  set isTabManager= not isTabAgent %}
+       
+      <h1>Ajout utilisateurs: Ta {{ isTabAgent }} not Ta: {{ isTabManager }} </h1>
 	  <div class="row">
                 <div class="col-lg-6">
                    <ul class="nav nav-tabs">
                        <li role="presentation" class="active">
-                            <a href="#managers" role="tab" data-toggle="tab" aria-expanded="true">Managers</a>
+                            <a href="#managers" role="tab" data-toggle="tab" aria-expanded="{{ isTabManager }}">Managers</a>
                        </li>
                        <li role="presentation" class="">
                            <a href="#agents" role="tab" data-toggle="tab" 
-                           aria-expanded=" ">Agents</a>
+                              aria-expanded="{{ isTabAgent }}" 
+                           >Agents</a>
                        </li>
                    </ul>
                    <div class="tab-content">
@@ -23,16 +26,14 @@
                          <h4>Nouveau manager</h4> 
                          {{ userFormMacro(managerUserForm,saveUrl='/user/manager/save', formName="managerUserForm") }}
                      </div>
-                   {# request.getRequestURI().startsWith('/home')
-                     {% if  beans.utils.contains(request.getRequestURI(),'tabAgent')  %}
-                                              true
-                                           {% else %} false {% endif %}
+                    
+                     
                     <div role="tabpanel" class="tab-pane fade" id="agents"> 
                          <h4>Nouvel agent</h4> 
                          {{ userFormMacro(userForm,saveUrl='/user/agent/save'  , formName="userForm") }}
                      </div>
                     </div>
-                    #}  
+                    
             </div><!-- end col -->
       </div>
 		

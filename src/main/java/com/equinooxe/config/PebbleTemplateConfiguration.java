@@ -46,7 +46,9 @@ public class PebbleTemplateConfiguration  extends WebMvcConfigurerAdapter {
     public PebbleEngine pebbleEngine() {
          return new PebbleEngine.Builder().strictVariables(true)
                 .loader(this.templateLoader())
-                .extension(springExtension(), new J8PebbleExtension())
+                .extension(
+                		springExtension(), 
+                		new J8PebbleExtension())
                 .build();
     }  
 
@@ -59,9 +61,4 @@ public class PebbleTemplateConfiguration  extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
     
-    @Bean
-    public StringUtils utils(){
-    	return new StringUtils();
-    }
-
 }
