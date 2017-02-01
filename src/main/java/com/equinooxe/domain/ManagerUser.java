@@ -29,16 +29,8 @@ public class ManagerUser extends User implements Serializable {
 		return phoneInterne;
 	}
 
-
-
 	public void setPhoneInterne(String phoneInterne) {
 		this.phoneInterne = phoneInterne;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "AgentUser[ id=" + id + " ]";
-	}
+ 
 }
