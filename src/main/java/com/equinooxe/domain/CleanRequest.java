@@ -33,7 +33,7 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
     private String instructions;
 
     @Column
-    private String status = StatusConsts.EN_ATTENTE;
+    private String status = DomainConsts.Status.EN_ATTENTE;
 
     @ManyToOne
     private AgentUser agent;
@@ -56,7 +56,7 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
 	}
     
     public String getStatusStr(){
-    	return StatusConsts.toString(this.status);
+    	return DomainConsts.Status.toString(this.status);
     }
 
 	public void setStatus(String status) {

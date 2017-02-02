@@ -17,14 +17,13 @@ import javax.validation.constraints.Max;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "manager_utilisateur")
 public class ManagerUser extends User implements Serializable {
-  
+
 	private static final long serialVersionUID = 1L;
-	
-	@Max(12)
-	@Column(name = "phoneInterne",length=20)
+
+	@Max(20)
+	@Column(name = "phoneInterne", length = 20)
 	private String phoneInterne;
-	
-	
+
 	public String getPhoneInterne() {
 		return phoneInterne;
 	}
@@ -32,5 +31,5 @@ public class ManagerUser extends User implements Serializable {
 	public void setPhoneInterne(String phoneInterne) {
 		this.phoneInterne = phoneInterne;
 	}
- 
+
 }

@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Email;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -92,7 +93,20 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	protected Set<PersistentToken> persistentTokens = new HashSet<>();
+    
+	
+	@Max(20)
+	@Column(name = "genre",length=20)
+	private String genre= DomainConsts.Genre.MR;
+	
+    public String getGenre() {
+		return genre;
+	}
 
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	
 	public String getFullName() {
 		return this.firstName + " " + this.lastName;
 	}
