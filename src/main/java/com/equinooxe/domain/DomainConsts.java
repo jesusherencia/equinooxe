@@ -39,7 +39,7 @@ public class DomainConsts {
 		}
 	}
     
-	public static class Genre {
+	public static class Civilite {
 		public static final String MR="Mr";
 		public static final String MME="Mme";
 	}

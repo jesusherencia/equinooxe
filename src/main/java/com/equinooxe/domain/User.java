@@ -96,15 +96,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
     
 	
 	@Max(20)
-	@Column(name = "genre",length=20)
-	private String genre= DomainConsts.Genre.MR;
+	@Column(name = "civilite",length=20)
+	private String civilite= DomainConsts.Civilite.MR;
 	
-    public String getGenre() {
-		return genre;
+    public String getCivilite() {
+		return civilite;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setCivilite(String genre) {
+		this.civilite = genre;
 	}
 	
 	public String getFullName() {

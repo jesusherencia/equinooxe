@@ -9,6 +9,7 @@
     <include file="config/liquibase/changelog/20170121070141_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170121083015_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170127201757_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170205135501_changelog.xml" relativeToChangelogFile="false"/>
     
     
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
