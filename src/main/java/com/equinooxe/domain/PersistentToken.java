@@ -16,7 +16,7 @@ import java.io.Serializable;
  * @see com.equinooxe.security.CustomPersistentRememberMeServices
  */
 @Entity
-@Table(name = "jhi_persistent_token")
+@Table(name = "persistent_token")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class PersistentToken implements Serializable {
 

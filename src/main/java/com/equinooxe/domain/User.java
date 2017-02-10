@@ -25,7 +25,7 @@ import java.time.ZonedDateTime;
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "user")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "USER_TYPE")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -82,7 +82,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
 	@JsonIgnore
 	@ManyToMany
-	@JoinTable(name = "jhi_user_authority", joinColumns = {
+	@JoinTable(name = "user_authority", joinColumns = {
 			@JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "authority_name", referencedColumnName = "name") })
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
