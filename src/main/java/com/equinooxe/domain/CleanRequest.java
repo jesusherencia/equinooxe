@@ -14,6 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -40,8 +43,10 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
 
     @ManyToOne
     private ManagerUser manager;
-
+    
+    
     @OneToMany(mappedBy = "cleanRequest", targetEntity = CleanTask.class)
+    @Fetch(FetchMode.JOIN)
     private Collection<CleanTask> cleanTasks;
 
     @ManyToOne

@@ -28,19 +28,28 @@
                     <td>Login:</td>
                     <td>{{ user.login }}  </td>
                 </tr>
-                 <tr>
+                <tr>
                     <td>Roles:</td>
                     <td> {% for auth in user.authorities %}
 						     {{ auth.name }} 
 						 {% endfor %} 
 					</td>
                 </tr>
+                 <tr>
+                    <td>Clean requests:</td>
+                    <td> {% for cleanReq in cleanRequests %}
+						   Status:  {{ cleanReq.status }}  | At: {{ cleanReq.doneAt|localDate }} 
+						   Inst: {{ cleanReq.instructions }}  <br>
+						 {% endfor %} 
+					</td>
+                </tr>
+                
                
                 <tr>
                     <td>Actions:</td>
                     <td>
                    	 <ul>
-                   	 	<li> <a href="{{ href('/user/manager/edit')}}/?id={{ user.id }}" >Editer </a></li>
+                   	 	<li> <a href="{{ href('/user/manager/edit')}}/{{ user.id }}" >Editer </a></li>
                    	 </ul>
                     </td>
                 </tr>

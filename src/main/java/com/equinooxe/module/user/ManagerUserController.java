@@ -18,17 +18,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.domain.Authority;
+import com.equinooxe.domain.CleanRequest;
 import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.AuthorityRepository;
+import com.equinooxe.repository.CleanRequestQueryRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
 import com.equinooxe.repository.ManagerUserRepository;
-import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 import com.equinooxe.service.UserService;
 
@@ -38,12 +38,15 @@ public class ManagerUserController {
 	private final Logger log = LoggerFactory.getLogger(ManagerUserController.class);
 	@Inject
 	private UserService userService;
-	 
+
 	@Inject
 	AuthorityRepository authorityRepo;
 
 	@Inject
 	private ManagerUserRepository managerUserRepo;
+	
+	@Inject
+	private CleanRequestQueryRepository cleanRequestQueryRep;
 
 	@Inject
 	EntityManager entityManager;
@@ -60,8 +63,8 @@ public class ManagerUserController {
 		return "user/manager/form";
 	}
 
-	@GetMapping("/user/manager/edit")
-	public String editForm(@RequestParam(value = "id", required = true) Long id, ManagerUserForm managerUserForm,
+	@GetMapping("/user/manager/edit/{id}")
+	public String editForm(@PathVariable(value = "id", required = true) Long id, ManagerUserForm managerUserForm,
 			Model uiModel, RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
@@ -107,14 +110,15 @@ public class ManagerUserController {
 	@GetMapping("/user/manager/show/{id}")
 	public String show(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		User u = managerUserQueryRepo.getOneById(id);
-		uiModel.addAttribute("user", u);
+		ManagerUser u = managerUserQueryRepo.getOneById(id);
+		List<CleanRequest> cleanReq = cleanRequestQueryRep.getByManager(u);
+		uiModel.addAttribute("user", u).addAttribute("cleanRequests", cleanReq);
 		return "user/manager/show";
 	}
 
 	@GetMapping("/user/manager/list")
 	public ModelAndView list(Model uiModel, RedirectAttributes redirectAttributes) {
-		List<ManagerUser> users = managerUserRepo.findAll()  ;
+		List<ManagerUser> users = managerUserRepo.findAll();
 		ModelAndView mv = new ModelAndView("user/list").addObject("users", users);
 		return mv;
 	}
