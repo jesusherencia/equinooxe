@@ -95,8 +95,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	protected Set<PersistentToken> persistentTokens = new HashSet<>();
     
 	
-	@Max(20)
-	@Column(name = "civilite",length=20)
+	
+	@Column(name = "civilite",nullable=true)
 	private String civilite= DomainConsts.Civilite.MR;
 	
     public String getCivilite() {
