@@ -1,0 +1,51 @@
+{% extends "../../layout" %}
+
+{% block title %}
+  Détails manager 
+{% endblock %}
+
+{% block content %}
+        <div class="titre"> <i class="fa fa-plus"></i> 
+		     Détails du manager:
+		     {{ user.lastName  | upper }} 
+		     {{ user.firstName | capitalize }}  
+		</div>	   
+		 
+		<table class="table">
+                <tr>
+                    <td>Nom:</td>
+                    <td> {{ user.lastName | upper }}  </td>
+                </tr>
+                <tr>
+                    <td>Prénom:</td>
+                    <td>{{ user.firstName | capitalize  }} </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ user.email   }} </td>
+                </tr>
+                <tr>
+                    <td>Login:</td>
+                    <td>{{ user.login }}  </td>
+                </tr>
+                 <tr>
+                    <td>Roles:</td>
+                    <td> {% for auth in user.authorities %}
+						     {{ auth.name }} 
+						 {% endfor %} 
+					</td>
+                </tr>
+               
+                <tr>
+                    <td>Actions:</td>
+                    <td>
+                   	 <ul>
+                   	 	<li> <a href="{{ href('/user/manager/edit')}}/?id={{ user.id }}" >Editer </a></li>
+                   	 </ul>
+                    </td>
+                </tr>
+        </table>
+{% endblock %}
+ 
+</body>
+</html>

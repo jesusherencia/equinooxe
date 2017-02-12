@@ -1,13 +1,9 @@
 package com.equinooxe.module.user;
 
- 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,41 +11,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.equinooxe.domain.Authority;
-import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.AuthorityRepository;
-import com.equinooxe.repository.ManagerUserQueryRepository;
 import com.equinooxe.repository.UserQueryRepository;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
-import com.equinooxe.service.UserService;
 
 @Controller
 @Secured(AuthoritiesConstants.USER)
 public class UserManagementController {
 	private final Logger log = LoggerFactory.getLogger(UserManagementController.class);
-	@Inject
-	private UserService userService;
-	
+
 	@Inject
 	private UserRepository userRepository;
-	
-	@Inject
-	private ManagerUserQueryRepository managerUserQueryRepository;
-	
+
 	@Inject
 	AuthorityRepository authorityRepo;
-	
-	@Inject
-	private UserRepository userRepo;
 
 	@Inject
 	EntityManager entityManager;
@@ -60,63 +42,6 @@ public class UserManagementController {
 	@Autowired
 	UserQueryRepository userQueryRepo;
 
-	@GetMapping("/user/new")
-	public ModelAndView showForm( Model uiModel) {
-		ModelAndView vm = new ModelAndView("user/form");
-		ManagerUserForm managerUserForm = new ManagerUserForm();
-		managerUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
-		vm.addObject("managerUserForm",managerUserForm);
-		return vm;
-	}
-
-	@GetMapping("/user/edit")
-	public String editForm(@RequestParam(value = "id", required = true) Long id, ManagerUserForm managerUserForm, Model uiModel,
-			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("flashMessage", "editer.utilisateur.existant");
-		User u = userQueryRepo.getOneById(id);
-		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
-		uiModel.addAttribute("userForm", managerUserForm); 
-		return "user/form";
-	} 
-
-	@PostMapping("/user/save")
-	public String save(@Valid ManagerUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
-			RedirectAttributes redirectAttributes) {
-		addUserValidator.validate(managerUserForm, bindingResult);
-		if (bindingResult.hasErrors()) {
-			return "user/form";
-		}
-		Object userObj=null;
-		log.info("\n============= U.ID: "+managerUserForm.getId());
-		if (managerUserForm.getId() != null) {
-			 User user  = userQueryRepo.getOneById(managerUserForm.getId()); 
-			 user.setFirstName(managerUserForm.getFirstName());
-			 user.setEmail(managerUserForm.getEmail());
-			 user.setLastName(managerUserForm.getLastName());
-			 user.setLogin(managerUserForm.getLogin());
-			 if(managerUserForm.getPassword()!=null && managerUserForm.getPassword().length()>=4){
-				 user.setPassword(managerUserForm.getPassword());
-			 }
-			 Set<Authority> selectedAut= new HashSet<>();
-			 for(String authName : managerUserForm.getAutorities()){ 
-				 if(authName!=null && authName.length()>1){
-					 selectedAut.add(authorityRepo.findOne(authName));
-				 }
-			 }
-			 user.setAuthorities(selectedAut);
-			 userRepo.saveAndFlush(user);
-			 log.info("\n============= User {} updated ",user);
-			 userObj= user;
-		} else {
-		 ManagerUser user = userService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(), managerUserForm.getFirstName(),
-					managerUserForm.getLastName(), managerUserForm.getEmail().toLowerCase(), "fr");
-		 userObj= user;
-		}
-		redirectAttributes.addAttribute("id",((User) userObj).getId());
-		redirectAttributes.addFlashAttribute("flashMessage", "operation.effectuee.avec.succes");
-		return "redirect:/user/show/?id="+((User) userObj).getId();
-	}
-
 	@GetMapping("/user/show")
 	public String show(@RequestParam(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
@@ -126,11 +51,10 @@ public class UserManagementController {
 	}
 
 	@GetMapping("/user/list")
-	public ModelAndView list(Model uiModel,
-			RedirectAttributes redirectAttributes) {
-		List<User> users =userRepository.findAll()  /*userRepository.findAll(); userQueryRepo.getAll()*/ ;
-		ModelAndView mv= new ModelAndView("user/list").addObject("users", users);
-		 return mv;
+	public ModelAndView list(Model uiModel, RedirectAttributes redirectAttributes) {
+		List<User> users = userRepository.findAll()  ;
+		ModelAndView mv = new ModelAndView("user/list").addObject("users", users);
+		return mv;
 	}
 
 }

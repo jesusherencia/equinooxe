@@ -2,20 +2,19 @@
 {% import "./../_UserFormMacro" %}
 
 {% block title %}
-  Gestion utilisateur
+  Gestion des managers
 {% endblock %}
 
 {% block content %}
 		<div class="titre"> <i class="fa fa-plus"></i> 
-		   {% if userForm.id is null or userForm.id<0 %}
-		     Nouvel utilisateur 
+		   {% if managerUserForm.id is null or managerUserForm.id<0 %}
+		     Nouveau manager
 		   {% else %} 
-		     Edition de l'utilisateur:
-		     {{ userForm.lastName | upper }} 
-		     {{ userForm.firstName | capitalize }}  
+		     Edition du manager:
+		     {{ managerUserForm.lastName | upper }} 
+		     {{ managerUserForm.firstName | capitalize }}  
 		  {% endif %}
 		</div>
-		
-		{{ userFormMacro(userForm,saveUrl='/user/save', formName="userForm") }}
+	    {{ userFormMacro(managerUserForm,saveUrl='/user/manager/save', formName="managerUserForm") }}
 		 
 {% endblock %}

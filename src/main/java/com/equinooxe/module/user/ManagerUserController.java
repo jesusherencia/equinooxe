@@ -1,6 +1,5 @@
 package com.equinooxe.module.user;
 
- 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,6 +27,7 @@ import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 import com.equinooxe.repository.AuthorityRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
+import com.equinooxe.repository.ManagerUserRepository;
 import com.equinooxe.repository.UserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 import com.equinooxe.service.UserService;
@@ -37,15 +38,12 @@ public class ManagerUserController {
 	private final Logger log = LoggerFactory.getLogger(ManagerUserController.class);
 	@Inject
 	private UserService userService;
-	
-	@Inject
-	private UserRepository userRepository;
-	
+	 
 	@Inject
 	AuthorityRepository authorityRepo;
-	
+
 	@Inject
-	private UserRepository userRepo;
+	private ManagerUserRepository managerUserRepo;
 
 	@Inject
 	EntityManager entityManager;
@@ -59,67 +57,66 @@ public class ManagerUserController {
 	@GetMapping("/user/manager/new")
 	public String showForm(ManagerUserForm managerUserForm, Model uiModel) {
 		managerUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
-		return "user/form";
+		return "user/manager/form";
 	}
 
 	@GetMapping("/user/manager/edit")
-	public String editForm(@RequestParam(value = "id", required = true) Long id, ManagerUserForm managerUserForm, Model uiModel,
-			RedirectAttributes redirectAttributes) {
-		redirectAttributes.addFlashAttribute("flashMessage", "editer.utilisateur.existant");
+	public String editForm(@RequestParam(value = "id", required = true) Long id, ManagerUserForm managerUserForm,
+			Model uiModel, RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
-		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()) );
-		uiModel.addAttribute("userForm", managerUserForm); 
+		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
+		uiModel.addAttribute("userForm", managerUserForm);
 		return "user/form";
-	} 
+	}
 
 	@PostMapping("/user/manager/save")
 	public String save(@Valid ManagerUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		addUserValidator.validate(managerUserForm, bindingResult);
 		if (bindingResult.hasErrors()) {
-			return "user/form";
+			return "user/manager/form";
 		}
 		ManagerUser user;
 		if (managerUserForm.getId() != null) {
-			 user  = managerUserQueryRepo.getOneById(managerUserForm.getId()); 
-			 user.setFirstName(managerUserForm.getFirstName());
-			 user.setEmail(managerUserForm.getEmail());
-			 user.setLastName(managerUserForm.getLastName());
-			 user.setLogin(managerUserForm.getLogin());
-			 if(managerUserForm.getPassword()!=null && managerUserForm.getPassword().length()>=4){
-				 user.setPassword(managerUserForm.getPassword());
-			 }
-			 Set<Authority> selectedAut= new HashSet<>();
-			 for(String authName : managerUserForm.getAutorities()){ 
-				 if(authName!=null && authName.length()>1){
-					 selectedAut.add(authorityRepo.findOne(authName));
-				 }
-			 }
-			 user.setAuthorities(selectedAut);
-			 userRepo.saveAndFlush(user);
-			 log.info("\n============= User {} updated ",user);
+			user = managerUserQueryRepo.getOneById(managerUserForm.getId());
+			user.setFirstName(managerUserForm.getFirstName());
+			user.setEmail(managerUserForm.getEmail());
+			user.setLastName(managerUserForm.getLastName());
+			user.setLogin(managerUserForm.getLogin());
+			if (managerUserForm.getPassword() != null && managerUserForm.getPassword().length() >= 4) {
+				user.setPassword(managerUserForm.getPassword());
+			}
+			Set<Authority> selectedAut = new HashSet<>();
+			for (String authName : managerUserForm.getAutorities()) {
+				if (authName != null && authName.length() > 1) {
+					selectedAut.add(authorityRepo.findOne(authName));
+				}
+			}
+			user.setAuthorities(selectedAut);
+			managerUserRepo.saveAndFlush(user);
+			log.info("\n============= User {} updated ", user);
 		} else {
-		 user = userService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(), managerUserForm.getFirstName(),
-					managerUserForm.getLastName(), managerUserForm.getEmail().toLowerCase(), "fr");
+			user = userService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(),
+					managerUserForm.getFirstName(), managerUserForm.getLastName(),
+					managerUserForm.getEmail().toLowerCase(), "fr", true);
 		}
-		redirectAttributes.addAttribute("id",user.getId());
-		return "redirect:/user/show/?id="+user.getId();
+		redirectAttributes.addAttribute("id", user.getId());
+		return "redirect:/user/manager/show/?id=" + user.getId();
 	}
 
-	@GetMapping("/user/manager/show")
-	public String show(@RequestParam(value = "id", required = true) Long id, Model uiModel,
+	@GetMapping("/user/manager/show/{id}")
+	public String show(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		User u = managerUserQueryRepo.getOneById(id);
 		uiModel.addAttribute("user", u);
-		return "user/show";
+		return "user/manager/show";
 	}
 
 	@GetMapping("/user/manager/list")
-	public ModelAndView list(Model uiModel,
-			RedirectAttributes redirectAttributes) {
-		List<User> users =userRepository.findAll()  /*userRepository.findAll(); userQueryRepo.getAll()*/ ;
-		ModelAndView mv= new ModelAndView("user/list").addObject("users", users);
-		 return mv;
+	public ModelAndView list(Model uiModel, RedirectAttributes redirectAttributes) {
+		List<ManagerUser> users = managerUserRepo.findAll()  ;
+		ModelAndView mv = new ModelAndView("user/list").addObject("users", users);
+		return mv;
 	}
 
 }
