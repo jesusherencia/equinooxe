@@ -27,14 +27,14 @@
         "icon": "ti-user",
         "label": "Utilisateurs",
         "subs": [{
-                "url": "/user/list",
-                "label": "Liste",
-                "active": request.getRequestURI().startsWith('/user/list')
+                "url": "/user/manager/list",
+                "label": "Managers",
+                "active": request.getRequestURI().startsWith('/manager/list')
                 },
                 {
-                "url": "/user/new",
-                "label": "Ajouter",
-                "active": request.getRequestURI().startsWith('/user/new')
+                "url": "/user/agent/list",
+                "label": "Agents",
+                "active": request.getRequestURI().startsWith('/agent/new')
         }]
     },
 	"espaces": {

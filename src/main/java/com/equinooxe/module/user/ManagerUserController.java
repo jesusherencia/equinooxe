@@ -24,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.equinooxe.domain.Authority;
 import com.equinooxe.domain.CleanRequest;
 import com.equinooxe.domain.ManagerUser;
-import com.equinooxe.domain.User;
 import com.equinooxe.repository.AuthorityRepository;
 import com.equinooxe.repository.CleanRequestQueryRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
@@ -119,7 +118,7 @@ public class ManagerUserController {
 	@GetMapping("/user/manager/list")
 	public ModelAndView list(Model uiModel, RedirectAttributes redirectAttributes) {
 		List<ManagerUser> users = managerUserRepo.findAll();
-		ModelAndView mv = new ModelAndView("user/list").addObject("users", users);
+		ModelAndView mv = new ModelAndView("user/manager/list").addObject("users", users);
 		return mv;
 	}
 
