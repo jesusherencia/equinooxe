@@ -2,14 +2,11 @@ package com.equinooxe.module.user;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -30,26 +27,25 @@ import com.equinooxe.repository.CleanRequestRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
 import com.equinooxe.repository.ManagerUserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
-import com.equinooxe.service.UserService;
 import com.google.common.collect.ImmutableList;
 
 @Controller
 @Secured(AuthoritiesConstants.USER)
 public class ManagerUserController {
-	private final Logger log = LoggerFactory.getLogger(ManagerUserController.class);
-	@Inject
-	private UserService userService;
 
 	@Inject
 	AuthorityRepository authorityRepo;
 
 	@Inject
+	private ManagerUserService managerUserService;
+
+	@Inject
 	private ManagerUserRepository managerUserRepo;
-	
+
 	@Inject
 	private CleanRequestQueryRepository cleanRequestQueryRep;
-	
-	@Inject 
+
+	@Inject
 	private CleanRequestRepository cleanRequestRepo;
 
 	@Inject
@@ -85,25 +81,9 @@ public class ManagerUserController {
 		}
 		ManagerUser user;
 		if (managerUserForm.getId() != null) {
-			user = managerUserQueryRepo.getOneById(managerUserForm.getId());
-			user.setFirstName(managerUserForm.getFirstName());
-			user.setEmail(managerUserForm.getEmail());
-			user.setLastName(managerUserForm.getLastName());
-			user.setLogin(managerUserForm.getLogin());
-			if (managerUserForm.getPassword() != null && managerUserForm.getPassword().length() >= 4) {
-				user.setPassword(managerUserForm.getPassword());
-			}
-			Set<Authority> selectedAut = new HashSet<>();
-			for (String authName : managerUserForm.getAutorities()) {
-				if (authName != null && authName.length() > 1) {
-					selectedAut.add(authorityRepo.findOne(authName));
-				}
-			}
-			user.setAuthorities(selectedAut);
-			managerUserRepo.saveAndFlush(user);
-			log.info("\n============= User {} updated ", user);
+			user = managerUserService.updateUserFrom(managerUserForm);
 		} else {
-			user = userService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(),
+			user = managerUserService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(),
 					managerUserForm.getFirstName(), managerUserForm.getLastName(),
 					managerUserForm.getEmail().toLowerCase(), "fr", true);
 		}
@@ -119,17 +99,17 @@ public class ManagerUserController {
 		uiModel.addAttribute("user", u).addAttribute("cleanRequests", cleanReq);
 		return "user/manager/show";
 	}
-	
+
 	@GetMapping("/user/manager/delete/{id}")
 	public String delete(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		List<CleanRequest> cleanReq = cleanRequestQueryRep.getByManager(u);
-		cleanReq.stream().forEach(cr->{
+		cleanReq.stream().forEach(cr -> {
 			cr.setManager(null);
 			cleanRequestRepo.saveAndFlush(cr);
 		});
-		
+
 		managerUserRepo.delete(ImmutableList.of(u));
 		return "redirect:/user/manager/list";
 	}
@@ -137,9 +117,8 @@ public class ManagerUserController {
 	@GetMapping("/user/manager/list")
 	public ModelAndView list(Model uiModel, RedirectAttributes redirectAttributes) {
 		List<ManagerUser> users = managerUserRepo.findAll();
-		
-		ModelAndView mv = new ModelAndView("user/manager/list")
-				              .addObject("users", users);
+
+		ModelAndView mv = new ModelAndView("user/manager/list").addObject("users", users);
 		return mv;
 	}
 
