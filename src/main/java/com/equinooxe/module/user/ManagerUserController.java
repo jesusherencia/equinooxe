@@ -99,9 +99,18 @@ public class ManagerUserController {
 		uiModel.addAttribute("user", u).addAttribute("cleanRequests", cleanReq);
 		return "user/manager/show";
 	}
-
+	
 	@GetMapping("/user/manager/delete/{id}")
 	public String delete(@PathVariable(value = "id", required = true) Long id, Model uiModel,
+			RedirectAttributes redirectAttributes) {
+		ManagerUser u = managerUserQueryRepo.getOneById(id);
+		u.setDeleted(true);
+		managerUserRepo.saveAndFlush(u);
+		return "redirect:/user/manager/show/"+u.getId();
+	}
+
+	@GetMapping("/user/manager/delete-hard/{id}")
+	public String deleteHard(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		List<CleanRequest> cleanReq = cleanRequestQueryRep.getByManager(u);

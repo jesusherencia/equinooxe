@@ -48,12 +48,14 @@
                     <td>Actions:</td>
                     <td>
                    	 <ul>
-                   	 	<li> <a href="{{ href('/user/manager/edit')}}/{{ user.id }}" >Editer </a></li>
-                   	 	<li> <a  href="{{ href('/user/manager/delete')}}/{{ user.id }}" class="btn btn-red" >Supprimer </a></li>
+                   	 	<li> <a  href="{{ href('/user/manager/edit')}}/{{ user.id }}" >Editer </a></li>
+                   	 	<li> <a  href="{{ href('/user/manager/delete')}}/{{ user.id }}" class="btn" >Supprimer </a></li>
+                   	 	<li> <a  href="{{ href('/user/manager/delete-hard')}}/{{ user.id }}" class="btn btn-gray pull-right" >Supprimer définitivement </a></li>
                    	 </ul>
                     </td>
                 </tr>
         </table>
+        {% include "../../partials/systemInfo" with {"infoForEntity": user} %}
 {% endblock %}
  
 </body>
