@@ -43,13 +43,13 @@
 						 {% endfor %} 
 					</td>
                 </tr>
-                
                
                 <tr>
                     <td>Actions:</td>
                     <td>
                    	 <ul>
                    	 	<li> <a href="{{ href('/user/manager/edit')}}/{{ user.id }}" >Editer </a></li>
+                   	 	<li> <a  href="{{ href('/user/manager/delete')}}/{{ user.id }}" class="btn btn-red" >Supprimer </a></li>
                    	 </ul>
                     </td>
                 </tr>

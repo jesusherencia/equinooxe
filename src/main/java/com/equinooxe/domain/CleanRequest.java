@@ -108,8 +108,6 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
         this.instructions = instructions;
     }
 
-    
-
     public AgentUser getAgent() {
         return agent;
     }
