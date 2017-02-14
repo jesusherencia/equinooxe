@@ -70,7 +70,6 @@ public class ManagerUserService {
 		authorities.add(authority);
 		newUser.setAuthorities(authorities);
 		managerUserRepo.save(newUser);
-		managerUserRepo.save(newUser);
 		return newUser;
 	}
 }
