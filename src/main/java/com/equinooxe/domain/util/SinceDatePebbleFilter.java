@@ -70,13 +70,13 @@ public class SinceDatePebbleFilter implements Filter {
 			return out;
 		}
 		if (years > 0)
-			out += years + "an ";
+			out += years + " an ";
 		if (months > 0)
-			out += months + "mois ";
+			out += months + " mois ";
 		if (days > 0)
-			out += days + "jour"+(days>1?"s ":" ");
+			out += days + " jour"+(days>1?"s ":" ");
 		if (hours > 0)
-			out += hours + "heure"+(hours>1?"s ":" ");
+			out += hours + " heure"+(hours>1?"s ":" ");
 		return out;
 	}
 }

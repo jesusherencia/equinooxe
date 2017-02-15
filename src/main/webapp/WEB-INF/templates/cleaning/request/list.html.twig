@@ -39,30 +39,21 @@
 				<tr>
 				    <td> 
 						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
-					   	    {{ entity.agent.lastName }}
+					   	    {{ entity.agent.lastName|default(' ') }}
 						</a>
 					</td>
 					<td> 
 						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
-					   	    {{ entity.espace.nom }}
+					   	    {{ entity.espace.nom|default(' ') }}
 						</a>
 					</td>
 					<td> 
-					 <a href="{{ href('/espaces/batiment/show')}}/{{ entity.batiment.id }}">     
-					     {{ entity.status }} </a>
+					      {{ entity.status }}  
                     </td>
                     <td> {{ entity.cleanTasks|length }}  </td>
                     <td> {{ entity.lastModifiedDate|zonedDate }}  </td>
 					<td>
-					   <div class="dropdown pull-right">
-                             <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                  <i class="zmdi zmdi-more-vert"></i>
-                             </a>
-                            <ul class="dropdown-menu" role="menu">
-                                 <li> <a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}" >Détails</a></li>
-                                 <li> <a href="{{ href('/espaces/etage/edit')}}/{{ entity.id }}" >Editer </a></li>
-                            </ul>
-                       </div>
+					   
 					</td>
 				</tr>
 				{% endfor %}
