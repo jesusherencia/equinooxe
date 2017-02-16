@@ -3,6 +3,9 @@
   */
 package com.equinooxe.module.espaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -23,11 +26,52 @@ public class EtageFormModel {
 	private String description;
 	private Batiment batiment;
 	private Long batimentId;
+	private List<Batiment> availableBatiments = new ArrayList<>();
+	private Long[] batiments = new Long[999];
 
 	public EtageFormModel() {
 	}
 
 	public EtageFormModel(Etage etage) {
+		this.init(etage);
+	}
+	
+	public EtageFormModel(Etage etage, List<Batiment> availableBatiments ) {
+		this.init(etage);
+		this.initBatiment(availableBatiments);
+		
+	}
+	
+	public EtageFormModel(List<Batiment> availableBatiments ) {
+		this.initBatiment(availableBatiments);
+	}
+	
+	public List<Batiment> getAvailableBatiments() {
+		return availableBatiments;
+	}
+
+	public void setAvailableBatiments(List<Batiment> availableBatiments) {
+		this.availableBatiments = availableBatiments;
+	}
+
+	public Long[] getBatiments() {
+		return batiments;
+	}
+
+	public void setBatiments(Long[] batiments) {
+		this.batiments = batiments;
+	}
+
+	private void initBatiment(List<Batiment> availableBatiments){
+		this.availableBatiments=availableBatiments; 
+		int c=0;
+		for(Batiment b: this.availableBatiments){
+			this.batiments[c]= b.getId();
+			c++;
+		}
+	}
+	
+	private void init(Etage etage){
 		this.id = etage.getId();
 		this.nom = etage.getNom();
 		this.description = etage.getDescription();

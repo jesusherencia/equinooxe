@@ -50,6 +50,19 @@ public class EtageController {
 		return new ModelAndView("espaces/etage/form").addObject("etageFormModel",
 				new EtageFormModel(batimentRepository.findOne(batimentId)));
 	}
+	
+	/**
+	 * new Etage
+	 * 
+	 * @param id
+	 * @param batimentFormModel
+	 * @return new ModelAndView
+	 */
+	@GetMapping("/espaces/etage/new")
+	public ModelAndView showEtageForm() {
+		EtageFormModel etageFormModel = new EtageFormModel( batimentRepository.findAll());
+		return new ModelAndView("espaces/etage/form-new").addObject("etageFormModel",etageFormModel);
+	}
 
 	@GetMapping("/espaces/etage/edit/{id}")
 	public ModelAndView editForm(@PathVariable Long id, EtageFormModel etageFormModel) {
@@ -74,14 +87,14 @@ public class EtageController {
 			etage.setNom(etageFormModel.getNom());
 			etage.setDescription(etageFormModel.getDescription());
 			etageRepository.saveAndFlush(etage);
-			return "redirect:/espaces/etage/show/"+ etage.getId();
+			
 		} else {
 			batiment = batimentRepository.findOne(etageFormModel.getBatimentId());/* batiment will be null on submit */
 			etage = new Etage(etageFormModel.getNom(), etageFormModel.getDescription(), batiment);
 			etage = etageRepository.saveAndFlush(etage);
 		}
 		uiModel.addAttribute("batiment", etageFormModel.getBatiment());
-		return "redirect:" + EspacesConsts.URL_BATIMENT_SHOW + etage.getBatiment().getId();
+		return "redirect:/espaces/etage/show/"+ etage.getId();
 	}
 
 	@GetMapping("/espaces/etage/list")

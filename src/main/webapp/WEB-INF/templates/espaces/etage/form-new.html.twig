@@ -1,0 +1,60 @@
+{% extends "../../layout" %}
+
+{% block title %}
+Gestion des étages
+{% endblock %}
+
+{% block content %}
+<div class="titre">
+	<i class="fa fa-plus"></i>
+	 Nouvel étage 
+</div>
+	 {% for err in getAllErrors('etageFormModel') %}
+    <b style="color: red;">{{ err }}</b><br>
+{% endfor %}  
+<form action="{{ href('/espaces/etage/save') }}" method="post" name="etageFormModel">
+	<table class="table">
+		<tr>
+			<td>Nom:</td>
+			<td><input type="text" name="nom"
+				value="{{etageFormModel.nom  }}" /></td>
+			<td>{% for err in getFieldErrors('etageFormModel', 'nom') %}
+				{{ err }}<br> 
+				{% endfor %}
+			</td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td><textarea name="description"> {{etageFormModel.description}} </textarea>
+			</td>
+			<td> 
+			     {% for err in getFieldErrors('etageFormModel', 'description') %}
+				  {{ err }}<br>
+				 {% endfor %}
+			</td>
+		</tr>
+		<tr>
+    		<td> Batiment </td>
+    		<td>
+                  <select name="batimentId">
+                     {% for batimentEntity in etageFormModel.availableBatiments %}
+                      <option value="{{ batimentEntity.id }}"
+                             {% if etageFormModel.batiments contains batimentEntity.id %}
+                                 selected                   
+                             {% endif %} > 
+                           {{ batimentEntity.nom }}
+                      </option>  
+                    {% endfor %}
+                  </select>                  
+    		</td>
+		</tr>
+		<tr>
+			<td>
+			    <button class="btn-blue" type="submit">
+					Enregistrer <i class="fa fa-save"></i>
+				</button>
+			</td>
+		</tr>
+	</table>
+</form>
+{% endblock %}
