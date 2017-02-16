@@ -41,8 +41,8 @@
 						</a>
 					</td>
 					<td> 
-					 <a href="{{ href('/espaces/espace/show')}}/{{ entity.etage.id }}">     
-					     {{ entity.etage.nom }} / {{ entity.etage.numero }}  </a>
+					 <a href="{{ href('/espaces/etage/show')}}/{{ entity.etage.id }}">     
+					     {{ entity.etage.nom }} / {{ entity.etage.numero|default(" ") }}  </a>
                     </td>
                     <td> {{ entity.description }}  </td>
 					<td>
@@ -51,8 +51,8 @@
                                   <i class="zmdi zmdi-more-vert"></i>
                              </a>
                             <ul class="dropdown-menu" role="menu">
-                                 <li> <a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}" >Détails</a></li>
-                                 <li> <a href="{{ href('/espaces/etage/edit')}}/{{ entity.id }}" >Editer </a></li>
+                                 <li> <a href="{{ href('/espaces/espace/show')}}/{{ entity.id }}" >Détails</a></li>
+                                 <li> <a href="{{ href('/espaces/espace/edit')}}/{{ entity.id }}" >Editer </a></li>
                             </ul>
                        </div>
 					</td>

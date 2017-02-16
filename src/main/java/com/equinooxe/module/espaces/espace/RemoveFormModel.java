@@ -1,4 +1,4 @@
-package com.equinooxe.module.espaces;
+package com.equinooxe.module.espaces.espace;
 
 public class RemoveFormModel {
 	private String postTo;

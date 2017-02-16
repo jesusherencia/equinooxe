@@ -1,4 +1,4 @@
-package com.equinooxe.module.espaces;
+package com.equinooxe.module.espaces.espace;
 
 import javax.inject.Inject;
 

@@ -1,7 +1,7 @@
 /** Copyright (C) 2017 <mohamedboullouz@gmail.com>
   * This file is part of Equinooxe Project
   */
-package com.equinooxe.module.espaces;
+package com.equinooxe.module.espaces.etage;
 
 import java.util.ArrayList;
 import java.util.List;

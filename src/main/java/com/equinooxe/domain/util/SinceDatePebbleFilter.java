@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.mitchellbosecke.pebble.extension.Filter;
 
 /**
@@ -77,6 +79,9 @@ public class SinceDatePebbleFilter implements Filter {
 			out += days + " jour"+(days>1?"s ":" ");
 		if (hours > 0)
 			out += hours + " heure"+(hours>1?"s ":" ");
+		if(StringUtils.isBlank(out)){
+			out=" moins d'une heure";
+		}
 		return out;
 	}
 }
