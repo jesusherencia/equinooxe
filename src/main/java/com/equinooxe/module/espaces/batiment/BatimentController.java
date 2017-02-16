@@ -20,8 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.domain.Batiment;
+import com.equinooxe.module.common.RemoveFormModel;
 import com.equinooxe.module.espaces.espace.EspacesConsts;
-import com.equinooxe.module.espaces.espace.RemoveFormModel;
 import com.equinooxe.repository.BatimentRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 

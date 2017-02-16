@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.equinooxe.domain.Batiment;
 import com.equinooxe.domain.Etage;
-import com.equinooxe.module.espaces.espace.RemoveFormModel;
+import com.equinooxe.module.common.RemoveFormModel;
 import com.equinooxe.repository.BatimentRepository;
 import com.equinooxe.repository.EtageRepository;
 import com.equinooxe.security.AuthoritiesConstants;

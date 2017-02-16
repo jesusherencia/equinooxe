@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.equinooxe.domain.Espace;
 import com.equinooxe.domain.Etage;
+import com.equinooxe.module.common.BaseFormModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -15,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author mboullouz
  *
  */
-public class EspaceFormModel {
-	private Long id = new Long(-1);
+public class EspaceFormModel extends BaseFormModel {
+	 
 	@NotNull
 	@Size(min = 2, max = 60)
 	private String nom;
@@ -40,21 +41,6 @@ public class EspaceFormModel {
 	public EspaceFormModel(Etage etage) {
 		this.etage = etage;
 		this.etageId = this.etage.getId();
-	}
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNumero() {

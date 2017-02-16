@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 
 import com.equinooxe.domain.Batiment;
 import com.equinooxe.domain.Etage;
+import com.equinooxe.module.common.BaseFormModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,8 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author mboullouz
  *
  */
-public class EtageFormModel {
-	private Long id = new Long(-1);
+public class EtageFormModel  extends BaseFormModel{
+ 
 	@NotNull
 	@Size(min = 2, max = 60)
 	private String nom;
@@ -85,21 +86,6 @@ public class EtageFormModel {
 	}
 
 	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
 	 * @return the batimentId
 	 */
 	public Long getBatimentId() {
@@ -157,18 +143,6 @@ public class EtageFormModel {
 	 */
 	public void setBatiment(Batiment batiment) {
 		this.batiment = batiment;
-	}
-
-	@Override
-	public String toString() {
-		ObjectMapper mapper = new ObjectMapper();
-		String jsonInString = "{ id:" + id + " }";
-		try {
-			jsonInString = mapper.writeValueAsString(this);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return jsonInString;
 	}
 
 }

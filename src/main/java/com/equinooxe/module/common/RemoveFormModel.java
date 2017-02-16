@@ -1,4 +1,6 @@
-package com.equinooxe.module.espaces.espace;
+package com.equinooxe.module.common;
+
+import com.equinooxe.domain.util.EqUtils;
 
 public class RemoveFormModel {
 	private String postTo;
@@ -16,10 +18,7 @@ public class RemoveFormModel {
 	}
 	
 	public String toString(){
-		return "{"
-				+"id:"+id
-				+"redirectTo"+redirectTo
-				+"}";
+		return EqUtils.json(this);
 	}
 
 	public String getPostTo() {

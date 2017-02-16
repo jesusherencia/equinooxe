@@ -7,13 +7,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.equinooxe.domain.Batiment;
+import com.equinooxe.module.common.BaseFormModel;
 
 /**
  * @author mboullouz
  *
  */
-public class BatimentFormModel {
-    private Long id= new Long(-1);
+public class BatimentFormModel extends BaseFormModel {
+  
     @NotNull
 	@Size(min = 2, max = 60)
     private String nom;
@@ -30,12 +31,7 @@ public class BatimentFormModel {
 		 adresse= batiment.getAdresse();
 		 description= batiment.getDescription();
 	}
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
+	 
 	/**
 	 * @return the description
 	 */
@@ -48,12 +44,7 @@ public class BatimentFormModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+	 
 	/**
 	 * @return the nom
 	 */
