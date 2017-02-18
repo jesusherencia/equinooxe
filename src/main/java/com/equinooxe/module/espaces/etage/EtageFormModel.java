@@ -12,8 +12,6 @@ import javax.validation.constraints.Size;
 import com.equinooxe.domain.Batiment;
 import com.equinooxe.domain.Etage;
 import com.equinooxe.module.common.BaseFormModel;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author mboullouz

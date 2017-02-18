@@ -65,7 +65,6 @@ public class SinceDatePebbleFilter implements Filter {
 		long minutes = tempDateTime.until(toDateTime, ChronoUnit.MINUTES);
 		tempDateTime = tempDateTime.plusMinutes(minutes);
 
-		long seconds = tempDateTime.until(toDateTime, ChronoUnit.SECONDS);
 		String out = "";
 		if (years > 1) {
 			out += years + " ans";
@@ -79,8 +78,11 @@ public class SinceDatePebbleFilter implements Filter {
 			out += days + " jour"+(days>1?"s ":" ");
 		if (hours > 0)
 			out += hours + " heure"+(hours>1?"s ":" ");
+		if(minutes>0)
+			out+= minutes+ " minute"+(minutes>1?"s ":" ");
+		
 		if(StringUtils.isBlank(out)){
-			out=" moins d'une heure";
+			out=" il y un instant";
 		}
 		return out;
 	}
