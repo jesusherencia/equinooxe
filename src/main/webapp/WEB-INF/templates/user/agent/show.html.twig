@@ -1,0 +1,67 @@
+{% extends "../../layout" %}
+
+{% block title %}
+  Détails agent 
+{% endblock %}
+
+{% block content %}
+        <div class="titre"> <i class="fa fa-plus"></i> 
+		     Détails de l'agent:
+		     {{ user.lastName  | upper }} 
+		     {{ user.firstName | capitalize }}  
+		</div>	   
+		 
+		<table class="table">
+                <tr>
+                    <td>Nom:</td>
+                    <td> {{ user.lastName | upper }}  </td>
+                </tr>
+                <tr>
+                    <td>Prénom:</td>
+                    <td>{{ user.firstName | capitalize  }} </td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td>{{ user.email   }} </td>
+                </tr>
+                <tr>
+                    <td>Login:</td>
+                    <td>{{ user.login }}  </td>
+                </tr>
+                <tr>
+                    <td>Roles:</td>
+                    <td> {% for auth in user.authorities %}
+						     {{ auth.name }} 
+						 {% endfor %} 
+					</td>
+                </tr>
+                 <tr>
+                    <td>Clean requests:</td>
+                    <td> {% for cleanReq in cleanRequests %}
+						   Status:  {{ cleanReq.status }}  | At: {{ cleanReq.doneAt|localDate }} 
+						   Inst  :  {{ cleanReq.instructions }}  <br>
+						 {% endfor %} 
+						 {% if cleanRequests | length >0  %}
+						 <sapn>
+						  <a  href="{{ href('/cleaning/list/per/user')}}/{{ user.id }}" >Liste complète </a>
+						 </sapn>
+						 {% endif %}
+					</td>
+                </tr>
+               
+                <tr>
+                    <td>Actions:</td>
+                    <td>
+                   	 <div>
+                   	 	<span> <a  href="{{ href('/user/agent/edit')}}/{{ user.id }}" >Editer </a></span>
+                   	 	<span> <a  href="{{ href('/user/agent/delete')}}/{{ user.id }}" class="btn" >Supprimer </a></span>
+                   	 	<span> <a  href="{{ href('/user/agent/delete-hard')}}/{{ user.id }}" class="btn-gray pull-right" >Supprimer définitivement </a></span>
+                   	 </div>
+                    </td>
+                </tr>
+        </table>
+        {% include "../../partials/systemInfo" with {"infoForEntity": user} %}
+{% endblock %}
+ 
+</body>
+</html>
