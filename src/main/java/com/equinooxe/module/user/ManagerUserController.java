@@ -69,7 +69,7 @@ public class ManagerUserController {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
 		uiModel.addAttribute("userForm", managerUserForm);
-		return "user/form";
+		return "user/manager/form";
 	}
 
 	@PostMapping("/user/manager/save")
