@@ -31,7 +31,7 @@ import com.google.common.collect.ImmutableList;
 
 @Controller
 @Secured(AuthoritiesConstants.USER)
-public class ManagerUserController {
+public class AgentUserController {
 
 	@Inject
 	AuthorityRepository authorityRepo;
@@ -57,27 +57,27 @@ public class ManagerUserController {
 	@Autowired
 	ManagerUserQueryRepository managerUserQueryRepo;
 
-	@GetMapping("/user/manager/new")
-	public String showForm(ManagerUserForm managerUserForm, Model uiModel) {
-		managerUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
-		return "user/manager/form";
+	@GetMapping("/user/agent/new")
+	public String showForm(AgentUserForm agentUserForm) {
+		agentUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
+		return "user/agent/form";
 	}
 
-	@GetMapping("/user/manager/edit/{id}")
-	public String editForm(@PathVariable(value = "id", required = true) Long id, ManagerUserForm managerUserForm,
+	@GetMapping("/user/agent/edit/{id}")
+	public String editForm(@PathVariable(value = "id", required = true) Long id, AgentUserForm managerUserForm,
 			Model uiModel, RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
-		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
+		managerUserForm = new AgentUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
 		uiModel.addAttribute("userForm", managerUserForm);
-		return "user/manager/form";
+		return "user/agent/form";
 	}
 
-	@PostMapping("/user/manager/save")
-	public String save(@Valid ManagerUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
+	@PostMapping("/user/agent/save")
+	public String save(@Valid AgentUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		addUserValidator.validate(managerUserForm, bindingResult);
 		if (bindingResult.hasErrors()) {
-			return "user/manager/form";
+			return "user/agent/form";
 		}
 		ManagerUser user;
 		if (managerUserForm.getId() != null) {
@@ -88,28 +88,28 @@ public class ManagerUserController {
 					managerUserForm.getEmail().toLowerCase(), "fr", true);
 		}
 		redirectAttributes.addAttribute("id", user.getId());
-		return "redirect:/user/manager/show/?id=" + user.getId();
+		return "redirect:/user/agent/show/?id=" + user.getId();
 	}
 
-	@GetMapping("/user/manager/show/{id}")
+	@GetMapping("/user/agent/show/{id}")
 	public String show(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		List<CleanRequest> cleanReq = cleanRequestQueryRep.getByManager(u);
 		uiModel.addAttribute("user", u).addAttribute("cleanRequests", cleanReq);
-		return "user/manager/show";
+		return "user/agent/show";
 	}
 
-	@GetMapping("/user/manager/delete/{id}")
+	@GetMapping("/user/agent/delete/{id}")
 	public String delete(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		u.setDeleted(true);
 		managerUserRepo.saveAndFlush(u);
-		return "redirect:/user/manager/show/" + u.getId();
+		return "redirect:/user/agent/show/" + u.getId();
 	}
 
-	@GetMapping("/user/manager/delete-hard/{id}")
+	@GetMapping("/user/agent/delete-hard/{id}")
 	public String deleteHard(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
@@ -120,13 +120,13 @@ public class ManagerUserController {
 		});
 
 		managerUserRepo.delete(ImmutableList.of(u));
-		return "redirect:/user/manager/list";
+		return "redirect:/user/agent/list";
 	}
 
-	@GetMapping("/user/manager/list")
+	@GetMapping("/user/agent/list")
 	public ModelAndView list(Model uiModel, RedirectAttributes redirectAttributes) {
 		List<ManagerUser> users = managerUserRepo.findAll();
-		ModelAndView mv = new ModelAndView("user/manager/list").addObject("users", users);
+		ModelAndView mv = new ModelAndView("user/agent/list").addObject("users", users);
 		return mv;
 	}
 
