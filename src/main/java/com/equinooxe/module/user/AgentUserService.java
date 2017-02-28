@@ -20,7 +20,7 @@ import com.equinooxe.service.util.RandomUtil;
 
 @Service
 @Transactional
-public class createAgentUser {
+public class AgentUserService {
 	@Inject
 	private ManagerUserRepository managerUserRepo;
 	@Autowired

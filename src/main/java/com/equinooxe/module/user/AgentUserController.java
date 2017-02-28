@@ -37,7 +37,7 @@ public class AgentUserController {
 	AuthorityRepository authorityRepo;
 
 	@Inject
-	private createAgentUser agentUserService;
+	private AgentUserService agentUserService;
 
 	@Inject
 	private ManagerUserRepository managerUserRepo;
