@@ -37,7 +37,7 @@ public class AgentUserController {
 	AuthorityRepository authorityRepo;
 
 	@Inject
-	private ManagerUserService managerUserService;
+	private createAgentUser agentUserService;
 
 	@Inject
 	private ManagerUserRepository managerUserRepo;
@@ -73,19 +73,19 @@ public class AgentUserController {
 	}
 
 	@PostMapping("/user/agent/save")
-	public String save(@Valid AgentUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
+	public String save(@Valid AgentUserForm userUserForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		addUserValidator.validate(managerUserForm, bindingResult);
+		addUserValidator.validate(userUserForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "user/agent/form";
 		}
 		ManagerUser user;
-		if (managerUserForm.getId() != null) {
-			user = managerUserService.updateUserFrom(managerUserForm);
+		if (userUserForm.getId() != null) {
+			user = agentUserService.updateUserFrom(userUserForm);
 		} else {
-			user = managerUserService.createManagerUser(managerUserForm.getLogin(), managerUserForm.getPassword(),
-					managerUserForm.getFirstName(), managerUserForm.getLastName(),
-					managerUserForm.getEmail().toLowerCase(), "fr", true);
+			user = agentUserService.createManagerUser(userUserForm.getLogin(), userUserForm.getPassword(),
+					userUserForm.getFirstName(), userUserForm.getLastName(),
+					userUserForm.getEmail().toLowerCase(), "fr", true);
 		}
 		redirectAttributes.addAttribute("id", user.getId());
 		return "redirect:/user/agent/show/?id=" + user.getId();
