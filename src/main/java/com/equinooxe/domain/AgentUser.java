@@ -25,6 +25,7 @@ public class AgentUser extends User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	@OneToMany(mappedBy = "agent", targetEntity = CleanRequest.class)
     private Collection<CleanRequest> cleanRequests;
 

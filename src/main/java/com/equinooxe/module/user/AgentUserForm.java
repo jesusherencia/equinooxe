@@ -35,13 +35,12 @@ public class AgentUserForm {
 
 	private String[] autorities = new String[99];
 
-	private Set<Authority> avelaibleAutorities = new HashSet<>();
+	private Set<Authority> availableAutorities = new HashSet<>();
 
-	private boolean isManager = false;
 
 	public AgentUserForm() {
 		autorities = new String[99];
-		avelaibleAutorities = new HashSet<>();
+		availableAutorities = new HashSet<>();
 	}
 
 	public AgentUserForm(Set<Authority> avelaibleAutorities) {
@@ -49,28 +48,22 @@ public class AgentUserForm {
 		avelaibleAutorities = new HashSet<>();
 	}
 
-	public AgentUserForm(User u, Set<Authority> avelaibleAutorities) {
-		initUserCommonPart(u, avelaibleAutorities);
-		int i = 0;
-		for (Authority autho : u.getAuthorities()) {
-			this.autorities[i] = autho.getName();
-			i++;
-		}
-		this.avelaibleAutorities = avelaibleAutorities;
-	}
-
-
 	public AgentUserForm(AgentUser au, Set<Authority> avelaibleAutorities) {
 		this.initUserCommonPart(au, avelaibleAutorities);
-		this.isManager = false;
 	}
 
-	private void initUserCommonPart(User u, Set<Authority> avelaibleAutorities) {
+	private void initUserCommonPart(User u, Set<Authority> availableAutorities) {
 		this.email = u.getEmail();
 		this.firstName = u.getFirstName();
 		this.lastName = u.getLastName();
 		this.login = u.getLogin();
 		this.id = u.getId();
+		int i = 0;
+		for (Authority autho : u.getAuthorities()) {
+			this.autorities[i] = autho.getName();
+			i++;
+		}
+		this.availableAutorities= availableAutorities;
 	}
 
 	public String[] getAutorities() {
@@ -81,12 +74,12 @@ public class AgentUserForm {
 		this.autorities = autorities;
 	}
 
-	public Set<Authority> getAvelaibleAutorities() {
-		return avelaibleAutorities;
+	public Set<Authority> getAvailableAutorities() {
+		return availableAutorities;
 	}
 
-	public void setAvelaibleAutorities(Set<Authority> avelaibleAutorities) {
-		this.avelaibleAutorities = avelaibleAutorities;
+	public void setAvailableAutorities(Set<Authority> avelaibleAutorities) {
+		this.availableAutorities = avelaibleAutorities;
 	}
 
 	public Long getId() {
@@ -135,14 +128,6 @@ public class AgentUserForm {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public boolean isManager() {
-		return isManager;
-	}
-
-	public void setManager(boolean isManager) {
-		this.isManager = isManager;
 	}
 
 }

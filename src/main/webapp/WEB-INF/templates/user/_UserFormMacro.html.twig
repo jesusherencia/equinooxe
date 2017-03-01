@@ -37,6 +37,7 @@
                         {% endfor %}
                     </td>
                 </tr>
+               {% if userForm.login is null %} {# hide passowrd form on edit #}
                 <tr>
                     <td>Mot de passe:</td>
                     <td><input type="password" name="password"   /></td>
@@ -46,10 +47,11 @@
                          {% endfor %}
                      </td>
                 </tr>
+               {% endif %}
                 <tr>
-                    <td>Mot de passe:</td>
+                    <td>Roles:</td>
                     <td>
-                      {% for authority in userForm.avelaibleAutorities %}
+                      {% for authority in userForm.availableAutorities %}
                         <input type="checkbox" 
                                name="autorities" 
                                {% if userForm.autorities contains authority.name %}

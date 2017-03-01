@@ -59,16 +59,16 @@ public class AgentUserController {
 
 	@GetMapping("/user/agent/new")
 	public String showForm(AgentUserForm agentUserForm) {
-		agentUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
+		agentUserForm.setAvailableAutorities(new HashSet<Authority>(authorityRepo.findAll()));
 		return "user/agent/form";
 	}
 
 	@GetMapping("/user/agent/edit/{id}")
-	public String editForm(@PathVariable(value = "id", required = true) Long id, AgentUserForm managerUserForm,
+	public String editForm(@PathVariable(value = "id", required = true) Long id, AgentUserForm agentUserForm,
 			Model uiModel, RedirectAttributes redirectAttributes) {
 		AgentUser u = agentUserQueryRepo.getOneById(id);
-		managerUserForm = new AgentUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
-		uiModel.addAttribute("userForm", managerUserForm);
+		agentUserForm = new AgentUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
+		uiModel.addAttribute("agentUserForm", agentUserForm);
 		return "user/agent/form";
 	}
 
