@@ -10,11 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.Authority;
-import com.equinooxe.domain.ManagerUser;
+import com.equinooxe.repository.AgentUserQueryRepository;
+import com.equinooxe.repository.AgentUserRepository;
 import com.equinooxe.repository.AuthorityRepository;
-import com.equinooxe.repository.ManagerUserQueryRepository;
-import com.equinooxe.repository.ManagerUserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 import com.equinooxe.service.util.RandomUtil;
 
@@ -22,16 +22,19 @@ import com.equinooxe.service.util.RandomUtil;
 @Transactional
 public class AgentUserService {
 	@Inject
-	private ManagerUserRepository managerUserRepo;
+	private AgentUserRepository agentUserRepo;
+	
 	@Autowired
-	ManagerUserQueryRepository managerUserQueryRepo;
+	AgentUserQueryRepository managerUserQueryRepo;
+	
 	@Inject
 	AuthorityRepository authorityRepo;
+	
 	@Inject
 	private PasswordEncoder passwordEncoder;
 
-	public ManagerUser updateUserFrom(AgentUserForm managerUserForm) {
-		ManagerUser user = managerUserQueryRepo.getOneById(managerUserForm.getId());
+	public AgentUser updateUserFrom(AgentUserForm managerUserForm) {
+		AgentUser user = managerUserQueryRepo.getOneById(managerUserForm.getId());
 		user.setFirstName(managerUserForm.getFirstName());
 		user.setEmail(managerUserForm.getEmail());
 		user.setLastName(managerUserForm.getLastName());
@@ -46,13 +49,13 @@ public class AgentUserService {
 			}
 		}
 		user.setAuthorities(selectedAut);
-		managerUserRepo.saveAndFlush(user);
+		agentUserRepo.saveAndFlush(user);
 		return user;
 	}
-	public ManagerUser createManagerUser(String login, String password, String firstName, String lastName, String email,
+	public AgentUser createAgentUser(String login, String password, String firstName, String lastName, String email,
 			String langKey, boolean activate) {
 
-		ManagerUser newUser = new ManagerUser();
+		AgentUser newUser = new AgentUser();
 		Authority authority = authorityRepo.findOne(AuthoritiesConstants.USER);
 		Set<Authority> authorities = new HashSet<>();
 		String encryptedPassword = passwordEncoder.encode(password);
@@ -69,7 +72,7 @@ public class AgentUserService {
 		newUser.setActivationKey(RandomUtil.generateActivationKey());
 		authorities.add(authority);
 		newUser.setAuthorities(authorities);
-		managerUserRepo.save(newUser);
+		agentUserRepo.save(newUser);
 		return newUser;
 	}
 }

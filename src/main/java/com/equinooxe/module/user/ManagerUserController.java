@@ -52,7 +52,7 @@ public class ManagerUserController {
 	EntityManager entityManager;
 
 	@Autowired
-	AddUserValidator addUserValidator;
+	AddManagerValidator addManagerValidator;
 
 	@Autowired
 	ManagerUserQueryRepository managerUserQueryRepo;
@@ -75,7 +75,7 @@ public class ManagerUserController {
 	@PostMapping("/user/manager/save")
 	public String save(@Valid ManagerUserForm managerUserForm, BindingResult bindingResult, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		addUserValidator.validate(managerUserForm, bindingResult);
+		addManagerValidator.validate(managerUserForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "user/manager/form";
 		}

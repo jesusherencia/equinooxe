@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Email;
 
 import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.Authority;
-import com.equinooxe.domain.ManagerUser;
 import com.equinooxe.domain.User;
 
 public class AgentUserForm {
@@ -60,10 +59,6 @@ public class AgentUserForm {
 		this.avelaibleAutorities = avelaibleAutorities;
 	}
 
-	public AgentUserForm(ManagerUser mu, Set<Authority> avelaibleAutorities) {
-		this.initUserCommonPart(mu, avelaibleAutorities);
-		this.isManager = true;
-	}
 
 	public AgentUserForm(AgentUser au, Set<Authority> avelaibleAutorities) {
 		this.initUserCommonPart(au, avelaibleAutorities);

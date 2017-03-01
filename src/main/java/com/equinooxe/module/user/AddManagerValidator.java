@@ -12,7 +12,7 @@ import com.equinooxe.domain.User;
 import com.equinooxe.repository.UserRepository;
 
 @Component
-public class AddUserValidator implements Validator {
+public class AddManagerValidator implements Validator {
 	@Inject
 	private UserRepository userRepository;
 	 

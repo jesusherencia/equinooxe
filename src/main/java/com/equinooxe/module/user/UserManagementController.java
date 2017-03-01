@@ -37,7 +37,7 @@ public class UserManagementController {
 	EntityManager entityManager;
 
 	@Autowired
-	AddUserValidator addUserValidator;
+	AddAgentValidator addUserValidator;
 
 	@Autowired
 	UserQueryRepository userQueryRepo;
