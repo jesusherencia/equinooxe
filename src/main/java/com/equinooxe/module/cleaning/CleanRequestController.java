@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.ManagerUser;
+import com.equinooxe.repository.AgentUserQueryRepository;
 import com.equinooxe.repository.CleanRequestQueryRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
 
@@ -18,6 +20,9 @@ public class CleanRequestController {
 	
 	@Inject
 	ManagerUserQueryRepository managerUserQueryRep;
+	
+	@Inject
+	AgentUserQueryRepository agentUserQueryRep;
 
 	@GetMapping("/cleaning/request/list")
 	public ModelAndView getList() {
@@ -25,12 +30,21 @@ public class CleanRequestController {
 		mv.addObject("cleanRequests",cleanRequestQueryRepository.getAll());
 		return mv;
 	}
-	@GetMapping("/cleaning/list/per/user/{id}")
+	@GetMapping("/cleaning/list/per/manager/{id}")
 	public ModelAndView getListPerUser( @PathVariable Long id) {
 		ModelAndView mv    = new ModelAndView("cleaning/request/list");
 		ManagerUser  mUser =  managerUserQueryRep.getOneById(id);
 		mv.addObject("cleanRequests",cleanRequestQueryRepository.getByManager(mUser))
 		  .addObject("manager", mUser);
+		return mv;
+	}
+	
+	@GetMapping("/cleaning/list/per/agent/{id}")
+	public ModelAndView getListPerAgent(@PathVariable Long id){
+		ModelAndView mv    = new ModelAndView("cleaning/request/list");
+		AgentUser aUser = agentUserQueryRep.getOneById(id);
+		mv.addObject("cleanRequests",cleanRequestQueryRepository.getByAgent(aUser));
+		mv.addObject("agent",aUser);
 		return mv;
 	}
 	

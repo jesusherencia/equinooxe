@@ -1,192 +1,68 @@
 {% extends "../../layout" %}
 
 {% block title %}
-Liste des étages
+  Liste des étages
 {% endblock %}
 
 {% block content %}
-
-<div class="card-box table-responsive">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
-
-                        			<h4 class="header-title m-t-0 m-b-30">Buttons Example</h4>
-
-                                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="dt-buttons btn-group"><a class="btn btn-default buttons-copy buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Copy</span></a><a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>CSV</span></a><a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Excel</span></a><a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>PDF</span></a><a class="btn btn-default buttons-print btn-sm" tabindex="0" aria-controls="datatable-buttons"><span>Print</span></a></div><div id="datatable-buttons_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="datatable-buttons"></label></div><table id="datatable-buttons" class="table table-striped table-bordered dataTable no-footer dtr-inline" role="grid" aria-describedby="datatable-buttons_info">
-                                        <thead>
-                                            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 95px;">Name</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 165px;">Position</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 66px;">Office</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 25px;">Age</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 63px;">Start date</th><th class="sorting" tabindex="0" aria-controls="datatable-buttons" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 47px;">Salary</th></tr>
-                                        </thead>
-
-                                        <tbody>
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                        <tr role="row" class="odd">
-                                                <td class="sorting_1" tabindex="0">Airi Satou</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>33</td>
-                                                <td>2008/11/28</td>
-                                                <td>$162,700</td>
-                                            </tr><tr role="row" class="even">
-                                                <td class="sorting_1" tabindex="0">Angelica Ramos</td>
-                                                <td>Chief Executive Officer (CEO)</td>
-                                                <td>London</td>
-                                                <td>47</td>
-                                                <td>2009/10/09</td>
-                                                <td>$1,200,000</td>
-                                            </tr><tr role="row" class="odd">
-                                                <td class="sorting_1" tabindex="0">Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr><tr role="row" class="even">
-                                                <td class="sorting_1" tabindex="0">Bradley Greer</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>41</td>
-                                                <td>2012/10/13</td>
-                                                <td>$132,000</td>
-                                            </tr><tr role="row" class="odd">
-                                                <td class="sorting_1" tabindex="0">Brenden Wagner</td>
-                                                <td>Software Engineer</td>
-                                                <td>San Francisco</td>
-                                                <td>28</td>
-                                                <td>2011/06/07</td>
-                                                <td>$206,850</td>
-                                            </tr><tr role="row" class="even">
-                                                <td class="sorting_1" tabindex="0">Brielle Williamson</td>
-                                                <td>Integration Specialist</td>
-                                                <td>New York</td>
-                                                <td>61</td>
-                                                <td>2012/12/02</td>
-                                                <td>$372,000</td>
-                                            </tr><tr role="row" class="odd">
-                                                <td class="sorting_1" tabindex="0">Bruno Nash</td>
-                                                <td>Software Engineer</td>
-                                                <td>London</td>
-                                                <td>38</td>
-                                                <td>2011/05/03</td>
-                                                <td>$163,500</td>
-                                            </tr><tr role="row" class="even">
-                                                <td class="sorting_1" tabindex="0">Caesar Vance</td>
-                                                <td>Pre-Sales Support</td>
-                                                <td>New York</td>
-                                                <td>21</td>
-                                                <td>2011/12/12</td>
-                                                <td>$106,450</td>
-                                            </tr><tr role="row" class="odd">
-                                                <td class="sorting_1" tabindex="0">Cara Stevens</td>
-                                                <td>Sales Assistant</td>
-                                                <td>New York</td>
-                                                <td>46</td>
-                                                <td>2011/12/06</td>
-                                                <td>$145,600</td>
-                                            </tr><tr role="row" class="even">
-                                                <td class="sorting_1" tabindex="0">Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr></tbody>
-                                    </table><div class="dataTables_info" id="datatable-buttons_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_simple_numbers" id="datatable-buttons_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="datatable-buttons" tabindex="0" id="datatable-buttons_previous"><a href="#">Previous</a></li><li class="paginate_button active" aria-controls="datatable-buttons" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="datatable-buttons" tabindex="0"><a href="#">2</a></li><li class="paginate_button " aria-controls="datatable-buttons" tabindex="0"><a href="#">3</a></li><li class="paginate_button " aria-controls="datatable-buttons" tabindex="0"><a href="#">4</a></li><li class="paginate_button " aria-controls="datatable-buttons" tabindex="0"><a href="#">5</a></li><li class="paginate_button " aria-controls="datatable-buttons" tabindex="0"><a href="#">6</a></li><li class="paginate_button next" aria-controls="datatable-buttons" tabindex="0" id="datatable-buttons_next"><a href="#">Next</a></li></ul></div></div>
-                                </div>
- 
-		<script src="/resources/assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/dataTables.bootstrap.js"></script>
-        <script src="/resources/assets/plugins/datatables/dataTables.buttons.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/buttons.bootstrap.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/jszip.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/pdfmake.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/vfs_fonts.js"></script>
-        <script src="/resources/assets/plugins/datatables/buttons.html5.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/buttons.print.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/dataTables.keyTable.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/dataTables.responsive.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/responsive.bootstrap.min.js"></script>
-        <script src="/resources/assets/plugins/datatables/dataTables.scroller.min.js"></script>
-
-        <!-- Datatable init js -->
-        <script src="/resources/assets/pages/datatables.init.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#datatable').dataTable();
-                $('#datatable-keytable').DataTable( { keys: true } );
-                $('#datatable-responsive').DataTable();
-                $('#datatable-scroller').DataTable( { ajax: "/resources/assets/plugins/datatables/json/scroller-demo.json", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
-                var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
-            } );
-            TableManageButtons.init();
-
-        </script>
-        
-
+		<div class="titre">
+			<i class="ti-list-ol"></i> <span> Liste des demandes</span>
+			<div class="dropdown pull-right">
+	                             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+	                                  <i style="font-size: 18px" 
+	                                     class="ti-settings"
+	                                     ></i>
+	                             </a>
+	                            <ul class="dropdown-menu" role="menu">
+	                                 <li>
+	                                 	<a href="{{ href('/espaces/batiment/new') }}">
+	                                 		Ajouter étage 
+	                                 	</a> 
+	                                 </li> 
+	                            </ul>
+	        </div>
+		</div>
+		
+		<table class="table table-kv">
+			<thead>
+				<tr> 
+				    <th>Manager</th>
+				    <th>Agent</th> 
+					<th>Espace</th>
+					<th>Status</th>
+					<th>Nbr taches</th>
+					<th>Mise à jour</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			    {% for entity in cleanRequests %}
+				<tr>
+					 <td> 
+						<a href="{{ href('/user/manager/show')}}/{{ entity.id }}">  
+					   	    {{ entity.manager.lastName|default(' ') }}
+						</a>
+					</td>
+				    <td> 
+						<a href="{{ href('/user/agent/show')}}/{{ entity.id }}">  
+					   	    {{ entity.agent.lastName|default(' ') }}
+						</a>
+					</td>
+					<td> 
+						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
+					   	    {{ entity.espace.nom|default(' ') }}
+						</a>
+					</td>
+					<td> 
+					      {{ entity.status }}  
+                    </td>
+                    <td> {{ entity.cleanTasks|length }}  </td>
+                    <td> {{ entity.lastModifiedDate|zonedDate }}  </td>
+					<td>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	 
 {% endblock %}
