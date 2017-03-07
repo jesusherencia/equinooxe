@@ -14,6 +14,9 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 /**
  *
  * @author mboullouz
@@ -27,6 +30,7 @@ public class AgentUser extends User implements Serializable {
 	
 	
 	@OneToMany(mappedBy = "agent", targetEntity = CleanRequest.class)
+	@Fetch(FetchMode.JOIN)
     private Collection<CleanRequest> cleanRequests;
 
     public Collection<CleanRequest> getCleanRequests() {
