@@ -65,12 +65,4 @@ public class TacheDefinition extends AbstractAuditingEntity implements Serializa
 		}
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "{ id:" + id + 
-				 "nom:"+nom +
-				" }";
-	}
-
 }
