@@ -7,7 +7,6 @@ import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.time.ZonedDateTime;
 
 /**
  * Utility class for testing REST controllers.
