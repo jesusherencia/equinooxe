@@ -1,0 +1,51 @@
+{% extends "../../layout" %}
+
+{% block title %}
+  Liste des definitions
+{% endblock %}
+
+{% block content %}
+		<div class="titre">
+			<i class="ti-list-ol"></i> <span> Liste des definitions des tâches </span>
+			<div class="dropdown pull-right">
+	             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+	                 <i style="font-size: 18px" 
+	                    class="ti-settings"></i>
+	            </a>
+	            <ul class="dropdown-menu" role="menu">
+	               <li>
+	                  <a href="/user/agent/new">Nouvelle definition de tâche</a>
+	               </li>
+	            </ul>
+	        </div>
+		</div>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Nom</th>
+					<th>Description</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			    {% for entity in tacheDefinitions %}
+				<tr>
+					<td> {{ entity.nom }}</td>
+					<td> {{ entity.description }}</td>
+					<td>
+					   <div class="dropdown pull-right">
+                             <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                  <i class="zmdi zmdi-more-vert"></i>
+                             </a>
+                            <ul class="dropdown-menu" role="menu">
+                                 <li> <a href="{{ href('/tache/definition/show')}}/{{ entity.id }}" >Détails</a></li>
+                                 <li> <a href="{{ href('/tache/definition/edit')}}/{{ entity.id }}" >Editer </a></li>
+                            </ul>
+                       </div>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+{% endblock %}
