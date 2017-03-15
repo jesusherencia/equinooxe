@@ -32,6 +32,12 @@ public class TacheDefinitionEntity extends AbstractAuditingEntity implements Ser
 		super();
 	}
 
+	public TacheDefinitionEntity(String nom, String description) {
+		super();
+		this.nom = nom;
+		this.description = description;
+	}
+
 	public String getNom() {
 		return nom;
 	}

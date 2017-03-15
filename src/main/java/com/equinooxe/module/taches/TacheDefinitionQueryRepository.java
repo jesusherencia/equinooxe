@@ -16,20 +16,24 @@ import com.equinooxe.repository.AbstractQueryRespository;
  *
  */
 @Component
-public class TacheDefinitionQueryRepository extends AbstractQueryRespository<QTacheDefinition,TacheDefinitionEntity> {
+public class TacheDefinitionQueryRepository extends AbstractQueryRespository<QTacheDefinition, TacheDefinitionEntity> {
 
 	@Autowired
 	public TacheDefinitionQueryRepository(EntityManager entityManager) {
-		super(entityManager,QTacheDefinition.tacheDefinition);
+		super(entityManager, QTacheDefinition.tacheDefinition);
 	}
 
 	public TacheDefinitionEntity getOneById(Long id) {
-		TacheDefinitionEntity td = queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
-		return td;
+		return queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
 	}
-	
+
 	@Override
 	public List<TacheDefinitionEntity> getAll() {
 		return queryFactory.selectFrom(qEntity).fetch();
+	}
+
+	public TacheDefinitionEntity getOneByNom(String nom) {
+		return queryFactory.selectFrom(qEntity).where(qEntity.nom.eq(nom)).fetchOne();
+
 	}
 }

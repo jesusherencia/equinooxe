@@ -20,6 +20,8 @@ public class TacheDefinitionController {
 	TacheDefinitionValidator addTacheDefinitionValidator;
 	@Inject
 	TacheDefinitionService tacheDefinitionService;
+	@Inject
+	TacheDefinitionQueryRepository tacheDefinitionQueryRep;
 
 	@GetMapping("/tache/definition/list")
 	public ModelAndView getList() {
@@ -43,7 +45,13 @@ public class TacheDefinitionController {
 		}
 		TacheDefinitionEntity tacheDefEntity = null;
 		if (tacheDefinitionFormModel.getId() != null && tacheDefinitionFormModel.getId() > 0) {
-			tacheDefEntity= tacheDefinitionService.addNew(tacheDefinitionFormModel.getNom(), tacheDefinitionFormModel.getDescription());
+			tacheDefEntity = tacheDefinitionService.update(tacheDefinitionFormModel.getId(),
+					tacheDefinitionFormModel.getNom(), tacheDefinitionFormModel.getDescription());
+		} else {
+
+			tacheDefEntity = tacheDefinitionService.addNew(tacheDefinitionFormModel.getNom(),
+					tacheDefinitionFormModel.getDescription());
+
 		}
 		redirectAttributes.addAttribute("id", tacheDefEntity.getId());
 		return "redirect:/user/manager/show/?id=" + tacheDefEntity.getId();

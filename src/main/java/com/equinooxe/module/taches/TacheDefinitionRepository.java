@@ -18,5 +18,5 @@ public interface TacheDefinitionRepository
 
 	@SuppressWarnings("unchecked")
 	@Override
-	TacheDefinitionEntity saveAndFlush(TacheDefinitionEntity u);
+	TacheDefinitionEntity saveAndFlush(TacheDefinitionEntity td);
 }
