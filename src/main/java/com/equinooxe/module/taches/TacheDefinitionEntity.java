@@ -3,8 +3,9 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.domain;
+package com.equinooxe.module.taches;
 
+import com.equinooxe.domain.AbstractAuditingEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -19,7 +20,7 @@ import javax.persistence.Entity;
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class TacheDefinition extends AbstractAuditingEntity implements Serializable {
+public class TacheDefinitionEntity extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Column(unique = true)
 	private String nom;
@@ -27,7 +28,7 @@ public class TacheDefinition extends AbstractAuditingEntity implements Serializa
 	@Column(unique = false, columnDefinition = "TEXT")
 	private String description;
 
-	public TacheDefinition() {
+	public TacheDefinitionEntity() {
 		super();
 	}
 
@@ -56,10 +57,10 @@ public class TacheDefinition extends AbstractAuditingEntity implements Serializa
 
 	@Override
 	public boolean equals(Object object) {
-		if (!(object instanceof TacheDefinition)) {
+		if (!(object instanceof TacheDefinitionEntity)) {
 			return false;
 		}
-		TacheDefinition other = (TacheDefinition) object;
+		TacheDefinitionEntity other = (TacheDefinitionEntity) object;
 		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
 			return false;
 		}

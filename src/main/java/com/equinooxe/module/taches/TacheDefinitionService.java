@@ -7,4 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class TacheDefinitionService {
 
+	public TacheDefinitionEntity addNew(String nom, String description) {
+		
+		return null;
+	}
+
 }

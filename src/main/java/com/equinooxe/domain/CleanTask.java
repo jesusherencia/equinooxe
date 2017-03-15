@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import com.equinooxe.module.taches.TacheDefinitionEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -36,7 +37,7 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
     private CleanRequest cleanRequest;
 
     @ManyToOne
-    private TacheDefinition tacheDefinition;
+    private TacheDefinitionEntity tacheDefinition;
 
     public CleanTask() {
         super();
@@ -74,11 +75,11 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
         this.cleanRequest = cleanRequest;
     }
 
-    public TacheDefinition getTacheDefinition() {
+    public TacheDefinitionEntity getTacheDefinition() {
         return tacheDefinition;
     }
 
-    public void setTacheDefinition(TacheDefinition tacheDefinition) {
+    public void setTacheDefinition(TacheDefinitionEntity tacheDefinition) {
         this.tacheDefinition = tacheDefinition;
     }
 

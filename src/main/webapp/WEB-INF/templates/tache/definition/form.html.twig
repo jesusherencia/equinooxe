@@ -1,0 +1,44 @@
+{% extends "../../layout" %}
+
+{% block title %}
+Gestion des définitions des tâches
+{% endblock %}
+
+{% block content %}
+<div class="titre">
+	<i class="fa fa-plus"></i>
+	{% if tacheDefinitionFormModel.id<0 %}
+	 Nouvelle définition de tâche 
+	{% else %}
+	Edition d'une définition de tâche:
+	{{ tacheDefinitionFormModel.nom | capitalize }}
+	{% endif %}
+</div>
+	 {% for err in getAllErrors('tacheDefinitionFormModel') %}
+     <b style="color: red;">{{ err }}</b><br>
+{% endfor %}  
+<form action="{{ href('/tache/definition/save') }}" method="post" name="tacheDefinitionFormModel">
+	<table class="table">
+		<tr>
+			<td>Nom:</td>
+			<td><input type="text" name="nom" value="{{tacheDefinitionFormModel.nom  }}" /></td>
+		</tr>
+		<tr>
+			<td>Description:</td>
+			<td>
+			 <textarea name="description"> 
+			    {{tacheDefinitionFormModel.description}} 
+			 </textarea>
+			</td>
+		</tr>
+		<input type="hidden" name="id"  value="{{ tacheDefinitionFormModel.id }}" />
+		<tr>
+			<td>
+			    <button class="btn-blue" type="submit">
+					Enregistrer <i class="fa fa-save"></i>
+				</button>
+			</td>
+		</tr>
+	</table>
+</form>
+{% endblock %}
