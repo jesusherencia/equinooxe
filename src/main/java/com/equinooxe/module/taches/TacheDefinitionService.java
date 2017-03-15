@@ -5,6 +5,9 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.equinooxe.domain.TacheDefinition;
+import com.equinooxe.repository.TacheDefinitionRepository;
+
 @Service
 @Transactional
 public class TacheDefinitionService {
@@ -14,13 +17,13 @@ public class TacheDefinitionService {
 	@Inject
 	TacheDefinitionQueryRepository tacheDefinitionQueryRep;
 
-	public TacheDefinitionEntity addNew(String nom, String description) {
-		TacheDefinitionEntity td = new TacheDefinitionEntity(nom, description);
+	public TacheDefinition addNew(String nom, String description) {
+		TacheDefinition td = new TacheDefinition(nom, description);
 		return tacheDefinitionRepository.saveAndFlush(td);
 	}
 
-	public TacheDefinitionEntity update(Long id, String nom, String description) {
-		TacheDefinitionEntity td = tacheDefinitionQueryRep.getOneById(id);
+	public TacheDefinition update(Long id, String nom, String description) {
+		TacheDefinition td = tacheDefinitionQueryRep.getOneById(id);
 		td.setNom(nom);
 		td.setDescription(description);
 		

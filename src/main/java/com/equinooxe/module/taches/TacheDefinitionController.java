@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.equinooxe.domain.TacheDefinition;
 import com.google.common.collect.ImmutableList;
 
 @Controller
@@ -43,7 +44,7 @@ public class TacheDefinitionController {
 		if (bindingResult.hasErrors()) {
 			return "tache/definition/form";
 		}
-		TacheDefinitionEntity tacheDefEntity = null;
+		TacheDefinition tacheDefEntity = null;
 		if (tacheDefinitionFormModel.getId() != null && tacheDefinitionFormModel.getId() > 0) {
 			tacheDefEntity = tacheDefinitionService.update(tacheDefinitionFormModel.getId(),
 					tacheDefinitionFormModel.getNom(), tacheDefinitionFormModel.getDescription());

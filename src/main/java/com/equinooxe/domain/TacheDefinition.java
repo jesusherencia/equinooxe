@@ -3,9 +3,8 @@
  * contact: <mohamed.boullouz@gmail.com>
  * This file is part of equinooxe Project
  */
-package com.equinooxe.module.taches;
+package com.equinooxe.domain;
 
-import com.equinooxe.domain.AbstractAuditingEntity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -20,7 +19,7 @@ import javax.persistence.Entity;
  */
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
-public class TacheDefinitionEntity extends AbstractAuditingEntity implements Serializable {
+public class TacheDefinition extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Column(unique = true)
 	private String nom;
@@ -28,11 +27,11 @@ public class TacheDefinitionEntity extends AbstractAuditingEntity implements Ser
 	@Column(unique = false, columnDefinition = "TEXT")
 	private String description;
 
-	public TacheDefinitionEntity() {
+	public TacheDefinition() {
 		super();
 	}
 
-	public TacheDefinitionEntity(String nom, String description) {
+	public TacheDefinition(String nom, String description) {
 		super();
 		this.nom = nom;
 		this.description = description;
@@ -63,10 +62,10 @@ public class TacheDefinitionEntity extends AbstractAuditingEntity implements Ser
 
 	@Override
 	public boolean equals(Object object) {
-		if (!(object instanceof TacheDefinitionEntity)) {
+		if (!(object instanceof TacheDefinition)) {
 			return false;
 		}
-		TacheDefinitionEntity other = (TacheDefinitionEntity) object;
+		TacheDefinition other = (TacheDefinition) object;
 		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
 			return false;
 		}

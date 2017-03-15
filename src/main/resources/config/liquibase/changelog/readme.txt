@@ -24,3 +24,6 @@ UPDATE `user` SET  `activated` = 1 where id = 1
 UPDATE `equinooxe`.`user` SET `user_type` = 'MANAGER' WHERE `user`.`id` = 1;
 
 **************************************
+
+Generate source for queryDSL:
+>generate-sources

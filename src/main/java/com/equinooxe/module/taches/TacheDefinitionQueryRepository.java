@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.equinooxe.domain.QTacheDefinition;
+import com.equinooxe.domain.TacheDefinition;
 import com.equinooxe.repository.AbstractQueryRespository;
 
 /**
@@ -16,23 +17,23 @@ import com.equinooxe.repository.AbstractQueryRespository;
  *
  */
 @Component
-public class TacheDefinitionQueryRepository extends AbstractQueryRespository<QTacheDefinition, TacheDefinitionEntity> {
+public class TacheDefinitionQueryRepository extends AbstractQueryRespository<QTacheDefinition, TacheDefinition> {
 
 	@Autowired
 	public TacheDefinitionQueryRepository(EntityManager entityManager) {
 		super(entityManager, QTacheDefinition.tacheDefinition);
 	}
 
-	public TacheDefinitionEntity getOneById(Long id) {
+	public TacheDefinition getOneById(Long id) {
 		return queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
 	}
 
 	@Override
-	public List<TacheDefinitionEntity> getAll() {
+	public List<TacheDefinition> getAll() {
 		return queryFactory.selectFrom(qEntity).fetch();
 	}
 
-	public TacheDefinitionEntity getOneByNom(String nom) {
+	public TacheDefinition getOneByNom(String nom) {
 		return queryFactory.selectFrom(qEntity).where(qEntity.nom.eq(nom)).fetchOne();
 
 	}
