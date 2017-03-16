@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -49,12 +50,22 @@ public class TacheDefinitionController {
 			tacheDefEntity = tacheDefinitionService.update(tacheDefinitionFormModel.getId(),
 					tacheDefinitionFormModel.getNom(), tacheDefinitionFormModel.getDescription());
 		} else {
-
 			tacheDefEntity = tacheDefinitionService.addNew(tacheDefinitionFormModel.getNom(),
 					tacheDefinitionFormModel.getDescription());
 
 		}
-		redirectAttributes.addAttribute("id", tacheDefEntity.getId());
-		return "redirect:/user/manager/show/?id=" + tacheDefEntity.getId();
+		return "redirect:/tache/definition/show/" + tacheDefEntity.getId();
+	}
+	
+	@GetMapping("/tache/definition/show/{id}")
+	public ModelAndView show(@PathVariable(value = "id", required = true) Long id){
+		
+		return new ModelAndView("tache/definition/show")
+				.addObject("tacheDefinition",tacheDefinitionQueryRep.getOneById(id) );
+	}
+	@GetMapping("/tache/definition/edit/{id}")
+	public String edit(@PathVariable(value = "id", required = true) Long id, Model uiModel) {
+		uiModel.addAttribute("tacheDefinitionFormModel", new TacheDefinitionFormModel(tacheDefinitionQueryRep.getOneById(id)));
+		return "tache/definition/form";
 	}
 }

@@ -3,6 +3,7 @@ package com.equinooxe.module.taches;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.equinooxe.domain.TacheDefinition;
 import com.equinooxe.module.common.BaseFormModel;
 
 public class TacheDefinitionFormModel extends BaseFormModel {
@@ -15,7 +16,7 @@ public class TacheDefinitionFormModel extends BaseFormModel {
 	public String getNom() {
 		return nom;
 	}
-	
+
 	public TacheDefinitionFormModel() {
 	}
 
@@ -23,6 +24,12 @@ public class TacheDefinitionFormModel extends BaseFormModel {
 		super();
 		this.nom = nom;
 		this.description = description;
+	}
+
+	public TacheDefinitionFormModel(TacheDefinition td) {
+		this.id = td.getId();
+		this.nom = td.getNom();
+		this.description = td.getDescription();
 	}
 
 	public void setNom(String nom) {
@@ -36,7 +43,5 @@ public class TacheDefinitionFormModel extends BaseFormModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	
 
 }
