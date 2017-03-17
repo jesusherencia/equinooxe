@@ -1,5 +1,7 @@
 package com.equinooxe.module.taches;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 
@@ -14,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.equinooxe.domain.TacheDefinition;
-import com.google.common.collect.ImmutableList;
 
 @Controller
 public class TacheDefinitionController {
@@ -28,7 +29,8 @@ public class TacheDefinitionController {
 	@GetMapping("/tache/definition/list")
 	public ModelAndView getList() {
 		ModelAndView mv = new ModelAndView("tache/definition/list");
-		mv.addObject("tacheDefinitions", ImmutableList.of());
+		List<TacheDefinition> tachesDef = tacheDefinitionQueryRep.getAll();
+		mv.addObject("tacheDefinitions", tachesDef);
 		return mv;
 	}
 

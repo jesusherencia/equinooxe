@@ -23,7 +23,7 @@ public class TacheDefinitionValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		TacheDefinitionFormModel form = (TacheDefinitionFormModel) target;
 		TacheDefinition td = tacheDefinitionQueryRep.getOneByNom(form.getNom());
-		if (td != null) {
+		if (td != null && td.getId() != form.getId()) {
 			errors.reject("valeur.existe.pour.champs", new String[] { form.getNom(), "Nom" }, "nom");
 		}
 
