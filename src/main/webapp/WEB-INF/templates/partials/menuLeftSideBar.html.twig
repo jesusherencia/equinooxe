@@ -14,12 +14,18 @@
         "active": request.getRequestURI().startsWith('/clean'),
         "icon": "ti-layout-media-right-alt",
         "label": "Cleaning",
-        "subs": [{
-                "url": "/cleaning/request/list",
-                "label": "Demandes",
-                "active": request.getRequestURI().startsWith('/request/list')
-                }
-              ]
+        "subs": [
+                 {
+                    "url": "/cleaning/request/list",
+                    "label": "Demandes",
+                    "active": request.getRequestURI().startsWith('/request/list')
+                 },
+                 {
+                    "url": "/tache/definition/list",
+                    "label": "Tache définitions",
+                    "active": request.getRequestURI().startsWith('/tache/definition/list')
+                  }
+                ]
     },
     "users": {
         "url": "/user",

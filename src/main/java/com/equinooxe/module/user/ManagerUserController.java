@@ -94,9 +94,9 @@ public class ManagerUserController {
 	@GetMapping("/user/manager/show/{id}")
 	public String show(@PathVariable(value = "id", required = true) Long id, Model uiModel,
 			RedirectAttributes redirectAttributes) {
-		ManagerUser u = managerUserQueryRepo.getOneById(id);
-		List<CleanRequest> cleanReq = cleanRequestQueryRep.getByManager(u);
-		uiModel.addAttribute("user", u).addAttribute("cleanRequests", cleanReq);
+		ManagerUser user = managerUserQueryRepo.getOneById(id);
+		List<CleanRequest> cleanReq = cleanRequestQueryRep.getByManager(user);
+		uiModel.addAttribute("user", user).addAttribute("cleanRequests", cleanReq);
 		return "user/manager/show";
 	}
 

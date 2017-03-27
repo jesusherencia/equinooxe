@@ -39,17 +39,17 @@
 			    {% for entity in cleanRequests %}
 				<tr>
 					 <td> 
-						<a href="{{ href('/user/manager/show')}}/{{ entity.id }}">  
+						<a href="{{ href('/user/manager/show')}}/{{ entity.manager.id }}">  
 					   	    {{ entity.manager.lastName|default(' ') }}
 						</a>
 					</td>
 				    <td> 
-						<a href="{{ href('/user/agent/show')}}/{{ entity.id }}">  
+						<a href="{{ href('/user/agent/show')}}/{{ entity.agent.id }}">  
 					   	    {{ entity.agent.lastName|default(' ') }}
 						</a>
 					</td>
 					<td> 
-						<a href="{{ href('/espaces/etage/show')}}/{{ entity.id }}">  
+						<a href="{{ href('/espaces/etage/show')}}/{{ entity.espace.id }}">  
 					   	    {{ entity.espace.nom|default(' ') }}
 						</a>
 					</td>
