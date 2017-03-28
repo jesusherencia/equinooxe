@@ -5,21 +5,17 @@
 {% endblock %}
 
 {% block content %}
+
 		<div class="titre">
 			<i class="ti-list-ol"></i> <span> Liste des demandes</span>
 			<div class="dropdown pull-right">
-	                             <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
-	                                  <i style="font-size: 18px" 
-	                                     class="ti-settings"
-	                                     ></i>
-	                             </a>
-	                            <ul class="dropdown-menu" role="menu">
-	                                 <li>
-	                                 	<a href="{{ href('/espaces/batiment/new') }}">
-	                                 		Ajouter étage 
-	                                 	</a> 
-	                                 </li> 
-	                            </ul>
+	              <a href="#" class="dropdown-toggle card-drop" 
+	                 title="Options" data-toggle="dropdown" aria-expanded="false">
+	                  <i style="font-size: 18px"  class="ti-settings"></i>
+	              </a>
+	              <ul class="dropdown-menu" role="menu">
+	                  <li> <a href="{{ href('#') }}"> Faire demande </a> </li> 
+	              </ul>
 	        </div>
 		</div>
 		
