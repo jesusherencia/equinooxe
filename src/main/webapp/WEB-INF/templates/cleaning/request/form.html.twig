@@ -1,0 +1,77 @@
+{% extends "../../layout" %}
+
+{% block title %}
+Gestion des étages
+{% endblock %}
+
+{% block content %}
+<div class="titre">
+	<i class="fa fa-plus"></i>
+	{% if cleanRequestFormModel.id<0 %}
+	 Nouvelle demande
+	{% else %}
+	Edition d'une demande:
+	{{ cleanRequestFormModel.nom | capitalize }}
+	{% endif %}
+	 
+</div>
+	 {% for err in getAllErrors('cleanRequestFormModel') %}
+    <b style="color: red;">{{ err }}</b><br>
+{% endfor %}  
+<form action="{{ href('/espaces/espace/save') }}" method="post" name="cleanRequestFormModel">
+	<table class="table">
+		<tr>
+			<td>Date début:</td>
+			<td><input type="datetime-local" name="startAt" value="{{cleanRequestFormModel.startAt  }}" /></td>
+		</tr>
+		<tr>
+			<td>Date limite:</td>
+			<td><input type="datetime-local" name="deadlineDate" value="{{cleanRequestFormModel.deadlineDate  }}" /></td>
+		</tr>
+		<tr>
+			<td>Insctructions:</td>
+			<td><textarea name="instructions"> {{cleanRequestFormModel.instructions}} </textarea>
+			</td>
+		</tr>
+		<tr>
+		    <td> Espace:</td>
+		    <td>
+             <select name="espaceId">
+                     {% for espaceEntity in cleanRequestFormModel.availableEspaces %}
+                      <option value="{{ espaceEntity.id }}"
+                             {% if cleanRequestFormModel.espaceId == espaceEntity.id %}
+                                 selected                   
+                             {% endif %} > 
+                           {{ espaceEntity.nom }}
+                      </option>  
+                    {% endfor %}
+              </select>                  
+    	   </td>
+		</tr>
+		<tr>
+		 <td> Agent:</td>
+    	 <td>
+    	     <select name="agentId">
+                     {% for agentEntity in cleanRequestFormModel.availableAgents %}
+                      <option value="{{ agentEntity.id }}"
+                             {% if cleanRequestFormModel.agentId == agentEntity.id %}
+                                 selected                   
+                             {% endif %} > 
+                           {{ agentEntity.firstName }}
+                      </option>  
+                    {% endfor %}
+              </select>                  
+    	  </td>
+    	 </tr>
+		 
+		<tr>
+			<td>
+			    <button class="btn-blue" type="submit">
+					Enregistrer <i class="fa fa-save"></i>
+				</button>
+			</td>
+		</tr>
+	</table>
+	<input type="hidden" name="id" value="{{ cleanRequestFormModel.id }}" />
+</form>
+{% endblock %}

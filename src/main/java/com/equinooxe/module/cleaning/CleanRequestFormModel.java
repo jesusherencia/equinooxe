@@ -5,15 +5,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.equinooxe.domain.AgentUser;
+import com.equinooxe.domain.Espace;
 import com.equinooxe.module.common.BaseFormModel;
 
 public class CleanRequestFormModel extends BaseFormModel {
+	
 	private LocalDateTime startAt;
 	private LocalDateTime deadlineDate;
 	private AgentUser agent;
+	private Espace espace;
+	private String instructions;
+	
+	/**
+	 * Lists to display options
+	 */
+	private List<Espace> availableEspaces = new ArrayList<>();
+	private List<AgentUser> availableAgents = new ArrayList<>();
+	
+	/**
+	 * From the form back to servers
+	 */
+	private Long espaceId;
 	private Long agentId;
 
-	private List<AgentUser> availableAgents = new ArrayList<>();
+	
 
 	public CleanRequestFormModel() {
 		super();
@@ -21,11 +36,12 @@ public class CleanRequestFormModel extends BaseFormModel {
 		this.deadlineDate = LocalDateTime.now().plusDays(2);
 	}
 
-	public CleanRequestFormModel(List<AgentUser> availableAgents) {
+	public CleanRequestFormModel(List<AgentUser> availableAgents, List<Espace> availableEspace) {
 		super();
 		this.startAt = LocalDateTime.now().plusDays(1);
 		this.deadlineDate = LocalDateTime.now().plusDays(2);
 		this.availableAgents = availableAgents;
+		this.availableEspaces = availableEspace;
 	}
 
 	public LocalDateTime getStartAt() {
@@ -34,6 +50,14 @@ public class CleanRequestFormModel extends BaseFormModel {
 
 	public Long getAgentId() {
 		return agentId;
+	}
+
+	public String getInstructions() {
+		return instructions;
+	}
+
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
 	}
 
 	public void setAgentId(Long agentId) {
@@ -66,6 +90,30 @@ public class CleanRequestFormModel extends BaseFormModel {
 
 	public void setAvailableAgents(List<AgentUser> availableAgents) {
 		this.availableAgents = availableAgents;
+	}
+
+	public Espace getEspace() {
+		return espace;
+	}
+
+	public void setEspace(Espace espace) {
+		this.espace = espace;
+	}
+
+	public Long getEspaceId() {
+		return espaceId;
+	}
+
+	public void setEspaceId(Long espaceId) {
+		this.espaceId = espaceId;
+	}
+
+	public List<Espace> getAvailableEspaces() {
+		return availableEspaces;
+	}
+
+	public void setAvailableEspaces(List<Espace> availableEspaces) {
+		this.availableEspaces = availableEspaces;
 	}
   
 }
