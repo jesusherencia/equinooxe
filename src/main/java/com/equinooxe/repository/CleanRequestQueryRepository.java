@@ -31,5 +31,9 @@ public class CleanRequestQueryRepository extends AbstractQueryRespository<QClean
 	public List<CleanRequest> getByAgent(AgentUser agentUser) {
 		return  queryFactory.selectFrom(qEntity).where(qEntity.agent.eq(agentUser)).fetch();
 	}
+	
+	public CleanRequest getOneById(Long id) {
+		return queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
+	}
  
 }

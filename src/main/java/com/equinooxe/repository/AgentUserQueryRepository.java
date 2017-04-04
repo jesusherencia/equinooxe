@@ -24,8 +24,7 @@ public class AgentUserQueryRepository extends AbstractQueryRespository<QAgentUse
 	}
 
 	public AgentUser getOneById(Long id) {
-		AgentUser u = queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
-		return u;
+		return queryFactory.selectFrom(qEntity).where(qEntity.id.eq(id)).fetchOne();
 	}
 	
 	@Override

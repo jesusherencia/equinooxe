@@ -1,0 +1,40 @@
+{% extends "../../layout" %} 
+  {% block title %} 
+   Détails Clean-request 
+  {% endblock %} 
+{% block content %}
+<div class="titre">
+    <i class="fa fa-plus"></i> Détails de la clean request: {{ cleanRequest.nom | capitalize }}
+    <div class="dropdown pull-right">
+        <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
+            <i style="font-size: 18px" class="ti-settings"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="{{ href('/tache/definition/edit')}}/{{ cleanRequest.id }}">Editer </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<table class="table table-kv ">
+    <tr>
+        <td>Nom:</td>
+        <td>{{ cleanRequest.nom | capitalize }} </td>
+    </tr>
+    <tr>
+        <td>Description:</td>
+        <td>{{ cleanRequest.description }} </td>
+    </tr>
+</table>
+<hr>
+
+{% include "../../partials/systemInfo" with {"infoForEntity": cleanRequest} %}
+
+<script id="TacheDefinitionEntity" type="application/json">
+    {{ cleanRequest | raw }}
+
+</script>
+<script>
+   /*  System.import('tache/definition/index.js'); */
+</script>
+{% endblock %} {% block appImport %} {% endblock %}
