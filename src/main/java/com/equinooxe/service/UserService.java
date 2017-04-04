@@ -52,6 +52,8 @@ public class UserService {
 
 	@Inject
 	private AuthorityRepository authorityRepository;
+	
+ 
 
 	public Optional<User> activateRegistration(String key) {
 		log.debug("Activating user for activation key {}", key);

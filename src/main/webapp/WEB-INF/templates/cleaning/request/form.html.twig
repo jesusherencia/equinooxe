@@ -18,15 +18,15 @@ Gestion des étages
 	 {% for err in getAllErrors('cleanRequestFormModel') %}
     <b style="color: red;">{{ err }}</b><br>
 {% endfor %}  
-<form action="{{ href('/espaces/espace/save') }}" method="post" name="cleanRequestFormModel">
+<form action="{{ href('/cleaning/request/save') }}" method="post" name="cleanRequestFormModel">
 	<table class="table">
 		<tr>
 			<td>Date début:</td>
-			<td><input type="datetime-local" name="startAt" value="{{cleanRequestFormModel.startAt  }}" /></td>
+			<td><input type="datetime" name="startAtStr" value="{{cleanRequestFormModel.startAt|localDate }}" /></td>
 		</tr>
 		<tr>
 			<td>Date limite:</td>
-			<td><input type="datetime-local" name="deadlineDate" value="{{cleanRequestFormModel.deadlineDate  }}" /></td>
+			<td><input type="datetime" name="deadlineDateStr" value="{{cleanRequestFormModel.deadlineDate|localDate  }}" /></td>
 		</tr>
 		<tr>
 			<td>Insctructions:</td>

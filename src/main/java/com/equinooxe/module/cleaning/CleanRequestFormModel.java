@@ -27,8 +27,27 @@ public class CleanRequestFormModel extends BaseFormModel {
 	 */
 	private Long espaceId;
 	private Long agentId;
+	
+	private String startAtStr;
+	private String deadlineDateStr;
 
 	
+
+	public String getStartAtStr() {
+		return startAtStr;
+	}
+
+	public void setStartAtStr(String startAtStr) {
+		this.startAtStr = startAtStr;
+	}
+
+	public String getDeadlineDateStr() {
+		return deadlineDateStr;
+	}
+
+	public void setDeadlineDateStr(String deadlineDateStr) {
+		this.deadlineDateStr = deadlineDateStr;
+	}
 
 	public CleanRequestFormModel() {
 		super();
