@@ -21,6 +21,7 @@ import java.util.Set;
 import java.time.ZonedDateTime;
 
 /**
+ * @DiscriminatorColumn may not be needed
  * A user.
  */
 @Entity
