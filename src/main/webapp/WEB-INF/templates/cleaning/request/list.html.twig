@@ -35,7 +35,7 @@
 			    {% for entity in cleanRequests %}
 				<tr>
 					 <td> 
-						<a href="{{ href('/user/manager/show')}}/{{ entity.manager.id }}">  
+						<a href="{{ href('/user/manager/show')}}/{{ entity.manager.id|default(' ') }}">  
 					   	    {{ entity.manager.lastName|default(' ') }}
 						</a>
 					</td>

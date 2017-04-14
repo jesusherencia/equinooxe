@@ -4,7 +4,7 @@
   {% endblock %} 
 {% block content %}
 <div class="titre">
-    <i class="fa fa-plus"></i> Détails de la clean request: {{ cleanRequest.nom | capitalize }}
+    <i class="fa fa-plus"></i> Détails de la clean request: {{ cleanRequest.espace.nom | capitalize }}
     <div class="dropdown pull-right">
         <a href="#" class="dropdown-toggle card-drop" title="Options" data-toggle="dropdown" aria-expanded="false">
             <i style="font-size: 18px" class="ti-settings"></i>
@@ -17,13 +17,30 @@
     </div>
 </div>
 <table class="table table-kv ">
+    
     <tr>
-        <td>Nom:</td>
-        <td>{{ cleanRequest.nom | capitalize }} </td>
+        <td>Agent:</td>
+        <td>{{ cleanRequest.manager.firstName | capitalize }} </td>
+    </tr>
+    <tr>
+        <td>Espace:</td>
+        <td>{{ cleanRequest.espace.nom }} </td>
+    </tr>
+    <tr>
+		 <td>Date début:</td>
+		 <td> {{cleanRequest.startAt|localDate }} </td>
+    </tr>
+	<tr>
+	  <td>Date limite:</td>
+	  <td> {{cleanRequest.deadlineDate|localDate  }} </td>
     </tr>
     <tr>
         <td>Description:</td>
-        <td>{{ cleanRequest.description }} </td>
+        <td>{{ cleanRequest.instructions }} </td>
+    </tr>
+    <tr>
+        <td>Manager:</td>
+        <td>{{ cleanRequest.manager.firstName | capitalize }} </td>
     </tr>
 </table>
 <hr>

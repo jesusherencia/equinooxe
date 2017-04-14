@@ -2,7 +2,6 @@ package com.equinooxe.repository;
 
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
