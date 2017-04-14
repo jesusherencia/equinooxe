@@ -36,13 +36,13 @@ public class ManagerUserForm {
 
 	private String[] autorities = new String[99];
 
-	private Set<Authority> avelaibleAutorities = new HashSet<>();
+	private Set<Authority> availableAutorities = new HashSet<>();
 
 	private boolean isManager = true;
 
 	public ManagerUserForm() {
 		autorities = new String[99];
-		avelaibleAutorities = new HashSet<>();
+		availableAutorities = new HashSet<>();
 	}
 
 	public ManagerUserForm(Set<Authority> avelaibleAutorities) {
@@ -57,7 +57,7 @@ public class ManagerUserForm {
 			this.autorities[i] = autho.getName();
 			i++;
 		}
-		this.avelaibleAutorities = avelaibleAutorities;
+		this.availableAutorities = avelaibleAutorities;
 	}
 
 	public ManagerUserForm(ManagerUser mu, Set<Authority> avelaibleAutorities) {
@@ -86,12 +86,12 @@ public class ManagerUserForm {
 		this.autorities = autorities;
 	}
 
-	public Set<Authority> getAvelaibleAutorities() {
-		return avelaibleAutorities;
+	public Set<Authority> getAvailableAutorities() {
+		return availableAutorities;
 	}
 
-	public void setAvelaibleAutorities(Set<Authority> avelaibleAutorities) {
-		this.avelaibleAutorities = avelaibleAutorities;
+	public void setAvailableAutorities(Set<Authority> avelaibleAutorities) {
+		this.availableAutorities = avelaibleAutorities;
 	}
 
 	public Long getId() {

@@ -29,6 +29,8 @@ import com.equinooxe.repository.ManagerUserRepository;
 import com.equinooxe.security.AuthoritiesConstants;
 import com.google.common.collect.ImmutableList;
 
+import javassist.tools.web.BadHttpRequest;
+
 @Controller
 @Secured(AuthoritiesConstants.USER)
 public class ManagerUserController {
@@ -59,16 +61,16 @@ public class ManagerUserController {
 
 	@GetMapping("/user/manager/new")
 	public String showForm(ManagerUserForm managerUserForm, Model uiModel) {
-		managerUserForm.setAvelaibleAutorities(new HashSet<Authority>(authorityRepo.findAll()));
+		managerUserForm.setAvailableAutorities(new HashSet<Authority>(authorityRepo.findAll()));
 		return "user/manager/form";
 	}
 
 	@GetMapping("/user/manager/edit/{id}")
 	public String editForm(@PathVariable(value = "id", required = true) Long id, ManagerUserForm managerUserForm,
-			Model uiModel, RedirectAttributes redirectAttributes) {
+			Model uiModel, RedirectAttributes redirectAttributes) throws BadHttpRequest {
 		ManagerUser u = managerUserQueryRepo.getOneById(id);
 		managerUserForm = new ManagerUserForm(u, new HashSet<Authority>(authorityRepo.findAll()));
-		uiModel.addAttribute("userForm", managerUserForm);
+		uiModel.addAttribute("managerUserForm", managerUserForm);
 		return "user/manager/form";
 	}
 
