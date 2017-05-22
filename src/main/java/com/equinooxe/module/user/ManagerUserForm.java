@@ -45,9 +45,9 @@ public class ManagerUserForm {
 		availableAutorities = new HashSet<>();
 	}
 
-	public ManagerUserForm(Set<Authority> avelaibleAutorities) {
+	public ManagerUserForm(Set<Authority> availableAutorities) {
 		autorities = new String[99];
-		avelaibleAutorities = new HashSet<>();
+		availableAutorities = new HashSet<>();
 	}
 
 	public ManagerUserForm(User u, Set<Authority> avelaibleAutorities) {
@@ -76,6 +76,12 @@ public class ManagerUserForm {
 		this.lastName = u.getLastName();
 		this.login = u.getLogin();
 		this.id = u.getId();
+		int i=0;
+		for (Authority autho : u.getAuthorities()) {
+			this.autorities[i] = autho.getName();
+			i++;
+		}
+		this.availableAutorities = avelaibleAutorities;
 	}
 
 	public String[] getAutorities() {

@@ -90,7 +90,7 @@ public class ManagerUserController {
 					managerUserForm.getEmail().toLowerCase(), "fr", true);
 		}
 		redirectAttributes.addAttribute("id", user.getId());
-		return "redirect:/user/manager/show/?id=" + user.getId();
+		return "redirect:/user/manager/show/" + user.getId();
 	}
 
 	@GetMapping("/user/manager/show/{id}")
