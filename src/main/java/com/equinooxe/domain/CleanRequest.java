@@ -7,6 +7,7 @@ package com.equinooxe.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -54,6 +55,13 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
 
     public CleanRequest() {
         super();
+    }
+    
+    public void addCleanTask(CleanTask cleanTask){
+    	if(cleanTask==null){
+    		this.cleanTasks= new ArrayList<>();
+    	}
+    	this.cleanTasks.add(cleanTask);
     }
 
     public String getStatus() {

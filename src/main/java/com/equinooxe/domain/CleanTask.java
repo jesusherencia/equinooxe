@@ -41,6 +41,12 @@ public class CleanTask extends AbstractAuditingEntity implements Serializable {
     public CleanTask() {
         super();
     }
+    
+    public CleanTask(TacheDefinition tacheDef){
+    	this.name= tacheDef.getNom();
+    	this.description= tacheDef.getDescription();
+    	this.tacheDefinition=tacheDef;
+    }
 
     public String getName() {
         return name;

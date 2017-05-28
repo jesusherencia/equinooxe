@@ -35,6 +35,14 @@
 	  <td> {{cleanRequest.deadlineDate|localDate  }} </td>
     </tr>
     <tr>
+        <td>Tâches:</td>
+        <td>
+        {% for task in cleanRequest.cleanTasks  %}
+        {{ task.name }} |  {{ task.description }} | <span style="color: red"> {{ task.done? 'Oui': 'Non' }} </span><br>
+        {% endfor %}
+        </td>
+    </tr>
+    <tr>
         <td>Description:</td>
         <td>{{ cleanRequest.instructions }} </td>
     </tr>

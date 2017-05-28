@@ -2,6 +2,7 @@ package com.equinooxe.module.cleaning;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,17 +17,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.CleanRequest;
+import com.equinooxe.domain.CleanTask;
 import com.equinooxe.domain.Espace;
 import com.equinooxe.domain.ManagerUser;
-import com.equinooxe.domain.util.EqUtils;
+import com.equinooxe.domain.TacheDefinition;
+import com.equinooxe.module.taches.TacheDefinitionQueryRepository;
 import com.equinooxe.repository.AgentUserQueryRepository;
 import com.equinooxe.repository.CleanRequestQueryRepository;
 import com.equinooxe.repository.CleanRequestRepository;
+import com.equinooxe.repository.CleanTaskRepository;
 import com.equinooxe.repository.EspaceQueryRepository;
 import com.equinooxe.repository.EspaceRepository;
 import com.equinooxe.repository.EtageRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
 import com.equinooxe.security.SecurityUtils;
+import com.equinooxe.service.util.EqLogger;
 
 @Controller
 public class CleanRequestController {
@@ -52,6 +57,10 @@ public class CleanRequestController {
 	CleanRequestRepository cleanRequestRepo;
 	@Inject
 	ManagerUserQueryRepository managerQueryRep;
+	@Inject
+	TacheDefinitionQueryRepository tachesDefQueryRep;
+	@Inject 
+	CleanTaskRepository cleanTaskRepo;
 	
 	@GetMapping("/cleaning/request/list")
 	public ModelAndView getList() {
@@ -67,6 +76,7 @@ public class CleanRequestController {
 		List<Espace> availableEspaces = espaceQueryRep.getAll();
 		cleanRequestFormModel.setAvailableAgents(availableAgents);
 		cleanRequestFormModel.setAvailableEspaces(availableEspaces);
+		cleanRequestFormModel.setAvailableTaches(tachesDefQueryRep.getAll());
 		mv.addObject("cleanRequestFormModel", cleanRequestFormModel);
 		return mv;
 	}
@@ -85,7 +95,9 @@ public class CleanRequestController {
 		} else {
 			cleanRequest = new CleanRequest();
 		}
-
+		
+		EqLogger eq = new EqLogger();
+		eq.json(" Taches desf ids", cleanRequestFormModel.getTachesIds());
 		cleanRequest.setAgent(agent);
 		cleanRequest.setEspace(espace);
 		cleanRequest.setInstructions(cleanRequestFormModel.getInstructions());
@@ -96,8 +108,18 @@ public class CleanRequestController {
 		  throw new Exception(" User not found "+ SecurityUtils.getCurrentUserLogin());
 		}
 		cleanRequest.setManager(um);
+		List<CleanTask> cls = new ArrayList<>();
+		for(Long id : cleanRequestFormModel.getTachesIds()) {
+			TacheDefinition tDef= tachesDefQueryRep.getOneById(id);
+			CleanTask cl= new CleanTask(tDef);
+			cls.add(cl); 
+			cl.setCleanRequest(cleanRequest);
+		};
+		cleanRequest.setCleanTasks(cls);
 		cleanRequest= cleanRequestRepo.saveAndFlush(cleanRequest);
-		
+		cls.forEach(cl->{
+			cleanTaskRepo.saveAndFlush(cl);
+		});
 		uiModel.addAttribute("cleanRequest", cleanRequest);
 		return "redirect:/cleaning/request/show/" + cleanRequest.getId();
 	}

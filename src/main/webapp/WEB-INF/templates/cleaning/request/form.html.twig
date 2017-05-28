@@ -63,6 +63,21 @@ Gestion des étages
               </select>                  
     	  </td>
     	 </tr>
+    	 <tr>
+        	 <td>
+        	   Tâches
+        	 </td>
+        	 <td>
+        	    {% for tache in cleanRequestFormModel.availableTaches %}
+                        <input type="checkbox" 
+                               name="tachesIds" 
+                               {% if cleanRequestFormModel.availableTaches contains tache.id %}
+                                 checked="checked"                                    
+                               {% endif %}
+                               value="{{ tache.id }}"> {{ tache.nom }} <i>{{ tache.description }}</i><br>
+               {% endfor %}
+        	 </td>
+    	 </tr>
 		 
 		<tr>
 			<td>
