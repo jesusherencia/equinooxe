@@ -26,7 +26,7 @@ public class LoggingAspect {
     @Inject
     private Environment env;
 
-    @Pointcut("within(com.equinooxe.repository..*) || within(com.equinooxe.service..*) || within(com.equinooxe.web.rest..*)")
+    @Pointcut("within(com.equinooxe.repository..*) || within(com.equinooxe.service..*) || within(com.equinooxe.web.rest..*)|| within(com.equinooxe.module.cleaning.CleanRequestController..*)")
     public void loggingPointcut() {
     }
 

@@ -11,7 +11,7 @@
         </a>
         <ul class="dropdown-menu" role="menu">
             <li>
-                <a href="{{ href('/tache/definition/edit')}}/{{ cleanRequest.id }}">Editer </a>
+                <a href="{{ href('/cleaning/request/edit')}}/{{ cleanRequest.id }}">Editer </a>
             </li>
         </ul>
     </div>
@@ -20,7 +20,7 @@
     
     <tr>
         <td>Agent:</td>
-        <td>{{ cleanRequest.manager.firstName | capitalize }} </td>
+        <td>{{ cleanRequest.agent.firstName | capitalize }} </td>
     </tr>
     <tr>
         <td>Espace:</td>

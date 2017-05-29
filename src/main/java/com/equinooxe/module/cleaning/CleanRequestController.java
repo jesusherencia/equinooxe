@@ -1,8 +1,5 @@
 package com.equinooxe.module.cleaning;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,10 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.equinooxe.domain.AgentUser;
 import com.equinooxe.domain.CleanRequest;
-import com.equinooxe.domain.CleanTask;
 import com.equinooxe.domain.Espace;
 import com.equinooxe.domain.ManagerUser;
-import com.equinooxe.domain.TacheDefinition;
 import com.equinooxe.module.taches.TacheDefinitionQueryRepository;
 import com.equinooxe.repository.AgentUserQueryRepository;
 import com.equinooxe.repository.CleanRequestQueryRepository;
@@ -30,8 +25,6 @@ import com.equinooxe.repository.EspaceQueryRepository;
 import com.equinooxe.repository.EspaceRepository;
 import com.equinooxe.repository.EtageRepository;
 import com.equinooxe.repository.ManagerUserQueryRepository;
-import com.equinooxe.security.SecurityUtils;
-import com.equinooxe.service.util.EqLogger;
 
 @Controller
 public class CleanRequestController {
@@ -59,9 +52,12 @@ public class CleanRequestController {
 	ManagerUserQueryRepository managerQueryRep;
 	@Inject
 	TacheDefinitionQueryRepository tachesDefQueryRep;
-	@Inject 
+	@Inject
 	CleanTaskRepository cleanTaskRepo;
-	
+
+	@Inject
+	CleanRequestService cleanReqService;
+
 	@GetMapping("/cleaning/request/list")
 	public ModelAndView getList() {
 		ModelAndView mv = new ModelAndView("cleaning/request/list");
@@ -81,45 +77,29 @@ public class CleanRequestController {
 		return mv;
 	}
 
+	@GetMapping("/cleaning/request/edit/{id}")
+	public ModelAndView edit(@PathVariable Long id) {
+		ModelAndView mv = new ModelAndView("cleaning/request/form");
+		CleanRequest cl = cleanRequestQueryRepository.getOneById(id);
+		CleanRequestFormModel cleanRequestFormModel = new CleanRequestFormModel(cl);
+		cleanRequestFormModel.setAvailableAgents(agentUserQueryRep.getAll());
+		cleanRequestFormModel.setAvailableEspaces(espaceQueryRep.getAll());
+		cleanRequestFormModel.setAvailableTaches(tachesDefQueryRep.getAll());
+		return mv.addObject("cleanRequestFormModel", cleanRequestFormModel);
+	}
+
 	@PostMapping("/cleaning/request/save")
-	public String save(CleanRequestFormModel cleanRequestFormModel, BindingResult bindingResult, Model uiModel) throws Exception {
+	public String save(CleanRequestFormModel cleanRequestFormModel, BindingResult bindingResult, Model uiModel)
+			throws Exception {
 		if (bindingResult.hasErrors()) {
 			return "/cleaning/request/new";
 		}
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-		Espace espace = espaceRepository.findOne(cleanRequestFormModel.getEspaceId());
-		AgentUser agent = agentUserQueryRep.getOneById(cleanRequestFormModel.getAgentId());
 		CleanRequest cleanRequest = null;
 		if (cleanRequestFormModel.getId() > 0) {
-			cleanRequest = cleanRequestQueryRepository.getOneById(cleanRequestFormModel.getId());
+			cleanRequest = cleanReqService.updateFrom(cleanRequestFormModel);
 		} else {
-			cleanRequest = new CleanRequest();
+			cleanRequest = cleanReqService.addNew(cleanRequestFormModel);
 		}
-		
-		EqLogger eq = new EqLogger();
-		eq.json(" Taches desf ids", cleanRequestFormModel.getTachesIds());
-		cleanRequest.setAgent(agent);
-		cleanRequest.setEspace(espace);
-		cleanRequest.setInstructions(cleanRequestFormModel.getInstructions());
-		cleanRequest.setDeadlineDate(LocalDateTime.parse(cleanRequestFormModel.getDeadlineDateStr(), formatter));
-		cleanRequest.setStartAt(LocalDateTime.parse(cleanRequestFormModel.getStartAtStr(), formatter));
-		ManagerUser um = managerQueryRep.getCurrent();
-		if(um==null){
-		  throw new Exception(" User not found "+ SecurityUtils.getCurrentUserLogin());
-		}
-		cleanRequest.setManager(um);
-		List<CleanTask> cls = new ArrayList<>();
-		for(Long id : cleanRequestFormModel.getTachesIds()) {
-			TacheDefinition tDef= tachesDefQueryRep.getOneById(id);
-			CleanTask cl= new CleanTask(tDef);
-			cls.add(cl); 
-			cl.setCleanRequest(cleanRequest);
-		};
-		cleanRequest.setCleanTasks(cls);
-		cleanRequest= cleanRequestRepo.saveAndFlush(cleanRequest);
-		cls.forEach(cl->{
-			cleanTaskRepo.saveAndFlush(cl);
-		});
 		uiModel.addAttribute("cleanRequest", cleanRequest);
 		return "redirect:/cleaning/request/show/" + cleanRequest.getId();
 	}
@@ -147,6 +127,21 @@ public class CleanRequestController {
 		mv.addObject("cleanRequests", cleanRequestQueryRepository.getByAgent(aUser));
 		mv.addObject("agent", aUser);
 		return mv;
+	}
+
+	@GetMapping("/cleaning/request/delete/{id}")
+	public String delete(@PathVariable Long id) {
+		CleanRequest cr = cleanRequestQueryRepository.getOneById(id);
+		cr.setDeleted(true);
+		cleanRequestRepo.saveAndFlush(cr);
+		return "redirect:/cleaning/request/show/" + cr.getId();
+	}
+
+	@GetMapping("/cleaning/request/delete-hard/{id}")
+	public String deleteHard(@PathVariable Long id) {
+		CleanRequest cr = cleanRequestQueryRepository.getOneById(id);
+		cleanRequestRepo.delete(cr);
+		return "redirect:/cleaning/request/list";
 	}
 
 }
