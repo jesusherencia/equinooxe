@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 /**
  * Base abstract class for entities which will hold definitions for created, last modified by and created,
  * last modified by date.
+ * @TODO: This class shoud be more generic as we can have an Id of String type ...
  */
 @MappedSuperclass
 @Audited
