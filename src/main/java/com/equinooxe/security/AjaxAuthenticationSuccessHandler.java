@@ -36,8 +36,8 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 			Authentication authentication) throws IOException, ServletException {
 		/** add the user to session */
 		response.setStatus(HttpServletResponse.SC_OK);
-//		addUserToSession(request);
-//		response.sendRedirect("/home");
+ 		addUserToSession(request);
+ 		response.sendRedirect("/home");
 	}
 
 	public void addUserToSession(HttpServletRequest request) {

@@ -1,0 +1,42 @@
+{% extends "../../layout" %}
+
+{% block title %}
+   Login
+{% endblock %}
+
+{% block content %}
+<span id="baseUrl" style="display: none;">
+  {{ href('/api/authentication') }}
+</span>
+<div class="titre">
+	 Login 
+</div>
+ 
+<form action="{{ href('/api/authentication') }}" method="post" name="espaceFormModel">
+	<table class="table">
+		<tr>
+			<td>Login:</td>
+			<td><input type="text" id="j_username" name="j_username" value="" placeholder="me@equinooxe.com" /></td>
+		</tr>
+		<tr>
+			<td>Mot de passe:</td>
+			<td><input type="password" id="j_password" name="j_password" placeholder="7HgT8eM7e" />  </td>
+		</tr>
+		<tr>
+			<td>Se souvenir de moi:</td>
+			<td><input type="checkbox" id="remember-me" name="remember-me" checked="checked" />  </td>
+		</tr>
+		<tr>
+			<td>
+			    <button id="loginBtn" class="btn-blue">
+					Login <i class="fa fa-save"></i>
+				</button>
+			</td>
+		</tr>
+	</table>
+</form>  
+  
+<script>
+    System.import('login/login.js');
+</script>
+{% endblock %}

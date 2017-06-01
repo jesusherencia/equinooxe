@@ -17,10 +17,14 @@ import com.equinooxe.security.AuthoritiesConstants;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 @Controller
-@Secured(AuthoritiesConstants.USER)
 public class AuthController {
 	@Inject
 	EntityManager entityManager;
+	
+	@GetMapping("/login") 
+	public String login(HttpServletRequest request){
+		return "login/form";
+	}
 	
 	/**
 	 * Reconnect the user: sync the session with the spring security session 
@@ -28,6 +32,7 @@ public class AuthController {
 	 * @param request
 	 * @return
 	 */
+	@Secured(AuthoritiesConstants.USER)
 	@GetMapping("/reconnect") 
 	public String reconnect(HttpServletRequest request){
 		SecurityContext securityContext = SecurityContextHolder.getContext();
