@@ -10,8 +10,9 @@ Gestion des étages
 	{% if cleanRequestFormModel.id<0 %}
 	 Nouvelle demande
 	{% else %}
-	Edition d'une demande:
-	{{ cleanRequestFormModel.nom | capitalize }}
+	Edition de la demande du:
+	{{ cleanRequestFormModel.startAt|localDate }}
+	 concernant l'espace {{ cleanRequestFormModel.espace.nom }}
 	{% endif %}
 	 
 </div>
@@ -62,6 +63,24 @@ Gestion des étages
                     {% endfor %}
               </select>                  
     	  </td>
+    	 </tr>
+    	 <tr>
+        	 <td>
+        	   Tâches
+        	 </td>
+        	 <td>
+        	    {% for tache in cleanRequestFormModel.availableTaches %}
+                      <input type="checkbox" 
+                             name="tachesIds" 
+                             {% for cleanTask in cleanRequestFormModel.cleanTasks %}
+                               {% if cleanTask.id == tache.id %}
+                                 checked="checked"                                    
+                               {% endif %}
+                             {% endfor %}
+                             value="{{ tache.id }}" /> 
+                     {{ tache.nom }} <i>{{ tache.description }}</i><br>
+                {% endfor %}
+        	 </td>
     	 </tr>
 		 
 		<tr>

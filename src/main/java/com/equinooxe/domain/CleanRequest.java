@@ -8,12 +8,15 @@ package com.equinooxe.domain;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -29,40 +32,44 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class CleanRequest extends AbstractAuditingEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private LocalDateTime startAt;
-    private LocalDateTime deadlineDate;
-    private LocalDateTime doneAt;
+	private LocalDateTime deadlineDate;
+	private LocalDateTime doneAt;
 
-    @Column(unique = false, columnDefinition = "TEXT")
-    private String instructions;
+	@Column(unique = false, columnDefinition = "TEXT")
+	private String instructions;
 
-    @Column
-    private String status = DomainConsts.Status.EN_ATTENTE;
+	@Column
+	private String status = DomainConsts.Status.EN_ATTENTE;
 
-    @ManyToOne
-    private AgentUser agent;
+	@ManyToOne
+	private AgentUser agent;
 
-    @ManyToOne
-    private ManagerUser manager;
-    
-    
-    @OneToMany(mappedBy = "cleanRequest", targetEntity = CleanTask.class)
-    @Fetch(FetchMode.JOIN)
-    private Collection<CleanTask> cleanTasks;
+	@ManyToOne
+	private ManagerUser manager;
 
-    @ManyToOne
-    private Espace espace;
+	@OneToMany(mappedBy = "cleanRequest", targetEntity = CleanTask.class)
+	@Fetch(FetchMode.JOIN)
+	@Cascade({ CascadeType.ALL })
+	private Collection<CleanTask> cleanTasks;
 
-    public CleanRequest() {
-        super();
-    }
+	@ManyToOne
+	private Espace espace;
 
-    public String getStatus() {
+	public CleanRequest() {
+		super();
+	}
+
+	public void addCleanTask(CleanTask cleanTask) {
+		this.cleanTasks.add(cleanTask);
+	}
+
+	public String getStatus() {
 		return status;
 	}
-    
-    public String getStatusStr(){
-    	return DomainConsts.Status.toString(this.status);
-    }
+
+	public String getStatusStr() {
+		return DomainConsts.Status.toString(this.status);
+	}
 
 	public void setStatus(String status) {
 		this.status = status;
@@ -77,88 +84,97 @@ public class CleanRequest extends AbstractAuditingEntity implements Serializable
 	}
 
 	public LocalDateTime getStartAt() {
-        return startAt;
-    }
+		return startAt;
+	}
 
-    public void setStartAt(LocalDateTime startAt) {
-        this.startAt = startAt;
-    }
+	public void setStartAt(LocalDateTime startAt) {
+		this.startAt = startAt;
+	}
 
-    public LocalDateTime getDeadlineDate() {
-        return deadlineDate;
-    }
+	public LocalDateTime getDeadlineDate() {
+		return deadlineDate;
+	}
 
-    public void setDeadlineDate(LocalDateTime deadlineDate) {
-        this.deadlineDate = deadlineDate;
-    }
+	public void setDeadlineDate(LocalDateTime deadlineDate) {
+		this.deadlineDate = deadlineDate;
+	}
 
-    public LocalDateTime getDoneAt() {
-        return doneAt;
-    }
+	public LocalDateTime getDoneAt() {
+		return doneAt;
+	}
 
-    public void setDoneAt(LocalDateTime doneAt) {
-        this.doneAt = doneAt;
-    }
+	public void setDoneAt(LocalDateTime doneAt) {
+		this.doneAt = doneAt;
+	}
 
-    public String getInstructions() {
-        return instructions;
-    }
+	public String getInstructions() {
+		return instructions;
+	}
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
-    }
+	public void setInstructions(String instructions) {
+		this.instructions = instructions;
+	}
 
-    public AgentUser getAgent() {
-        return agent;
-    }
+	public AgentUser getAgent() {
+		return agent;
+	}
 
-    public void setAgent(AgentUser agent) {
-        this.agent = agent;
-    }
+	public void setAgent(AgentUser agent) {
+		this.agent = agent;
+	}
 
-    public ManagerUser getManager() {
-        return manager;
-    }
+	public ManagerUser getManager() {
+		return manager;
+	}
 
-    public void setManager(ManagerUser manager) {
-        this.manager = manager;
-    }
+	public void setManager(ManagerUser manager) {
+		this.manager = manager;
+	}
 
-    public Collection<CleanTask> getCleanTasks() {
-        return cleanTasks;
-    }
+	public Collection<CleanTask> getCleanTasks() {
+		return cleanTasks;
+	}
 
-    public void setCleanTasks(Collection<CleanTask> cleanTasks) {
-        this.cleanTasks = cleanTasks;
-    }
+	public void setCleanTasks(Collection<CleanTask> cleanTasks) {
+		this.cleanTasks = cleanTasks;
+	}
 
-    public Espace getLocation() {
-        return espace;
-    }
+	public void addAll(Set<CleanTask> cleanTasks) {
+		this.cleanTasks.clear(); 
+		cleanTasks.forEach(c -> {
+			this.cleanTasks.add(c);
+		});
+	}
 
-    public void setLocation(Espace espace) {
-        this.espace = espace;
-    }
+	public Espace getLocation() {
+		return espace;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
+	public void setLocation(Espace espace) {
+		this.espace = espace;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        if (!(object instanceof CleanRequest)) {
-            return false;
-        }
-        CleanRequest other = (CleanRequest) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (id != null ? id.hashCode() : 0);
+		return hash;
+	}
 
-   
+	@Override
+	public boolean equals(Object object) {
+		if (!(object instanceof CleanRequest)) {
+			return false;
+		}
+		CleanRequest other = (CleanRequest) object;
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+			return false;
+		}
+		return true;
+	}
+
+	public void remove(CleanTask cl) {
+		this.cleanTasks.remove(cl);
+	}
 
 }

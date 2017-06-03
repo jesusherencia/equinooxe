@@ -29,10 +29,12 @@ public class AddManagerValidator implements Validator {
 		ManagerUserForm managerUserForm = (ManagerUserForm) target;
 		if(managerUserForm.getId()==null && (managerUserForm.getPassword()==null||managerUserForm.getPassword().length()<4)){
 			errors.rejectValue("password", "password.obligatoire");
+			errors.reject("Password error");
 		}
 		Optional<User> optUser=userRepository.findOneByLogin(managerUserForm.getLogin().toLowerCase());
 		if (optUser.isPresent() && optUser.get().getId()!=managerUserForm.getId() ) {
 			errors.rejectValue("login", "login.deja.utilise");
+			errors.reject("valeur.existe.pour.champs", new String[] { managerUserForm.getLogin(), "Login" }, "login");
 		}
 		optUser=userRepository.findOneByEmail(managerUserForm.getEmail());
 		if (optUser.isPresent() && optUser.get().getId()!=managerUserForm.getId()) {

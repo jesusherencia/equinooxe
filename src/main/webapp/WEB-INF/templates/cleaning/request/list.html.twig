@@ -35,7 +35,7 @@
 			    {% for entity in cleanRequests %}
 				<tr>
 					 <td> 
-						<a href="{{ href('/user/manager/show')}}/{{ entity.manager.id|default(' ') }}">  
+						<a href="{{ href('/cleaning/request/show')}}/{{ entity.id }}">  
 					   	    {{ entity.manager.lastName|default(' ') }}
 						</a>
 					</td>
@@ -55,6 +55,17 @@
                     <td> {{ entity.cleanTasks|length }}  </td>
                     <td> {{ entity.lastModifiedDate|zonedDate }}  </td>
 					<td>
+					   <div class="dropdown pull-right">
+                             <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                  <i class="zmdi zmdi-more-vert"></i>
+                             </a>
+                            <ul class="dropdown-menu" role="menu">
+                                 <li> <a href="{{ href('/cleaning/request/show')}}/{{ entity.id }}" >Détails</a></li>
+                                 <li> <a href="{{ href('/cleaning/request/edit')}}/{{ entity.id }}" >Editer </a></li>
+                                 <li> <a href="{{ href('/cleaning/request/delete')}}/{{ entity.id }}" >Marquer supprmiée </a></li>
+                                 <li> <a href="{{ href('/cleaning/request/delete-hard')}}/{{ entity.id }}" >Supprimer définitivement </a></li>
+                            </ul>
+                       </div>
 					</td>
 				</tr>
 				{% endfor %}

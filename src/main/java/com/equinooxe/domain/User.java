@@ -37,7 +37,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
  
 	@NotNull
 	@Pattern(regexp = Constants.LOGIN_REGEX)
-	@Size(min = 1, max = 50)
+	@Size(min = 1, max = 50, message=" Le login doit être entre {0} et {1}")
 	@Column(length = 50, unique = true, nullable = false)
 	protected String login;
 
@@ -51,12 +51,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "first_name", length = 50)
 	protected String firstName;
 
-	@Size(max = 50)
+	@Size(max = 50,message="Le nom doit comporter au maximum 50 caractères")
 	@Column(name = "last_name", length = 50)
 	protected String lastName;
 
 	@Email
-	@Size(max = 100)
+	@Size(max = 100, min=3, message="Email doit être minimum 3 caractères")
 	@Column(length = 100, unique = true)
 	protected String email;
 

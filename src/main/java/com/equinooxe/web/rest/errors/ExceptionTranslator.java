@@ -46,6 +46,7 @@ public class ExceptionTranslator {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ParameterizedErrorVM processParameterizedValidationError(CustomParameterizedException ex) {
+    	System.out.println("ex xçx  "+ex.getMessage());
         return ex.getErrorVM();
     }
 
@@ -56,7 +57,6 @@ public class ExceptionTranslator {
         try {
 			response.sendRedirect("/");
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
         return new ErrorVM(ErrorConstants.ERR_ACCESS_DENIED, e.getMessage());
@@ -68,7 +68,7 @@ public class ExceptionTranslator {
         for (FieldError fieldError : fieldErrors) {
             dto.add(fieldError.getObjectName(), fieldError.getField(), fieldError.getCode());
         }
-
+        System.out.println("dto x_x"+ dto);
         return dto;
     }
 
@@ -76,6 +76,7 @@ public class ExceptionTranslator {
     @ResponseBody
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ErrorVM processMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
+    	System.out.println("errorVM x_x "+ exception.getMessage());
         return new ErrorVM(ErrorConstants.ERR_METHOD_NOT_SUPPORTED, exception.getMessage());
     }
 
@@ -91,6 +92,7 @@ public class ExceptionTranslator {
             builder = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
             errorVM = new ErrorVM(ErrorConstants.ERR_INTERNAL_SERVER_ERROR, "Internal server error");
         }
+        System.out.println("errorVM x_x "+errorVM.getFieldErrors()+ errorVM.getMessage() + errorVM.getDescription()+ errorVM.getFieldErrors());
         return builder.body(errorVM);
     }
 }
