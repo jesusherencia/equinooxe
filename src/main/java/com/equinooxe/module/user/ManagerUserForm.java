@@ -47,7 +47,7 @@ public class ManagerUserForm {
 
 	public ManagerUserForm(Set<Authority> availableAutorities) {
 		autorities = new String[99];
-		availableAutorities = new HashSet<>();
+		this.availableAutorities = availableAutorities;
 	}
 
 	public ManagerUserForm(User u, Set<Authority> avelaibleAutorities) {

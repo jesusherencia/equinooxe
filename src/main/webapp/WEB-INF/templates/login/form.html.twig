@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+ 
 <span id="baseUrl" style="display: none;">
   {{ href('/api/authentication') }}
 </span>
@@ -16,7 +17,7 @@
 	<table class="table">
 		<tr>
 			<td>Login:</td>
-			<td><input type="text" id="j_username" name="j_username" value="" placeholder="me@equinooxe.com" /></td>
+			<td><input type="text" id="j_username" name="j_username" value="{{ newUser.username|default('') }}" placeholder="me@equinooxe.com" /></td>
 		</tr>
 		<tr>
 			<td>Mot de passe:</td>

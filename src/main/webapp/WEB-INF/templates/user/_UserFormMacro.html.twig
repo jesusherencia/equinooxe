@@ -5,7 +5,7 @@
                     <td>Nom:</td>
                     <td><input type="text" name="lastName" value="{{userForm.lastName  }}" /></td>
                     <td>
-                      {% for err in getFieldErrors('userForm', 'lastName') %}
+                      {% for errl in getFieldErrors(formName, 'lastName') %}
                         <p>{{ err }}</p>
                    	  {% endfor %}
                     </td>
@@ -14,7 +14,7 @@
                     <td>Prénom:</td>
                     <td><input type="text" name="firstName" value="{{userForm.firstName}}" /></td>
                     <td>
-                    {% for err in getFieldErrors('userForm', 'firstName') %}
+                    {% for err in getFieldErrors(formName, 'firstName') %}
                         <p>{{ err }}</p>
                     {% endfor %}
                     </td>
@@ -23,7 +23,7 @@
                     <td>Email:</td>
                     <td><input type="email" name="email" value="{{userForm.email}}"  /></td>
                     <td>
-                        {% for err in getFieldErrors('userForm', 'email') %}
+                        {% for err in getFieldErrors(formName, 'email') %}
                             <p>{{ err }}</p>
                         {% endfor %}
                     </td>
@@ -32,17 +32,18 @@
                     <td>Login:</td>
                     <td><input type="text" name="login" value="{{userForm.login}}" /></td>
                     <td>
-                        {% for err in getFieldErrors('userForm', 'login') %}
+                        {% for err in getFieldErrors(formName, 'login') %}
                             <p>{{ err }}</p>
                         {% endfor %}
+                        LG: {{ getFieldErrors(formName, 'login') }}
                     </td>
                 </tr>
-               {% if userForm.login is null %} {# hide passowrd form on edit #}
+               {% if userForm.login is null or userForm.id is null or userForm.id<1  %} {# hide passowrd form on edit #}
                 <tr>
                     <td>Mot de passe:</td>
                     <td><input type="password" name="password"   /></td>
                     <td>
-                        {% for err in getFieldErrors('userForm', 'password') %}
+                        {% for err in getFieldErrors(formName, 'password') %}
                             <p>{{ err }}</p>
                          {% endfor %}
                      </td>
@@ -61,7 +62,7 @@
                       {% endfor %}
                     </td>
                     <td>
-                        {% for err in getFieldErrors('userForm', 'password') %}
+                        {% for err in getFieldErrors(formName, 'password') %}
                             <p>{{ err }}</p>
                          {% endfor %}
                      </td>

@@ -1,0 +1,23 @@
+{% extends "../../layout" %}
+{% import "./../user/_UserFormMacro" %}
+
+{% block title %}
+  Gestion des managers
+{% endblock %}
+
+{% block content %}
+		<div class="titre"> <i class="fa fa-plus"></i> 
+		     Nouveau manager
+		</div>
+		Es:
+		{% for err in getAllErrors('managerUserForm') %}
+          <p style=""> 
+             {{ err.defaultMessage }}
+            {% for arg in err.arguments %}
+               {{ arg.code }}
+            {% endfor %}
+          </p>
+        {% endfor %}
+		
+	    {{ userFormMacro(managerUserForm,saveUrl="/register", formName="managerUserForm") }}
+{% endblock %}
