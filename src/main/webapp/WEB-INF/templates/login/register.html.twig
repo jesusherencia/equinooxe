@@ -1,4 +1,4 @@
-{% extends "../../layout" %}
+{% extends "../../logoff" %}
 {% import "./../user/_UserFormMacro" %}
 
 {% block title %}
@@ -9,7 +9,6 @@
 		<div class="titre"> <i class="fa fa-plus"></i> 
 		     Nouveau manager
 		</div>
-		Es:
 		{% for err in getAllErrors('managerUserForm') %}
           <p style=""> 
              {{ err.defaultMessage }}
@@ -18,6 +17,5 @@
             {% endfor %}
           </p>
         {% endfor %}
-		
 	    {{ userFormMacro(managerUserForm,saveUrl="/register", formName="managerUserForm") }}
 {% endblock %}

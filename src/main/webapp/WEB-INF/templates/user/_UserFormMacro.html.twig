@@ -1,6 +1,6 @@
 {% macro userFormMacro(userForm,saveUrl='/user/save', formName="userForm") %}
  <form  action="{{ href(saveUrl) }}" method="post" name="{{ formName }}" >
-        <table class="table">
+        <table class="table-form">
                 <tr>
                     <td>Nom:</td>
                     <td><input type="text" name="lastName" value="{{userForm.lastName  }}" /></td>
@@ -35,7 +35,6 @@
                         {% for err in getFieldErrors(formName, 'login') %}
                             <p>{{ err }}</p>
                         {% endfor %}
-                        LG: {{ getFieldErrors(formName, 'login') }}
                     </td>
                 </tr>
                {% if userForm.login is null or userForm.id is null or userForm.id<1  %} {# hide passowrd form on edit #}

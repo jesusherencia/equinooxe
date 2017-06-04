@@ -1,9 +1,9 @@
-{% extends "../../layout" %}
+{% extends "../../logoff" %}
 
 {% block title %}
    Login
 {% endblock %}
-
+ 
 {% block content %}
  
 <span id="baseUrl" style="display: none;">
@@ -14,7 +14,7 @@
 </div>
  
 <form action="{{ href('/api/authentication') }}" method="post" name="espaceFormModel">
-	<table class="table">
+	<table class="table-form">
 		<tr>
 			<td>Login:</td>
 			<td><input type="text" id="j_username" name="j_username" value="{{ newUser.username|default('') }}" placeholder="me@equinooxe.com" /></td>
@@ -28,15 +28,16 @@
 			<td><input type="checkbox" id="remember-me" name="remember-me" checked="checked" />  </td>
 		</tr>
 		<tr>
+		    <td></td>
 			<td>
-			    <button id="loginBtn" class="btn-blue">
-					Login <i class="fa fa-save"></i>
+			    <button id="loginBtn" class="btn-blue pull-right">
+					Login <i class="fa fa-floppy-o"></i>
 				</button>
 			</td>
 		</tr>
 	</table>
 </form>  
-  
+ 
 <script>
     System.import('login/login.js');
 </script>
